@@ -8,7 +8,13 @@
 
 ## The Problem
 
-The Agentic Primitives document (~200KB, ~1,800 lines) serves four distinct audiences simultaneously: security teams, platform engineers, GRC professionals, and AI engineers. All three Round 3 external reviewers independently recommended decomposition. The monolith creates cognitive overload — a security team doing threat modeling shouldn't parse primitive interaction tensions, and a platform engineer deploying ring infrastructure shouldn't wade through EU AI Act article mappings.
+Governing agentic systems is a cross-functional challenge that no single team owns. Security teams need threat models and defensive architectures. Platform engineers need deployment patterns and infrastructure guidance. Compliance officers need regulatory mappings and audit evidence. AI engineers need implementation patterns and composition guidance. SREs need monitoring, detection, and response playbooks.
+
+Today, these teams each stitch together fragments from NIST, OWASP, CSA, EU AI Act, and vendor documentation — often independently, often inconsistently, often missing the connections between their domains. A security architect's threat model doesn't reference the platform engineer's deployment mode. A compliance officer's EU AI Act mapping doesn't connect to the AI engineer's primitive implementation. An SRE's monitoring setup doesn't correlate with the security team's threat intelligence.
+
+**The gap is not a lack of frameworks — it's a lack of a shared architecture that connects them.** AGF fills that gap. But to be useful across all five functions, it must be structured so that each team can go deep in their domain while seeing how their work connects to the whole.
+
+This decomposition defines that structure.
 
 ## The Vision
 
