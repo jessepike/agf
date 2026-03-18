@@ -39,7 +39,7 @@ intent.md                          ← North Star. Sacred. Never edit without hu
     │
 agentic-governance-framework.md    ← Top-level operating model (umbrella)
     │
-    ├── agentic-primitives.md      ← Foundation layer: 18 primitives, Rings Model,
+    ├── agentic-primitives.md      ← Foundation layer: 19 primitives, Rings Model,
     │                                 security architecture, deployment modes, prior art
     │
     ├── decision-intelligence.md   ← Capability layer: governed decision flows,
@@ -98,8 +98,8 @@ The primitives doc (`agentic-primitives.md`, ~160KB) is the most substantial art
 - New findings from reviews get added under the appropriate priority section.
 
 ### Cross-Reference Integrity
-- Observability and Decision Intelligence docs reference the primitives by number (#1-#18). When primitives are added, renumbered, or restructured, these docs must be updated.
-- Current count: 18 primitives. Observability doc still references 16 (needs update — see BACKLOG Tier 2).
+- Observability and Decision Intelligence docs reference the primitives by number (#1-#19). When primitives are added, renumbered, or restructured, these docs must be updated.
+- Current count: 19 primitives (17 runtime + 1 lifecycle + 1 substrate). All downstream docs updated to 19.
 - The framework doc (`agentic-governance-framework.md`) references the primitives doc for the Rings Model, security architecture, and deployment modes.
 
 ## Current State

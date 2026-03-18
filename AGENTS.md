@@ -15,7 +15,7 @@
 4. **Use confidence levels** (Established pattern / Informed proposal / Open question) when adding new claims to any concept doc.
 5. **Maintain synthesis positioning.** This framework connects dots from existing standards — it does not invent new governance concepts. Lead with humility.
 6. **Update timestamps** on any concept doc you substantively modify (`Last updated:` in frontmatter).
-7. **Cross-reference integrity.** Observability and Decision Intelligence docs reference primitives by number (#1-#18). If you add, remove, or renumber primitives, update all downstream docs.
+7. **Cross-reference integrity.** Observability and Decision Intelligence docs reference primitives by number (#1-#19). If you add, remove, or renumber primitives, update all downstream docs.
 8. **Commit at meaningful milestones.** Use conventional commits: `type(scope): description`. Types: `content`, `research`, `review`, `structure`, `meta`.
 
 ### Inbox Triage Protocol
@@ -31,7 +31,7 @@ When items exist in `inbox/`:
 ### Validation Before Commit
 
 - Verify all markdown links resolve
-- Verify primitive numbers (#1-#18) are consistent across docs
+- Verify primitive numbers (#1-#19) are consistent across docs
 - Verify `Last updated` dates reflect actual changes
 - No broken table formatting
 
@@ -58,10 +58,10 @@ When items exist in `inbox/`:
 **Owns:** Architecture reviews, technology evaluations, cross-system integration design, responsibility matrices, deployment mode analysis.
 
 **Typical tasks:**
-- Responsibility assignment matrix (OWASP threats → primitives → security levels)
-- MCP/A2A protocol integration into deployment modes
-- #18 taxonomy resolution (design-time vs. runtime)
-- Cross-concept coherence reviews
+- Cross-concept coherence reviews (primitives ↔ observability ↔ decision intelligence)
+- Technology landscape scans and competitive positioning
+- Deployment mode analysis and protocol integration
+- Architecture reviews for new primitives and capability layers
 - Technology landscape scans
 
 **Context to load:** `intent.md` (always), `BACKLOG.md` (always), grep relevant sections of `agentic-primitives.md`

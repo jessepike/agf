@@ -221,7 +221,7 @@ From the Claude research report specifically:
 | Artifact | Status |
 |----------|--------|
 | Agentic Governance Framework (top-level) | First draft complete. Needs diagrams and review cycle. |
-| Agentic Primitives (16 primitives, rings, zero trust) | Advanced. 3 external reviews, multiple iterations. Needs landscape alignment update. |
+| Agentic Primitives (19 primitives, rings, zero trust) | Advanced. 3 external reviews, multiple iterations. P0.5 findings resolved. #19 (Agent Environment Governance) added. |
 | Decision Intelligence | Updated. Mapped to primitives and rings. Needs diagrams and review. |
 | Agentic Observability | Updated. Three roles, 18 correlation rules, maturity model. Needs diagrams and review. |
 | Landscape Research | Gemini + GPT complete. Claude pending. Need synthesis. |

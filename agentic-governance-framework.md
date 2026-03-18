@@ -402,11 +402,11 @@ The three concept areas are capability layers within the framework:
 
 ### Layer 6: Agentic Primitives (`agentic-primitives.md`)
 
-**What it provides:** The 16 proven patterns, the rings model, the composability interface, the zero trust overlay, the deployment modes, the interaction tensions.
+**What it provides:** 19 proven patterns organized into three categories: 17 runtime primitives (#1-#17), 1 lifecycle primitive (#18: Evaluation & Assurance), and 1 substrate primitive (#19: Agent Environment Governance). Plus the rings model, composability interface, zero trust overlay, three deployment modes, agent environment architecture, interaction tensions, and cost of governance model.
 
-**Framework role:** Foundation. Everything else is built on these patterns. The primitives are the shared vocabulary across all layers.
+**Framework role:** Foundation. Everything else is built on these patterns. The primitives are the shared vocabulary across all layers. Agent Environment Governance (#19) is particularly foundational — it governs the operating substrate (context, instructions, tools, workspace, memory) that all agents across all layers depend on.
 
-**Governance functions served:** GOVERN (runtime implementation), EVOLVE (self-improving cycles)
+**Governance functions served:** GOVERN (runtime implementation), EVOLVE (self-improving cycles, environment optimization loop)
 
 ### Layer 5: Decision Intelligence (`decision-intelligence.md`)
 

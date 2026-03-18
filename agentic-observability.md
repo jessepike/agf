@@ -147,7 +147,7 @@ The compliance and audit layer. Provides the evidence that organizations need to
 
 ## Mapping to Agentic Primitives
 
-Agentic Observability consumes events from all 16 primitives and provides the detection/response infrastructure for the entire framework.
+Agentic Observability consumes events from all 19 primitives and provides the detection/response infrastructure for the entire framework.
 
 ### Primitives it directly implements
 
@@ -462,7 +462,7 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 | Current Work | Connection | Status |
 |-------------|-----------|--------|
-| Agentic Primitives framework | Agentic Observability implements #10 (Event-Driven Observability), provides detection/response for #15 (Adversarial Robustness), calibrates #11 (Trust Ladders), feeds #3 (Self-Improving Cycles). Monitors all other primitives. | Defined (16 primitives, rings, zero trust) |
+| Agentic Primitives framework | Agentic Observability implements #10 (Event-Driven Observability), provides detection/response for #15 (Adversarial Robustness), calibrates #11 (Trust Ladders), feeds #3 (Self-Improving Cycles). Monitors all other primitives. | Defined (19 primitives, rings, zero trust) |
 | Pipeline verification spec (v0.3) | The event envelope schema, verification middleware, gate logic, and observatory vision are a working implementation of Level 1-2 for one specific pipeline. | Specified |
 | Pipeline Observatory concept | Section 7.5 of the Deep Dive Analysis names the SIEM pattern explicitly. The first concrete implementation of Agentic Observability, scoped to the assessment pipeline. | Conceptualized |
 | Decision Intelligence concept | Decision Intelligence produces decisions and emits events. Agentic Observability consumes those events for quality monitoring, security detection, and governance compliance. Complementary layers — DI governs decisions, AO monitors the agents making them. | Updated |

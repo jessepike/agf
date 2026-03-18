@@ -76,7 +76,7 @@ Every node in the provenance chain carries full identity context (Primitive #14:
 
 ## Mapping to Agentic Primitives
 
-Decision Intelligence is a specific application of the Agentic Primitives framework. Here's how the 16 primitives map:
+Decision Intelligence is a specific application of the Agentic Primitives framework. Here's how the 19 primitives map:
 
 ### Core primitives (actively used)
 
@@ -330,7 +330,7 @@ Each phase should be funded by the previous phase's revenue or a funding event.
 |-------------|-----------|--------|
 | AI Risk Tools assessment pipeline | Phase 1 — document in, structured assessment out. Ring 0 + partial Ring 1. | Built |
 | Pipeline verification spec (v0.3) | Event envelope, artifact lineage, gate logic — engineering primitives for Ring 1 and observability fabric. | Specified |
-| Agentic Primitives framework | Decision Intelligence is a Governed Decision Flow — the composition pattern for Ring 0 + Ring 1 + Ring 2 applied to risk-bearing decisions. | Defined (16 primitives, rings model, zero trust) |
+| Agentic Primitives framework | Decision Intelligence is a Governed Decision Flow — the composition pattern for Ring 0 + Ring 1 + Ring 2 applied to risk-bearing decisions. | Defined (19 primitives, rings model, zero trust) |
 | Agentic Observability concept | Decision Intelligence produces decisions and emits events. Observability monitors the decision agents, detects quality degradation and adversarial patterns, and provides the security monitoring layer. | Concept stage |
 
 ---
