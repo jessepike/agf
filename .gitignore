@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+
+# Session data
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Session transcripts (large, not useful in VCS)
+*.txt
+
+# Capabilities registry (auto-generated)
+INVENTORY.md
+inventory.json
