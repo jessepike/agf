@@ -1,6 +1,6 @@
 # Concepts Backlog
 
-**Last updated:** 2026-03-17
+**Last updated:** 2026-03-18
 
 ---
 
@@ -66,22 +66,22 @@ Four independent reviews: Claude Opus (adversarial), GPT 5.4 (deep research), Ge
 
 ### Important — To Address in Next Iteration
 
-- [ ] **Missing prior art** — Singapore IMDA agentic governance framework (Jan 2026), NIST IR 8596 (Dec 2025), CSA MAESTRO detailed layer mapping, SagaLLM (VLDB 2025), AGNTCY/AAIF (Linux Foundation), IEEE P2863, UK AISI Inspect, OWASP MCP Secure Development Guide (Feb 2026), "Mind the GAP" benchmark (Feb 2026)
-- [ ] **MCP integration** — de facto middleware standard omitted. Must integrate into deployment modes and tool governance sections.
-- [ ] **#18 taxonomy resolution** — design-time primitive mixed with runtime primitives. Either create two-taxonomy model or explicitly frame as CI/CD for ring architecture.
-- [ ] **Responsibility assignment matrix** — map each OWASP ASI threat to exactly one owning primitive + one owning security level. Resolve #15/#17/Security Fabric/Ring 2 boundaries.
-- [ ] **NIST NCCoE identity protocols** — explicitly integrate SPIFFE/SPIRE, NGAC, OAuth 2.1 into Identity primitive (#14).
-- [ ] **Speculative execution formal bounds** — depth limits, entropy constraints for graph-embedded mode. Research documents O(n²·⁵) latency beyond depth 4.
-- [ ] **EU AI Act mapping corrections** — add Article 6 (classification), Article 50 (transparency, NOT Art. 52), tighten Art. 12/14/15 language hooks.
-- [ ] **NIST AI RMF precision** — MAP = context framing + risk identification (not just classification). MANAGE broader than trust ladders. Use "agentic specialization of" language.
-- [ ] **Intelligence integrity** — compromised Intelligence + Response Bus = denial-of-service. Add as Known Limitation with mitigations.
-- [ ] **AgentSpec/AgentGuard distinction** — AgentSpec = deterministic boundary enforcement. AgentGuard = probabilistic runtime verification. Pro2Guard = proactive probabilistic enforcement. Clarify which maps where.
-- [ ] **Cost model empirical grounding** — Microsoft AGT 0.43s/7K decisions, Bifrost 11μs, SHAP/LIME 2x compute, Reflexion loops 50x tokens.
-- [ ] **SAGA split-plane topology** — control/data plane separation for scalability. Framework captures per-interaction tokens but misses the direct TLS data plane.
-- [ ] **Human oversight 51.7% limit** — elevate from Known Limitations to framing/core thesis as a declared architectural constraint.
-- [ ] **Mode selection matrix gaps** — add regulatory jurisdiction, rollback/compensation requirements, observability maturity, concurrent load.
-- [ ] **SentinelAgent and AgentGuard ambiguous citations** — pin to specific papers with venue/date.
-- [ ] **Wrapper mode structural privilege** — doc claims wrapper is "special case" but wrapper gets most detailed treatment and the Ring Diagram depicts wrapper mode.
+- [x] **Missing prior art** — All 9 sources now integrated: IMDA (4-dimension mapping to primitives), NIST IR 8596 (3 focus areas mapped to security architecture), CSA MAESTRO (7-layer primitive mapping table), SagaLLM, AGNTCY/AAIF, IEEE P2863, UK AISI Inspect, OWASP MCP Top 10 (10 threats mapped to primitives) + Secure Dev Guide, "Mind the GAP". Prior art section substantially enriched.
+- [x] **MCP integration** — Integrated into: (1) Middleware/Interrupt deployment mode as canonical implementation with 4 MCP-specific governance concerns (dynamic tool discovery, server trust chain, context-as-attack-surface, session isolation); (2) Security Architecture supply chain trust policy with MCP server trust enforcement; (3) Mode Selection Matrix protocol integration row; (4) Prior Art section updated to reference architecture-level coverage. Defers to OWASP MCP guides for implementation specifics.
+- [x] **#18 taxonomy resolution** — Resolved with explicit taxonomy note at top of Primitives section: #1–#17 are runtime primitives, #18 is a lifecycle primitive (CI/CD gate for the ring architecture). Distinction is temporal, not hierarchical. Avoids two-taxonomy complexity while addressing the reviewer concern.
+- [x] **Responsibility assignment matrix** — OWASP threat table restructured with explicit Owner (Level) and Owner (Primitive) columns + Supporting column for defense-in-depth. Each ASI threat now has exactly one accountable security level and one accountable primitive. #15/#17/Fabric/Ring 2 boundary clarification added: #15 = external threat surface, #17 = internal data lifecycle, Governance = policy authority, Fabric = enforcement mechanism.
+- [x] **NIST NCCoE identity protocols** — SPIFFE/SPIRE (cryptographic workload identity with SVIDs), OAuth 2.1 (user-delegated agent authority), OIDC (federated identity), NGAC (attribute-based access control), and JWT integrated into Identity & Attribution (#14). Protocol-level gaps in MCP and A2A noted. Trust Ladders cross-reference added.
+- [x] **Speculative execution formal bounds** — Added to Graph-Embedded Mode: depth limit (3-4, O(n²·⁵) beyond depth 4), entropy constraint (>20% rejection rate excludes action class from speculation), resource budget (compute/token/API ceiling with sequential fallback), side-effect fence (commit buffer for irreversible actions pending gate clearance).
+- [x] **EU AI Act mapping corrections** — Art. 6 and Art. 50 already present. Art. 12 tightened with specific logging requirements (input data, output decisions, parameter changes, human intervention events). Art. 13 added anomaly detection requirement. Art. 14 expanded with full oversight capability list + 51.7% ceiling reference. Art. 15 expanded with specific attack-to-primitive mappings (data poisoning → #17, adversarial examples → Fabric, model manipulation → attestation, supply chain → trust policy).
+- [x] **NIST AI RMF precision** — All four functions expanded with precise scope language. MAP: context framing + risk identification + categorization (not just classification). MANAGE: broader than trust calibration, includes organizational response planning. "Agentic specializations of" language applied throughout. Each function now explicitly notes what our framework covers vs. what sits above our runtime architecture.
+- [x] **Intelligence integrity** — Added as Known Limitation #5 with four mitigations: cryptographic proof for Response Bus activation, pre-authorized response class blast radius limits, Governance dead-man's-switch override, and independent Ring 1 verification of Intelligence itself. Acknowledged as recursive trust problem with defense-in-depth strategy.
+- [x] **AgentSpec/AgentGuard distinction** — Security Intelligence "Aligns with" rewritten to show the full spectrum: deterministic enforcement (AgentSpec → Fabric/Policy as Code) → probabilistic verification (AgentGuard → Intelligence behavioral analysis) → proactive prediction (Pro2Guard → Intelligence anticipatory detection). All three pinned with venues/dates.
+- [x] **Cost model empirical grounding** — Added four empirical reference points to Cost of Governance: Microsoft AGT 0.43s/7K decisions (policy evaluation), Bifrost 11μs (security fabric), SHAP/LIME 2x compute (explainability), Reflexion 50x tokens (self-improvement). Framed as calibration evidence, not planning constants.
+- [x] **SAGA split-plane topology** — Prior Art entry expanded with control/data plane separation: control plane = Ring 2 + Security Governance (token issuance, policy decisions), data plane = Ring 0 execution + Fabric enforcement (direct communication with locally-verified identity). Scalability rationale included.
+- [x] **Human oversight 51.7% limit** — Elevated to Core Thesis as "A declared architectural constraint." Explicitly frames human oversight as necessary but insufficient, and positions the ring architecture as the structural guarantee that works *with* human oversight, not *only because of* it.
+- [x] **Mode selection matrix gaps** — Four rows added: regulatory jurisdiction, rollback/compensation requirements, observability maturity, concurrent load. Each with per-mode guidance.
+- [x] **SentinelAgent and AgentGuard ambiguous citations** — Already pinned in Prior Art (He et al., May 2025; Koohestani et al., ASE 2025; Pro2Guard late 2025). Security Intelligence "Aligns with" now includes full author/venue/date citations.
+- [x] **Wrapper mode structural privilege** — Presentation note added to Wrapper Mode section: explicitly states this is a pedagogical choice (sequential structure is easiest to explain), not a recommendation. Most production systems use middleware or graph-embedded mode.
 
 ---
 
