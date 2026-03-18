@@ -70,12 +70,12 @@ The primitives doc (`agentic-primitives.md`, ~160KB) is the most substantial art
 
 | Path | Purpose |
 |------|---------|
-| `inbox/` | **Triage queue.** Drop research, reviews, artifacts here. Agents review, extract findings, then move to `.archive/`, delete, or place into the appropriate folder. Check on session start. |
-| `.archive/` | Processed artifacts. Moved here after triage — retained for reference, excluded from active work. |
-| `diagrams/` | Architecture diagrams (PNG). Rings model, deployment modes, security model, composition patterns. |
+| `inbox/` | **Single triage queue.** Drop research, reviews, artifacts here. Agents review, extract findings, then move to `.archive/` or `research/archive/`. Check on session start. No other inbox locations. |
+| `.archive/` | Processed inbox items. Moved here after triage — retained for reference, excluded from active work. |
+| `diagrams/` | Architecture diagrams (PNG). Rings model, deployment modes, security model, environment stack, composition patterns. |
 | `research/landscape/` | Active landscape research (standards, security frameworks, industry analysis) |
-| `research/archive/` | Historical research, specs, vision docs from earlier project phases |
-| `review-prompts/` | External review prompts and results (Opus, GPT, Gemini — 2 rounds complete) |
+| `research/archive/` | Historical research, specs, vision docs, and processed external reviews. Subdirectories by review round (`round2-reviews/`). |
+| `review-prompts/` | External review prompts (Opus, GPT, Gemini — 3 rounds). Review RESULTS go in `inbox/` for triage, then `research/archive/` after processing. |
 | `data/` | SQLite memory DB (session context) |
 
 ## Working Conventions
