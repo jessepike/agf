@@ -1,24 +1,25 @@
 # Agentic Primitives
 
 **Status:** Living concept document
-**Last updated:** 2026-03-17
+**Last updated:** 2026-03-18
 
 ---
 
 ## Contents
 
 1. [Core Thesis](#core-thesis) — Synthesis framework positioning
-2. [The Primitives](#the-primitives) — 18 patterns for governed agentic systems
-3. [Security Architecture](#security-architecture) — Three-level security model, zero trust, threat mappings
-4. [The Rings Model](#the-rings-model) — Logical architecture (Execution → Verification → Governance → Learning)
-5. [Ring Deployment Modes](#ring-deployment-modes) — Wrapper, middleware, graph-embedded with selection matrix
-6. [Multi-Agent Coordination](#multi-agent-coordination) — Composition patterns, governance collapse rule, cross-system trust
-7. [Composability Interface](#composability-interface) — Standard contract, execution budgets, human interface requirements
-8. [Primitive Interaction Tensions](#primitive-interaction-tensions) — 6 tensions with resolutions
-9. [Cost of Governance](#cost-of-governance) — Economic model, real cost drivers, minimum viable ring stack
-10. [How the Primitives Compose](#how-the-primitives-compose) — Higher-order patterns
-11. [Prior Art Mapping](#prior-art-mapping) — Standards, government frameworks, security frameworks, academic research, protocols, evaluation
-12. [Open Questions](#open-questions)
+2. [The Primitives](#the-primitives) — 19 patterns for governed agentic systems
+3. [Agent Environment Architecture](#agent-environment-architecture) — Environment stack, composition patterns, optimization loop, recursive governance
+4. [Security Architecture](#security-architecture) — Three-level security model, zero trust, threat mappings
+5. [The Rings Model](#the-rings-model) — Logical architecture (Execution → Verification → Governance → Learning)
+6. [Ring Deployment Modes](#ring-deployment-modes) — Wrapper, middleware, graph-embedded with selection matrix
+7. [Multi-Agent Coordination](#multi-agent-coordination) — Composition patterns, governance collapse rule, cross-system trust
+8. [Composability Interface](#composability-interface) — Standard contract, execution budgets, human interface requirements
+9. [Primitive Interaction Tensions](#primitive-interaction-tensions) — 7 tensions with resolutions
+10. [Cost of Governance](#cost-of-governance) — Economic model, real cost drivers, minimum viable ring stack
+11. [How the Primitives Compose](#how-the-primitives-compose) — Higher-order patterns
+12. [Prior Art Mapping](#prior-art-mapping) — Standards, government frameworks, security frameworks, academic research, protocols, evaluation
+13. [Open Questions](#open-questions)
 
 ---
 
@@ -77,7 +78,7 @@ The primitives endure. The implementations change. Naming the tensions between p
 
 ## The Primitives
 
-**Taxonomy note:** Primitives #1–#17 are **runtime primitives** — they operate within or across the ring processing pipeline during agent execution. Primitive #18 (Evaluation & Assurance) is a **lifecycle primitive** — it operates outside the runtime pipeline as the CI/CD gate for the ring architecture, determining whether configurations deploy and whether the system maintains its assurance properties over time. Both categories are first-class primitives because both are necessary for governed agentic systems; the distinction is temporal (when they fire), not hierarchical (how important they are).
+**Taxonomy note:** Primitives #1–#17 are **runtime primitives** — they operate within or across the ring processing pipeline during agent execution. Primitive #18 (Evaluation & Assurance) is a **lifecycle primitive** — it operates outside the runtime pipeline as the CI/CD gate for the ring architecture. Primitive #19 (Agent Environment Governance) is a **substrate primitive** — it governs the operating environment that all agents (across all rings) depend on. All three categories are first-class primitives because all are necessary for governed agentic systems; the distinction is temporal and structural, not hierarchical.
 
 ### 1. Separation of Producer and Verifier
 
@@ -513,7 +514,189 @@ This is not a runtime primitive. It is a **pre-deployment and continuous assuran
 
 ---
 
-## Security Architecture
+### 19. Agent Environment Governance
+
+Every agent operates within a substrate — context, instructions, tools, workspace, memory — that defines what the agent IS before it acts. The environment is not incidental to agent behavior. **It is the primary control surface.** An agent's context is its reality: control what an agent sees, and you control what it thinks. Optimize what an agent has access to, and you optimize what it can do.
+
+The framework's other primitives govern agent behavior — what agents produce, how their outputs are verified, how decisions are gated, how actions are bounded. This primitive governs the **operating environment** that all agents depend on: the composition of their context, the architecture of their instructions, the provisioning of their capabilities, the boundaries of their workspace, and the lifecycle of their memory.
+
+This is not a performance optimization concern. It is a governance concern. Context composition determines what an agent considers, prioritizes, and ignores. Instruction architecture determines what an agent values and how it reasons. Tool provisioning determines what an agent can do. Workspace scoping determines what an agent can reach. These are governance decisions with governance consequences — and in governed systems, they must be governed explicitly.
+
+**The pattern:**
+
+- **Context composition governance.** What information enters an agent's context window, in what priority order, and with what lifecycle. Context is a finite, precious resource (Anthropic's "finite attention budget") — every token that enters displaces another. Composition policy defines: what is always present (system instructions, identity context, active policy), what is loaded on demand (task-specific knowledge, retrieved documents, tool descriptions), and what is explicitly excluded (irrelevant history, out-of-scope data, information above the agent's clearance level). The governing principle: **the smallest set of high-signal tokens that maximize the likelihood of the desired outcome.** Context composition is not an optimization problem alone — it is a governance problem, because the composition determines what the agent considers and what it is blind to.
+
+- **Instruction architecture.** The agent's "DNA" — system prompts, rules files, persona definitions, behavioral constraints — treated as a versioned, tested, governed artifact. Instruction changes are configuration changes with behavioral consequences. A prompt tweak that shifts an agent's reasoning style, a rules update that changes priority ordering, a persona modification that alters tone — these are not cosmetic changes. They change what the agent IS. Instruction architecture requires: version control (every instruction state is traceable), testing against Evaluation & Assurance (#18) before deployment, rollback capability when instructions degrade performance, and structured decomposition (labeled sections — background, instructions, tool guidance, output format — following Anthropic's "right altitude principle").
+
+- **Capability provisioning.** Which tools, skills, and resources are available to an agent — not just permission to use them (that's Bounded Agency #7), but the governed process of discovery, selection, scoping, and lifecycle management. An agent with 50 tools available performs worse than one with 5 well-chosen tools — tool bloat degrades reasoning quality. Provisioning governance defines: what tools are in the agent's active set (static provisioning), how the agent discovers additional tools when needed (dynamic discovery via vector search or semantic matching), how tool descriptions are curated for the agent's context (tool descriptions ARE context — and are subject to context composition governance), and how tool access changes over time (tool rotation, deprecation, upgrade paths). For MCP-based systems, this includes MCP server authorization, tool schema verification, and dynamic tool discovery governance (see Middleware/Interrupt deployment mode).
+
+- **Workspace scoping.** Least-privilege applied to the agent's information and execution space — what files, repositories, APIs, databases, and services the agent can see and touch. Workspace scoping is the spatial equivalent of Bounded Agency (#7): where Bounded Agency limits what an agent CAN DO, workspace scoping limits what an agent CAN REACH. The scoping decision is a governance decision: too narrow and the agent can't complete its task (requesting access, burning time and tokens on context recovery); too broad and the agent has unnecessary attack surface and cognitive load. Scoping policy should be task-proportional and subject to Trust Ladders (#11) — as trust builds, workspace boundaries can expand.
+
+- **Session state management.** What an agent remembers within and across sessions — the lifecycle of short-term context, working memory, and persistent knowledge. Session state is not just Memory-Augmented Reasoning (#12) — it includes the entire ephemeral state that shapes the agent's current behavior: conversation history, tool results, intermediate work products, decision context, and handoff state. Session state governance defines: what persists across sessions (structured handoffs, learned conventions, calibrated trust levels), what is discarded (raw tool outputs, redundant conversation turns, expired context), what is compacted (summarized history that preserves decisions while discarding detail), and what is never written (sensitive data, personally identifiable information — governed by Data Governance #17).
+
+- **Environment optimization loop.** The self-improving cycle that makes the agent's operating substrate better over time — Ring 3 (Learning) applied not to pipeline outputs, but to the environment itself. The optimization loop observes agent execution, measures environment effectiveness (context hit rate, tool selection accuracy, token efficiency, instruction adherence, task completion quality), identifies gaps (missing context that caused errors, wrong tools that wasted cycles, stale instructions that led to outdated patterns), proposes environment changes (updated instructions, revised tool sets, adjusted context priorities), validates changes through Evaluation & Assurance (#18), and deploys improvements. This is the mechanism by which an agent's operating environment gets better — more relevant, more efficient, more aligned — with every execution cycle. The optimization loop is itself governed: proposed changes are subject to the same ring architecture (Ring 1 verifies the change won't degrade, Ring 2 evaluates whether the change is within policy, #18 regression-tests before deployment).
+
+**Key design decisions:**
+
+- **Context composition is a governance decision, not just an engineering decision.** What an agent sees determines what it thinks. In governed systems, composition policy must be explicit, auditable, and subject to review — not left to implicit framework defaults or developer intuition. Composition policy is a Ring 2 artifact.
+
+- **The environment optimization loop must be governed, not autonomous.** An unconstrained self-improving loop on the agent's own environment is a safety risk — the agent could optimize its own instructions to bypass governance constraints, expand its own tool access beyond authorized scope, or modify its own context composition to exclude governance-relevant information. The optimization loop proposes changes; governance validates them. Ring 3 suggests; Ring 2 approves; #18 tests.
+
+- **Every ring's agents are subject to environment governance.** Ring 1 verification agents have their own context, tools, and instructions that must be composed, scoped, and optimized. Ring 2 governance agents have their own operating environment. Security Intelligence agents have their own substrate. The governance agent that manages other agents' environments has its own environment that must be governed. This creates a recursive pattern that terminates at a known trust anchor — typically human-authored configuration that is signed, versioned, and manually reviewed. The recursion is finite and auditable.
+
+- **Environment composition is an attack surface.** If context is the primary control surface, then context manipulation is the primary attack vector. Tool poisoning (OWASP MCP03), intent flow subversion (MCP06), and context injection (MCP10) all operate by manipulating what enters the agent's environment. Environment governance is therefore a security concern as much as a performance concern — and the Security Fabric must treat environment composition inputs (tool descriptions, retrieved documents, instruction files) as potentially adversarial content subject to input sanitization.
+
+**Why it endures:** Every computing system has an operating environment that must be configured, secured, and maintained. Server configuration management (Ansible, Puppet, Chef), container orchestration (Kubernetes), and infrastructure-as-code (Terraform) are all expressions of the same principle: the runtime environment is a governed, versioned artifact — not an ad-hoc collection of implicit defaults. Agentic systems are no different. The agent's context window is its operating environment. The industry is already converging on this understanding — Anthropic calls it "context engineering," the AgentOS paper (arXiv, Feb 2026) proposes a full operating system metaphor with memory hierarchies and semantic paging, LangChain calls context a "compiled view over a richer stateful system," and Microsoft's Multi-Agent Reference Architecture addresses agent orchestration context. What these treatments share is the engineering perspective. What this primitive adds is the governance perspective: the agent's operating environment must be not just optimized but governed — composed by policy, scoped by least privilege, auditable in its composition decisions, and subject to the same ring architecture that governs agent behavior.
+
+**Relationship to other primitives:**
+- Bounded Agency (#7) limits what an agent CAN DO. Environment Governance limits what an agent CAN SEE and REACH — and ensures what it sees is optimal, not just permitted.
+- Memory-Augmented Reasoning (#12) covers persistent memory. Environment Governance covers the full operating substrate: context composition, instructions, tools, workspace, session state — with memory as one component.
+- Policy as Code (#9) defines governance rules. Environment Governance treats the environment configuration ITSELF as a policy artifact — who composed this context, under what policy, and is that composition auditable?
+- Self-Improving Cycles (#3) improves pipeline performance. The environment optimization loop improves the agent's own substrate — the most direct lever for practical performance gains.
+- Evaluation & Assurance (#18) validates changes before deployment. Environment changes — instruction updates, tool set modifications, context priority adjustments — are subject to #18 testing before they reach production agents.
+- Adversarial Robustness (#15) defends against external threats. Environment governance recognizes that the environment itself IS the attack surface — context injection, tool poisoning, and instruction manipulation are environment-layer attacks.
+- Identity & Attribution (#14) answers "who did this." Environment governance answers "in what environment" — and the environment state (which instructions, which tools, which context) is part of the provenance record for every agent action.
+
+**Aligns with:** Anthropic context engineering principles (finite attention budget, JIT retrieval, compaction, right altitude principle), AgentOS semantic memory management and cognitive drift detection (arXiv, Feb 2026), LangChain context-as-compiled-view architecture, Microsoft Multi-Agent Reference Architecture orchestration context patterns, NVIDIA OpenShell secure runtime environment (kernel-level isolation, per-binary/endpoint policy), Google ADK tiered context architecture, NIST SP 800-207 zero trust (least-privilege applied to information access), IMDA Agentic AI Governance Framework Dimension 1 (risk bounding via tool access restriction and sandboxed environments).
+
+---
+
+## Agent Environment Architecture
+
+> *This section expands on Agent Environment Governance (#19) with architectural detail on how environment governance manifests across the ring architecture and how the environment optimization loop operates.*
+
+### The Environment Stack
+
+Every agent's operating environment can be decomposed into five layers. Each layer has its own composition policy, lifecycle, and governance requirements:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Layer 5: Session State                                  │
+│  (conversation history, tool results, working memory,    │
+│   handoff context — ephemeral, session-scoped)           │
+├─────────────────────────────────────────────────────────┤
+│  Layer 4: Retrieved Context                              │
+│  (task-specific knowledge, documents, search results —   │
+│   dynamic, loaded JIT per task)                          │
+├─────────────────────────────────────────────────────────┤
+│  Layer 3: Capability Set                                 │
+│  (active tools, skills, MCP servers, API access —        │
+│   provisioned per role, subject to trust level)          │
+├─────────────────────────────────────────────────────────┤
+│  Layer 2: Instruction Architecture                       │
+│  (system prompts, rules, personas, behavioral            │
+│   constraints — versioned, tested, slow-changing)        │
+├─────────────────────────────────────────────────────────┤
+│  Layer 1: Identity & Policy Substrate                    │
+│  (agent identity, ring assignment, governance policy,    │
+│   trust level, workspace boundaries — foundational)      │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Composition flow:** Layers compose bottom-up. Layer 1 (identity and policy) determines what Layers 2-5 can contain. Policy substrate sets the boundaries; instructions operate within those boundaries; capabilities are provisioned within instruction scope; retrieved context and session state fill the remaining context budget.
+
+**Governance intensity:** Layers 1-2 are slow-changing and high-governance (changes require #18 validation and Ring 2 approval). Layer 3 changes at role/task boundaries (governed by provisioning policy). Layers 4-5 change per-interaction (governed by composition policy but not individually approved).
+
+**Context budget allocation:** The total context window is finite. Composition policy allocates budget across layers — typically: Layer 1 (5-10%), Layer 2 (10-20%), Layer 3 (10-15% for tool descriptions), Layer 4 (30-40%), Layer 5 (20-30%). These are starting points, not fixed allocations — the optimization loop adjusts ratios based on measured effectiveness.
+
+### Environment Composition Patterns
+
+Three patterns for composing the environment, aligned with the ring deployment modes:
+
+**Static composition** (aligns with Wrapper mode): The full environment is composed before execution begins. All context, tools, and instructions are loaded upfront. Changes require a full recomposition. Best for batch pipelines and assessment workflows where the task scope is known in advance.
+
+**JIT composition** (aligns with Middleware mode): The environment starts with Layers 1-3 (identity, instructions, tools) and loads Layers 4-5 dynamically as the agent executes. The agent uses tools to retrieve context as needed — maintaining lightweight identifiers (file paths, queries, URLs) rather than pre-loading all potentially relevant information. This is Anthropic's recommended pattern: progressive disclosure through exploration. Best for coding agents, task agents, and multi-step workflows.
+
+**Streaming composition** (aligns with Graph-Embedded mode): The environment is continuously updated as execution proceeds. Context enters and exits the window based on relevance scoring. Tool availability may change mid-execution based on task evolution. Session state is continuously compacted to maintain headroom. This requires the most sophisticated composition engine and the highest context management overhead. Best for conversational agents, real-time systems, and long-running sessions.
+
+### The Environment Optimization Loop
+
+The self-improving cycle for the agent's operating substrate:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                                                           │
+│  1. OBSERVE — Measure environment effectiveness           │
+│     • Context hit rate (did the context contain           │
+│       what the agent needed?)                             │
+│     • Tool selection accuracy (did the agent use          │
+│       the right tools?)                                   │
+│     • Token efficiency (how much context was              │
+│       actually used vs. loaded?)                          │
+│     • Instruction adherence (did the agent follow         │
+│       its instructions?)                                  │
+│     • Task completion quality (did the environment        │
+│       enable a good outcome?)                             │
+│                                                           │
+│  2. IDENTIFY — Find environment gaps                      │
+│     • Missing context that caused errors or               │
+│       hallucinations                                      │
+│     • Unused tools that wasted context budget             │
+│     • Stale instructions that led to outdated patterns    │
+│     • Workspace boundaries that were too narrow           │
+│       (access requests) or too broad (unused access)      │
+│     • Session state that was lost at compaction           │
+│       and later needed                                    │
+│                                                           │
+│  3. PROPOSE — Generate environment improvements           │
+│     • Updated instructions (clearer, more precise)        │
+│     • Revised tool sets (add missing, remove unused)      │
+│     • Adjusted context priorities (promote what           │
+│       was needed, demote what wasn't)                     │
+│     • Modified workspace boundaries (right-size)          │
+│     • Improved compaction policy (preserve more           │
+│       of what matters)                                    │
+│                                                           │
+│  4. VALIDATE — Test changes before deployment             │
+│     • Evaluation & Assurance (#18) regression tests       │
+│     • Ring 1 verification: does the new environment       │
+│       produce equal or better outcomes?                   │
+│     • Ring 2 governance: does the change stay within      │
+│       policy boundaries?                                  │
+│     • Security review: does the change expand             │
+│       attack surface?                                     │
+│                                                           │
+│  5. DEPLOY — Apply validated improvements                 │
+│     • Staged rollout (canary → wider deployment)          │
+│     • Monitoring for regressions                          │
+│     • Rollback capability if quality degrades             │
+│                                                           │
+│  ────────────────── cycle repeats ──────────────────────  │
+└──────────────────────────────────────────────────────────┘
+```
+
+**Governance constraint:** The optimization loop PROPOSES changes. It does not autonomously apply them. This is critical — an unconstrained optimization loop on the agent's own environment could:
+- Optimize instructions to bypass governance constraints ("I work better without policy checks")
+- Expand tool access beyond authorized scope ("I need this tool I'm not supposed to have")
+- Modify context composition to exclude governance-relevant information ("This audit context is low-signal")
+- Adjust trust levels in its own favor ("I've been performing well, promote me")
+
+Each of these is a governance violation disguised as optimization. The validation step (step 4) exists to catch them. Ring 2 evaluates whether the proposed change stays within policy. Evaluation & Assurance tests whether the change maintains system properties. Human review gates high-risk environment changes (instruction rewrites, tool access expansion, workspace boundary changes).
+
+### Context as Attack Surface
+
+The agent's environment is simultaneously the primary optimization target AND the primary attack surface. This dual nature is unique to Agent Environment Governance and creates a tension that the Security Architecture must address:
+
+| Attack Vector | Environment Layer Targeted | Defense |
+|--------------|---------------------------|---------|
+| **Prompt injection** | L2 (Instructions) — attempting to override system instructions | Security Fabric input sanitization + instruction integrity verification |
+| **Tool poisoning** (OWASP MCP03) | L3 (Capability Set) — malicious tool descriptions injected into context | Supply chain trust policy + tool schema verification |
+| **Context injection** (OWASP MCP10) | L4 (Retrieved Context) — sensitive or manipulative content in retrieved documents | Data Governance (#17) classification + Fabric content scanning |
+| **Memory poisoning** (OWASP ASI06) | L5 (Session State) — slow corruption of session memory | Intelligence memory introspection + compaction-time integrity checks |
+| **Environment drift** | All layers — gradual, undetected shift in environment composition | Environment optimization loop observation + baseline comparison |
+
+The key insight: **defense-in-depth at the environment layer means treating every environment input as untrusted.** Tool descriptions are untrusted content (they enter the context window and influence agent reasoning). Retrieved documents are untrusted content. Session state from prior interactions is untrusted content (it may have been influenced by adversarial inputs). Only Layers 1-2 (identity/policy substrate and instruction architecture) are trusted — because they are human-authored, version-controlled, and validated through #18.
+
+### The Recursive Governance Problem
+
+If an agent manages other agents' environments, who manages THAT agent's environment? This is the same recursive trust problem that appears in Security Architecture (Known Limitation #5: intelligence integrity).
+
+The resolution follows the same pattern:
+
+1. **The recursion is finite.** In practice, you have 2-3 levels: agents → environment manager → human-authored root configuration. The root configuration is the trust anchor — signed, version-controlled, manually reviewed.
+2. **Each level is governed by the level above.** An environment manager agent operates within an environment composed by its own environment manager (or directly by human configuration). The governance guarantees apply at each level.
+3. **The root environment is static and human-controlled.** The outermost environment (the environment manager's own instructions, tools, and workspace) is not self-optimizing. It is manually authored and changes through the same human-reviewed process as any critical configuration. This is the "bootstrap" environment — it must be correct by construction, not by optimization.
+4. **Monitoring is external.** Ring 3 and Security Intelligence observe environment manager behavior from outside the managed environment, providing independent verification that the manager is operating within its authorized scope.
 
 > *This section references the Rings Model (Ring 0-3) and Fabric concepts defined in the next section. Readers unfamiliar with the ring architecture may wish to read [The Rings Model](#the-rings-model) first, then return here.*
 
@@ -1293,6 +1476,19 @@ Ring 3 can recommend policy changes — surface patterns like "this policy thres
 
 **The invariant:** The system can suggest governance changes. It cannot enact them autonomously.
 
+### Tension 7: Environment Optimization vs. Governance Integrity
+
+**The conflict:** Agent Environment Governance (#19) includes a self-improving optimization loop that proposes changes to the agent's operating environment — instructions, tool sets, context priorities, workspace boundaries. Self-improving environments directly improve agent performance. But the environment IS the control surface. An optimization that reduces context (for efficiency) might remove governance-relevant information. An optimization that expands tools (for capability) might expand the attack surface. An optimization that modifies instructions (for clarity) might weaken behavioral constraints.
+
+**Resolution: Separate the optimizable from the inviolable.**
+
+- **Optimizable** (environment loop can propose changes): context priority ordering, tool description wording, session compaction policy, retrieved context relevance thresholds, workspace boundary sizing, instruction formatting and structure. These tune *how well* the environment supports the agent.
+- **Inviolable** (environment loop cannot change): governance policy embedded in instructions, tool authorization boundaries (which tools are permitted vs. which are described), security classification of workspace content, data governance constraints in session state, identity substrate. These define *what the environment IS* from a governance perspective.
+
+The optimization loop can propose changes to the inviolable layer — "this instruction constraint causes 30% of task failures" — but the proposal goes through Ring 2 governance and human review. The environment loop optimizes the agent's experience within governance boundaries. It does not move the boundaries.
+
+**The invariant:** The environment can get better. It cannot get less governed.
+
 ---
 
 ## Cost of Governance
@@ -1480,6 +1676,18 @@ We are deeply grateful for the academic community's contributions to agentic gov
 | **SagaLLM** (VLDB 2025) | Formalizes the Saga distributed transaction pattern for multi-agent systems | Directly validates Primitive #16 (Transaction & Side-Effect Control). Independent confirmation that agent side effects require formal transaction semantics — compensation, idempotency, partial-execution recovery. |
 | **"Mind the GAP"** (Feb 2026, arXiv) | Text-safety ≠ tool-call-safety in LLM agents. Governance contracts reduce leakage but show no deterrent on forbidden tool-call attempts | High-leverage finding for our security model: tool-call governance must be first-class, not inferred from text-level safety behavior. Directly supports why Security Fabric must operate at the tool-call boundary, not just the prompt boundary. |
 | **Pro2Guard** (Late 2025) | Proactive probabilistic enforcement using discrete-time Markov chains — anticipates violations before they manifest | Extends our Security Intelligence beyond reactive detection to proactive prediction. Our current architecture is primarily reactive (detect → respond). Pro2Guard represents where the field is heading — anticipate → prevent. |
+| **AgentOS** (arXiv, Feb 2026) | Full OS metaphor for agent context — L1/L2/L3 memory hierarchy, semantic paging, Reasoning Interrupt Cycle for tool invocation, Cognitive Drift detection, Cognitive Sync Pulses for multi-agent alignment | The most ambitious formalization of the agent operating environment. Directly informs Agent Environment Governance (#19) — our environment stack maps to their memory hierarchy, our optimization loop maps to their drift detection, and our recursive governance maps to their synchronization model. AgentOS treats this as an engineering problem; we add the governance layer. |
+| **Anthropic "Effective Context Engineering"** (2025) | Context as "precious, finite resource" — finite attention budget, JIT retrieval, compaction, sub-agent architectures, structured note-taking, "right altitude principle" for instructions | The practitioner's guide to context engineering. Directly informs Agent Environment Governance (#19) — composition patterns, instruction architecture, session state management. Anthropic's framing of context engineering as iterative curation (not static prompting) validates our environment optimization loop. |
+
+### Industry Architecture References
+
+| Reference | What It Contributes | How We Use It |
+|-----------|--------------------|--------------------|
+| **LangChain Context Engineering** (2025-2026) | Context as "compiled view over richer stateful system" — sessions, memory, and artifacts as sources; flows and processors as compiler pipeline | Validates our environment stack architecture. LangChain's "compiler" metaphor maps to our composition patterns: sources (Layers 1-5 inputs) are compiled through flows (composition policy) into the working context (what the agent sees). |
+| **Microsoft Multi-Agent Reference Architecture** (2026) | Three orchestration context patterns: static tools, vector similarity search, semantic caching | Informs Agent Environment Governance (#19) capability provisioning — specifically the trade-off between static provisioning (simple, limited) and dynamic discovery (flexible, higher overhead). |
+| **NVIDIA OpenShell** (Mar 2026) | Secure agent runtime with kernel-level isolation, per-binary/endpoint/method policy control | The security-first approach to agent environment management. Validates our position that environment governance is a security concern — OpenShell treats the runtime environment as an attack surface requiring granular policy control. |
+| **Google ADK** (Agent Development Kit, 2026) | Tiered context storage, compiled views, pipeline processing, strict scoping | Validates our environment stack's layered architecture. ADK's tiered storage maps to our L1-L5 layers; their strict scoping maps to our workspace scoping governance. |
+| **Denis Rothman "Context Engine"** (Packt, 2026) | Context Fabric with structured slots, orchestrator, governance plane | Early attempt at treating context management as a governed architectural concern rather than pure engineering. Validates the direction of Agent Environment Governance (#19). |
 
 ### Observability Standards
 

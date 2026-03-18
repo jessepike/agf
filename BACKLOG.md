@@ -89,7 +89,7 @@ Four independent reviews: Claude Opus (adversarial), GPT 5.4 (deep research), Ge
 
 - [x] **Composability interfaces** — Standard ring interface contract (PASS/REVISE/HALT/GATE/ERROR). Five requirements for ring-compatible pipelines. Git as versioning reference implementation.
 - [x] **Rings model** — Ring 0 (execution), Ring 1 (verification), Ring 2 (governance), Ring 3 (learning). Cross-cutting fabric (structured output + event observability + error recovery). Time horizons per ring.
-- [x] **Primitive interaction tensions** — 6 tensions documented with resolutions and invariants.
+- [x] **Primitive interaction tensions** — 7 tensions documented with resolutions and invariants (Tension 7: Environment Optimization vs. Governance Integrity added with #19).
 - [x] **Multi-agent coordination** — Sequential, parallel, orchestrated composition patterns. Fractal rings. Cross-pipeline governance.
 - [x] **New primitives: Error Handling (#13), Identity & Attribution (#14)** — Added with full patterns and ring integration.
 - [x] **Cost of governance section** — Proportional activation, trust ladders as cost optimization, Ring 3 as investment.
@@ -98,6 +98,7 @@ Four independent reviews: Claude Opus (adversarial), GPT 5.4 (deep research), Ge
 - [x] **Opus external review complete** — Review captured at `review-prompts/opus-review-round1.md`
 - [x] **Gemini external review complete** — Captured in session, synthesis in this backlog
 - [x] **GPT external review complete** — Review at `review-prompts/agentic_primitives_adversarial_review.md`
+- [x] **New primitive: Agent Environment Governance (#19)** — Substrate primitive governing the agent's operating environment: context composition, instruction architecture, capability provisioning, workspace scoping, session state management, and environment optimization loop. Full architectural companion section (Agent Environment Architecture) with 5-layer environment stack, 3 composition patterns, optimization loop diagram, context-as-attack-surface mapping, and recursive governance resolution. Tension 7 added. Prior art mapped (AgentOS, Anthropic context engineering, LangChain, Microsoft MAR, NVIDIA OpenShell, Google ADK). intent.md update pending human approval (18→19 primitives).
 - [ ] **Personal vs. enterprise scoping** — Which primitives simplify for personal agent use?
 - [ ] **Map current pipeline to primitives** — Which are implemented, partially, missing.
 - [ ] **Ring activation patterns** — Which ring combinations are valid and when.

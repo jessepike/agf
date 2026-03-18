@@ -54,12 +54,12 @@ BACKLOG.md                         ← Prioritized work queue (P0 through Parkin
 
 **Precedence:** `intent.md` > `agentic-primitives.md` > `agentic-governance-framework.md` > capability layer docs > `strategic-positioning.md`
 
-The primitives doc (`agentic-primitives.md`, ~150KB) is the most substantial artifact and the shared vocabulary all other docs reference.
+The primitives doc (`agentic-primitives.md`, ~160KB) is the most substantial artifact and the shared vocabulary all other docs reference.
 
 ## Key Concepts to Understand
 
 - **Rings Model:** Concentric logical architecture — Ring 0 (Execution) → Ring 1 (Verification) → Ring 2 (Governance) → Ring 3 (Learning). Cross-cutting fabric connects them.
-- **18 Primitives:** Named patterns (not invented) for governed agentic systems. Each maps to specific rings.
+- **19 Primitives:** Named patterns (not invented) for governed agentic systems. Each maps to specific rings. #1-#17 are runtime, #18 is lifecycle, #19 is substrate.
 - **Three-Level Security Model:** Security Fabric + Security Governance + Security Intelligence, with a Security Response Bus for fast-path containment.
 - **Ring Deployment Modes:** Wrapper, middleware/interrupt, graph-embedded — with a selection matrix and hybrid patterns.
 - **Composability Interface:** Standard contract (PASS/REVISE/HALT/GATE/ERROR signals) with execution budgets, delegation, and human interface requirements.
