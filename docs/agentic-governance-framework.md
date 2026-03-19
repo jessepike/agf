@@ -594,3 +594,7 @@ ISO 42001 establishes organizational requirements for responsible AI. This frame
 - **Personal vs. enterprise:** The framework is written for organizations. What's the "personal governance" version? Likely: DISCOVER (know what agents you run), ASSESS (understand what they can do), GOVERN (Ring 0 + basic Ring 1), MONITOR (basic trust visibility). Simplified but structurally the same.
 - **Framework positioning:** Is this framework IP, or is it thought leadership? If IP: how do you protect it? If thought leadership: how do you monetize it? The framework itself is likely thought leadership and community contribution. The implementations — products built on the framework — are the commercial layer.
 - **NIST engagement:** The CAISI RFI and NCCoE concept paper are both seeking public comment. This framework directly addresses many of their questions. Consider submitting a response.
+
+---
+
+*This is the AGF top-level operating model. For the reference architecture overview, see [AGF: A Reference Architecture for Governed Agentic Systems](agf-reference-architecture.md). For the foundational primitives, see [Agentic Primitives](agentic-primitives.md). For domain-specific views, see the [profiles](../profiles/).*
