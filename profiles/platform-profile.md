@@ -393,12 +393,12 @@ The following AGF primitives are directly relevant to platform engineering. For 
 | Primitive | Platform Role |
 |-----------|--------------|
 | **#5 Structured Output Persistence** | The data contract between rings. Infrastructure must support structured artifact persistence. |
+| **#8 Governance Gates** | Platform provides gate UX — the interface where humans review evidence and make decisions. |
 | **#10 Event-Driven Observability** | The event stream. Platform provides ingestion, routing, storage. |
 | **#13 Error Handling & Recovery** | Checkpointing, retry, graceful degradation. Platform provides the recovery infrastructure. |
+| **#14 Identity & Attribution** | Platform operates the identity infrastructure — SPIFFE/SPIRE, OAuth, certificate management. |
 | **#16 Transaction & Side-Effect Control** | Pre-commit/commit/post-commit. Platform manages the transaction layer for irreversible actions. |
 | **#19 Agent Environment Governance** | The 5-layer environment stack. Platform builds and operates the composition, provisioning, and optimization infrastructure. |
-| **#8 Governance Gates** | Platform provides gate UX — the interface where humans review evidence and make decisions. |
-| **#14 Identity & Attribution** | Platform operates the identity infrastructure — SPIFFE/SPIRE, OAuth, certificate management. |
 
 ---
 

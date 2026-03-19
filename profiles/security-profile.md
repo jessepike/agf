@@ -324,15 +324,15 @@ The following AGF primitives are directly relevant to security. For full pattern
 
 | Primitive | Security Role |
 |-----------|--------------|
+| **#6 Provenance Chains** | Full decision history. Tamper-evident audit trail. |
 | **#7 Bounded Agency** | Defines what agents CAN DO. The operating envelope. |
+| **#10 Event-Driven Observability** | The event stream that Intelligence consumes. |
+| **#11 Trust Ladders** | Trust earned through performance. Anomaly detection on trust trajectories. |
 | **#14 Identity & Attribution** | Answers WHO did this. Authenticated, inspectable identity on every action. |
 | **#15 Adversarial Robustness** | The security posture: assume breach, defense in depth, verify explicitly. |
+| **#16 Transaction & Side-Effect Control** | Irreversible action management. Pre-commit/commit/post-commit. |
 | **#17 Data Governance** | Owns the internal data lifecycle: classification, consent, PII, retention. |
 | **#19 Agent Environment Governance** | The environment IS the attack surface: context composition, tool provisioning, instruction integrity. |
-| **#11 Trust Ladders** | Trust earned through performance. Anomaly detection on trust trajectories. |
-| **#16 Transaction & Side-Effect Control** | Irreversible action management. Pre-commit/commit/post-commit. |
-| **#6 Provenance Chains** | Full decision history. Tamper-evident audit trail. |
-| **#10 Event-Driven Observability** | The event stream that Intelligence consumes. |
 
 ---
 

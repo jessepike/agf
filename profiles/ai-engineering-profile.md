@@ -312,8 +312,12 @@ Validation Pipeline + Governance Gates (#8) + Policy as Code (#9) + Transaction 
 ### Secure Governed System (All rings + zero trust)
 Governed Decision Flow + Adversarial Robustness (#15) + zero trust at every boundary + Evaluation & Assurance (#18) as the deployment gate
 
+**What it gives you:** Defense in depth, pre-deployment validation, and security monitoring for production-grade agentic systems.
+
 ### Full Governed Agentic System (Everything)
 All rings active, all primitives engaged, zero trust at every boundary, environment optimization loop improving the substrate continuously.
+
+**What it gives you:** The complete governance architecture for high-stakes, regulated, enterprise-grade agentic systems that improve over time.
 
 ### Application Examples
 
