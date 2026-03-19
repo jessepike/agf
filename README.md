@@ -2,7 +2,7 @@
 
 **A Reference Architecture for Governed Agentic Systems**
 
-AGF is a synthesis framework that integrates NIST AI RMF, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, Singapore IMDA, MITRE ATLAS, and academic research into a single coherent reference architecture for organizations building safe, secure, reliable, auditable, and observable agentic systems.
+AGF is a synthesis framework that integrates NIST AI RMF, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, Singapore IMDA, MITRE ATLAS, and academic research into a single coherent reference architecture for organizations building safe, secure, durable, auditable, and observable agentic systems.
 
 We did not invent these patterns. We connected them.
 

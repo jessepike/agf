@@ -7,7 +7,7 @@
 
 ## What This Is
 
-This directory contains the **Agentic Governance Framework** — a comprehensive reference architecture and operating model for organizations developing safe, secure, reliable, auditable, and observable agentic systems.
+This directory contains the **Agentic Governance Framework** — a comprehensive reference architecture and operating model for organizations developing safe, secure, durable, auditable, and observable agentic systems.
 
 The landscape of agentic governance is fragmented. NIST provides risk management frameworks. OWASP provides threat taxonomies. CSA provides trust frameworks. ISO provides management systems. OpenTelemetry provides observability standards. Model providers ship their own governance features. Enterprise platforms build their own control planes. Security vendors build point solutions.
 

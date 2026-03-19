@@ -7,7 +7,7 @@
 
 ## What We're Doing
 
-We are building the **playbook** — the reference architecture and practical guide for organizations developing safe, secure, reliable, auditable, and observable agentic systems.
+We are building the **playbook** — the reference architecture and practical guide for organizations developing safe, secure, durable, auditable, and observable agentic systems.
 
 The landscape is fragmented. NIST is doing risk management frameworks. OWASP is doing threat taxonomies. CSA is doing trust frameworks. ISO is doing management systems. OTel is doing observability standards. Model providers ship their own governance features. Enterprise platforms build their own control planes. Security vendors build point solutions for specific threats.
 

@@ -29,7 +29,7 @@ The governance landscape is fragmented. NIST provides risk management frameworks
 
 **Every one of these institutions is doing critical work. These are the dots.** The puzzle pieces are on the table.
 
-The Agentic Governance Framework (AGF) connects those dots. We synthesize the best thinking from standards bodies, government frameworks, security organizations, academic researchers, and industry practitioners into a single coherent reference architecture that shows organizations how to build agentic systems that are safe, secure, reliable, auditable, and observable.
+The Agentic Governance Framework (AGF) connects those dots. We synthesize the best thinking from standards bodies, government frameworks, security organizations, academic researchers, and industry practitioners into a single coherent reference architecture that shows organizations how to build agentic systems that are safe, secure, durable, auditable, and observable.
 
 We are not claiming to have invented new governance concepts. The patterns in this framework — separation of duties, least privilege, audit trails, zero trust, policy as code — are battle-tested across distributed systems, security engineering, compliance, and control theory. They have governed critical infrastructure for decades. **The contribution is the composition:** pulling these patterns together, naming them for the agentic context, showing where they conflict, and proposing how to resolve those conflicts.
 

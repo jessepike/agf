@@ -13,3 +13,4 @@ data/
 # Capabilities registry (auto-generated)
 INVENTORY.md
 inventory.json
+agf-docs/
