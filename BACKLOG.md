@@ -138,9 +138,9 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [ ] **Internal review** — Structured review for regulatory accuracy, mapping completeness, evidence sufficiency.
 - [ ] **External review** — After internal cycle. Focus on: regulatory precision, auditor usability, any overclaiming in compliance coverage.
 
-### AI Engineering Profile (`profiles/ai-engineering-profile.md`) — Not Yet Written
+### AI Engineering Profile (`profiles/ai-engineering-profile.md`)
 
-- [ ] **Draft profile** — Full 19-primitive catalog with implementation detail, composition patterns with priority ordering, primitive interaction tensions with resolutions, Trust Ladders mechanics, Environment Optimization Loop, prior art mapping, worked examples.
+- [x] **Draft profile** — Full 19-primitive catalog (implementer-focused summaries with key decisions, ring assignments, distinctions), 5-phase implementation priority (Minimum Viable Control → Verification → Governance → Security & Assurance → Learning), composition patterns with application examples, 7 tensions with invariants, Trust Ladders mechanics, Environment Optimization Loop, prior art (standards, academic, implementation ecosystem), implementation checklist. DONE.
 - [ ] **Internal review**
 - [ ] **External review**
 
@@ -152,7 +152,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ### Cross-Profile
 
-- [x] **Fix broken cross-references** — Interim links to `agentic-primitives.md` for Security and Platform profile primitives references. Observability Profile link in Platform Profile marked as forthcoming. DONE.
+- [x] **Fix broken cross-references** — Security and Platform profiles now link to AI Engineering Profile + primitives catalog. Observability Profile link in Platform Profile marked as forthcoming. DONE.
 - [x] **Fix parent doc relative paths** — All profiles now correctly link to `../docs/agf-reference-architecture.md`. DONE.
 
 ---

@@ -388,7 +388,7 @@ The multipliers above describe LLM compute only. The real costs are organization
 
 ## Platform Primitives Reference
 
-The following AGF primitives are directly relevant to platform engineering. For full pattern descriptions, see the [AGF Primitives catalog](../docs/agentic-primitives.md). A dedicated AI Engineering Profile is forthcoming.
+The following AGF primitives are directly relevant to platform engineering. For full pattern descriptions, see the [AI Engineering Profile](ai-engineering-profile.md) or the [AGF Primitives catalog](../docs/agentic-primitives.md).
 
 | Primitive | Platform Role |
 |-----------|--------------|

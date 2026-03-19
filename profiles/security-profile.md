@@ -320,7 +320,7 @@ Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern 
 
 ## Security Primitives Reference
 
-The following AGF primitives are directly relevant to security. For full pattern descriptions, see the [AGF Primitives catalog](../docs/agentic-primitives.md). A dedicated AI Engineering Profile is forthcoming.
+The following AGF primitives are directly relevant to security. For full pattern descriptions, see the [AI Engineering Profile](ai-engineering-profile.md) or the [AGF Primitives catalog](../docs/agentic-primitives.md).
 
 | Primitive | Security Role |
 |-----------|--------------|
