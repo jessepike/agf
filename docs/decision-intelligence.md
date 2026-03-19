@@ -377,3 +377,7 @@ Do not start broader than this.
 - **Revenue gate per phase:** Phase 1 has a revenue model. Phase 2+ needs either customer pull or funding. What's the trigger?
 - **Zero trust overhead:** How much does evidence integrity verification (source authentication, tampering detection, grounding verification) add to per-assessment cost and latency? Is this a Trust Ladder candidate — full verification early, relaxed for trusted document sources?
 - **Ring deployment mode for interactive review:** When a human reviewer is interacting with the decision system (reviewing evidence, challenging claims, modifying beliefs), is that wrapper mode or middleware mode? Likely middleware — the human's actions are interrupt points in the decision graph.
+
+---
+
+*This is an AGF capability layer document. For the framework overview, see [AGF: A Reference Architecture for Governed Agentic Systems](agf-reference-architecture.md). For the foundational primitives, see [Agentic Primitives](agentic-primitives.md). For event monitoring of decision systems, see [Agentic Observability](agentic-observability.md).*

@@ -182,7 +182,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [x] **Expand SIEM analogy with security events** — Event taxonomy covers all rings + security cross-cutting. DONE.
 - [x] **Correlation rule patterns** — 18 rules across quality, security, and governance domains. DONE.
 - [x] **"What this is NOT" sharpening** — Differentiated from LLM observability, APM, GRC, AND traditional SIEM. DONE.
-- [x] **Diagrams** — Mermaid source files created for all architecture diagrams (rings model, composition patterns, security model, deployment modes, environment stack, ring interface, implementation phases, event flow). In `diagrams/`. DONE.
+- [ ] **Diagrams** — 9 existing PNG diagrams cover core concepts (Rings, Deployment Modes, Composition, Multi-Agent, Environment Stack, Security Model, OWASP, Zero Trust, Governance-Latency). 6 missing diagrams need Diagram Forge (light theme, match existing): Ring Interface/Composability, Implementation Phases, Event Flow/Observability Architecture, Security Response Bus, Belief Revision Cascade, DI Multi-Agent Pipeline.
 - [x] **Internal review** — Added missing primitives (#17, #18, #19) to monitoring mapping. Resolved OTel open question (OTel-compatible base + extensions). Resolved privacy tension (redacted content pattern). DONE.
 - [ ] **External review** — After internal cycle. Create review prompt tailored to observability (focus on SIEM analogy viability, correlation rule completeness, market positioning).
 - [ ] **Reference architecture** — How does an org deploy this? OTel integration. Connection to DI event streams.
@@ -201,6 +201,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 ## Priority 4: Cross-Concept
 
 - [ ] **Relationship model** — Two products? One platform? Adjacent? Document the architectural relationship.
+- [x] **Cross-doc navigation links** — Meta doc links to all 5 profiles with relative paths + updated descriptions. Meta doc links to all 3 concept docs in Deep-Dive Topics. Concept docs (observability, DI) link back to meta doc, primitives, profiles, and each other. DONE.
 - [ ] **Shared vocabulary doc** — Consistent terminology across all three concept docs.
 - [ ] **Bridge to assessment pipeline** — How concepts feed back into risk tools roadmap.
 - [ ] **Next primitive to implement** — Select and spec for the pipeline.

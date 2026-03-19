@@ -364,22 +364,22 @@ Not everything carries the same certainty:
 
 | If you are... | Start with... |
 |--------------|---------------|
-| A CISO or security architect | **[Security Profile]** — Threat modeling, OWASP mappings, security architecture |
-| A platform or infrastructure engineer | **[Platform Profile]** — Deployment modes, Mode Selection Matrix, environment architecture |
-| A compliance officer or auditor | **[GRC Profile]** — Regulatory mappings, control crosswalks, evidence guides |
-| An AI engineer building agents | **[AI Engineering Profile]** — Full primitive catalog, composition patterns, implementation guide |
-| An SRE or detection engineer | **[Observability Profile]** — Event architecture, correlation rules, playbooks |
-| An executive or business owner | **This document** — plus the GRC Profile for regulatory evidence |
+| A CISO or security architect | **[Security Profile](../profiles/security-profile.md)** — Threat modeling, OWASP mappings, MITRE ATLAS alignment, red team scenarios, incident response playbooks |
+| A platform or infrastructure engineer | **[Platform Profile](../profiles/platform-profile.md)** — Deployment modes, Mode Selection Matrix, environment architecture, MCP integration, cost of governance |
+| A compliance officer or auditor | **[GRC Profile](../profiles/grc-profile.md)** — Regulatory mappings, control crosswalks, maturity model, risk classification, evidence guides |
+| An AI engineer building agents | **[AI Engineering Profile](../profiles/ai-engineering-profile.md)** — Full primitive catalog, 5-phase implementation priority, composition patterns, tensions |
+| An SRE or detection engineer | **[Observability Profile](../profiles/observability-profile.md)** — Event architecture, correlation rules, playbooks, zero trust monitoring |
+| An executive or business owner | **This document** — plus the [GRC Profile](../profiles/grc-profile.md) for regulatory evidence |
 
 ### Deep-Dive Topics
 
-These standalone pieces explore specific aspects of the framework in depth:
+These explore specific aspects of the framework in depth:
 
-- **Trust Ladders** — How agentic systems earn autonomy through demonstrated performance
-- **The Rings Model** — Concentric architecture for governed agentic systems (architecture post)
-- **Agent Environment Governance** — The governed operating substrate beneath all rings
-- **Multi-Agent Coordination** — Governance patterns for agent-to-agent systems
-- **Decision Intelligence** — Governed decision flows for risk-bearing decisions
+- **[Agentic Primitives](agentic-primitives.md)** — The full 19-primitive catalog with complete patterns, tensions, deployment modes, security architecture, and prior art mapping
+- **[Agentic Observability](agentic-observability.md)** — The SIEM pattern for agents: event architecture, correlation engine, playbooks, maturity model
+- **[Decision Intelligence](decision-intelligence.md)** — Governed decision flows: Risk Decision Graph, Belief Layer, revision cascade, multi-agent decision pipeline
+- **Trust Ladders** — How agentic systems earn autonomy through demonstrated performance (white paper forthcoming)
+- **The Rings Model** — Concentric architecture for governed agentic systems (architecture post forthcoming)
 
 ### Community & Contribution
 

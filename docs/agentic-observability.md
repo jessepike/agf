@@ -483,3 +483,7 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 - **Personal vs. enterprise:** Is there a "personal agent governance" product? Lightweight trust ladders, basic quality monitoring, simple audit trail. The Level 1-2 maturity model could map to personal use. Level 3+ is enterprise.
 - **Privacy tension:** ~~Event-driven observability says "log everything." Privacy regulations say "minimize data."~~ **Resolved (pattern):** Log governance events (ring signals, gate decisions, trust changes, identity context) with **redacted content** — the event records *that* an action happened, *who* did it, and *what the governance outcome was*, without persisting full input/output content. Full content available only in investigation mode with access controls and audit trail. For GDPR contexts, retention policies must account for data subject rights. See Observability Profile Known Limitations for operational details.
 - **Pricing model:** Per event volume? Per agent monitored? Per audit package generated? Platform fee? Likely: platform fee + event volume tier — same model as SIEM (Splunk charges by data ingestion volume).
+
+---
+
+*This is an AGF capability layer document. For the framework overview, see [AGF: A Reference Architecture for Governed Agentic Systems](agf-reference-architecture.md). For the practitioner-facing view, see the [Observability Profile](../profiles/observability-profile.md). For the foundational primitives, see [Agentic Primitives](agentic-primitives.md).*
