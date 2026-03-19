@@ -127,22 +127,27 @@ Decision Intelligence is a specific application of the Agentic Primitives framew
 The core data structure. A case-bound reasoning substrate — not a generic knowledge graph.
 
 Every decision case produces a graph containing:
+- **Agents:** the actors who produced, verified, challenged, and authorized each artifact (human and AI)
 - **Entities:** systems, datasets, vendors, controls, policies, owners
-- **Claims:** assertions produced during reasoning (fact, risk, control, assumption)
-- **Evidence:** supporting or contradicting information with source, timestamp, freshness
+- **Claims:** assertions produced during reasoning — with typed relationships (SUPPORTS, CONTRADICTS, QUALIFIES) rather than separate claim/counterclaim types
+- **Evidence:** supporting or contradicting information with source, timestamp, freshness, integrity status
 - **Beliefs:** the governed stance toward claims (see Belief Layer below)
 - **Policy Tests:** explicit evaluation of governance rules against case data
-- **Scenarios:** alternative configurations or outcomes with quantified risk
+- **Scenarios:** alternative configurations or outcomes with quantified risk (includes simulations)
 - **Decision Options:** system-generated proposals (approve, approve with conditions, reject, defer, escalate)
 - **Final Decision:** authorized outcome with conditions and expiration
 - **Approval:** human governance action with justification
 
 **Key design rules:**
-1. The graph is **case-bound first**. Cross-case intelligence comes later through templates, baselines, and prior-case references — not one giant enterprise graph.
-2. Every node includes: creator identity (#14), timestamp, method reference, confidence, and source references.
+1. The graph is **case-bound first**. Cross-case intelligence comes later through templates, baselines, and prior-case references — not one giant enterprise graph. Design the schema for cross-case interoperability from day one (global entity IDs, canonical schemas) even if cross-case queries come in a later phase.
+2. Every node includes: creator agent reference, timestamp, method reference, confidence, and source references.
 3. Agents return **structured objects** (#5), not prose. LLM output is converted into graph objects.
 
-**Canonical node types (15):** Case, Entity, Claim, Counterclaim, Evidence, Belief, Method, PolicyTest, Score, Scenario, Simulation, DecisionOption, Decision, Approval, ReviewTrigger, RevisionEvent.
+**Canonical node types (9):** Case, Agent, Entity, Claim, Evidence, Belief, PolicyTest, Scenario, Decision. Extended types for governance workflow: Approval, ReviewTrigger, Condition.
+
+**Standards alignment:** The RDG aligns with W3C PROV-O (Entity, Activity, Agent) for provenance and with DeCPROV for decision-specific provenance. Agent is a first-class node type — not metadata — enabling behavioral queries across the graph (e.g., which agent produced the most contested claims, which reviewer overrides the Challenger most frequently).
+
+**Design note (from external review):** The original design specified 15+ node types including separate Claim/Counterclaim, Score, and Simulation types. Three independent reviews converged on reducing to ~9 core types: merge Claim/Counterclaim into Claim with typed edges (SUPPORTS/CONTRADICTS); merge Score into Belief (a score is a quantified belief); merge Simulation into Scenario; add Agent as a first-class citizen. Standards adoption (DMN: 5 types, PROV-O: 3 core types, influence diagrams: 3 types) consistently shows that parsimony drives adoption.
 
 ### The Belief Layer
 
@@ -150,7 +155,16 @@ The most conceptually novel element. This is what separates a decision intellige
 
 **Belief states:**
 `unknown` → `under_review` → `plausible` → `provisionally_accepted` → `accepted`
-Also: `contested`, `insufficient_evidence`, `rejected`, `stale`, `superseded`
+Also: `contested`, `insufficient_evidence`, `rejected`, `stale`, `superseded`, `suspended`
+
+**Key transitions:**
+- `accepted` → `under_review` (triggered by new contradicting evidence or Challenger finding)
+- `accepted` → `stale` (evidence freshness expired)
+- `accepted` → `superseded` (replaced by newer claim with stronger evidence)
+- Any state → `suspended` (circuit breaker: intractable dispute, legally toxic claim, infinite loop detected — requires human adjudication to resume)
+- `provisionally_accepted` → `expired` (time-bound acceptance window closed)
+
+**The `suspended` state** is an epistemic circuit breaker — a hard halt when the system cannot converge by iteration. Distinct from `under_review` (which implies active processing), `suspended` enforces a governance gate: the claim is frozen and requires explicit human adjudication before any state change.
 
 **The revision cascade — the operating system behavior:**
 ```
@@ -164,14 +178,31 @@ New evidence arrives
 
 When evidence changes, beliefs revise, which cascades through policy evaluation to decision options. In ring terms: Ring 2 detects the context change and issues REVISE(context) back to Ring 0, triggering re-execution of the affected decision pipeline with updated evidence.
 
-**Why this matters:** The Belief Layer is the mechanism by which an agentic system maintains a *governed epistemic state* — it knows what it knows, what it doesn't know, and what has changed. This draws on established patterns from argumentation frameworks (IBIS, Toulmin), Bayesian belief networks, and decision analysis — applied to the agentic governance context. The revision cascade is the most novel aspect: a concrete mechanism by which governed systems respond to evidence changes through structured belief revision rather than ad-hoc re-evaluation.
+**Cascade protection (from external review):**
+- **Cycle detection:** Circular dependencies (Belief A → Claim X → Belief B → Claim Y → Belief A) are detected and broken. The cascade enforces DAG traversal; cycles trigger `suspended` state on the cycle entry point.
+- **Depth limit:** Maximum cascade depth (recommended: 5). Beyond the limit, the cascade halts and surfaces the constraint for human review.
+- **Hysteresis bands:** Promotion and demotion thresholds differ to prevent oscillation. A belief that was just demoted requires a higher evidence bar to be re-promoted than a belief being promoted for the first time.
+- **Cascade budget:** Maximum number of belief state changes per evidence event (recommended: 50). Budget exhaustion triggers review.
+
+**Prior art and intellectual lineage:**
+
+The Belief Layer draws on established traditions:
+- **Argumentation frameworks** — IBIS (Kunz & Rittel), Toulmin model, Dung's abstract argumentation (1995), Carneades (Gordon, Prakken, Walton, 2007) with dialectical statuses and proof standards, ASPIC+ for structured argumentation
+- **Belief revision theory** — AGM framework (Alchourrón, Gärdenfors, Makinson) for rational belief update under new information
+- **Truth Maintenance Systems** — Doyle (1979), de Kleer (1986) for dependency-directed revision cascades
+- **Assurance cases** — GSN, CAE, OMG SACM for structured claims-arguments-evidence to justify system properties
+- **W3C PROV-O** — Entity/Activity/Agent provenance model; DeCPROV for decision-specific provenance
+
+**What is novel:** None of the above treat belief as an **organizational governance act** rather than a logical derivation. In every prior system, belief status is computed from argument acceptability or logical entailment. The Belief Layer makes belief a deliberate institutional stance — a human governance decision mediated by evidence but not determined by it. The reframing from "what the logic says" to "what the organization is willing to stand behind" is the genuine contribution. The revision cascade applies TMS-style dependency propagation to this governed epistemic state, and the temporal states (`stale`, `superseded`, `suspended`) address governance needs absent from classical systems.
+
+**Design trade-off:** Discrete states vs. probabilistic confidence (Bayesian networks, Dempster-Shafer). Discrete states are auditable, interpretable, and governance-friendly — a committee can discuss whether a belief should move from "plausible" to "provisionally accepted" in ways they cannot discuss a posterior probability shift. The cost is lost nuance. A hybrid approach — discrete governance states with optional underlying confidence scores — would capture benefits of both paradigms.
 
 ### Adversarial Self-Critique (The Challenger)
 
 Implementation of Primitive #4 (Adversarial Critique) applied to decision-making.
 
 **The Challenger Agent produces:**
-- Counterclaims (structured opposition to existing claims)
+- Contradicting claims (claims with CONTRADICTS relationships to existing claims)
 - Gaps (missing evidence or analysis)
 - Contradiction flags (claims that conflict with each other or with evidence)
 - Challenge summaries
@@ -186,15 +217,20 @@ The decision pipeline is an **orchestrated multi-agent system** (see Agentic Pri
 
 | Agent | Ring | Role |
 |-------|------|------|
-| Intake Agent | R0 | Normalizes intake materials into a case package |
-| Entity Extraction Agent | R0 | Extracts systems, datasets, vendors, controls from documents |
-| Evidence Agent | R0 | Collects, links, and summarizes evidence with metadata |
-| Claim Agent | R0 | Transforms evidence into structured claims |
-| Challenger Agent | R1 | Searches for contradictions and weak assumptions |
-| Belief Manager Agent | R0/R1 | Maintains governed belief state for material claims |
+| Intake & Extraction Agent | R0 | Normalizes intake materials, extracts entities (systems, datasets, vendors, controls) into a structured case package |
+| Evidence Agent | R0 | Collects, links, and summarizes evidence with metadata. Integrity verification (source authentication, tampering detection, freshness) |
+| Claim Agent | R0 | Transforms evidence into structured claims with typed relationships (SUPPORTS, CONTRADICTS, QUALIFIES) |
+| Challenger Agent | R1 | Searches for contradictions, weak assumptions, missing evidence. Structural mandate: find flaws, never confirm |
+| Belief Manager | R1 | Maintains governed belief state. **Deterministic state machine**, not an LLM agent — applies formal transition rules, threshold checks, and provenance capture. Receives claim proposals from R0, subjects them to Challenger validation before committing state changes |
 | Policy Agent | R2 | Evaluates beliefs against formal governance rules |
 | Recommendation Agent | R0 | Synthesizes all outputs into decision options |
-| Memo Agent | R0 | Generates exportable, reviewer-ready decision memos |
+| Memo Agent | R0 (lightweight) | Generates exportable, reviewer-ready decision memos. Formatting tool, not a reasoning agent |
+
+**Design notes (from external review):**
+- **Intake + Entity Extraction merged:** These execute highly overlapping NLP tasks. Separating them introduces unnecessary latency and forces context reconstruction. A single agent produces both the normalized case package and extracted entities in one pass.
+- **Belief Manager moved to Ring 1:** Three independent reviews identified the original Ring 0/Ring 1 boundary position as a security vulnerability — a component bridging two trust zones is the most attacked element in any security architecture. The Belief Manager now sits firmly in Ring 1, receiving immutable claim proposals from Ring 0 and subjecting them to adversarial challenge before committing state changes. It operates as a **deterministic state machine** (formal transition rules, not LLM reasoning) to ensure predictable, auditable state transitions.
+- **Memo Agent downgraded:** From full reasoning agent to lightweight formatting tool. It renders the provenance chain for human consumption but does not perform reasoning.
+- **Pipeline is a directed graph, not a linear pipeline.** The Challenger creates feedback loops, the Policy Agent applies constraints throughout, and Evidence and Claim agents can run in parallel. Design and implement as a cyclic graph with explicit cycle handling.
 
 **Guardrails (from Primitives #7 and #14):** Every agent write includes agent_id, version, timestamp, method reference, confidence, source references, and change justification. Each agent has declared scope (Bounded Agency). Identity context travels with every action (Identity & Attribution).
 
@@ -298,6 +334,8 @@ These map to Primitive #15 (Adversarial Robustness) applied specifically to the 
 - **Not a GRC platform.** Traditional GRC (OneTrust, Archer, ServiceNow GRC) manages controls, questionnaires, and compliance workflows. Decision Intelligence governs how specific risk-bearing decisions are made — it produces the decision artifacts that GRC platforms track.
 
 - **Not a business intelligence tool.** BI tools aggregate data for human analysis. Decision Intelligence structures the reasoning process itself — evidence, claims, beliefs, policy evaluation, and authorization — into auditable artifacts. BI answers "what happened?" DI answers "why was this decided, and was the decision governed?"
+
+- **Not a decision automation engine.** The Gartner Decision Intelligence Platform Leaders (FICO, SAS, Aera Technology) focus on automated decisioning — rules engines that make operational decisions at scale without human involvement. This system explicitly requires human judgment in the governance loop. It captures and governs the reasoning process; it does not automate the decision away.
 
 - **Not a replacement for human judgment.** Agents recommend; humans decide. The system captures how decisions are made and ensures governance rigor. It does not remove human authority from consequential decisions — it makes human authority more effective by providing structured evidence, adversarial challenge, and explicit policy evaluation.
 

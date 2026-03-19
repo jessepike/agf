@@ -193,7 +193,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [x] **Update to reference Agentic Primitives** — Mapped all 16 primitives, ring architecture, zero trust overlay, deployment modes, composition patterns. DONE.
 - [ ] **Diagrams** — Decision Intelligence architecture, ring mapping, belief revision cascade, multi-agent decision pipeline. Run through Diagram Forge.
 - [x] **Internal review** — Added missing primitives (#17, #18, #19) to mapping tables. Fixed Belief Layer overclaim (reframed with prior art: IBIS, Toulmin, Bayesian networks). Added "What This Is Not" section (not chatbot, not GRC, not BI, not human replacement). DONE.
-- [ ] **External review** — After internal cycle. Create review prompt tailored to decision intelligence (focus on belief layer novelty, RDG viability, market positioning).
+- [x] **External review** — Three independent reviews (Claude adversarial, GPT deep research, Gemini practitioner). All three validated Belief Layer novelty. Critical fixes resolved: RDG reduced from 15 to 9 core types + PROV-O alignment + Agent node added; Claim/Counterclaim merged; Belief Manager moved to Ring 1 as deterministic state machine; cascade protection added (cycles, depth, hysteresis, budget); `suspended` state added; "not a decision automation engine" positioning; prior art citations added (Carneades, AGM, TMS, GSN, PROV-O). Reviews archived. DONE.
 - [ ] **Positioning vision section** — Strengthen category positioning narrative for buyers/investors.
 - [ ] **Revenue gate per phase** — Each build phase needs a funding answer.
 - [ ] **Belief layer complexity vs. adoption** — Buyer language for belief revision.
