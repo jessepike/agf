@@ -219,7 +219,7 @@ Every ring adds cost. AGF is designed for proportional activation:
 
 **Trust Ladders are the primary cost optimization mechanism.** As trust builds through demonstrated performance, verification intensity decreases and governance gates relax. The system starts expensive and gets cheaper — the right economic trajectory.
 
-Empirical reference points from the literature: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT); AI gateway routing at 11μs per request at 5K RPS (Bifrost); self-improvement loops at approximately 50× the tokens of single execution (Reflexion-style learning). Governance overhead is measurable and manageable at production scale.
+Empirical reference points from the literature: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT); AI gateway routing at 11μs per request at 5K RPS (Bifrost); self-improvement loops requiring significantly more tokens than single execution due to multi-trial iteration (Reflexion-style learning, Shinn et al., NeurIPS 2023). Governance overhead is measurable and manageable at production scale.
 
 ### Key Tensions
 

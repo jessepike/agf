@@ -70,7 +70,18 @@ The EU AI Act provides the most comprehensive regulatory framework for AI system
 | **Art. 15 — Accuracy, robustness, cybersecurity** | Resilience against data poisoning, adversarial examples, model manipulation, supply chain exploitation | Adversarial Robustness (#15) + Security Architecture + Evaluation & Assurance (#18) | Security test results, red team reports, evaluation suite outcomes |
 | **Art. 50 — Transparency obligations** | Users informed they are interacting with AI; disclosure/labelling for certain AI-generated content (e.g., deepfakes); transparency duties for emotion recognition and biometric categorisation systems | Identity & Attribution (#14) — AI-system identification in identity context. Provenance Chains (#6) for content provenance. | AI identification disclosure records, content provenance records |
 
-**What AGF does NOT cover:** Art. 43 (conformity assessment procedures), Art. 73 (serious incident reporting), Art. 51-56 (GPAI model obligations — relevant when agentic systems are built on general-purpose AI models), Art. 72 (post-market monitoring system), and Art. 26 (deployer obligations including log retention ≥6 months). These are organizational/regulatory processes above AGF's runtime architecture. AGF provides the technical evidence substrate these processes require.
+### General-Purpose AI Model Obligations (Articles 51–56)
+
+Most agentic systems are built on general-purpose AI models (GPT, Claude, Gemini, etc.). GPAI obligations have applied since **2 August 2025** and are relevant to deployers of agentic systems:
+
+| Article | Requirement | AGF Relevance |
+|---------|------------|--------------|
+| **Art. 53 — GPAI provider obligations** | Documentation, adversarial testing, copyright compliance | AGF does not address GPAI provider obligations directly. Organizations deploying agents on GPAI models should verify provider compliance and maintain evidence of provider documentation. |
+| **Art. 55 — Systemic risk obligations** | Additional obligations for GPAI models with systemic risk (compute >10²⁵ FLOPs or Commission designation) | If your agent system uses a systemic-risk GPAI model, additional governance requirements apply. AGF's Evaluation & Assurance (#18) and Security Architecture support but do not fully satisfy these obligations. |
+
+**Coverage boundary:** AGF governs how organizations deploy and operate agentic systems built on GPAI models. It does not govern the models themselves. Organizations have a dual compliance obligation: GPAI model compliance (provider responsibility, Art. 53-55) AND high-risk system compliance (deployer responsibility, Art. 6, 9-15) when the agent system qualifies as high-risk.
+
+**What AGF does NOT cover:** Art. 43 (conformity assessment procedures), Art. 73 (serious incident reporting), Art. 72 (post-market monitoring system), Art. 26 (deployer obligations including log retention ≥6 months). These are organizational/regulatory processes above AGF's runtime architecture. AGF provides the technical evidence substrate these processes require.
 
 **Applicability timing (as of March 2026):** The EU AI Act entered into force in 2024 with phased applicability. Prohibitions, definitions, and AI literacy (Art. 4) have applied since 2 February 2025. Governance rules and GPAI obligations have applied since 2 August 2025. High-risk system obligations (Art. 6, 9-15) become applicable 2 August 2026. Organizations should begin preparation now; the obligations in this profile are transitional as of this writing.
 
@@ -86,12 +97,12 @@ For compliance purposes: document both the human oversight mechanisms (gates, re
 
 AGF primitives constitute an **agentic AI RMF-style profile** — runtime mechanisms that partially address aspects of NIST AI RMF functions in the agentic context. NIST describes its functions as flexibly applicable; AGF applies them to agentic systems specifically. AGF does not claim to cover the full breadth of each function.
 
-| NIST Function | Scope | AGF Mapping |
-|---------------|-------|-------------|
-| **GOVERN** | Establish and maintain organizational AI risk governance | Ring 2 instantiates runtime governance — policy evaluation, gate decisions, delegation authority — within the broader organizational governance that GOVERN defines. |
-| **MAP** | Context framing, risk identification, categorization | Risk classification + ring activation intensity. MAP includes understanding the system's context, stakeholders, and potential impacts — broader than classification alone. |
-| **MEASURE** | Quantify, monitor, assess AI risks | Evaluation & Assurance (#18) for pre-deployment measurement. Ring 1 verification + Event-Driven Observability (#10) for continuous runtime measurement. |
-| **MANAGE** | Allocate resources, plan responses, manage risks | Trust Ladders (#11) + Bounded Agency (#7) — calibrating autonomy levels and enforcing boundaries as risk management. MANAGE is broader; it includes organizational response planning above our runtime architecture. |
+| NIST Function | Scope (NIST) | AGF Covers | AGF Does NOT Cover |
+|---------------|-------------|-----------|-------------------|
+| **GOVERN** | Establish and maintain organizational AI risk governance (6 categories, 23 subcategories covering legal compliance, DEI, stakeholder engagement, supply chain governance, risk culture) | Ring 2 runtime governance: policy evaluation, gate decisions, delegation authority, Policy as Code (#9) | Organizational risk culture, legal compliance processes, external stakeholder engagement, DEI governance, supply chain governance beyond tool trust |
+| **MAP** | Context framing, risk identification, categorization (understanding context, stakeholders, potential impacts) | Risk classification + ring activation intensity. Risk tier decision tree. | Broader stakeholder analysis, societal impact assessment, system context mapping beyond runtime classification |
+| **MEASURE** | Quantify, monitor, assess AI risks (continuous measurement across AI lifecycle) | Evaluation & Assurance (#18) for pre-deployment. Ring 1 verification + Event-Driven Observability (#10) for runtime. | Organizational risk quantification, bias measurement, fairness metrics, broader AI lifecycle measurement beyond runtime |
+| **MANAGE** | Allocate resources, plan responses, manage risks (incident response, recovery, communication, decommissioning) | Trust Ladders (#11) + Bounded Agency (#7) for runtime risk management. Error Handling (#13) for recovery. | Organizational response planning, resource allocation, stakeholder communication, appeal mechanisms, decommissioning processes |
 
 ### NIST IR 8596 (Cybersecurity AI Profile)
 

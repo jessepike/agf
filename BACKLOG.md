@@ -162,17 +162,19 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ### Remaining External Review Findings (To Address)
 
-**Strategic (next iteration):**
-- [ ] **Add "coverage boundary" annotations** to every regulatory mapping — state not just what's covered, but what's NOT (Claude finding)
-- [ ] **Add EU AI Act GPAI chapter** (Art. 51-56) as a mapping domain in GRC profile — relevant for all agentic systems built on foundation models
-- [ ] **Add competitive landscape references** — AWS Agentic AI Security Scoping Matrix (Nov 2025), Microsoft Azure AI agent governance guidance (Dec 2025), Google Cloud Vertex AI tool governance (Dec 2025), ServiceNow AI Control Tower/Gateway, Salesforce Agentforce governance
-- [ ] **Missing personas** — Product Manager profile (UX for governance gates, latency budgets, guardrail design) and Procurement/Vendor Risk profile (third-party agent evaluation rubrics) identified as gaps by Gemini
-- [ ] **Per-profile reference artifacts** — each profile needs one concrete implementation artifact: Security (red team payload repo), Platform (MCP OAuth federation reference), GRC (evidence exporter template), AI Engineering (trust calibration algorithms), Observability (OTel config snippets)
-- [ ] **Trust Ladders mathematical formalization** — move from conceptual to algorithmic (time-series models, ARIMAX-style calibration, temporal decay)
-- [ ] **NIST AI RMF coverage honesty** — add explicit "what AGF covers vs. what sits outside" for each of the 4 NIST functions (GOVERN has 23 subcategories; Ring 2 addresses a subset)
-- [ ] **Deployment mode ecosystem nuance** — middleware/interrupt is one of several coequal patterns, not dominant; MCP is connectivity, not governance; LangGraph uses graph-embedded, not middleware
-- [ ] **OTel semantic convention proposal** — pursue standardization of AGF governance extensions as OTel semantic conventions for reusable pieces
-- [ ] **Primitives doc: fix AGT/Bifrost/Reflexion characterizations** — Bifrost is AI gateway (not security fabric), AGT 0.43s is cumulative (not per-decision), Reflexion 50x needs direct source citation
+**Strategic — Resolved:**
+- [x] **Coverage boundary annotations** — NIST AI RMF table expanded with "AGF Covers" and "AGF Does NOT Cover" columns for all 4 functions. DONE.
+- [x] **EU AI Act GPAI chapter** — Art. 51-56 added as dedicated subsection in GRC profile with Art. 53/55 mapping and dual-obligation framing. DONE.
+- [x] **NIST AI RMF coverage honesty** — Explicit "what sits outside" for GOVERN (23 subcategories), MAP, MEASURE, MANAGE. DONE.
+- [x] **Deployment mode ecosystem nuance** — Added ecosystem reality note: no single mode dominates, MCP is connectivity not governance, framework-specific patterns acknowledged. DONE.
+- [x] **Primitives doc characterization fixes** — Reflexion 50x softened (no direct source, acknowledged as estimate). AGT/Bifrost already fixed in prior round. DONE.
+- [x] **Competitive landscape** — Updated in Observability concept doc (Microsoft Agent 365, AWS AgentCore, Zenity, Gartner projections). Partially done — GRC/Security/Platform profiles could also benefit from competitive refs but are lower priority.
+
+**Strategic — Deferred (post-publication iteration):**
+- [ ] **Missing personas** — Product Manager profile and Procurement/Vendor Risk profile. Real gaps but require product decisions about scope expansion.
+- [ ] **Per-profile reference artifacts** — Security (payload repo), Platform (MCP OAuth ref), GRC (evidence exporter), AI Engineering (trust algorithms), Observability (OTel configs). Substantial new work — best informed by practitioner feedback post-publication.
+- [ ] **Trust Ladders mathematical formalization** — Time-series models, ARIMAX-style calibration, temporal decay. Research work — important for credibility with quantitative buyers.
+- [ ] **OTel semantic convention proposal** — Pursue standardization of AGF governance extensions. External community process — timing dependent on publication and community reception.
 
 ---
 

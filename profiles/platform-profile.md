@@ -172,7 +172,9 @@ Choose the deployment mode based on system characteristics. When multiple modes 
 | **Concurrent load** | Low — batch/sequential | Medium — multiple agents with interleaved governance | High — parallel verification, swarm coordination |
 | **Protocol integration** | Custom pipeline orchestration | MCP (tool calls), A2A (agent delegation) | Custom streaming protocols, WebSocket-based |
 
-**Decision heuristic:** If you're unsure, start with middleware mode. It's the most common deployment pattern for agentic systems in 2026, handles the widest range of use cases, and has the strongest middleware ecosystem (MCP).
+**Decision heuristic:** If you're unsure, start with middleware mode. It handles the widest range of use cases and has the strongest protocol ecosystem (MCP).
+
+**Ecosystem reality (March 2026):** No single deployment mode dominates. The ecosystem is fragmented: LangGraph uses graph-embedded governance with state machines; CrewAI uses workflow checkpoint governance; OpenAI Agents SDK uses interceptor/middleware guardrails; Amazon Bedrock AgentCore uses external policy enforcement at the gateway layer; AutoGen uses conversational participant governance. MCP is a **connectivity protocol**, not a governance mechanism — governance layers are built on top of or alongside MCP. The Mode Selection Matrix helps organizations choose the right mode for their system type rather than defaulting to what their framework happens to use.
 
 ---
 
