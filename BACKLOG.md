@@ -202,7 +202,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 - [x] **Relationship model** — Cross-concept relationship model documenting: AGF primitives as shared foundation, DI↔AO symbiotic relationship (DI produces events, AO consumes them), product strategy implications (one framework, separate products, cross-sell), shared elements vs. different buyers/problems/moats, relationship to governance framework operating model. At `docs/cross-concept-relationship.md`. DONE.
 - [x] **Cross-doc navigation links** — Meta doc links to all 5 profiles with relative paths + updated descriptions. Meta doc links to all 3 concept docs in Deep-Dive Topics. Concept docs (observability, DI) link back to meta doc, primitives, profiles, and each other. DONE.
-- [ ] **Shared vocabulary doc** — Consistent terminology across all three concept docs.
+- [x] **Shared vocabulary doc** — Canonical terminology reference at `docs/shared-vocabulary.md`. Covers: architecture terms (rings, deployment modes, composability interface signals), all 19 primitives with ring assignments, security model terms, governance terms (adaptive/mandatory gates, policy vs configuration, trust levels), risk classification tiers, environment stack terms, observability terms, DI terms (RDG, beliefs, revision cascade), composition patterns, confidence levels, standards abbreviations. DONE.
 - [ ] **Bridge to assessment pipeline** — How concepts feed back into risk tools roadmap.
 - [ ] **Next primitive to implement** — Select and spec for the pipeline.
 - [ ] **Observatory as first Agentic Observability implementation** — Scope the pipeline observatory as proof of the broader concept.
