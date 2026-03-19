@@ -154,8 +154,11 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ### Cross-Profile
 
-- [x] **Fix broken cross-references** — Security and Platform profiles now link to AI Engineering Profile + primitives catalog. Observability Profile link in Platform Profile marked as forthcoming. DONE.
+- [x] **Fix broken cross-references** — Security and Platform profiles now link to AI Engineering Profile + primitives catalog. All observability links now resolve. DONE.
 - [x] **Fix parent doc relative paths** — All profiles now correctly link to `../docs/agf-reference-architecture.md`. DONE.
+- [x] **External review prompts created** — Three tailored prompts: Claude Opus (adversarial — positioning, cross-profile coherence, audience targeting), GPT 5.4 (deep research — regulatory accuracy, crosswalk verification, threat mapping, OTel alignment), Gemini 3.1 Pro (deep research — practitioner usability, "would I use this?" test, navigation, missing personas). DONE.
+- [ ] **Run external reviews** — Claude, GPT, Gemini. Capture results in `inbox/`, triage to backlog.
+- [ ] **Process external review findings** — Address findings, update profiles, iterate.
 
 ---
 
