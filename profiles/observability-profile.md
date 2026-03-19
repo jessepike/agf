@@ -29,8 +29,9 @@ SREs, SOC analysts, detection engineers, platform reliability engineers, and any
 7. [Zero Trust Monitoring](#zero-trust-monitoring)
 8. [Observability Maturity Model](#observability-maturity-model)
 9. [What This Is NOT](#what-this-is-not)
-10. [Observability Primitives Reference](#observability-primitives-reference)
-11. [Operations Checklist](#operations-checklist)
+10. [Known Limitations and Operational Realities](#known-limitations-and-operational-realities)
+11. [Observability Primitives Reference](#observability-primitives-reference)
+12. [Operations Checklist](#operations-checklist)
 
 ---
 
@@ -196,6 +197,12 @@ Events classified by ring, mapping to the three detection domains:
 - `improvement_recommended`, `improvement_applied`, `improvement_rolled_back`
 - `memory_written`, `memory_queried`, `memory_pruned`
 
+**Environment events (#19):**
+- `environment_composed` (layers assembled, context budget allocated)
+- `environment_optimization_proposed`, `environment_optimization_applied`, `environment_optimization_rejected`
+- `tool_provisioned`, `tool_revoked` (capability set changes)
+- `instruction_version_changed` (L2 instruction update deployed)
+
 **Security events (cross-cutting):**
 - `identity_verified`, `identity_failed`
 - `boundary_violation_detected` (agent exceeded declared scope)
@@ -227,7 +234,7 @@ The correlation engine consumes the event stream and applies rules across the th
 | **Convergence degradation** | Average validation loop iterations trending up >25% | Alert, investigate prompt/model degradation |
 | **Override clustering** | Human overrides clustering on same field type across agents | Alert, flag for prompt improvement |
 | **Cost anomaly** | Per-execution cost >2σ above baseline for >24 hours | Alert, investigate resource usage |
-| **Verification bypass** | Output appears in Ring 2 without corresponding Ring 1 events | Critical alert, quarantine, investigate |
+| **Trust-quality divergence** | Trust level increasing while Ring 1 pass rate is flat or declining | Alert, investigate calibration — trust is rising without quality justification |
 
 ### Security Correlation Rules
 
@@ -372,6 +379,23 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Not a GRC platform.** Traditional GRC (OneTrust, Archer, ServiceNow GRC) manages controls and compliance workflows. Agentic Observability is the telemetry layer that feeds governance evidence INTO those platforms.
 
 - **Not traditional SIEM.** Splunk, Chronicle, Elastic SIEM don't understand agentic event semantics — ring signals, governance gates, trust ladders, decision provenance. Agentic Observability speaks the language of governed agentic systems. It may integrate with traditional SIEM (sending security alerts upstream), but it doesn't replace infrastructure SIEM.
+
+---
+
+## Known Limitations and Operational Realities
+
+1. **Observability vs. Privacy.** Event-driven observability says "log everything material." Privacy regulations and data minimization principles say "minimize what you collect." This tension is real. Resolution pattern: log governance events (ring signals, gate decisions, trust changes, identity context) with **redacted content** — the event records *that* an action happened, *who* did it, and *what the governance outcome was*, without persisting the full content of inputs/outputs. Full content is available only in investigation mode with access controls and audit trail. For GDPR contexts, this means event retention policies must account for data subject rights.
+
+2. **Event volume at scale.** A governed agentic system with full ring instrumentation produces significantly more events than traditional applications. At scale (hundreds of agents, thousands of executions per day), event storage is a real infrastructure cost. Operations teams must design for this:
+   - **Sampling:** Low-stakes, high-trust agents can use statistical sampling rather than exhaustive logging (Level 1 events only). High-stakes and critical-tier agents require full event capture.
+   - **Tiered storage:** Hot storage for recent events (days-weeks), warm storage for correlation windows (weeks-months), cold/archive for audit retention (months-years).
+   - **Retention policies:** Define per risk tier. Critical-tier events retained for system lifetime or regulatory requirement. Low-tier events may age off after 90 days.
+
+3. **Correlation rule authoring.** Who writes and maintains correlation rules? Quality rules need domain expertise (the team that understands what good output looks like). Security rules need security expertise (SOC, red team). Governance rules need compliance expertise (GRC team). In practice, this means rule authoring is a cross-functional responsibility — shared infrastructure, domain-specific rules.
+
+4. **Baseline cold start.** Behavioral baselines require historical data. New agents have no baseline — anomaly detection doesn't work until enough execution data accumulates. During the cold start period, agents should run at maximum governance intensity (all gates, full verification) regardless of risk tier.
+
+5. **OTel compatibility is extension, not native.** AGF's governance, security, and ring-level event semantics are custom extensions within the OTel data model, not native OTel semantic conventions. This means OTel tooling (Jaeger, Grafana Tempo, Honeycomb) can ingest and display AGF events, but won't understand the governance semantics without custom dashboards and correlation rules.
 
 ---
 
