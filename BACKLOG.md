@@ -200,7 +200,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ## Priority 4: Cross-Concept
 
-- [ ] **Relationship model** — Two products? One platform? Adjacent? Document the architectural relationship.
+- [x] **Relationship model** — Cross-concept relationship model documenting: AGF primitives as shared foundation, DI↔AO symbiotic relationship (DI produces events, AO consumes them), product strategy implications (one framework, separate products, cross-sell), shared elements vs. different buyers/problems/moats, relationship to governance framework operating model. At `docs/cross-concept-relationship.md`. DONE.
 - [x] **Cross-doc navigation links** — Meta doc links to all 5 profiles with relative paths + updated descriptions. Meta doc links to all 3 concept docs in Deep-Dive Topics. Concept docs (observability, DI) link back to meta doc, primitives, profiles, and each other. DONE.
 - [ ] **Shared vocabulary doc** — Consistent terminology across all three concept docs.
 - [ ] **Bridge to assessment pipeline** — How concepts feed back into risk tools roadmap.
@@ -209,7 +209,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ## Content & Publication
 
-- [ ] **White paper: Trust Ladders** — How agentic systems earn autonomy. Strongest standalone piece. Source: Anthropic agent autonomy research + DeepMind delegation paper.
+- [x] **White paper: Trust Ladders** — "How Agentic Systems Earn Autonomy." AGF White Paper No. 1. Covers: the binary trust problem, the graduated pattern (6 mechanics), empirical evidence (Anthropic data, DeepMind delegation framework, CSA ATF, Engels et al. oversight scaling), AGF integration (governance, learning, security, economics), implementation guidance (metrics, promotion criteria, demotion triggers), the broader principle. At `docs/white-papers/trust-ladders.md`. DONE.
 - [ ] **Architecture post: The Rings Model** — Concentric architecture for governed agentic systems. Diagram + write-up.
 - [ ] **Post: Validation Loops with Convergence Gates** — Self-improving pipeline pattern. Engineering audience.
 - [ ] **Post: Adversarial Critique as Structural Pattern** — Producer/verifier separation for AI.
