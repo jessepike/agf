@@ -117,8 +117,10 @@ Five domain profiles decompose the AGF reference architecture for different buye
 ### Security Profile (`profiles/security-profile.md`)
 
 - [x] **Draft profile** — Three-level security model, OWASP ASI + MCP threat analysis, Response Bus, zero trust, CSA ATF alignment, assessment checklist. DONE.
-- [ ] **Red team scenarios** — Worked examples showing how specific attack chains traverse the three-level model. Promised in meta doc.
-- [ ] **Incident response playbook structure** — Runbook templates, escalation trees, containment decision flows. Promised in meta doc.
+- [x] **Red team scenarios** — Three worked scenarios: (1) Multi-agent lateral movement (ASI07→ASI03→ASI08) with timeline, defense layers, and weakness analysis; (2) Slow memory poisoning (ASI06) showing temporal gap exploitation; (3) Trust ladder manipulation (ASI09+ASI02) showing gaming patterns. Each with "where AGF holds" and "where AGF is weakest" analysis + practical usage guide. DONE.
+- [x] **Incident response playbook structure** — Standard playbook template (detect→contain→investigate→remediate→learn), 8 defined playbooks (PB-01 through PB-08) covering lateral movement, memory poisoning, trust manipulation, supply chain, cascading failure, oversight exploitation, rogue agent, data exfiltration. Escalation paths by severity. Post-incident requirements. DONE.
+- [ ] **Verify IMDA date** — GRC profile says "January 2026" for IMDA MGF for Agentic AI. Verify vs. original MGF (Jan 2024). Correct if needed across all docs.
+- [ ] **Crosswalk: #16 Transaction Control EU AI Act mapping** — Currently mapped to Art. 15 (Accuracy). Consider Art. 9 (Risk Management) as better fit. Decision needed.
 - [ ] **Internal review** — Structured review for accuracy, completeness, threat coverage gaps.
 - [ ] **External review** — After internal cycle. Focus on: threat model completeness, practical applicability, any overclaiming in defense posture.
 

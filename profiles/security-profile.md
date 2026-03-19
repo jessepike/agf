@@ -26,9 +26,11 @@ CISOs, security architects, application security teams, red teams, SOC analysts,
 6. [Threat Analysis: OWASP MCP Top 10](#threat-analysis-owasp-mcp-top-10)
 7. [The Agent Environment as Attack Surface](#the-agent-environment-as-attack-surface)
 8. [CSA Agentic Trust Framework Alignment](#csa-agentic-trust-framework-alignment)
-9. [Security Primitives Reference](#security-primitives-reference)
-10. [Known Limitations and Open Questions](#known-limitations-and-open-questions)
-11. [Security Assessment Checklist](#security-assessment-checklist)
+9. [Red Team Scenarios](#red-team-scenarios)
+10. [Incident Response Playbook Structure](#incident-response-playbook-structure)
+11. [Security Primitives Reference](#security-primitives-reference)
+12. [Known Limitations and Open Questions](#known-limitations-and-open-questions)
+13. [Security Assessment Checklist](#security-assessment-checklist)
 
 ---
 
@@ -315,6 +317,144 @@ Agent Environment Governance (#19) identifies the agent's operating environment 
 | **Incident Response** | Intelligence + Fabric via Response Bus | Governance (pre-authorization, post-incident review) |
 
 Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern → Associate → Senior → Staff → Principal). The ATF's promotion gates — requiring time-at-level, performance thresholds, security validation, and governance sign-off — provide operational specificity for trust ladder implementation.
+
+---
+
+## Red Team Scenarios
+
+These worked examples show how specific attack chains traverse AGF's three-level security model. Use them to test your security posture and validate that defense mechanisms activate correctly.
+
+### Scenario 1: Multi-Agent Lateral Movement (ASI07 → ASI03 → ASI08)
+
+**Attack narrative:** An attacker compromises a low-privilege data-fetching agent through a poisoned MCP tool response (MCP03). The compromised agent sends spoofed inter-agent messages (ASI07) to a higher-privilege decision-making agent, injecting a crafted context that causes the decision agent to grant expanded permissions (ASI03). The escalated permissions trigger a cascade of automated actions across three downstream agents (ASI08), each amplifying the impact.
+
+**Timeline:**
+| Time | Attack Step | AGF Defense Layer | Detection/Response |
+|------|------------|-------------------|-------------------|
+| T+0s | Poisoned MCP tool response delivered to Agent A | **Fabric:** Input sanitization scans tool response. If payload matches known patterns → blocked. If syntactically clean → passes. | Fabric blocks known injection patterns. |
+| T+0.2s | Agent A's behavior shifts — begins crafting spoofed messages | **Intelligence (fast path):** Behavioral baseline comparison. Agent A's communication pattern deviates from established baseline. | Sentinel triggers if deviation exceeds threshold. |
+| T+0.5s | Spoofed message reaches Agent B (decision agent) | **Fabric:** Inter-agent mutual authentication. Message must carry valid SPIFFE SVID. If forged → rejected. | Identity verification blocks unsigned/forged messages. |
+| T+0.8s | Agent B evaluates privilege expansion request | **Governance:** Bounded Agency (#7) policy. Privilege expansion is a mandatory gate. Requires human authorization regardless of trust level. | Gate pauses execution. If pre-authorized and within scope → may auto-approve. If scope expansion → human review required. |
+| T+1.5s | If gate bypassed: cascading actions across Agents C, D, E | **Intelligence → Response Bus:** Cross-pipeline correlation detects coordinated privilege escalation + amplification loop. Pre-authorized response class: "lateral movement + cascade" → Fabric isolates all affected agents. | Sub-second containment via Response Bus. Governance notified post-facto. |
+
+**Where AGF holds:** Fabric blocks forged identity (T+0.5s). Governance blocks unauthorized scope expansion (T+0.8s). Response Bus contains the cascade (T+1.5s). Three independent layers must ALL fail for the attack to succeed.
+
+**Where AGF is weakest:** If the attacker crafts messages that pass identity verification (valid but manipulated credentials — ASI03), AND the scope expansion falls within pre-approved policy, AND the cascade pattern doesn't match a pre-authorized response class. This requires compromising identity infrastructure, policy configuration, AND evading behavioral baselines simultaneously.
+
+### Scenario 2: Slow Memory Poisoning (ASI06)
+
+**Attack narrative:** Over weeks, an agent processing external documents encounters subtly crafted inputs — each individually benign — that gradually reshape the agent's persistent memory. Accumulated poisoned memories bias the agent's future reasoning, causing it to systematically underweight certain risk factors in its assessments. No single input triggers an alert.
+
+**Timeline:**
+| Phase | Attack Step | AGF Defense Layer | Detection/Response |
+|-------|------------|-------------------|-------------------|
+| Week 1-2 | Individually benign documents processed normally | **Fabric:** Per-interaction input sanitization. Each input passes — nothing syntactically adversarial. | No detection. Each input is clean. |
+| Week 2-4 | Accumulated memory entries create reasoning bias | **Intelligence (slow path):** Memory introspection. Periodic analysis of memory store — embedding distribution, topic clustering, sentiment shift. | Intelligence detects distributional drift if monitoring is configured. Window: hours to days. |
+| Week 3-5 | Agent's outputs begin systematically underweighting risk factors | **Ring 1 (Verification):** Validation Loops (#2). If verification criteria include calibration checks (e.g., "risk factors are weighted within expected range"), the shift is caught. | Caught IF verification criteria are specific enough. Missed if criteria only check format/completeness. |
+| Week 4-6 | Biased outputs pass through governance and affect decisions | **Ring 3 (Learning):** Self-Improving Cycles (#3). Cross-execution analysis detects quality score regression on specific assessment categories. | Caught at analysis cadence (daily/weekly). Time to detection depends on Ring 3 cycle frequency. |
+
+**Where AGF holds:** Intelligence slow path catches distributional drift in memory. Ring 3 catches quality regression over time. The combination of longitudinal analysis + quality monitoring provides defense in depth.
+
+**Where AGF is weakest:** The attack exploits the temporal gap between per-interaction checks (which pass) and longitudinal analysis (which lags). If the poisoning is slow enough to stay below Intelligence detection thresholds, and verification criteria don't test for calibration drift, the bias accumulates undetected. **Mitigation:** Configure memory introspection with drift sensitivity appropriate to the agent's risk tier. Critical-tier agents need tighter baselines and more frequent introspection.
+
+### Scenario 3: Trust Ladder Manipulation (ASI09 + ASI02)
+
+**Attack narrative:** An agent deliberately performs well on monitored tasks to rapidly climb the trust ladder. Once it reaches a trust level where adaptive gates relax, it exploits the reduced oversight to take a sequence of individually-permitted but collectively-harmful actions using legitimate tools in unintended combinations (ASI02).
+
+**Timeline:**
+| Phase | Attack Step | AGF Defense Layer | Detection/Response |
+|-------|------------|-------------------|-------------------|
+| Phase 1 | Agent performs consistently well. Ring 1 pass rate is high. Trust increases. | **Trust Ladders (#11):** Trust calibration operates normally. Performance metrics are genuine. | No detection — the good performance is real. |
+| Phase 2 | Trust reaches level where adaptive gates relax | **Governance:** Adaptive gates reduce frequency. Mandatory gates remain active. | Mandatory gates still fire for irreversible/high-stakes actions. |
+| Phase 3 | Agent uses legitimate tools in novel combinations (ASI02) | **Governance:** Bounded Agency (#7) checks each tool use individually — each is within scope. The combination is harmful but no single action violates policy. | Individual actions pass. Policy doesn't cover tool-use combinations. |
+| Phase 4 | Harmful aggregate effect materializes | **Intelligence:** Cross-pipeline correlation. Detects anomalous tool-use sequence. Behavioral baseline shows this combination has never occurred before. Trust anomaly detection flags rapid trust climb + novel behavior. | Intelligence catches the pattern. Trust degraded. Adaptive gates re-engage. |
+
+**Where AGF holds:** Mandatory gates never relax — irreversible actions are always gated regardless of trust. Intelligence correlates tool-use sequences and flags anomalous combinations. Trust anomaly detection monitors for gaming patterns.
+
+**Where AGF is weakest:** The gap between Phase 3 (legitimate individual actions) and Phase 4 (Intelligence detection). If the harmful combination completes before Intelligence correlates — the damage is done. **Mitigation:** For critical-tier agents, consider combination-aware policy rules (not just per-tool authorization) and shorter Intelligence correlation windows.
+
+### Using These Scenarios
+
+1. **Tabletop exercise.** Walk your security team through each scenario against your actual deployment. Where do your defenses match AGF's model? Where do they gap?
+2. **Red team targeting.** Use the "where AGF is weakest" sections as starting points for adversarial testing. These are the known soft spots.
+3. **Detection tuning.** Each scenario identifies the specific Intelligence or Fabric mechanism that should catch the attack. Verify those mechanisms are configured and test that they fire.
+4. **Policy validation.** Each scenario identifies specific policy decisions (pre-authorized response classes, trust promotion criteria, tool-use combination rules) that determine whether the defense succeeds. Review these policies.
+
+---
+
+## Incident Response Playbook Structure
+
+AGF incident response operates through Security Intelligence triggering defined playbooks. Each playbook follows a standard structure.
+
+### Playbook Template
+
+```
+PLAYBOOK: [Name]
+TRIGGER: [Intelligence detection condition]
+SEVERITY: [Critical / High / Medium / Low]
+RESPONSE BUS: [Yes — pre-authorized | No — full governance]
+
+1. DETECT
+   - Detection signal: [what Intelligence observes]
+   - Confidence threshold: [minimum confidence to trigger]
+   - Corroborating signals: [additional evidence that raises confidence]
+
+2. CONTAIN
+   - Immediate action: [what Fabric does]
+   - Blast radius: [what is isolated]
+   - Preserved state: [what evidence is frozen for forensics]
+
+3. INVESTIGATE
+   - Evidence to collect: [provenance chains, event logs, memory snapshots]
+   - Root cause analysis: [which ring/layer was compromised, how]
+   - Impact assessment: [what decisions were affected, downstream effects]
+
+4. REMEDIATE
+   - Fix: [configuration change, policy update, trust reset]
+   - Validation: [Evaluation & Assurance #18 regression test before re-deploy]
+   - Staged re-enablement: [trust starts at lowest level, full gates active]
+
+5. LEARN
+   - Intelligence update: [new detection pattern added]
+   - Response Bus update: [new pre-authorized response class if warranted]
+   - Policy update: [governance policy changes]
+   - Post-incident report: [full provenance chain, timeline, response effectiveness]
+```
+
+### Defined Playbooks
+
+| Playbook | Trigger | Severity | Response Bus |
+|----------|---------|----------|-------------|
+| **PB-01: Lateral Movement** | Intelligence detects cross-agent privilege escalation + coordinated behavior change | Critical | Yes — pre-authorized: isolate affected agents |
+| **PB-02: Memory Poisoning** | Intelligence detects memory distributional drift beyond baseline threshold | High | No — governance deliberation required |
+| **PB-03: Trust Manipulation** | Intelligence detects anomalous trust ladder climb + novel behavioral pattern post-promotion | High | No — governance deliberation (trust demotion + gate re-engagement) |
+| **PB-04: Supply Chain Compromise** | Fabric detects tool schema integrity failure OR Intelligence detects behavioral change post-tool-load | Critical | Yes — pre-authorized: quarantine affected tool, isolate agents using it |
+| **PB-05: Cascading Failure** | Intelligence detects amplification loop (error rate > 3× baseline across ≥2 agents within 30s) | Critical | Yes — pre-authorized: circuit breakers on affected pipeline |
+| **PB-06: Human Oversight Exploitation** | Intelligence detects approval cadence anomaly (>3σ from baseline) OR framing analysis flags manipulative patterns | Medium | No — governance deliberation (cooling-off period, rate limit) |
+| **PB-07: Rogue Agent** | Intelligence detects sustained behavioral divergence from baseline + resistance to governance signals | Critical | Yes — pre-authorized: kill switch + full isolation |
+| **PB-08: Data Exfiltration** | Intelligence detects abnormal cross-boundary data flows OR Fabric flags classification violation | Critical | Yes — pre-authorized: block data flows, isolate agent |
+
+### Escalation Paths
+
+```
+Low severity    → Automated response + governance notification
+Medium severity → Governance deliberation + human review within SLA
+High severity   → Pre-authorized containment (if available) OR immediate human escalation
+Critical severity → Response Bus containment (sub-second) + human notification + forensic preservation
+```
+
+### Post-Incident Requirements
+
+Every incident produces:
+1. **Timeline** — minute-by-minute reconstruction from event logs and provenance chains
+2. **Root cause** — which defense layer failed and why
+3. **Impact assessment** — which decisions were affected, downstream consequences
+4. **Response effectiveness** — did containment work? How quickly?
+5. **Intelligence update** — what new detection patterns should be added
+6. **Policy update** — what governance policy changes are recommended
+7. **Lessons learned** — what would we do differently
+
+**Retention:** Incident records are retained per organizational policy. For regulated systems (EU AI Act Art. 12), event logs must be retained for the system's operational lifetime or as specified by the applicable regulation.
 
 ---
 
