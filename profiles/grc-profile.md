@@ -28,8 +28,10 @@ Compliance officers, risk managers, auditors, legal/privacy teams, Data Protecti
 8. [Policy as Code: Governance Rules as Auditable Artifacts](#policy-as-code)
 9. [Data Governance and Privacy](#data-governance-and-privacy)
 10. [Risk Classification and Ring Activation](#risk-classification-and-ring-activation)
-11. [GRC Primitives Reference](#grc-primitives-reference)
-12. [Compliance Assessment Checklist](#compliance-assessment-checklist)
+11. [Governance Maturity Model](#governance-maturity-model)
+12. [Control Crosswalks](#control-crosswalks)
+13. [GRC Primitives Reference](#grc-primitives-reference)
+14. [Compliance Assessment Checklist](#compliance-assessment-checklist)
 
 ---
 
@@ -217,14 +219,28 @@ Data Governance & Confidentiality (#17) addresses GDPR, EU AI Act Art. 10, and o
 
 AGF uses risk-proportional governance — higher stakes trigger more intensive ring activation.
 
-| Risk Classification | Ring Configuration | Governance Intensity | Typical Use Cases |
-|-------------------|-------------------|---------------------|-------------------|
+### Risk Tiers and Governance Response
+
+| Risk Tier | Ring Configuration | Governance Intensity | Typical Use Cases |
+|-----------|-------------------|---------------------|-------------------|
 | **Low** | Ring 0 + minimal Ring 1 | Basic verification, no mandatory gates | Internal productivity tools, personal agents |
 | **Medium** | Ring 0 + Ring 1 + adaptive Ring 2 gates | Full verification, gates on consequential actions | Customer-facing agents, workflow automation |
 | **High** | All four rings, mandatory gates | Full verification, mandatory human oversight, adversarial testing | Regulated decisions, financial transactions, healthcare |
 | **Critical** | All rings + enhanced monitoring + continuous evaluation | Full stack + Security Intelligence active monitoring + continuous red-teaming | Autonomous systems with irreversible real-world impact |
 
 For EU AI Act: high-risk classification under Art. 6 implies full ring stack activation at minimum.
+
+### Classification Dimensions
+
+Five dimensions determine risk classification. Assess each independently; the highest-scoring dimension sets the floor.
+
+| Dimension | Low | Medium | High | Critical |
+|-----------|-----|--------|------|----------|
+| **Consequence of error** | Inconvenience, easily corrected | Business impact, costly to correct | Regulatory violation, significant harm | Irreversible harm, legal liability |
+| **Data sensitivity** | Public data | Internal data | Confidential / PII | Restricted / regulated data |
+| **Autonomy level** | Human reviews every output | Human reviews exceptions | Human reviews escalations only | Autonomous action within scope |
+| **Blast radius** | Affects one user | Affects one team/department | Affects one organization | Affects customers/public |
+| **Reversibility** | All actions reversible | Most actions reversible | Some irreversible actions | Primarily irreversible actions |
 
 ### Risk Classification Decision Tree
 
@@ -260,19 +276,7 @@ START: What is the worst realistic consequence of an unconstrained error?
 - Any system with primarily irreversible actions affecting customers/public → **Tier 4: CRITICAL** regardless of other dimensions
 - When classification dimensions point to different tiers, **use the highest tier indicated**
 
-### Classification Dimensions
-
-Five dimensions determine risk classification. Assess each independently; the highest-scoring dimension sets the floor.
-
-| Dimension | Low (Tier 1) | Medium (Tier 2) | High (Tier 3) | Critical (Tier 4) |
-|-----------|-------------|-----------------|---------------|-------------------|
-| **Consequence of error** | Inconvenience, easily corrected | Business impact, costly to correct | Regulatory violation, significant harm | Irreversible harm, legal liability |
-| **Data sensitivity** | Public data | Internal data | Confidential / PII | Restricted / regulated data |
-| **Autonomy level** | Human reviews every output | Human reviews exceptions | Human reviews escalations only | Autonomous action within scope |
-| **Blast radius** | Affects one user | Affects one team/department | Affects one organization | Affects customers/public |
-| **Reversibility** | All actions reversible | Most actions reversible | Some irreversible actions | Primarily irreversible actions |
-
-**Document the classification decision.** Record: which system, the assessment date, the assessor, the score per dimension, the resulting tier, and the rationale. This record is audit evidence (Art. 6 compliance).
+**Document the classification decision.** Record: which system, the assessment date, the assessor, the score per dimension (see [Classification Dimensions](#classification-dimensions) above), the resulting tier, and the rationale. This record is audit evidence (Art. 6 compliance).
 
 ---
 
@@ -358,13 +362,13 @@ This crosswalk maps AGF primitives to established security and compliance contro
 
 | AGF Primitive | NIST 800-53 Rev. 5 Controls | ISO 27001:2022 Controls | EU AI Act Articles |
 |---------------|----------------------------|------------------------|-------------------|
-| **#1 Separation of Producer/Verifier** | CA-7 (Continuous Monitoring), SI-4 (System Monitoring) | A.8.16 (Monitoring Activities) | Art. 15 (Accuracy) |
+| **#1 Separation of Producer/Verifier** | CA-7 (Continuous Monitoring), SI-4 (System Monitoring) | A.5.3 (Segregation of Duties), A.8.16 (Monitoring Activities) | Art. 15 (Accuracy) |
 | **#6 Provenance Chains** | AU-3 (Content of Audit Records), AU-6 (Audit Record Review), AU-10 (Non-repudiation) | A.8.15 (Logging), A.5.33 (Protection of Records) | Art. 11 (Technical Documentation), Art. 12 (Record-keeping) |
 | **#7 Bounded Agency** | AC-6 (Least Privilege), AC-3 (Access Enforcement), CM-7 (Least Functionality) | A.8.2 (Privileged Access Rights), A.5.15 (Access Control) | Art. 9 (Risk Management), IMDA Dim. 1 |
 | **#8 Governance Gates** | AC-3 (Access Enforcement), CM-3 (Configuration Change Control) | A.8.32 (Change Management), A.5.1 (Policies for Information Security) | Art. 14 (Human Oversight) |
 | **#9 Policy as Code** | PL-1 (Policy and Procedures), CM-3 (Configuration Change Control), CM-6 (Configuration Settings) | A.5.1 (Policies for Information Security), A.8.9 (Configuration Management) | Art. 9 (Risk Management) |
 | **#10 Event-Driven Observability** | AU-2 (Event Logging), AU-3 (Content of Audit Records), AU-12 (Audit Record Generation), SI-4 (System Monitoring) | A.8.15 (Logging), A.8.16 (Monitoring Activities) | Art. 12 (Record-keeping) |
-| **#11 Trust Ladders** | AC-2 (Account Management), AC-6 (Least Privilege) | A.5.18 (Access Rights), A.8.2 (Privileged Access Rights) | NIST MANAGE |
+| **#11 Trust Ladders** | AC-2 (Account Management), AC-6 (Least Privilege) | A.5.18 (Access Rights), A.8.2 (Privileged Access Rights) | Art. 9 (Risk Management) |
 | **#14 Identity & Attribution** | IA-2 (Identification and Authentication), IA-4 (Identifier Management), IA-8 (Identification and Authentication — Non-Org Users) | A.5.16 (Identity Management), A.8.5 (Secure Authentication) | Art. 13 (Transparency), Art. 50 |
 | **#15 Adversarial Robustness** | SI-3 (Malicious Code Protection), SI-7 (Software/Firmware/Info Integrity), RA-5 (Vulnerability Monitoring and Scanning) | A.8.7 (Protection Against Malware), A.8.8 (Management of Technical Vulnerabilities) | Art. 15 (Robustness, Cybersecurity) |
 | **#16 Transaction & Side-Effect Control** | CP-9 (System Backup), CP-10 (System Recovery and Reconstitution), SI-10 (Information Input Validation) | A.8.13 (Information Backup), A.8.14 (Redundancy of Information Processing Facilities) | Art. 15 (Accuracy) |
@@ -394,10 +398,10 @@ This crosswalk maps AGF primitives to established security and compliance contro
 | **#8 Governance Gates** | Human oversight mechanism — where humans authorize agent actions |
 | **#9 Policy as Code** | Governance rules as versioned, executable, testable artifacts |
 | **#10 Event-Driven Observability** | Record-keeping — continuous structured event logging |
+| **#11 Trust Ladders** | Risk management — graduated trust with documented calibration |
+| **#14 Identity & Attribution** | Transparency — who did what, under whose authority |
 | **#17 Data Governance** | Privacy compliance — classification, consent, PII, retention |
 | **#18 Evaluation & Assurance** | Pre-deployment assurance — testing, red-teaming, regression |
-| **#14 Identity & Attribution** | Transparency — who did what, under whose authority |
-| **#11 Trust Ladders** | Risk management — graduated trust with documented calibration |
 | **#19 Agent Environment Governance** | Operational environment governance — composition audit trail |
 
 ---
@@ -420,6 +424,12 @@ This crosswalk maps AGF primitives to established security and compliance contro
 - [ ] MAP → Risk classification and ring activation rules documented
 - [ ] MEASURE → Evaluation #18 pre-deployment + Ring 1 continuous verification + Observability #10
 - [ ] MANAGE → Trust Ladders #11 calibrated + Bounded Agency #7 enforced
+
+### Governance Maturity Self-Assessment
+- [ ] Current maturity level identified (Level 1-5)
+- [ ] Gap analysis completed: current level vs. target level
+- [ ] Regulatory posture at current level documented (which requirements are met, which are not)
+- [ ] Advancement plan defined with milestones
 
 ### Audit Evidence Availability
 - [ ] Full provenance chain retrievable for any output (who, what, when, why, under what authority)
