@@ -3,6 +3,7 @@
 **Version:** 0.1 Draft
 **Last updated:** 2026-03-18
 **Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md)
+**Terminology:** [Shared Vocabulary](../docs/shared-vocabulary.md)
 
 ---
 

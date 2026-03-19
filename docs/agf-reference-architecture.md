@@ -2,7 +2,8 @@
 
 **Version:** 0.1 Draft
 **Last updated:** 2026-03-18
-**Status:** Living document
+**Status:** Living document — entry point for the AGF reference architecture
+**Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 
 ---
 

@@ -181,6 +181,7 @@ Rings communicate through a standard composability interface — six signals tha
 - **HALT** — something is fundamentally wrong, stop execution
 - **GATE** — pause for human authorization (returns: approve, reject, modify, defer, escalate)
 - **DELEGATE** — hand off to another agent/pipeline with depth tracking
+- **ERROR** — something broke; recovery options: retry, degrade, or halt
 
 This standard contract is what makes rings attachable to any pipeline. If your system can produce structured output, carry identity context, emit events, and accept these signals — you can attach governance rings.
 
@@ -211,8 +212,9 @@ Every ring adds cost. The Rings Model is designed for proportional activation:
 - **Low-stakes task** → Ring 0 + minimal Ring 1. Near-zero overhead.
 - **Medium-stakes task** → Ring 0 + Ring 1 + adaptive Ring 2 gates. 1.5–3× Ring 0 alone.
 - **High-stakes decision** → All four rings, mandatory gates. 3–5× Ring 0 alone.
+- **Critical-stakes system** → All rings + enhanced monitoring + continuous red-teaming. 5×+ Ring 0 alone. For autonomous systems with irreversible real-world impact.
 
-Trust Ladders are the primary cost optimization: the system starts expensive and gets cheaper as trust is earned. This is the right economic trajectory.
+[Trust Ladders](trust-ladders.md) are the primary cost optimization: the system starts expensive and gets cheaper as trust is earned. This is the right economic trajectory.
 
 But the real cost comparison is not "governance vs. no governance." It is "the cost of governance vs. the cost of an ungoverned failure." For regulated contexts, ungoverned failure means audit failure, regulatory penalty, reputational damage, and legal liability. For any context, it means fixing bad outputs that weren't caught, investigating incidents without audit trails, and explaining decisions that have no provenance.
 

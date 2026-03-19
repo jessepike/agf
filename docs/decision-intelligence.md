@@ -2,6 +2,7 @@
 
 **Status:** Living concept document
 **Last updated:** 2026-03-16
+**Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 **Relationship:** A **Governed Decision Flow** built on the Agentic Primitives framework — Ring 0 through Ring 2 applied to risk-bearing decisions, with Ring 3 learning across decision cases over time.
 **Detailed architecture:** `research/vision/decision-intelligence-platform-vision.md` (consolidated from 10+ session documents)
 

@@ -2,6 +2,7 @@
 
 **Status:** Living concept document
 **Last updated:** 2026-03-18
+**Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 
 ---
 
