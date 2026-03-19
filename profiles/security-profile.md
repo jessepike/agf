@@ -1,8 +1,8 @@
 # AGF Security Profile: Securing Governed Agentic Systems
 
-**Version:** 1.0 Draft
+**Version:** 0.1 Draft
 **Last updated:** 2026-03-18
-**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md)
+**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md)
 
 ---
 
@@ -12,7 +12,7 @@ CISOs, security architects, application security teams, red teams, SOC analysts,
 
 **The key question this profile answers:** *What are the threats to my agentic systems, and how does AGF's architecture defend against each one?*
 
-**Prerequisites:** Familiarity with the [Rings Model and core concepts](../agf-reference-architecture.md#core-concepts) in the AGF meta document. This profile does not re-explain the ring architecture — it shows how security operates within it.
+**Prerequisites:** Familiarity with the [Rings Model and core concepts](../docs/agf-reference-architecture.md#core-concepts) in the AGF meta document. This profile does not re-explain the ring architecture — it shows how security operates within it.
 
 ---
 
@@ -320,7 +320,7 @@ Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern 
 
 ## Security Primitives Reference
 
-The following AGF primitives are directly relevant to security. For full pattern descriptions, see the [AI Engineering Profile](ai-engineering-profile.md).
+The following AGF primitives are directly relevant to security. For full pattern descriptions, see the [AGF Primitives catalog](../docs/agentic-primitives.md). A dedicated AI Engineering Profile is forthcoming.
 
 | Primitive | Security Role |
 |-----------|--------------|
@@ -407,4 +407,4 @@ Use this checklist to evaluate the security posture of an agentic system against
 
 ---
 
-*This is the AGF Security Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md).*
+*This is the AGF Security Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md).*

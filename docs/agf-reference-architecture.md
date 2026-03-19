@@ -1,6 +1,6 @@
 # AGF: A Reference Architecture for Governed Agentic Systems
 
-**Version:** 1.0 Draft
+**Version:** 0.1 Draft
 **Last updated:** 2026-03-18
 **Status:** Living document
 
@@ -214,6 +214,7 @@ Every ring adds cost. AGF is designed for proportional activation:
 - **Low-stakes task** → Ring 0 + minimal Ring 1. Near-zero overhead.
 - **Medium-stakes task** → Ring 0 + Ring 1 + adaptive Ring 2 gates. 1.5–3× Ring 0 alone.
 - **High-stakes decision** → All four rings, mandatory gates, full verification. 3–5× Ring 0 alone.
+- **Critical-stakes system** → All rings + enhanced Security Intelligence monitoring + continuous evaluation and red-teaming. 5×+ Ring 0 alone. For autonomous systems with irreversible real-world impact.
 
 **Trust Ladders are the primary cost optimization mechanism.** As trust builds through demonstrated performance, verification intensity decreases and governance gates relax. The system starts expensive and gets cheaper — the right economic trajectory.
 
@@ -235,7 +236,7 @@ AGF names seven tensions between primitives and provides architectural resolutio
 
 AGF serves five distinct professional audiences. Each has a dedicated domain profile with the depth they need:
 
-### Profile A: Security & Threat Modeling
+### Security & Threat Modeling
 
 **For:** CISOs, security architects, AppSec teams, red teams, SOC analysts
 **Key question:** *How do I defend against threats to my agentic systems?*
@@ -244,7 +245,7 @@ This profile provides: the three-level security model in full detail, OWASP ASI 
 
 **Start here if:** You are responsible for the security posture of systems that include autonomous agents.
 
-### Profile B: Platform & Infrastructure
+### Platform & Infrastructure
 
 **For:** Platform engineers, infrastructure architects, DevOps/MLOps teams
 **Key question:** *How do I build and deploy governed agent infrastructure?*
@@ -253,7 +254,7 @@ This profile provides: ring deployment modes in full detail, the Mode Selection 
 
 **Start here if:** You are building the infrastructure that agents run on.
 
-### Profile C: Governance, Risk & Compliance
+### Governance, Risk & Compliance
 
 **For:** Compliance officers, risk managers, auditors, legal/privacy teams, DPOs
 **Key question:** *How do I prove to a regulator that my agentic systems are governed?*
@@ -262,7 +263,7 @@ This profile provides: EU AI Act article-by-article mapping, NIST AI RMF functio
 
 **Start here if:** You need to demonstrate compliance for agentic systems.
 
-### Profile D: AI Engineering
+### AI Engineering
 
 **For:** AI engineers, ML engineers, prompt engineers, agent developers
 **Key question:** *Which primitives do I implement first, and how?*
@@ -271,7 +272,7 @@ This profile provides: all 19 primitives in full detail (the pattern catalog), c
 
 **Start here if:** You are building agents and want to make them governed.
 
-### Profile E: Observability & Operations
+### Observability & Operations
 
 **For:** SREs, SOC analysts, detection engineers, platform reliability engineers
 **Key question:** *How do I see what my agents are doing and respond when they misbehave?*
@@ -286,7 +287,7 @@ You don't need a full profile — you need the answer to three questions:
 
 1. **Are my agentic systems governed?** The composition patterns (above) tell you what level of governance you have. Minimum Viable Control is the floor. Full Governed is the ceiling. Where you sit depends on your risk and regulatory posture.
 2. **Can I trust the agents in my domain?** Trust Ladders (#11) provide a calibrated trust model. Agents earn autonomy through demonstrated performance. You can see their trust level, review their decisions, and override when needed.
-3. **Can I prove it to a regulator?** The GRC Profile (Profile C) provides the evidence trail. Every primitive produces audit artifacts. The framework maps to EU AI Act, NIST AI RMF, and Singapore IMDA requirements.
+3. **Can I prove it to a regulator?** The GRC Profile provides the evidence trail. Every primitive produces audit artifacts. The framework maps to EU AI Act, NIST AI RMF, and Singapore IMDA requirements.
 
 ---
 

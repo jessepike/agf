@@ -1,8 +1,8 @@
 # AGF Platform Profile: Building and Deploying Governed Agent Infrastructure
 
-**Version:** 1.0 Draft
+**Version:** 0.1 Draft
 **Last updated:** 2026-03-18
-**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md)
+**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md)
 
 ---
 
@@ -12,9 +12,9 @@ Platform engineers, infrastructure architects, DevOps/MLOps teams, and anyone re
 
 **The key question this profile answers:** *How do I build and deploy governed agent infrastructure?*
 
-**Scope boundary:** This profile covers build-time and deployment-time infrastructure. Runtime operations (monitoring, incident response, observability) belong to the [Observability Profile](observability-profile.md). The split mirrors Platform Engineering vs. SRE.
+**Scope boundary:** This profile covers build-time and deployment-time infrastructure. Runtime operations (monitoring, incident response, observability) belong to the Observability Profile (forthcoming). The split mirrors Platform Engineering vs. SRE.
 
-**Prerequisites:** Familiarity with the [Rings Model and core concepts](../agf-reference-architecture.md#core-concepts) in the AGF meta document.
+**Prerequisites:** Familiarity with the [Rings Model and core concepts](../docs/agf-reference-architecture.md#core-concepts) in the AGF meta document.
 
 ---
 
@@ -360,6 +360,7 @@ When agents cross organizational boundaries:
 | Low | Ring 0 + minimal Ring 1 | Near-zero |
 | Medium | Ring 0 + Ring 1 + adaptive Ring 2 gates | 1.5–3× Ring 0 |
 | High | All four rings, mandatory gates, full verification | 3–5× Ring 0 |
+| Critical | All rings + enhanced Intelligence monitoring + continuous evaluation/red-teaming | 5×+ Ring 0 |
 
 ### Empirical Benchmarks
 
@@ -387,7 +388,7 @@ The multipliers above describe LLM compute only. The real costs are organization
 
 ## Platform Primitives Reference
 
-The following AGF primitives are directly relevant to platform engineering. For full pattern descriptions, see the [AI Engineering Profile](ai-engineering-profile.md).
+The following AGF primitives are directly relevant to platform engineering. For full pattern descriptions, see the [AGF Primitives catalog](../docs/agentic-primitives.md). A dedicated AI Engineering Profile is forthcoming.
 
 | Primitive | Platform Role |
 |-----------|--------------|
@@ -449,4 +450,4 @@ Use this checklist to verify that your platform supports governed agentic system
 
 ---
 
-*This is the AGF Platform Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md).*
+*This is the AGF Platform Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md).*

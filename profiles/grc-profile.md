@@ -1,8 +1,8 @@
-# AGF Compliance Profile: Regulatory Alignment and Governance Evidence
+# AGF GRC Profile: Regulatory Alignment and Governance Evidence
 
-**Version:** 1.0 Draft
+**Version:** 0.1 Draft
 **Last updated:** 2026-03-18
-**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md)
+**Parent:** [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md)
 
 ---
 
@@ -12,7 +12,7 @@ Compliance officers, risk managers, auditors, legal/privacy teams, Data Protecti
 
 **The key question this profile answers:** *How do I prove to a regulator or auditor that my agentic systems are governed?*
 
-**Prerequisites:** Familiarity with the [Rings Model and core concepts](../agf-reference-architecture.md#core-concepts) in the AGF meta document.
+**Prerequisites:** Familiarity with the [Rings Model and core concepts](../docs/agf-reference-architecture.md#core-concepts) in the AGF meta document.
 
 ---
 
@@ -274,4 +274,4 @@ For EU AI Act: high-risk classification under Art. 6 implies full ring stack act
 
 ---
 
-*This is the AGF Compliance Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md).*
+*This is the AGF GRC Profile — one of five domain profiles in the AGF reference architecture. For the complete framework, see [AGF: A Reference Architecture for Governed Agentic Systems](../docs/agf-reference-architecture.md).*

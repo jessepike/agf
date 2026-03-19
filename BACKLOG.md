@@ -1,6 +1,6 @@
 # Concepts Backlog
 
-**Last updated:** 2026-03-18
+**Last updated:** 2026-03-18 (profiles backlog added)
 
 ---
 
@@ -102,6 +102,60 @@ Four independent reviews: Claude Opus (adversarial), GPT 5.4 (deep research), Ge
 - [ ] **Personal vs. enterprise scoping** — Which primitives simplify for personal agent use?
 - [ ] **Map current pipeline to primitives** — Which are implemented, partially, missing.
 - [ ] **Ring activation patterns** — Which ring combinations are valid and when.
+
+## Priority 1.5: Domain Profiles (2026-03-18)
+
+Five domain profiles decompose the AGF reference architecture for different buyer personas. Three drafted, two planned.
+
+### Meta Document (`docs/agf-reference-architecture.md`)
+
+- [x] **Draft meta document** — Reference architecture overview, core concepts, composition patterns, "Who Uses What" routing, standards alignment, prior art. DONE.
+- [x] **Reframe decomposition as market problem** — Different buyers need different entry points. DONE.
+- [x] **Drop letter designations** — Profile A/B/C/D/E → named profiles. DONE.
+- [x] **Propagate Critical risk tier** — 4-tier risk classification (Low/Medium/High/Critical) consistent across meta doc, platform profile, and GRC profile. DONE.
+
+### Security Profile (`profiles/security-profile.md`)
+
+- [x] **Draft profile** — Three-level security model, OWASP ASI + MCP threat analysis, Response Bus, zero trust, CSA ATF alignment, assessment checklist. DONE.
+- [ ] **Red team scenarios** — Worked examples showing how specific attack chains traverse the three-level model. Promised in meta doc.
+- [ ] **Incident response playbook structure** — Runbook templates, escalation trees, containment decision flows. Promised in meta doc.
+- [ ] **Internal review** — Structured review for accuracy, completeness, threat coverage gaps.
+- [ ] **External review** — After internal cycle. Focus on: threat model completeness, practical applicability, any overclaiming in defense posture.
+
+### Platform Profile (`profiles/platform-profile.md`)
+
+- [x] **Draft profile** — Deployment modes, Mode Selection Matrix, Agent Environment Stack, Composability Interface, MCP integration, multi-agent coordination, cost of governance. DONE.
+- [ ] **Internal review** — Structured review for accuracy, deployment mode coverage, MCP integration completeness.
+- [ ] **External review** — After internal cycle. Focus on: practical implementability, Mode Selection Matrix utility, gap between spec and real-world platform engineering.
+
+### GRC Profile (`profiles/grc-profile.md`)
+
+- [x] **Draft profile** — EU AI Act article mapping, NIST AI RMF alignment, IMDA alignment, CSA MAESTRO mapping, evidence generation guide, governance gates, risk classification. DONE.
+- [x] **Fix naming** — Title → "AGF GRC Profile" (was "Compliance Profile"). Consistent with filename and meta doc. DONE.
+- [ ] **Control crosswalks** — AGF primitive → NIST 800-53 control → ISO 27001 control mapping table. Promised in meta doc.
+- [ ] **Governance maturity model** — Maturity levels (ad-hoc → defined → managed → optimized) with per-level ring activation guidance. Promised in meta doc.
+- [ ] **Risk classification decision tree** — Flowchart/decision tree for determining risk classification level (Low/Medium/High/Critical). Promised in meta doc.
+- [ ] **Internal review** — Structured review for regulatory accuracy, mapping completeness, evidence sufficiency.
+- [ ] **External review** — After internal cycle. Focus on: regulatory precision, auditor usability, any overclaiming in compliance coverage.
+
+### AI Engineering Profile (`profiles/ai-engineering-profile.md`) — Not Yet Written
+
+- [ ] **Draft profile** — Full 19-primitive catalog with implementation detail, composition patterns with priority ordering, primitive interaction tensions with resolutions, Trust Ladders mechanics, Environment Optimization Loop, prior art mapping, worked examples.
+- [ ] **Internal review**
+- [ ] **External review**
+
+### Observability Profile (`profiles/observability-profile.md`) — Not Yet Written
+
+- [ ] **Draft profile** — SIEM-for-agents concept, canonical event architecture (envelope, taxonomy, identity context), correlation engine (quality/security/governance rules), detection patterns, operational playbooks (incident response, forensic investigation, containment), observability maturity model.
+- [ ] **Internal review**
+- [ ] **External review**
+
+### Cross-Profile
+
+- [x] **Fix broken cross-references** — Interim links to `agentic-primitives.md` for Security and Platform profile primitives references. Observability Profile link in Platform Profile marked as forthcoming. DONE.
+- [x] **Fix parent doc relative paths** — All profiles now correctly link to `../docs/agf-reference-architecture.md`. DONE.
+
+---
 
 ## Priority 2: Agentic Observability (Updated — Needs Diagrams + Review)
 
