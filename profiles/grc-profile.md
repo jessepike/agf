@@ -226,6 +226,164 @@ AGF uses risk-proportional governance — higher stakes trigger more intensive r
 
 For EU AI Act: high-risk classification under Art. 6 implies full ring stack activation at minimum.
 
+### Risk Classification Decision Tree
+
+Use this decision tree to determine the appropriate risk tier for an agentic system:
+
+```
+START: What is the worst realistic consequence of an unconstrained error?
+
+  ├─ Inconvenience / easily corrected
+  │   └─ Does the agent access sensitive data (PII, confidential, regulated)?
+  │       ├─ No  → TIER 1: LOW
+  │       └─ Yes → TIER 2: MEDIUM (data sensitivity elevates)
+  │
+  ├─ Business impact / costly to correct
+  │   └─ Does the agent take irreversible actions?
+  │       ├─ No  → TIER 2: MEDIUM
+  │       └─ Yes → Does the blast radius extend beyond one team/department?
+  │           ├─ No  → TIER 2: MEDIUM (with mandatory gates on irreversible actions)
+  │           └─ Yes → TIER 3: HIGH
+  │
+  ├─ Regulatory violation / significant harm to individuals
+  │   └─ TIER 3: HIGH (minimum)
+  │       └─ Does the agent operate autonomously (minimal human-in-the-loop)?
+  │           ├─ No  → TIER 3: HIGH
+  │           └─ Yes → TIER 4: CRITICAL
+  │
+  └─ Irreversible harm / legal liability / public impact
+      └─ TIER 4: CRITICAL
+```
+
+**Override rules:**
+- Any system classified as high-risk under EU AI Act Art. 6 → **minimum Tier 3: HIGH**
+- Any system with primarily irreversible actions affecting customers/public → **Tier 4: CRITICAL** regardless of other dimensions
+- When classification dimensions point to different tiers, **use the highest tier indicated**
+
+### Classification Dimensions
+
+Five dimensions determine risk classification. Assess each independently; the highest-scoring dimension sets the floor.
+
+| Dimension | Low (Tier 1) | Medium (Tier 2) | High (Tier 3) | Critical (Tier 4) |
+|-----------|-------------|-----------------|---------------|-------------------|
+| **Consequence of error** | Inconvenience, easily corrected | Business impact, costly to correct | Regulatory violation, significant harm | Irreversible harm, legal liability |
+| **Data sensitivity** | Public data | Internal data | Confidential / PII | Restricted / regulated data |
+| **Autonomy level** | Human reviews every output | Human reviews exceptions | Human reviews escalations only | Autonomous action within scope |
+| **Blast radius** | Affects one user | Affects one team/department | Affects one organization | Affects customers/public |
+| **Reversibility** | All actions reversible | Most actions reversible | Some irreversible actions | Primarily irreversible actions |
+
+**Document the classification decision.** Record: which system, the assessment date, the assessor, the score per dimension, the resulting tier, and the rationale. This record is audit evidence (Art. 6 compliance).
+
+---
+
+## Governance Maturity Model
+
+Organizations adopt governed agentic systems progressively. This maturity model provides a self-assessment framework and a roadmap for advancement.
+
+### Level 1: Awareness
+
+| Characteristic | Description |
+|---------------|-------------|
+| **Agent inventory** | Exists, even if incomplete. Shadow AI detection may be in early stages. |
+| **Risk classification** | Basic classification applied — at least Low/Medium/High distinction. |
+| **Observability** | Some agents have structured output and event logging. No correlation. |
+| **Ring architecture** | None formal. Agents execute without structural governance. |
+| **Policy** | Implicit — tribal knowledge, not codified. |
+| **Evidence posture** | Minimal. Cannot produce audit packages on demand. |
+
+**Regulatory risk:** High. No structural evidence of governance. Art. 9, 12, 14 requirements unmet.
+
+### Level 2: Foundation
+
+| Characteristic | Description |
+|---------------|-------------|
+| **Ring activation** | Ring 0 + Ring 1 operational for high-risk agents. |
+| **Event capture** | Structured events flowing to basic dashboards. |
+| **Policy** | Rules defined for critical governance domains. Not yet versioned as code. |
+| **Gates** | Mandatory gates on highest-consequence actions. |
+| **Testing** | Pre-deployment evaluation for new agents (Evaluation & Assurance #18). |
+| **Identity** | Agent identity established. Delegation chains partially tracked. |
+| **Evidence posture** | Partial. Can produce evidence for gated decisions. Cannot yet produce full provenance chains. |
+
+**Regulatory posture:** Art. 14 (human oversight) partially met via gates. Art. 12 (record-keeping) partially met via events. Art. 15 (testing) partially met via pre-deployment evaluation.
+
+### Level 3: Governed
+
+| Characteristic | Description |
+|---------------|-------------|
+| **Ring activation** | Full Ring 0 + Ring 1 + Ring 2 operational. |
+| **Observability** | Correlation-level — not just logging, but cross-event pattern detection. |
+| **Trust Ladders** | Actively calibrating. Trust promotions/demotions documented. |
+| **Policy** | Policy as Code (#9) — versioned, tested, auditable. |
+| **Audit readiness** | Audit packages producible on demand. Full provenance chains. |
+| **Integration** | Connected to existing GRC tooling and SIEM. |
+| **Evidence posture** | Strong. All Art. 9-15 requirements met structurally. |
+
+**Regulatory posture:** EU AI Act Art. 9-15 requirements met. NIST AI RMF functions operational. Can respond to regulator requests with evidence.
+
+### Level 4: Adaptive
+
+| Characteristic | Description |
+|---------------|-------------|
+| **Ring activation** | Ring 3 (Learning) operational. Self-improving cycles active. |
+| **Monitoring** | Predictive quality and security monitoring. |
+| **Intelligence** | Cross-agent and cross-case intelligence. Security Intelligence detecting behavioral drift. |
+| **Response** | Automated playbook response for routine patterns. Security Response Bus operational. |
+| **Efficiency** | Trust Ladders driving meaningful cost reduction. Governance overhead decreasing. |
+| **Evidence posture** | Comprehensive. Proactive evidence generation, not just reactive. |
+
+**Regulatory posture:** Exceeds current regulatory requirements. Prepared for regulatory evolution.
+
+### Level 5: Optimized
+
+| Characteristic | Description |
+|---------------|-------------|
+| **Governance scope** | Full framework operational across all agent types. |
+| **Assurance** | Continuous assurance with minimal manual intervention. |
+| **Onboarding** | New agents onboarded with appropriate governance in days, not months. |
+| **Federation** | Cross-organizational intelligence — shared baselines, federated learning. |
+| **Business value** | Governance is a competitive advantage and customer trust signal, not just a compliance cost. |
+
+**Realistic timeline:** Most organizations reach Level 3 in 12-24 months. Level 4-5 requires operational data, organizational maturity, and likely 2-3 years.
+
+**Assessment guidance:** Evaluate your organization honestly. Being at Level 1 is not a failure — it's a starting point. The maturity model is a roadmap, not a judgment.
+
+---
+
+## Control Crosswalks
+
+This crosswalk maps AGF primitives to established security and compliance control frameworks. Use it to demonstrate that AGF governance mechanisms satisfy controls your organization is already assessed against.
+
+### AGF → NIST 800-53 → ISO 27001 → EU AI Act
+
+| AGF Primitive | NIST 800-53 Rev. 5 Controls | ISO 27001:2022 Controls | EU AI Act Articles |
+|---------------|----------------------------|------------------------|-------------------|
+| **#1 Separation of Producer/Verifier** | CA-7 (Continuous Monitoring), SI-4 (System Monitoring) | A.8.16 (Monitoring Activities) | Art. 15 (Accuracy) |
+| **#6 Provenance Chains** | AU-3 (Content of Audit Records), AU-6 (Audit Record Review), AU-10 (Non-repudiation) | A.8.15 (Logging), A.5.33 (Protection of Records) | Art. 11 (Technical Documentation), Art. 12 (Record-keeping) |
+| **#7 Bounded Agency** | AC-6 (Least Privilege), AC-3 (Access Enforcement), CM-7 (Least Functionality) | A.8.2 (Privileged Access Rights), A.5.15 (Access Control) | Art. 9 (Risk Management), IMDA Dim. 1 |
+| **#8 Governance Gates** | AC-3 (Access Enforcement), CM-3 (Configuration Change Control) | A.8.32 (Change Management), A.5.1 (Policies for Information Security) | Art. 14 (Human Oversight) |
+| **#9 Policy as Code** | PL-1 (Policy and Procedures), CM-3 (Configuration Change Control), CM-6 (Configuration Settings) | A.5.1 (Policies for Information Security), A.8.9 (Configuration Management) | Art. 9 (Risk Management) |
+| **#10 Event-Driven Observability** | AU-2 (Event Logging), AU-3 (Content of Audit Records), AU-12 (Audit Record Generation), SI-4 (System Monitoring) | A.8.15 (Logging), A.8.16 (Monitoring Activities) | Art. 12 (Record-keeping) |
+| **#11 Trust Ladders** | AC-2 (Account Management), AC-6 (Least Privilege) | A.5.18 (Access Rights), A.8.2 (Privileged Access Rights) | NIST MANAGE |
+| **#14 Identity & Attribution** | IA-2 (Identification and Authentication), IA-4 (Identifier Management), IA-8 (Identification and Authentication — Non-Org Users) | A.5.16 (Identity Management), A.8.5 (Secure Authentication) | Art. 13 (Transparency), Art. 50 |
+| **#15 Adversarial Robustness** | SI-3 (Malicious Code Protection), SI-7 (Software/Firmware/Info Integrity), RA-5 (Vulnerability Monitoring and Scanning) | A.8.7 (Protection Against Malware), A.8.8 (Management of Technical Vulnerabilities) | Art. 15 (Robustness, Cybersecurity) |
+| **#16 Transaction & Side-Effect Control** | CP-9 (System Backup), CP-10 (System Recovery and Reconstitution), SI-10 (Information Input Validation) | A.8.13 (Information Backup), A.8.14 (Redundancy of Information Processing Facilities) | Art. 15 (Accuracy) |
+| **#17 Data Governance** | MP-2 (Media Access), PM-25 (Minimization of PII), PT-2 (Authority to Process PII), PT-3 (PII Processing Purposes) | A.5.34 (Privacy and Protection of PII), A.5.12 (Classification of Information) | Art. 10 (Data Governance), GDPR |
+| **#18 Evaluation & Assurance** | CA-2 (Control Assessments), CA-8 (Penetration Testing), SA-11 (Developer Testing and Evaluation) | A.8.29 (Security Testing in Development and Acceptance), A.8.8 (Technical Vulnerabilities) | Art. 15 (Accuracy, Robustness) |
+| **#19 Agent Environment Governance** | CM-2 (Baseline Configuration), CM-6 (Configuration Settings), CM-8 (System Component Inventory) | A.8.9 (Configuration Management), A.5.9 (Inventory of Information and Other Associated Assets) | IMDA Dim. 1 (Operational Environments) |
+| **Security Fabric** | SC-7 (Boundary Protection), SC-8 (Transmission Confidentiality/Integrity), SI-10 (Information Input Validation) | A.8.20 (Networks Security), A.8.21 (Security of Network Services), A.8.24 (Use of Cryptography) | Art. 15 (Cybersecurity) |
+| **Security Response Bus** | IR-4 (Incident Handling), IR-5 (Incident Monitoring), IR-6 (Incident Reporting) | A.5.24 (Information Security Incident Management Planning), A.5.26 (Response to Information Security Incidents) | Art. 15 (Robustness) |
+
+### How to Use This Crosswalk
+
+1. **Map your existing controls.** If your organization is already assessed against NIST 800-53 or ISO 27001, use the crosswalk to identify which AGF primitives satisfy existing control requirements. This reduces the compliance burden — you're extending existing controls to agentic systems, not starting from scratch.
+
+2. **Identify gaps.** Controls in the crosswalk that your organization has not implemented represent governance gaps for agentic systems. Prioritize based on risk tier.
+
+3. **Produce evidence.** For each control, the corresponding AGF primitive produces specific audit artifacts (see [Governance Evidence](#governance-evidence-what-each-primitive-produces) above). Map these artifacts to control evidence requirements.
+
+4. **Support assessors.** Provide this crosswalk to auditors alongside AGF evidence artifacts. It translates AGF's architecture into the control language assessors already work with.
+
 ---
 
 ## GRC Primitives Reference

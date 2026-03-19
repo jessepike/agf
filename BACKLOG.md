@@ -132,9 +132,9 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 - [x] **Draft profile** — EU AI Act article mapping, NIST AI RMF alignment, IMDA alignment, CSA MAESTRO mapping, evidence generation guide, governance gates, risk classification. DONE.
 - [x] **Fix naming** — Title → "AGF GRC Profile" (was "Compliance Profile"). Consistent with filename and meta doc. DONE.
-- [ ] **Control crosswalks** — AGF primitive → NIST 800-53 control → ISO 27001 control mapping table. Promised in meta doc.
-- [ ] **Governance maturity model** — Maturity levels (ad-hoc → defined → managed → optimized) with per-level ring activation guidance. Promised in meta doc.
-- [ ] **Risk classification decision tree** — Flowchart/decision tree for determining risk classification level (Low/Medium/High/Critical). Promised in meta doc.
+- [x] **Control crosswalks** — AGF primitive → NIST 800-53 Rev. 5 → ISO 27001:2022 → EU AI Act crosswalk table with usage guidance. 15 rows covering all GRC-relevant primitives + Security Fabric + Response Bus. DONE.
+- [x] **Governance maturity model** — 5 levels (Awareness → Foundation → Governed → Adaptive → Optimized) with per-level characteristics table, regulatory posture assessment, and realistic timeline guidance. Sourced from governance framework doc, adapted for GRC audience. DONE.
+- [x] **Risk classification decision tree** — Decision tree flowchart with override rules, 5-dimension classification matrix, and documentation requirements. DONE.
 - [ ] **Internal review** — Structured review for regulatory accuracy, mapping completeness, evidence sufficiency.
 - [ ] **External review** — After internal cycle. Focus on: regulatory precision, auditor usability, any overclaiming in compliance coverage.
 
