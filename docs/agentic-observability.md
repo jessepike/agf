@@ -33,7 +33,9 @@ Organizations are deploying agentic systems with essentially zero observability 
 
 The gap: **nobody owns the layer between "the agents ran" and "we can prove to auditors, regulators, and boards that the agents ran within governance boundaries."**
 
-This is the SIEM pattern applied to agentic workflows. Traditional SIEM ingests security events from infrastructure and applies correlation rules, playbooks, and forensic investigation to detect and respond to threats. Agentic Observability does the same — but the event sources are agent orchestrators, LLM APIs, tool calls, governance gates, and human-in-the-loop checkpoints. The threats are not unauthorized access — they are **ungoverned autonomous action, adversarial manipulation, quality degradation, policy violations, and trust manipulation.**
+This applies the SIEM detection-and-response pattern to agentic workflows — but goes beyond SIEM. Traditional SIEM ingests security events from infrastructure and applies correlation rules, playbooks, and forensic investigation to detect and respond to threats. Agentic Observability does the same for agent systems — but the event sources are agent orchestrators, LLM APIs, tool calls, governance gates, and human-in-the-loop checkpoints. The threats are not unauthorized access — they are **ungoverned autonomous action, adversarial manipulation, quality degradation, policy violations, and trust manipulation.**
+
+More precisely, Agentic Observability combines: the real-time detection and response patterns of **SIEM/SOAR**, the causal chain tracing of **distributed tracing**, the audit rigor of a **flight data recorder**, and the statistical evaluation of **quality observability** — purpose-built for governed agentic AI workflows. The SIEM analogy is the strongest explanatory anchor but the system's scope is broader than traditional SIEM.
 
 The Agentic Primitives framework established that security detection and response lives in the observability layer — not in a dedicated security ring. This means Agentic Observability is not just a quality monitoring system. It is the **unified monitoring, detection, and response layer** for governed agentic systems — covering quality, security, and governance compliance in a single event-driven architecture.
 
@@ -203,6 +205,8 @@ Every material agent action emits an event with a common schema. The envelope is
 ```
 Event Envelope:
   event_id:           Unique event identifier
+  trace_id:           OTel trace context (maps to distributed trace)
+  span_id:            OTel span context (maps to parent operation)
   timestamp:          When the event occurred
 
   # Identity context (Primitive #14 — travels with every event)
@@ -276,44 +280,74 @@ Events are classified into categories that map to the three detection domains:
 - `trust_manipulation_suspected` (anomalous trust trajectory)
 - `memory_poisoning_suspected` (compromised data entering Ring 3)
 
+### OTel Signal Mapping
+
+The event taxonomy maps to four OTel signal types. This mapping resolves the structural gap between the event-oriented AGF schema and OTel's span-oriented model:
+
+| AGF Event Category | OTel Signal Type | Examples |
+|-------------------|-----------------|---------|
+| **Operations with duration** | OTel Spans | `agent_started/completed`, `tool_called/returned`, `verification_started/completed`, `gate_triggered/resolved` |
+| **Point-in-time within an operation** | OTel Span Events | `finding_produced`, `adversarial_critique`, `output_validated_schema`, `revise_quality_issued` |
+| **Standalone occurrences** | OTel Log Records | `trust_level_changed`, `sentinel_triggered`, `boundary_violation_detected`, `memory_poisoning_suspected` |
+| **Aggregations** | OTel Metrics | Token usage (`gen_ai.usage.*`), policy evaluation counts, quality scores, cost tracking |
+
+**Correlation context mapping:** `run_id` → OTel `trace_id`, `parent_event_id` → OTel `parent_span_id`, `session_id` → `gen_ai.conversation.id`, `case_id` → OTel Baggage or custom resource attribute (no direct OTel equivalent).
+
+**Missing fields to add in production implementations:** `duration_ms` (essential for performance), `token_usage` with input/output/cached breakdown, `cost` (no OTel standard yet, critical for governance), `error_type`/`error_details`, `data_classification`/`sensitivity_level`, `input_hash`/`output_hash` (integrity verification without storing content), `schema_version` (backward compatibility).
+
+**Complementary specifications:** OpenInference (Arize/Phoenix — defines GUARDRAIL and EVALUATOR span kinds relevant to Ring 1), CloudEvents (CNCF — event transport), W3C Trace Context (distributed agent tracing), OTel GenAI Agentic Systems Proposal #2664 (active — covers Tasks, Actions, Agents, Teams, Artifacts, Memory).
+
 ---
 
 ## Correlation Engine
 
 The correlation engine consumes the event stream and applies rules across the three detection domains. Rules are versioned, explicit, and auditable — the same principle as Policy as Code (#9) applied to detection logic.
 
+**Note on abstraction level:** The rules below are a **detection strategy taxonomy**, not production-level detection rules. Each conceptual rule decomposes into 3-10 implementable detections with specific log fields, thresholds, and time windows. Rules should be tagged with OWASP ASI and MITRE ATLAS identifiers following the pattern Sigma rules use with ATT&CK tags.
+
 ### Quality Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| Quality degradation | Quality score below threshold for N consecutive runs | Alert + sentinel trust degradation |
-| Extraction drift | Specific field types producing more human overrides over time | Prompt improvement recommendation |
-| Convergence slowdown | Average validation loop iterations trending up | Threshold recalibration signal |
-| Model regression | Quality drop correlated with model version change | Alert + investigation |
-| Document type failure | Consistent failures on a specific document format | New document profile needed |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| Quality degradation | Quality score (F1, accuracy, extraction rate) drops >15% over rolling 7-day window | Alert + sentinel trust degradation | — |
+| Extraction drift | Specific field types producing more human overrides over time | Prompt improvement recommendation | — |
+| Convergence slowdown | Average validation loop iterations trending up >25% | Threshold recalibration signal | — |
+| Model regression | Quality drop correlated with model version change | Alert + investigation | — |
+| Document type failure | Consistent failures on a specific document format | New document profile needed | — |
+| Hallucination spike | Output claims not grounded in source evidence (grounding check failure rate up) | Alert + verification intensity increase | — |
+| Resource exhaustion | Token usage or API cost >2σ above baseline per task, or recursive loop detection | Budget circuit breaker + alert | ASI02 |
+| Output safety violation | Toxicity/harm score exceeds threshold on agent output | Quarantine + escalate | — |
 
 ### Security Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| Ring bypass | Output without corresponding Ring 1 verification events | Quarantine output + alert |
-| Trust manipulation | Low-stakes high-performance streak followed by high-stakes anomaly | Immediate trust reset + investigation |
-| Evidence tampering | Document hash mismatch or source authentication failure | Halt processing + quarantine evidence |
-| Memory poisoning | Ring 3 ingesting data from an agent with recent security events | Block ingestion + investigation |
-| Identity anomaly | Delegation chain inconsistency or unexpected model version in production | Alert + identity re-verification |
-| Cross-pipeline poisoning | Downstream pipeline processing output from flagged upstream pipeline | Quarantine downstream + trace upstream |
-| Prompt injection | Input patterns matching known injection signatures + anomalous output | Halt + quarantine + investigation |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| Agent goal hijacking | Behavioral divergence from authorized objectives (instruction drift detection, output intent mismatch) | Containment + investigation | ASI01 |
+| Tool misuse / exploitation | Agent using permitted tools in anomalous parameter combinations or sequences | Alert + scope review | ASI02 |
+| Ring bypass | Output without corresponding Ring 1 verification events | Quarantine output + critical alert | — |
+| Trust manipulation | Low-stakes high-performance streak followed by high-stakes anomaly | Immediate trust reset + investigation | ASI09 |
+| Evidence tampering | Document hash mismatch or source authentication failure | Halt processing + quarantine evidence | — |
+| Memory poisoning | Ring 3 ingesting data from an agent with recent security events, or memory distribution drift | Block ingestion + investigation | ASI06 |
+| Identity anomaly | Delegation chain inconsistency or unexpected model version in production | Alert + identity re-verification | ASI03 |
+| Cross-pipeline poisoning | Downstream pipeline processing output from flagged upstream pipeline | Quarantine downstream + trace upstream | ASI08 |
+| Prompt injection | Input patterns matching known injection signatures + anomalous output | Halt + quarantine + investigation | ASI01/ATLAS |
+| Supply chain compromise | MCP server integrity failure, tool schema mutation, untrusted server invocation | Quarantine tool + isolate agents + alert | ASI04 |
+| Cascading failure | Error rate >3× baseline across ≥2 agents within 30s amplification window | Circuit breakers + Response Bus | ASI08 |
+| Data exfiltration | Abnormal cross-boundary data flows or classification-violating output patterns | Block data flows + isolate + critical alert | ASI03 |
+| Confused deputy | Agent acting with more privileged identity than the initiating principal | Halt + identity trace + alert | ASI03/ATLAS |
 
 ### Governance Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| Mandatory gate bypass | Decision output without mandatory gate resolution event | Critical alert + halt |
-| Stale approval usage | Action executed on approval older than policy-defined TTL | Invalidate + re-gate |
-| Policy drift | Increasing rate of policy violations on a specific rule | Policy review recommendation |
-| Provenance gap | Decision chain with missing intermediate events | Investigation + flag for audit |
-| Transaction lifecycle violation | Side effect without pre-commit/commit/confirm sequence | Alert + compensation check |
-| Unauthorized scope expansion | Agent accessing tools or data outside declared Bounded Agency | Immediate containment + alert |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| Mandatory gate bypass | Decision output without mandatory gate resolution event | Critical alert + halt | — |
+| Stale approval usage | Action executed on approval older than policy-defined TTL | Invalidate + re-gate | — |
+| Policy drift | Increasing rate of policy violations on a specific rule | Policy review recommendation | — |
+| Provenance gap | Decision chain with missing intermediate events | Investigation + flag for audit | Art. 12 |
+| Transaction lifecycle violation | Side effect without pre-commit/commit/confirm sequence | Alert + compensation check | — |
+| Unauthorized scope expansion | Agent accessing tools or data outside declared Bounded Agency | Immediate containment + alert | ASI02 |
+| Missing required telemetry | Expected governance event not observed within time window (e.g., verification event absent) | Alert + flag for audit | — |
+| Data governance violation | PII processed without classification, consent scope exceeded, cross-boundary flow unauthorized | Halt data flow + alert | Art. 10/GDPR |
 
 ---
 
@@ -442,16 +476,29 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 ## Market Context
 
-**Current state of play:**
-- Companies deploying agentic systems are duct-taping observability from generic tools that don't understand governance semantics
-- LLM observability tools (LangSmith, Arize, Helicone, Fiddler, Galileo) cover model performance, not governance or security
-- Traditional SIEM vendors (Splunk, Chronicle, Elastic) haven't extended to agentic event semantics
-- GRC platforms (OneTrust, Archer, ServiceNow GRC) can't ingest agentic event streams
-- ServiceNow AI Control Tower is the closest enterprise play — centralized command center for AI agents — but scoped to ServiceNow's ecosystem
-- Salesforce Agentforce has governance features (Einstein Trust Layer) but scoped to Salesforce agents
-- OpenTelemetry GenAI semantic conventions are standardizing LLM-level tracing — but don't cover governance, security, or ring-level semantics
+**Current state of play (updated March 2026):**
 
-**The gap:** No product purpose-built to ingest, correlate, and govern the event stream from arbitrary agentic systems across quality, security, and governance domains. The "SIEM for agents" doesn't exist yet.
+*Platform-native agent governance (ecosystem-locked):*
+- **Microsoft Agent 365** (announced March 9, 2026, GA May 1, 2026) — "the control plane for agents." Three pillars: Observability, Security, Governance. Agent Registry, Agent ID (Entra identity), integration with Defender/Purview/Sentinel. Tens of millions of agents in registry within two months. $15/user/month. The most direct competitive threat — but Microsoft-ecosystem-locked.
+- **AWS Bedrock AgentCore** — AgentCore Policy GA March 3, 2026. Fine-grained, centralized controls using Cedar policy language. AgentCore Evaluations (preview) for continuous quality monitoring. Framework-agnostic (CrewAI, LangGraph, LlamaIndex). Most comprehensive cloud-native agent platform. AWS-ecosystem-locked.
+- **ServiceNow AI Control Tower** — centralized command center for AI agents. AI Gateway for governed connectivity. Enterprise-grade but ServiceNow-ecosystem-scoped.
+- **Salesforce Agentforce** — Einstein Trust Layer, shared responsibility model. Salesforce-ecosystem-scoped.
+
+*Purpose-built agent governance (cross-platform):*
+- **Zenity** — 2025 Gartner Cool Vendor in Agentic AI TRiSM. "Unified observability, governance, and threat protection for any agent on any platform." Platform-agnostic (Microsoft, Salesforce, AWS, GitHub). Fortune 500 customers. Security-focused (CISO buyer), limited deep LLM quality observability.
+
+*LLM observability (quality-focused, governance-light):*
+- LangSmith, Arize, Helicone, Fiddler, Galileo — model performance (latency, tokens, hallucination rates). Not governance or security.
+- Datadog, Dynatrace, LogicMonitor — expanding into "agentic observability" as APM extension. Strong on operational metrics, weak on governance semantics.
+
+*Traditional SIEM (security-focused, agent-unaware):*
+- Splunk, Chronicle, Elastic SIEM, Sentinel — no agentic event semantics. Some are adding AI-for-SIEM (agents inside the SIEM), not SIEM-for-agents.
+
+*Standards:*
+- OpenTelemetry GenAI semantic conventions (Development maturity, v1.40.0) — agent spans, tool calls, MCP conventions. No governance, security, or ring-level semantics.
+- Gartner projects AI governance platform spending at **$492M in 2026, exceeding $1B by 2030**. Inaugural Magic Quadrant for Decision Intelligence Platforms published January 2026.
+
+**The gap (narrowing but still real):** No single product genuinely covers all three domains (quality + security + governance) for arbitrary, **platform-agnostic** agent systems using a unified event correlation architecture. Cloud platforms are strong but ecosystem-locked. Zenity is cross-platform but security-focused. LLM observability tools lack governance. Traditional SIEM lacks agentic semantics. The differentiation axes: **true platform-agnosticism**, **deep LLM quality + governance + security in one architecture**, **cross-system event correlation**, and **open-standards-native (OTel, not proprietary telemetry)**.
 
 **Who needs this:**
 - **Enterprises deploying agentic workflows** — customer service, coding, document processing, decision support. They need to prove governed operation.
