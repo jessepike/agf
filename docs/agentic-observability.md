@@ -1,7 +1,7 @@
 # Agentic Observability & Governance
 
 **Status:** Living concept document
-**Last updated:** 2026-03-16
+**Last updated:** 2026-03-19
 **Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 **Relationship:** The **event fabric + Ring 3 intelligence + security monitoring layer** of the Agentic Primitives framework. Consumes the event stream from all rings, provides detection/correlation/response for both quality and security concerns, and feeds Ring 3 learning.
 **Origin material:** `research/AI-Risk-Tools-Deep-Dive-Analysis.md` (Part 7, Section 7.5 — "Pipeline Observatory: The SIEM Pattern"), `research/pipeline-verification-spec-v0.3.md` (event envelope architecture)

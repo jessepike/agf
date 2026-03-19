@@ -1,6 +1,6 @@
 # Strategic Positioning — Agentic Governance Framework
 
-**Last updated:** 2026-03-16
+**Last updated:** 2026-03-19
 **Purpose:** Captures what makes our approach distinct, how we relate to the landscape, and what outcomes we're building toward.
 
 ---

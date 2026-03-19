@@ -1,7 +1,7 @@
 # Agentic Governance Framework
 
 **Status:** Living concept document
-**Last updated:** 2026-03-16
+**Last updated:** 2026-03-19
 **Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 **Purpose:** Top-level operating model for governing agentic systems across the full lifecycle. This is the umbrella framework — the three concept areas (Agentic Primitives, Decision Intelligence, Agentic Observability) are capability layers within it.
 

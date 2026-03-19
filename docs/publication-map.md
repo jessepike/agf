@@ -149,19 +149,19 @@ GitHub repo for the source of truth + community contribution. Documentation site
 ### Review Complete
 - [x] Primitives: 3 rounds external review
 - [x] Profiles: 1 round external review (Claude, GPT, Gemini) + error fixes
-- [ ] Observability concept doc: external review (prompt ready)
-- [ ] Decision Intelligence concept doc: external review (prompt ready)
-- [ ] White papers: internal review
-- [ ] Final cross-doc consistency check
+- [x] Observability concept doc: 1 round external review + critical fixes (correlation rules, OTel, market context)
+- [x] Decision Intelligence concept doc: 1 round external review + critical fixes (RDG, Belief Layer, pipeline)
+- [x] White papers: internal review (Trust Ladders clean, Rings Model fixed)
+- [x] Strategic review findings: 6 of 10 resolved, 4 deferred to post-publication
 
 ### Packaging
 - [x] Cross-doc navigation links
-- [ ] Add shared vocabulary reference to each doc header
-- [ ] README.md for GitHub repo
-- [ ] LICENSE file
-- [ ] Final link audit (verify all relative paths resolve)
-- [ ] Consistent formatting pass (headers, tables, code blocks)
-- [ ] Publication site setup (if Option 2)
+- [x] Shared vocabulary reference in all doc headers
+- [x] README.md for GitHub repo
+- [x] LICENSE file (CC BY 4.0)
+- [x] Final link audit (all relative paths verified)
+- [x] Consistent formatting pass
+- [ ] Publication site setup (GeistDocs or equivalent)
 
 ---
 

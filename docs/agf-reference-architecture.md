@@ -379,8 +379,8 @@ These explore specific aspects of the framework in depth:
 - **[Agentic Primitives](agentic-primitives.md)** — The full 19-primitive catalog with complete patterns, tensions, deployment modes, security architecture, and prior art mapping
 - **[Agentic Observability](agentic-observability.md)** — The SIEM pattern for agents: event architecture, correlation engine, playbooks, maturity model
 - **[Decision Intelligence](decision-intelligence.md)** — Governed decision flows: Risk Decision Graph, Belief Layer, revision cascade, multi-agent decision pipeline
-- **Trust Ladders** — How agentic systems earn autonomy through demonstrated performance (white paper forthcoming)
-- **The Rings Model** — Concentric architecture for governed agentic systems (architecture post forthcoming)
+- **[Trust Ladders](white-papers/trust-ladders.md)** — How agentic systems earn autonomy through demonstrated performance
+- **[The Rings Model](white-papers/rings-model.md)** — Concentric architecture for governed agentic systems
 
 ### Community & Contribution
 
