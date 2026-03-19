@@ -210,7 +210,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 ## Content & Publication
 
 - [x] **White paper: Trust Ladders** — "How Agentic Systems Earn Autonomy." AGF White Paper No. 1. Covers: the binary trust problem, the graduated pattern (6 mechanics), empirical evidence (Anthropic data, DeepMind delegation framework, CSA ATF, Engels et al. oversight scaling), AGF integration (governance, learning, security, economics), implementation guidance (metrics, promotion criteria, demotion triggers), the broader principle. At `docs/white-papers/trust-ladders.md`. DONE.
-- [ ] **Architecture post: The Rings Model** — Concentric architecture for governed agentic systems. Diagram + write-up.
+- [x] **Architecture post: The Rings Model** — "A Concentric Architecture for Governed Agentic Systems." AGF White Paper No. 2. Covers: the governance gap, the 4-ring architecture (with fabric + substrate), why concentric rings, logical vs physical (3 deployment modes), signal protocol, progressive composition (5 phases), cost model, honest constraints (oversight limits), prior art. At `docs/white-papers/rings-model.md`. DONE.
 - [ ] **Post: Validation Loops with Convergence Gates** — Self-improving pipeline pattern. Engineering audience.
 - [ ] **Post: Adversarial Critique as Structural Pattern** — Producer/verifier separation for AI.
 - [ ] **Post: "The box can get smarter but cannot grow itself"** — Bounded AI autonomy framing.
