@@ -3,7 +3,7 @@
 **AGF White Paper Series — No. 1**
 **Version:** 0.1 Draft
 **Date:** 2026-03-18
-**Authors:** Keating Pike
+**Authors:** Jesse Pike
 
 ---
 
@@ -246,4 +246,4 @@ Trust Ladders are how you build agentic systems that are worthy of the trust pla
 
 *Trust Ladders are AGF Primitive #11 in the Agentic Governance Framework. For the complete framework including all 19 primitives, the Rings Model, and domain-specific profiles, see [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md).*
 
-*AGF is developed and maintained by Keating Pike.*
+*AGF is developed and maintained by Jesse Pike.*

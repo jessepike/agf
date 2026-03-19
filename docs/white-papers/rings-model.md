@@ -3,7 +3,7 @@
 **AGF White Paper Series — No. 2**
 **Version:** 0.1 Draft
 **Date:** 2026-03-18
-**Authors:** Keating Pike
+**Authors:** Jesse Pike
 
 ---
 
@@ -252,4 +252,4 @@ We named it. We didn't invent it.
 
 *The Rings Model is the central architecture of the Agentic Governance Framework (AGF). For the complete framework including all 19 primitives, domain-specific profiles, and implementation guidance, see [AGF: A Reference Architecture for Governed Agentic Systems](../agf-reference-architecture.md).*
 
-*AGF is developed and maintained by Keating Pike.*
+*AGF is developed and maintained by Jesse Pike.*

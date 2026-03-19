@@ -395,4 +395,4 @@ Our hope is that this work serves the community: that it gives practitioners a b
 
 ---
 
-*AGF is developed and maintained by Keating Pike. For the complete framework including all domain profiles and the full primitive catalog, visit [link].*
+*AGF is developed and maintained by [Jesse Pike](https://jessepike.com). For the complete framework including all domain profiles and the full primitive catalog, visit [agf.jessepike.com](https://agf.jessepike.com).*

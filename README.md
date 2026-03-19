@@ -92,4 +92,4 @@ See [LICENSE](LICENSE).
 
 ## About
 
-AGF is developed and maintained by [Keating Pike](https://keatingpike.com).
+AGF is developed and maintained by [Jesse Pike](https://jessepike.com). Documentation site: [agf.jessepike.com](https://agf.jessepike.com) (coming soon).
