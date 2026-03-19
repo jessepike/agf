@@ -146,9 +146,9 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [ ] **Internal review**
 - [ ] **External review**
 
-### Observability Profile (`profiles/observability-profile.md`) — Not Yet Written
+### Observability Profile (`profiles/observability-profile.md`)
 
-- [ ] **Draft profile** — SIEM-for-agents concept, canonical event architecture (envelope, taxonomy, identity context), correlation engine (quality/security/governance rules), detection patterns, operational playbooks (incident response, forensic investigation, containment), observability maturity model.
+- [x] **Draft profile** — SIEM-for-agents concept, three detection domains (quality/security/governance), canonical event envelope + taxonomy, correlation engine (15 rules across 3 domains), dual-speed detection (sentinels + analysis), operational playbooks with forensic investigation, zero trust monitoring with posture scoring, 5-level observability maturity model, "What This Is NOT" positioning, OTel integration guidance, operations checklist. DONE.
 - [ ] **Internal review**
 - [ ] **External review**
 

@@ -14,7 +14,7 @@ AI engineers, ML engineers, prompt engineers, agent developers, and anyone respo
 
 **Prerequisites:** Familiarity with the [Rings Model and core concepts](../docs/agf-reference-architecture.md#core-concepts) in the AGF meta document.
 
-**Scope boundary:** This profile covers what to build and in what order. Deployment topology belongs to the [Platform Profile](platform-profile.md). Security architecture belongs to the [Security Profile](security-profile.md). Regulatory evidence belongs to the [GRC Profile](grc-profile.md). Runtime operations belong to the Observability Profile (forthcoming).
+**Scope boundary:** This profile covers what to build and in what order. Deployment topology belongs to the [Platform Profile](platform-profile.md). Security architecture belongs to the [Security Profile](security-profile.md). Regulatory evidence belongs to the [GRC Profile](grc-profile.md). Runtime operations belong to the [Observability Profile](observability-profile.md).
 
 ---
 

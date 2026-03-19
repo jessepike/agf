@@ -12,7 +12,7 @@ Platform engineers, infrastructure architects, DevOps/MLOps teams, and anyone re
 
 **The key question this profile answers:** *How do I build and deploy governed agent infrastructure?*
 
-**Scope boundary:** This profile covers build-time and deployment-time infrastructure. Runtime operations (monitoring, incident response, observability) belong to the Observability Profile (forthcoming). The split mirrors Platform Engineering vs. SRE.
+**Scope boundary:** This profile covers build-time and deployment-time infrastructure. Runtime operations (monitoring, incident response, observability) belong to the [Observability Profile](observability-profile.md). The split mirrors Platform Engineering vs. SRE.
 
 **Prerequisites:** Familiarity with the [Rings Model and core concepts](../docs/agf-reference-architecture.md#core-concepts) in the AGF meta document.
 
