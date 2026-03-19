@@ -1,0 +1,273 @@
+---
+title: "Security Profile"
+description: "Threat modeling, OWASP mappings, three-level security model, and incident response for governed agentic systems."
+---
+
+import Image from "next/image";
+
+For CISOs, security architects, application security teams, red teams, and SOC analysts responsible for the security posture of systems that include autonomous AI agents.
+
+**The key question this profile answers:** *What are the threats to my agentic systems, and how does AGF's architecture defend against each one?*
+
+**Prerequisites:** Familiarity with the [Rings Model](/docs/overview/rings-model) and core concepts. This profile does not re-explain the ring architecture — it shows how security operates within it.
+
+## The Security Challenge
+
+Agentic systems introduce a fundamentally different threat surface from traditional software. An autonomous agent doesn't just process data — it reasons, selects tools, executes actions, communicates with other agents, and modifies its own behavior over time. Every one of these capabilities is an attack vector.
+
+The traditional security stack — firewalls, WAFs, SAST/DAST, IAM — was built for deterministic software that does what it's told. Agentic systems are non-deterministic, autonomous, and capable of taking actions their developers never explicitly programmed. A compromised agent doesn't just leak data — it can manipulate decisions, escalate its own privileges, coordinate with other compromised agents, and gradually poison the systems that govern it.
+
+**Why a unified security architecture matters:** The landscape fragments agentic security into separate silos — quality monitoring, security monitoring (SIEM), and compliance monitoring (GRC tools). AGF argues this fragmentation is itself a vulnerability. A quality degradation pattern might be a security attack. A compliance anomaly might indicate behavioral drift. A performance issue might mask a privilege escalation. The three-level security model unifies these domains because agentic threats don't respect domain boundaries.
+
+## The Three-Level Security Model
+
+Security in AGF is not a single ring, layer, or feature. It is a pervasive architectural concern operating at three distinct levels — each with different temporal characteristics, enforcement mechanisms, and failure modes.
+
+<Image
+  src="/diagrams/three-level-security-model.png"
+  alt="Three-Level Security Model — Fabric, Governance, Intelligence"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+### Level 1: Security Fabric — Enforcement
+
+**What it is:** The embedded security substrate active at every ring boundary. Always on, synchronous, wire-speed.
+
+| Capability | Description | Temporal |
+|-----------|-------------|----------|
+| **Input sanitization** | Every input to any ring is treated as potentially adversarial. Prompt injection detection, context boundary enforcement, payload validation. | Per-interaction (μs–ms) |
+| **Output scanning** | Every output inspected before crossing a ring boundary. Known pattern detection, classification markers, integrity assertions. | Per-interaction (μs–ms) |
+| **Runtime containment** | Sandboxing, resource limits, execution isolation. Compromised agents have bounded blast radius. | Always active |
+| **Ring integrity verification** | Each ring verifies its configuration matches its authorized state (signed manifest). | Per-interaction (μs–ms) |
+| **Identity enforcement** | Per-interaction cryptographic identity verification at every boundary. No ring trusts another's output by origin alone. | Per-interaction (μs–ms) |
+| **Configuration attestation** | Control-plane configuration verified against signed deployment manifest. Divergence triggers containment. | Per-interaction (μs–ms) |
+
+**What it is NOT:** The fabric does not make semantic judgments. A carefully worded adversarial prompt that is syntactically clean passes the fabric. Semantic threats require Level 2 evaluation.
+
+### Level 2: Security Governance — Policy Evaluation
+
+**What it is:** Security policy evaluation. Lives in Ring 2, evaluated by Policy as Code (#9), enforced through Governance Gates (#8). Makes the decisions that the fabric enforces.
+
+| Capability | Description | Temporal |
+|-----------|-------------|----------|
+| **Access control policy** | Who can do what under what conditions. Agents, models, humans × tools, data, actions × trust level, risk classification, context. | Per-decision (ms–min) |
+| **Data classification** | PII rules, consent scope, data residency, retention, redaction. | Per-decision |
+| **Irreversible-action authorization** | Any action classified as irreversible must pass a mandatory gate regardless of trust level. | Per-decision (may pause for human review) |
+| **Supply chain trust policy** | Approved sources, version pins, trust tiers. For MCP: server identity verification, tool schema integrity, authorized registries. | Per-decision |
+| **Semantic security evaluation** | When the fabric flags syntactically-clean-but-potentially-adversarial content, Governance evaluates against security policy. | Per-decision (ms–min) |
+
+### Level 3: Security Intelligence — Detection & Response
+
+**What it is:** The SIEM pattern applied to agentic systems. Consumes the event stream from all rings, runs security-specific correlation rules, triggers response playbooks.
+
+| Capability | Description | Temporal |
+|-----------|-------------|----------|
+| **Behavioral anomaly detection** | Baseline agent behavior, detect divergence. Trust manipulation patterns. Behavioral drift over time. | Dual-speed |
+| **Cross-pipeline correlation** | Detect attacks spanning multiple agents. Lateral movement, coordinated behavior changes, cascading failures. | Slow path (hours–days) |
+| **Memory & state introspection** | Read access to agent internal state — memory stores, context windows, embedding stores, tool registries, loaded manifests. The EDR pattern for agents. | Slow path |
+| **Human-agent interaction analysis** | Approval cadence, framing analysis, fatigue indicators. Detect agents exploiting human cognitive biases. | Dual-speed |
+| **Response playbooks** | Quarantine, trust degradation, blast radius containment, human escalation, forensic preservation. | On trigger |
+
+**Dual-speed operation:**
+- **Fast path (sentinels):** Sub-second. Known-pattern anomaly-triggered responses.
+- **Slow path (analysis):** Hours to days. Cross-execution pattern analysis, behavioral drift, memory evolution tracking.
+
+**Implementation references:** SentinelAgent graph analysis (92% accuracy, OTel-based), AgentGuard MDP-based probabilistic verification, Pro2Guard proactive enforcement via Markov chains.
+
+## The Security Response Bus
+
+**The problem:** A multi-agent lateral movement attack cascades across three agents in under 3 seconds. Full governance deliberation takes minutes. By the time Intelligence detects, Governance authorizes, and Fabric contains — the attack may already be complete.
+
+**The solution:** Pre-authorized fast-path from Intelligence directly to Fabric, bypassing normal Governance deliberation for defined threat classes.
+
+<Image
+  src="/diagrams/security-response-bus.png"
+  alt="Security Response Bus — Pre-authorized fast-path containment"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+```
+Normal path (seconds–minutes):
+  Intelligence detects → Governance evaluates → Fabric contains
+
+Response Bus path (sub-second):
+  Intelligence detects → [pre-authorized match] → Fabric contains
+                                                    ↓
+                                           Governance notified post-facto
+```
+
+**How it works:**
+
+1. Governance pre-authorizes response classes — "If Intelligence detects lateral movement pattern X, Fabric may immediately isolate affected agents." Pre-authorizations are versioned policy, recorded in the provenance chain, auditable.
+2. Intelligence triggers pre-authorized responses when a detection matches a pre-authorized class.
+3. Fabric executes containment — circuit breakers fire, agents isolated, blast radius bounded.
+4. Governance is notified post-facto. Response recorded, evidence preserved, Governance validates or escalates.
+
+**What this is NOT:** A governance bypass. Governance defines and pre-authorizes the response classes. Intelligence cannot trigger containment for patterns Governance hasn't pre-authorized.
+
+**Known limitation:** A compromised Intelligence layer with Response Bus access can trigger false containment — denial-of-service by halting legitimate operations. Mitigations: cryptographic proof required for activation, pre-authorized classes limit blast radius, Governance dead-man's-switch overrides excessive containment rates.
+
+## Zero Trust for Agentic Systems
+
+Zero trust is not a feature — it is the architectural assumption that runs through everything. No ring trusts another ring's output by default. Trust is earned through demonstrated performance (Trust Ladders #11), not assumed.
+
+<Image
+  src="/diagrams/zero-trust-identity-flow.png"
+  alt="Zero Trust Identity Flow — per-interaction verification across rings"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+| Zero Trust Principle | Agentic Application |
+|---------------------|-------------------|
+| **Never trust, always verify** | Ring 1 independently verifies Ring 0. Ring 2 independently evaluates policy. No implicit trust between rings. |
+| **Least privilege** | Bounded Agency (#7). Agents have only the tools, data access, and authority they need. |
+| **Assume breach** | Adversarial Robustness (#15). Limit damage when — not if — a component is compromised. |
+| **Verify explicitly** | Identity & Attribution (#14). Every action carries authenticated identity. |
+| **Microsegmentation** | Ring isolation. Tenant scoping. Cross-pipeline interactions require mutual authentication. |
+
+### Identity as the Control Plane
+
+In agentic zero trust, identity is richer than traditional identity:
+
+- **Agent identity:** agent_id, version, configuration hash
+- **Model identity:** model, version, provider, fine-tune
+- **Delegation chain:** who authorized this agent, under what authority, with what scope
+- **Execution identity:** run ID, context, inputs, checkpoint
+- **Data identity:** whose data, classification level, consent scope
+- **Human identity:** who is in the governance loop, what authority do they hold
+
+These bind into an **identity context** that travels with every action through every ring. Candidate implementation protocols (NIST NCCoE concept paper, Feb 2026): SPIFFE/SPIRE for cryptographic workload identity, OAuth 2.1 for user-delegated agent authority, OIDC for federated identity, NGAC for attribute-based access control.
+
+## Threat Analysis: OWASP Top 10 for Agentic Applications
+
+<Image
+  src="/diagrams/owasp-threat-mapping.png"
+  alt="OWASP Threat Mapping — AGF defense coverage per ASI threat"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Each of the 10 OWASP ASI threats maps to specific AGF defense mechanisms.
+
+### ASI01 — Agent Goal Hijack
+
+Hidden prompts or instructions that redirect an agent's goals via external content, context manipulation, or environment drift.
+
+- **Owner:** Security Fabric / Adversarial Robustness (#15)
+- **Primary:** Configuration integrity attestation — Fabric verifies control-plane configuration against a signed manifest at every ring boundary. Divergence triggers containment.
+- **Supporting:** Intelligence detects behavioral divergence from authorized objectives over time. Agent Environment Governance (#19) verifies instruction integrity.
+- **Gap:** Full semantic goal-state attestation remains a research frontier. Text-level safety behavior does not reliably transfer to tool-call behavior.
+
+### ASI02 — Tool Misuse & Exploitation
+
+Steering agents into unsafe use of legitimate capabilities — using permitted tools in unintended ways.
+
+- **Owner:** Governance / Bounded Agency (#7)
+- **Primary:** Governance defines permitted tool parameters and action scopes via policy. Bounded Agency enforces the operating envelope.
+- **Supporting:** Fabric enforces containment at runtime. Intelligence detects anomalous tool-use patterns.
+
+### ASI03 — Identity & Privilege Abuse
+
+Agents receiving, holding, or delegating privilege improperly. Stale or inherited credentials expanding blast radius.
+
+- **Owner:** Security Fabric / Identity & Attribution (#14)
+- **Primary:** Cryptographic identity verification at every ring boundary. SPIFFE/SPIRE SVIDs — short-lived, automatically rotated. No static credentials.
+- **Supporting:** Governance evaluates authorization. Intelligence detects lateral movement and privilege escalation.
+
+### ASI04 — Supply Chain Vulnerabilities
+
+Poisoned tools, plugins, models, or connectors in dynamic MCP/A2A ecosystems.
+
+- **Owner:** Governance / Adversarial Robustness (#15)
+- **Primary:** Governance defines approved sources, version pins, trust tiers. MCP: server identity verification, tool schema integrity checks, authorized registries.
+- **Key data point:** 53% of community MCP servers use insecure static API keys (Astrix Security, 2025). Supply chain policy must enforce short-lived, scoped credentials.
+
+### ASI05 — Unexpected Code Execution
+
+Agents constructing and executing code from untrusted input without adequate sandboxing.
+
+- **Owner:** Security Fabric / Adversarial Robustness (#15)
+- **Primary:** Runtime containment — sandboxed execution environments with resource limits. Code generated from external input treated as untrusted.
+
+### ASI06 — Data Exfiltration & Privacy Violation
+
+Agents leaking sensitive data through tool outputs, logs, memory stores, or model context.
+
+- **Owner:** Governance / Data Governance & Confidentiality (#17)
+- **Primary:** Data classification at every data flow. PII rules, consent scope, redaction before ring boundary crossing.
+
+### ASI07 — Cascading & Compounding Failures
+
+Multi-agent failures where one compromised agent contaminates downstream agents.
+
+- **Owner:** Security Intelligence (cross-pipeline correlation)
+- **Primary:** Cross-pipeline correlation detects cascading patterns. Security Response Bus provides fast-path containment before cascade completes.
+
+### ASI08 — Resource & Service Abuse
+
+Agents consuming excessive compute, API quotas, or financial resources — intentionally or through manipulation.
+
+- **Owner:** Bounded Agency (#7) + Security Fabric
+- **Primary:** Execution budgets (compute, tokens, API calls, wall-clock time) enforced at the ring boundary. Budget exhaustion triggers graceful halt, not crash.
+
+### ASI09 — Human Manipulation & Oversight Evasion
+
+Agents exploiting human cognitive biases to manipulate oversight decisions — framing, anchoring, approval fatigue.
+
+- **Owner:** Security Intelligence / Governance Gates (#8)
+- **Primary:** Rubber-stamping detection — Intelligence flags reviewers who approve too quickly or too uniformly. Approval rate limits. Cooling-off periods prevent fatigue exploitation.
+- **Note:** Oversight efficacy degrades as the capability gap between overseer and system increases (Engels et al., NeurIPS 2025). Structural safeguards supplement human oversight.
+
+### ASI10 — Irreversible & High-Stakes Actions
+
+Agents taking consequential actions that cannot be undone — financial transactions, data deletion, external communications.
+
+- **Owner:** Governance Gates (#8) + Transaction & Side-Effect Control (#16)
+- **Primary:** Mandatory gate on any action classified irreversible. Three-phase commit: pre-commit → commit → confirm. Compensation logic for rollback where possible.
+
+## CSA Agentic Trust Framework Alignment
+
+| CSA ATF Domain | AGF Mapping |
+|---------------|-------------|
+| **Segmentation** | Ring isolation, tenant scoping, cross-pipeline authentication requirements |
+| **Data Governance** | Data Governance & Confidentiality (#17) — classification, lineage, consent, retention |
+| **Identity & Access** | Identity & Attribution (#14) + Zero Trust identity context |
+| **Behavioral Monitoring** | Security Intelligence — behavioral baselines, trust trajectories |
+| **Supply Chain** | Adversarial Robustness (#15) supply chain trust policy |
+
+## Security Assessment Checklist
+
+**Security Fabric:**
+- [ ] Input sanitization active at all ring boundaries
+- [ ] Output scanning before every ring boundary crossing
+- [ ] Runtime sandboxing with resource limits per agent
+- [ ] Signed deployment manifests for ring configuration integrity
+- [ ] Cryptographic identity verification per interaction (no static credentials)
+
+**Security Governance:**
+- [ ] Access control policy covers agent × tool × data × trust level
+- [ ] Irreversible actions classified and mandatory gate configured
+- [ ] Supply chain trust policy: approved sources, version pins, trust tiers
+- [ ] MCP server identity verification and tool schema integrity
+
+**Security Intelligence:**
+- [ ] Behavioral baseline established for each agent
+- [ ] Cross-pipeline correlation rules active
+- [ ] Security Response Bus pre-authorization policy defined and versioned
+- [ ] Incident response playbooks tested
+
+**Zero Trust:**
+- [ ] No static credentials anywhere in the agent stack
+- [ ] Delegation chains bounded and auditable
+- [ ] Trust Ladders calibrated from empirical performance data
+
+---
+
+*Related: [Platform Profile](/docs/profiles/platform) — deployment infrastructure and containment architecture. [Observability Profile](/docs/profiles/observability) — detection, correlation, and response operations. [GRC Profile](/docs/profiles/grc) — regulatory compliance and evidence generation.*

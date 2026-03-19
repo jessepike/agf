@@ -1,0 +1,276 @@
+---
+title: "Platform Profile"
+description: "Deployment modes, environment architecture, MCP integration, and cost of governance."
+---
+
+import Image from "next/image";
+
+For platform engineers, infrastructure architects, and DevOps/MLOps teams responsible for building, deploying, and scaling the infrastructure that autonomous AI agents run on.
+
+**The key question this profile answers:** *How do I build and deploy governed agent infrastructure?*
+
+**Scope boundary:** This profile covers build-time and deployment-time infrastructure. Runtime operations (monitoring, incident response, observability) belong to the [Observability Profile](/docs/profiles/observability). The split mirrors Platform Engineering vs. SRE.
+
+## The Platform Challenge
+
+Building infrastructure for governed agentic systems is fundamentally different from building infrastructure for traditional applications. Traditional infrastructure serves deterministic software — the application does what it's told, every time. Agentic infrastructure serves non-deterministic, autonomous systems that select tools, modify their own behavior, and take actions their developers never explicitly programmed.
+
+The platform challenge has three dimensions:
+
+1. **Governance must be structural, not bolted on.** You can't add governance to an agentic system after the fact — it must be built into the infrastructure from the start. The rings, the verification layers, the gates, the containment mechanisms — these are infrastructure, not application features.
+
+2. **The topology must match the system type.** A document processing pipeline and a conversational agent have completely different latency requirements, governance patterns, and failure modes. The infrastructure must adapt — the same logical governance deployed in different physical topologies.
+
+3. **The agent's operating environment is infrastructure.** Context composition, instruction management, tool provisioning, workspace scoping, session state — these are infrastructure concerns that determine agent performance as much as compute and networking.
+
+## Ring Deployment Modes
+
+The Rings Model is a logical architecture. How the rings manifest physically depends on the system type, latency budget, and governance requirements. Three modes, each with different tradeoffs:
+
+<Image
+  src="/diagrams/ring-deployment-modes-v2.png"
+  alt="Ring Deployment Modes — Wrapper, Middleware/Interrupt, Graph-Embedded"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+### Wrapper Mode
+
+The rings literally wrap execution. Sequential, concentric — Ring 0 produces, Ring 1 verifies, Ring 2 governs, output releases.
+
+```
+Ring 0: Produce output
+──── checkpoint ────
+Ring 1: Verify (loop until converge)
+──── checkpoint ────
+Ring 2: Evaluate policy, gate if required
+──── checkpoint ────
+Output released
+Ring 3: Learn (async)
+```
+
+| Property | Assessment |
+|----------|-----------|
+| **Best for** | Batch pipelines, document processing, assessment workflows, regulatory filings |
+| **Real-world examples** | AI risk assessment pipelines, automated report generation, code review pipelines |
+| **Latency** | Seconds to hours — the full sequential pass adds wall-clock time proportional to verification complexity |
+| **Audit clarity** | Highest — each stage boundary is a clean cut in the provenance chain |
+| **Human oversight** | Easiest — gates pause cleanly, reviewers see complete context |
+| **Reproducibility** | Highest — same inputs + configuration = same trace |
+| **Tradeoff** | Latency. For user-facing agents, the sequential pass may be unacceptable. |
+
+### Middleware / Interrupt Mode
+
+Ring logic fires at specific decision points within an execution graph — tool calls, data access, state mutations. The agent executes continuously; the rings intercept at defined boundaries.
+
+```
+step 1 → step 2 → [R1: verify tool] → step 3
+                                          │
+                    [R2: gate — destructive] ←┘
+                              │
+                       (human approves)
+                              │
+                          step 4 → step 5 → [R1: verify output]
+                                                    │
+                                                step 6 → done
+
+Ring 3: learns from full trace (async)
+Security fabric: active at every interrupt boundary
+```
+
+| Property | Assessment |
+|----------|-----------|
+| **Best for** | Coding agents, ops automation, multi-step task agents, infrastructure management |
+| **Real-world examples** | Claude Code, Cursor, Devin, GitHub Copilot Workspace, CI/CD agents |
+| **Latency** | Sub-second to seconds per action |
+| **Audit clarity** | Good — provenance shows which control points triggered and what was decided |
+| **Human oversight** | Good with constraints — richer context, more domain expertise required |
+| **Checkpointing** | Checkpoint at each interrupt boundary. Agent must be resumable — pausing mid-execution for a gate requires frozen, persisted, resumable state. |
+| **Tradeoff** | Interrupt policy design is hard. Too many = constant pausing. Too few = missed consequential actions. |
+
+**MCP as canonical implementation:** The Model Context Protocol materializes middleware/interrupt mode directly — the protocol defines the boundary between agent reasoning and tool execution, making each tool call a natural interrupt point.
+
+### Graph-Embedded Mode
+
+Verification, governance, and security run concurrently with execution as peer nodes in the orchestration graph.
+
+| Property | Assessment |
+|----------|-----------|
+| **Best for** | Conversational agents, voice assistants, real-time systems, agent swarms |
+| **Real-world examples** | ChatGPT-style agents, voice assistants, real-time recommendation engines, trading agents |
+| **Latency** | Milliseconds (user-perceived) |
+| **Audit clarity** | Lowest — concurrent execution produces a partial order, not a total order |
+| **Human oversight** | Hardest — speculative execution means the agent has "moved on" by the time a gate fires |
+| **Reproducibility** | Lowest — concurrency introduces timing-dependent behavior |
+| **Tradeoff** | Latency for governance clarity. Systems subject to regulatory audit should strongly consider wrapper or middleware. |
+
+**Speculative execution bounds** *(Informed proposal):*
+- **Depth limit:** 3–4 levels of speculative chaining. Governance overhead grows super-linearly beyond depth 4.
+- **Entropy constraint:** If historical rejection rate for an action class exceeds ~20%, exclude from speculation and process sequentially.
+- **Side-effect fence:** Speculative steps that produce irreversible side effects are held in a commit buffer until the governance release gate clears.
+
+### Hybrid Deployment
+
+Systems are not required to use a single mode. The common pattern: **middleware mode overall with graph-embedded subsections.** The coding agent operates in middleware mode (interrupt-driven), but within a single user-facing response, the generation pipeline uses graph-embedded mode (parallel verification of streamed output).
+
+## Mode Selection Matrix
+
+Choose the deployment mode based on system characteristics. When multiple modes could work, prefer the one with stronger governance properties unless latency requirements force otherwise.
+
+| System Characteristic | Wrapper | Middleware | Graph-Embedded |
+|----------------------|---------|-----------|----------------|
+| **Output type** | Discrete artifact (document, report, assessment) | Sequence of actions (tool calls, mutations, operations) | Continuous stream (conversation, real-time feed) |
+| **Latency tolerance** | Seconds to hours | Sub-second to seconds per action | Milliseconds (user-perceived) |
+| **Governance intensity** | High — every output fully reviewed | Selective — consequential actions trigger rings | Minimal blocking — most output auto-passes |
+| **Human gate frequency** | High — frequent pause-and-review acceptable | Moderate — gates at high-stakes actions only | Low — rare, and disruptive when they fire |
+| **Regulatory/audit** | Strong — clear evidence trail required | Moderate — action-level audit sufficient | Light — behavioral monitoring sufficient |
+| **Side-effect profile** | Contained — output is an artifact | Mixed — many actions, some irreversible | Continuous — streaming output, real-time effects |
+| **Regulatory jurisdiction** | EU AI Act high-risk (Art. 9–15) | Most jurisdictions | Permissive or low-risk classification |
+| **Rollback/compensation** | Simple — discard the artifact | Per-action compensation via Transaction Control (#16) | Complex — speculative execution may have committed partial state |
+
+**Decision heuristic:** If you're unsure, start with middleware mode. It handles the widest range of use cases and has the strongest protocol ecosystem (MCP).
+
+**Ecosystem reality (March 2026):** No single deployment mode dominates. LangGraph uses graph-embedded governance with state machines; CrewAI uses workflow checkpoint governance; OpenAI Agents SDK uses interceptor/middleware guardrails; Amazon Bedrock AgentCore uses external policy enforcement at the gateway layer. MCP is a **connectivity protocol**, not a governance mechanism — governance layers are built on top of or alongside MCP.
+
+## The Agent Environment Stack
+
+Every agent operates within a 5-layer environment. Each layer has its own composition policy, governance intensity, and lifecycle:
+
+```
+┌──────────────────────────────────────────────────┐
+│ L5: Session State                     20-30%     │
+│ conversation history, tool results, working      │
+│ memory, handoff context                          │
+│ Ephemeral, session-scoped                        │
+├──────────────────────────────────────────────────┤
+│ L4: Retrieved Context                 30-40%     │
+│ task-specific knowledge, documents, search       │
+│ Dynamic, loaded JIT per task                     │
+├──────────────────────────────────────────────────┤
+│ L3: Capability Set                    10-15%     │
+│ active tools, skills, MCP servers, API access    │
+│ Provisioned per role, subject to trust level     │
+├─ ─ ─ ─ ─ ─ TRUST BOUNDARY ─ ─ ─ ─ ─ ─ ─ ─ ─ ─┤
+│ L2: Instruction Architecture          10-20%     │
+│ system prompts, rules, personas, constraints     │
+│ Versioned, tested, slow-changing                 │
+├──────────────────────────────────────────────────┤
+│ L1: Identity & Policy Substrate       5-10%      │
+│ agent identity, ring assignment, governance      │
+│ policy, trust level, workspace boundaries        │
+│ Foundational                                     │
+└──────────────────────────────────────────────────┘
+         ▲ Composition flow: bottom-up
+```
+
+**Trust boundary:** Below L3 (L1–L2) is human-authored, version-controlled, and trusted. Above the boundary (L3–L5) is dynamic, runtime-composed, and treated as untrusted input by the Security Fabric.
+
+**Percentages** are context budget allocation starting points. The Environment Optimization Loop adjusts based on measured effectiveness.
+
+## The Composability Interface
+
+AGF defines a standard contract for how agents expose themselves to the ring stack. Every governed agent implements this interface:
+
+<Image
+  src="/diagrams/ring-interface-composability.png"
+  alt="Ring Interface and Composability — standard contract between rings"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+**Signal set — what rings return to each other:**
+
+| Signal | Meaning | Who Receives |
+|--------|---------|-------------|
+| `PASS` | Output meets criteria | Ring 2 / Release |
+| `REVISE` | Output needs change — structured finding attached | Ring 0 (retry) |
+| `HALT` | Output cannot be fixed — stop execution | Governance |
+| `GATE` | Output meets quality criteria but requires human authorization | Human reviewer |
+| `ERROR` | Verification process itself failed | Orchestrator |
+
+**Execution budgets:** Every ring boundary carries a budget — maximum iterations, time, compute, API calls. Budget exhaustion triggers graceful halt. Without budgets, validation loops can spin indefinitely.
+
+**Delegation signals:** The `DELEGATE` signal passes authority to a sub-agent with a bounded scope — the delegating agent's authority cannot be exceeded, only narrowed. Delegation chains are cryptographically bound and auditable.
+
+## MCP Integration Patterns
+
+The Model Context Protocol (MCP) is the current dominant protocol for tool integration. AGF's governance layer sits on top of MCP, not inside it.
+
+**MCP as the interrupt boundary:** Each MCP tool call is a natural interrupt point. The governance layer:
+1. Intercepts the tool call intent before execution
+2. Evaluates against policy (is this tool permitted? with these parameters? at this trust level?)
+3. Either passes, modifies, or blocks
+4. Records the decision in the event stream
+
+**MCP server trust tiers:**
+
+| Tier | Source | Trust Level | Governance |
+|------|--------|-------------|------------|
+| **Tier 1 — Organizational** | Internal, first-party | High | Streamlined approval |
+| **Tier 2 — Verified** | Known vendor, audited schema | Medium | Policy evaluation per call |
+| **Tier 3 — Community** | Public registry, unverified | Low | Sandboxed, mandatory gate on first use |
+| **Tier 4 — Dynamic** | Runtime discovery | Untrusted | Blocked by default, explicit allowlisting required |
+
+**Supply chain posture:** 53% of community MCP servers use insecure static API keys (Astrix Security, 2025). Default stance: Tier 3 and Tier 4 servers require explicit organizational approval before use.
+
+## Cost of Governance
+
+Governance is not free. Every ring boundary adds latency, compute, and complexity. Understanding the cost model helps make informed tradeoffs.
+
+<Image
+  src="/diagrams/governance-latency-tradeoff.png"
+  alt="Governance Latency Tradeoff — overhead by ring and deployment mode"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+**Latency overhead by deployment mode:**
+
+| Mode | Ring 1 overhead | Ring 2 overhead | Gate overhead |
+|------|----------------|----------------|--------------|
+| **Wrapper** | +20–50% per output | +10–30% per output | Minutes (human review) |
+| **Middleware** | +50ms–500ms per tool call | +50ms–200ms per gate evaluation | Minutes (human review) |
+| **Graph-Embedded** | Near-zero (concurrent) | Near-zero (concurrent) | Disruptive (blocks stream) |
+
+**Cost reduction strategies:**
+- **Trust Ladders (#11):** Higher-trust agents pass verification faster (fewer iterations, lighter checks).
+- **Risk-based ring activation:** Not every execution triggers all rings. Risk classification determines which rings activate at what intensity.
+- **Async Ring 3:** Learning and analysis run asynchronously — no latency impact on the critical path.
+- **Adaptive gates:** Mandatory only for classified irreversible actions. Routine operations auto-pass.
+
+**The governance dividend:** Governance costs are offset by reduced failure costs — avoided regulatory penalties, reduced remediation, lower breach costs, and trust that enables higher-stakes automation.
+
+## Infrastructure Checklist
+
+**Deployment mode selection:**
+- [ ] System type mapped to deployment mode (wrapper / middleware / graph-embedded)
+- [ ] Latency budget documented and mode selection justified
+- [ ] Regulatory jurisdiction requirements checked against mode properties
+
+**Agent environment:**
+- [ ] 5-layer stack composed (L1–L5) with trust boundary respected
+- [ ] Versioned system prompts and instructions in source control
+- [ ] Tool provisioning scoped per role and trust level
+- [ ] Workspace boundaries enforced (tenant isolation)
+
+**MCP integration:**
+- [ ] MCP server inventory documented with trust tier assignments
+- [ ] Static API keys eliminated from Tier 2–4 servers
+- [ ] Dynamic discovery blocked by default
+
+**Composability interface:**
+- [ ] Signal set implemented (PASS/REVISE/HALT/GATE/ERROR)
+- [ ] Execution budgets defined per ring boundary
+- [ ] Delegation chain bounds enforced
+
+**Cost of governance:**
+- [ ] Latency overhead measured per ring per deployment mode
+- [ ] Trust Ladders configured for high-volume, proven agents
+- [ ] Async Ring 3 confirmed off critical path
+
+---
+
+*Related: [Security Profile](/docs/profiles/security) — security architecture and threat defense. [Observability Profile](/docs/profiles/observability) — runtime monitoring and incident response. [AI Engineering Profile](/docs/profiles/ai-engineering) — which primitives to implement first.*

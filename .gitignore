@@ -1,19 +1,23 @@
-# OS
+# ── Private working directory ──
+.private/
+
+# ── Claude Code config (session-specific) ──
+.claude/
+
+# ── OS ──
 .DS_Store
 
-# Session data
+# ── Session data ──
 data/
 *.db
 *.db-shm
 *.db-wal
 
-# Session transcripts (large, not useful in VCS)
-*.txt
+# ── Node / Next.js (agf-docs) ──
+agf-docs/node_modules/
+agf-docs/.next/
+agf-docs/.source/
+.env*.local
 
-# Private author voice/tone guide (not for public repo)
-.claude/voice.md
-
-# Capabilities registry (auto-generated)
-INVENTORY.md
-inventory.json
-agf-docs/
+# ── Build artifacts ──
+*.tsbuildinfo

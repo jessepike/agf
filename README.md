@@ -2,9 +2,14 @@
 
 **A Reference Architecture for Governed Agentic Systems**
 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Status: Draft](https://img.shields.io/badge/Status-0.1%20Draft-orange.svg)]()
+
 AGF is a synthesis framework that integrates NIST AI RMF, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, Singapore IMDA, MITRE ATLAS, and academic research into a single coherent reference architecture for organizations building safe, secure, durable, auditable, and observable agentic systems.
 
 We did not invent these patterns. We sorted the pieces and showed how they fit together.
+
+**Documentation site:** [agf.jessepike.dev](https://agf.jessepike.dev)
 
 ---
 
@@ -13,11 +18,11 @@ We did not invent these patterns. We sorted the pieces and showed how they fit t
 | If you are... | Start with... |
 |--------------|---------------|
 | New to AGF | **[Reference Architecture](docs/agf-reference-architecture.md)** — the entry point |
-| A CISO or security architect | **[Security Profile](profiles/security-profile.md)** — threat modeling, OWASP mappings, red team scenarios |
-| A platform engineer | **[Platform Profile](profiles/platform-profile.md)** — deployment modes, MCP integration, cost model |
-| A compliance officer or auditor | **[GRC Profile](profiles/grc-profile.md)** — regulatory mappings, control crosswalks, maturity model |
-| An AI engineer | **[AI Engineering Profile](profiles/ai-engineering-profile.md)** — 19 primitives, implementation priority, composition patterns |
-| An SRE or detection engineer | **[Observability Profile](profiles/observability-profile.md)** — event architecture, correlation rules, playbooks |
+| A CISO or security architect | **[Security Profile](docs/profiles/security-profile.md)** — threat modeling, OWASP mappings, red team scenarios |
+| A platform engineer | **[Platform Profile](docs/profiles/platform-profile.md)** — deployment modes, MCP integration, cost model |
+| A compliance officer or auditor | **[GRC Profile](docs/profiles/grc-profile.md)** — regulatory mappings, control crosswalks, maturity model |
+| An AI engineer | **[AI Engineering Profile](docs/profiles/ai-engineering-profile.md)** — 19 primitives, implementation priority, composition patterns |
+| An SRE or detection engineer | **[Observability Profile](docs/profiles/observability-profile.md)** — event architecture, correlation rules, playbooks |
 
 ## Core Concepts
 
@@ -40,25 +45,20 @@ docs/
   agentic-governance-framework.md ← Top-level operating model
   shared-vocabulary.md            ← Canonical terminology
   cross-concept-relationship.md   ← How the concept areas relate
-  strategic-positioning.md        ← Market landscape, differentiation
   publication-map.md              ← How all artifacts connect
   white-papers/
     trust-ladders.md              ← White Paper No. 1
     rings-model.md                ← White Paper No. 2
-
-profiles/
-  security-profile.md             ← For CISOs, security architects
-  platform-profile.md             ← For platform engineers
-  grc-profile.md                  ← For compliance officers, auditors
-  ai-engineering-profile.md       ← For AI engineers
-  observability-profile.md        ← For SREs, detection engineers
+  profiles/
+    security-profile.md           ← For CISOs, security architects
+    platform-profile.md           ← For platform engineers
+    grc-profile.md                ← For compliance officers, auditors
+    ai-engineering-profile.md     ← For AI engineers
+    observability-profile.md      ← For SREs, detection engineers
 
 diagrams/                         ← 21 architecture diagrams (PNG)
 
-research/
-  review-prompts/                 ← External review prompts
-  archive/                        ← Processed review results
-  landscape/                      ← Market research
+agf-docs/                         ← Documentation site (agf.jessepike.dev)
 ```
 
 ## Standards Alignment
@@ -82,14 +82,20 @@ research/
 - **Rigor before opinion.** Every claim grounded in evidence, existing work, or clearly marked as a proposal.
 - **Community > credit.** If this framework helps one organization build a safer agentic system, it has served its purpose.
 
+Read the full philosophy in [intent.md](intent.md).
+
+## Contributing
+
+We welcome challenges, evidence, proposals, and corrections. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or jump into [Discussions](https://github.com/jessepike/agf/discussions).
+
 ## Status
 
 **Version:** 0.1 Draft — All core documents drafted, 5 domain profiles complete, 3 rounds of external review on primitives, 1 round on profiles with errors corrected, 21 architecture diagrams, 2 white papers.
 
 ## License
 
-See [LICENSE](LICENSE).
+[CC BY 4.0](LICENSE) — free to share and adapt with attribution.
 
 ## About
 
-AGF is developed and maintained by [Jesse Pike](https://jessepike.dev). Documentation site: [agf.jessepike.dev](https://agf.jessepike.dev) (coming soon).
+AGF is developed and maintained by [Jesse Pike](https://jessepike.dev).

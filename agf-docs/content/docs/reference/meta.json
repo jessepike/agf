@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "pages": [
+    "primitives",
+    "decision-intelligence",
+    "observability-concept",
+    "governance-framework"
+  ]
+}

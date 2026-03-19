@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "pages": [
+    "vocabulary",
+    "diagrams",
+    "standards-alignment",
+    "relationship-model"
+  ]
+}

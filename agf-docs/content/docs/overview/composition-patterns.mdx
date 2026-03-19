@@ -1,0 +1,130 @@
+---
+title: "Composition Patterns"
+description: "Four progressively governed architectures — from Minimum Viable Control to a Full Governed Agentic System. Start with five primitives and grow as stakes demand."
+---
+
+import Image from "next/image";
+
+The nineteen AGF primitives don't all activate at once. They compose into progressively more governed architectures — each stage independently valuable, each stage a foundation for the next.
+
+<Image
+  src="/diagrams/composition-patterns.png"
+  alt="Composition Patterns — Progressive Build-Up from Minimum Viable Control to Full Governed System"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Organizations start at Minimum Viable Control and grow toward Full Governed as stakes, scale, and regulatory requirements demand. This is not a binary choice — it is a maturity continuum.
+
+## The Four Patterns
+
+### Minimum Viable Control
+
+**The floor for any consequential agent system.**
+
+Primitives: Bounded Agency (#7) + Identity (#14) + Provenance (#6) + Observability (#10) + Environment Governance (#19, minimal)
+
+What it gives you: agents that can't exceed their scope, actions that are attributable, an audit trail, and scoped operating environments.
+
+This is Ring 0 only — no verification layer yet. But it's more governance than most organizations have today. If you're starting from zero, start here.
+
+### Validation Pipeline
+
+**Ring 0 + Ring 1**
+
+Primitives: Minimum Viable Control + Separation of Producer/Verifier (#1) + Validation Loops (#2) + Structured Output (#5)
+
+What it gives you: verified outputs before release. The fundamental principle — the agent that creates output must not be the sole agent that validates it — becomes structural rather than manual.
+
+The key addition is the [Rings Model's](/docs/overview/rings-model) core insight: Ring 1 provides an independent verification layer that loops until convergence and can challenge as well as confirm.
+
+### Governed Decision Flow
+
+**Ring 0 + Ring 1 + Ring 2**
+
+Primitives: Validation Pipeline + Governance Gates (#8) + Policy as Code (#9) + Transaction Control (#16)
+
+What it gives you: policy-evaluated, human-gateable decisions with side-effect management.
+
+Ring 2 adds two classes of gates:
+- **Adaptive gates** relax as agents build a track record through [Trust Ladders](/docs/overview/trust-ladders)
+- **Mandatory gates** never relax — irreversible actions, regulatory requirements, and legally mandated reviews always fire
+
+This is the pattern for most regulated enterprise deployments.
+
+### Full Governed Agentic System
+
+**All rings, all primitives, zero trust at every boundary**
+
+Every ring active. Every primitive engaged. The environment optimization loop improving the substrate continuously.
+
+What it gives you: the complete governance architecture for high-stakes, regulated, enterprise-grade agentic systems.
+
+This includes:
+- Ring 3 (Learning) observing execution patterns and proposing improvements
+- Security Intelligence monitoring trust trajectories and behavioral baselines
+- Evaluation & Assurance (#18) running continuous regression
+- The self-improving loop: Ring 3 proposes, Ring 2 validates, governance decides
+
+**The invariant across all levels:** The system can suggest governance changes. It cannot enact them autonomously.
+
+## Cost of Governance
+
+Every ring adds overhead. AGF is designed for proportional activation:
+
+| Stakes | Ring Activation | Overhead Multiplier |
+|--------|----------------|-------------------|
+| Low-stakes task | Ring 0 + minimal Ring 1 | Near-zero |
+| Medium-stakes task | Ring 0 + Ring 1 + adaptive Ring 2 | 1.5–3× Ring 0 alone |
+| High-stakes decision | All four rings, mandatory gates | 3–5× Ring 0 alone |
+| Critical-stakes system | All rings + enhanced Security Intelligence | 5×+ Ring 0 alone |
+
+[Trust Ladders](/docs/overview/trust-ladders) are the primary cost optimization mechanism. As trust builds through demonstrated performance, verification intensity decreases and governance gates relax. The system starts expensive and gets cheaper.
+
+Empirical reference points: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT); AI gateway routing at 11μs per request at 5K RPS (Bifrost). Governance overhead is measurable and manageable at production scale.
+
+## The Self-Improving Loop
+
+<Image
+  src="/diagrams/implementation-phases-roadmap.png"
+  alt="Implementation Phases Roadmap — from foundational controls through full governed system"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Once Ring 3 is active, AGF is designed to get better over time:
+
+1. **Ring 3 observes** execution patterns across all rings
+2. **Ring 3 proposes** improvements — better prompts, tighter thresholds, calibrated trust levels, optimized environment configurations
+3. **Ring 2 validates** — governance evaluates whether the proposed change stays within policy
+4. **Evaluation & Assurance (#18) tests** — regression suites verify the change doesn't degrade known-good behaviors
+5. **The change deploys** — with staged rollout and monitoring
+
+This loop applies to both pipeline performance (Ring 3 improves how agents produce outputs) and the agent operating environment (Ring 3 improves context composition, instruction architecture, and tool provisioning through Environment Governance #19).
+
+## Key Tensions
+
+AGF names seven tensions between primitives with architectural resolutions. Three are central to composition:
+
+**Governance vs. Latency.** More governance means more safety but more latency. Resolution: deployment mode selection. Wrapper mode accepts latency for governance clarity; graph-embedded mode minimizes latency at the cost of audit complexity. The Mode Selection Matrix in the [Reference Architecture](/docs/reference/architecture) is the decision tool.
+
+**Self-Improvement vs. Reproducibility.** Ring 3 makes the system better, but changes make it harder to reproduce past behavior. Resolution: Ring 3 changes go through versioned configuration management. Every configuration state is traceable and reproducible. The system improves forward; it doesn't drift.
+
+**Environment Optimization vs. Governance Integrity.** The environment optimization loop makes agents more effective, but the environment is the control surface. Resolution: separate the optimizable (context priorities, tool descriptions, session policy) from the inviolable (governance policy, authorization boundaries, security constraints). The loop can improve the agent's experience within governance boundaries; it cannot move the boundaries.
+
+## Where to Start
+
+If you are responsible for an agentic system in production today, the practical question is: which pattern are you at?
+
+- **No scope constraints, no attribution, no audit trail** → Start at Minimum Viable Control
+- **MVC in place, outputs reviewed manually** → Move to Validation Pipeline
+- **Verification structured, governance ad hoc** → Move to Governed Decision Flow
+- **Regulated, high-stakes, or autonomous** → Full Governed
+
+Each stage is independently valuable. The goal is not to reach Full Governed as fast as possible — it's to match governance intensity to the stakes of what you're building.
+
+---
+
+*For the complete primitive catalog including all 19 patterns, see the [AI Engineering Profile](/docs/profiles/ai-engineering). For how composition patterns map to regulatory requirements (EU AI Act, NIST AI RMF), see the [GRC Profile](/docs/profiles/governance-risk-compliance).*

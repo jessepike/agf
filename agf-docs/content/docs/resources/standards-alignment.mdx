@@ -1,0 +1,82 @@
+---
+title: "Standards Alignment"
+description: "How AGF maps to NIST, OWASP, CSA, EU AI Act, ISO, OpenTelemetry, Singapore IMDA, and MITRE ATLAS."
+---
+
+AGF is a synthesis framework — it integrates, not replaces, established standards. This page summarizes how AGF maps to each.
+
+## Regulatory Frameworks
+
+### EU AI Act
+
+| Article | AGF Mapping |
+|---------|-------------|
+| Art. 6 (Risk classification) | Risk classification → ring activation level |
+| Art. 9 (Risk management) | Three-level security model |
+| Art. 12 (Record-keeping) | Event-Driven Observability (#10) |
+| Art. 14 (Human oversight) | Governance Gates (#8), mandatory gates |
+| Art. 15 (Robustness) | Adversarial Robustness (#15) |
+| Art. 50 (Transparency) | Identity & Attribution (#14) |
+
+### NIST AI RMF
+
+| NIST Function | AGF Mapping |
+|---------------|-------------|
+| GOVERN | Ring 2 governance functions |
+| MAP | Risk classification + ring activation |
+| MEASURE | Evaluation & Assurance (#18) + Ring 1 verification |
+| MANAGE | Trust Ladders (#11) + Bounded Agency (#7) |
+
+AGF primitives are "agentic specializations of" NIST functions — runtime mechanisms within broader organizational functions.
+
+### Singapore IMDA
+
+| IMDA Dimension | AGF Mapping |
+|----------------|-------------|
+| Risk Bounding | Bounded Agency (#7) |
+| Accountability | Governance Gates (#8) |
+| Technical Controls | Evaluation & Assurance (#18) |
+| End-User Responsibility | Identity & Attribution (#14) |
+
+IMDA explicitly includes operational environments as a governance dimension, validating Agent Environment Governance (#19).
+
+## Security Frameworks
+
+### OWASP Top 10 for Agentic Applications
+
+All 10 ASI threats are mapped to the three-level security model with single-owner responsibility per threat. See the [Security Profile](/docs/profiles/security) for the complete threat-by-threat analysis.
+
+### OWASP MCP Top 10
+
+All 10 MCP threats are mapped to specific primitives and security architecture components.
+
+### CSA MAESTRO
+
+7-layer threat model mapped to AGF primitives layer by layer.
+
+### CSA Agentic Trust Framework
+
+Trust Ladders (#11) aligns with ATF's earned autonomy maturity model.
+
+### MITRE ATLAS
+
+Security architecture aligned to the adversarial technique taxonomy.
+
+### NIST SP 800-207 (Zero Trust)
+
+| NIST Zero Trust | AGF Mapping |
+|-----------------|-------------|
+| Policy Enforcement Point (PEP) | Security Fabric |
+| Policy Decision Point (PDP) | Security Governance |
+| Continuous Diagnostics | Security Intelligence |
+
+## Industry Standards
+
+| Standard | AGF Mapping |
+|----------|-------------|
+| **ISO/IEC 42001** | Policy as Code (#9) maps to operational planning; AGF provides runtime mechanisms |
+| **IEEE P2863** | Organizational governance that AGF's runtime architecture implements |
+| **OpenTelemetry GenAI** | Event architecture builds on OTel conventions with governance extensions |
+| **NIST 800-53 / ISO 27001** | Control crosswalks available in the [GRC Profile](/docs/profiles/grc) |
+
+For detailed article-level regulatory mappings and control crosswalks, see the [GRC Profile](/docs/profiles/grc).

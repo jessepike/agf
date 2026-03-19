@@ -1,0 +1,151 @@
+---
+title: "The Rings Model"
+description: "A concentric architecture for governed agentic systems — four rings, one fabric, one substrate."
+---
+
+import Image from "next/image";
+
+Most agentic systems in production today have no structural governance. The agent produces output, and either a human reviews it or nobody does. There's no verification layer, no policy evaluation, no audit trail, and no mechanism for the system to improve over time.
+
+The Rings Model is a vendor-neutral logical architecture that organizes governance into four concentric rings — **Execution, Verification, Governance, and Learning** — plus a cross-cutting fabric and an environment substrate.
+
+<Image
+  src="/diagrams/rings-model-governed-agentic-systems.png"
+  alt="The Rings Model — Governed Agentic Systems"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+## The Four Rings
+
+### Ring 0 — Execution
+
+The core agent performs its domain task. It generates text, writes code, makes a recommendation, extracts data, or executes an action. Ring 0 is where the work happens.
+
+Without governance, Ring 0 is all there is. **Most deployed agentic systems today are Ring-0-only.**
+
+### Ring 1 — Verification
+
+A separate process evaluates Ring 0's output against quality criteria. The fundamental principle: **the agent that creates output must not be the sole agent that validates it.**
+
+Ring 1 can loop — sending output back to Ring 0 for revision until it converges on acceptable quality. Ring 1 can also challenge — a dedicated adversarial critique role whose mandate is to find flaws, not confirm quality.
+
+**What Ring 1 answers:** Is this output correct? Is it complete? Does it meet quality standards?
+
+### Ring 2 — Governance
+
+Policy evaluation and authorization. Ring 2 determines whether a verified output should be released, using explicit governance rules (Policy as Code), human-reviewable gates, and organizational policy.
+
+Ring 2 enforces two classes of gates:
+- **Adaptive gates** relax as the system proves reliability through [Trust Ladders](/docs/overview/trust-ladders).
+- **Mandatory gates** never relax. Irreversible actions, regulatory requirements, and legally mandated reviews always fire, regardless of trust level.
+
+**What Ring 2 answers:** Should this output be released? Does it comply with policy? Who authorized it?
+
+### Ring 3 — Learning
+
+The system improves over time. Ring 3 observes execution patterns, calibrates trust levels, tunes verification thresholds, and proposes configuration changes.
+
+Critically: **Ring 3 proposes. It does not autonomously enact.** All Ring 3 proposals pass through Ring 2 governance and Evaluation & Assurance testing before deployment.
+
+> The box can get smarter inside. It cannot grow itself.
+
+**What Ring 3 answers:** How can the system get better? What should change?
+
+## The Fabric
+
+Cross-cutting infrastructure that makes the rings composable:
+
+- **Structured Output Persistence** — rings communicate through schema-conformant artifacts, not raw text
+- **Event-Driven Observability** — every ring emits structured events, creating the shared nervous system
+- **Identity & Attribution** — every action carries authenticated identity context through every ring
+- **Provenance Chains** — every output carries its full decision history
+- **Error Handling & Recovery** — checkpointing at ring boundaries, graceful degradation
+- **Security Fabric** — input sanitization, output scanning, containment, identity verification at every boundary
+
+## The Rings Are Logical, Not Physical
+
+This is the key architectural insight. The concentric ring diagram depicts one deployment mode — **wrapper mode**. But the rings are a *logical* architecture. How they manifest physically depends on the system type.
+
+<Image
+  src="/diagrams/ring-deployment-modes-v2.png"
+  alt="Ring Deployment Modes — Wrapper, Middleware/Interrupt, and Graph-Embedded"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+### Wrapper Mode
+
+Rings literally wrap execution. Sequential: Ring 0 produces → Ring 1 verifies → Ring 2 governs → output releases.
+
+**Best for:** Batch pipelines, document processing, regulatory assessments.
+
+### Middleware / Interrupt Mode
+
+Ring logic fires at specific decision points — tool calls, data access, state mutations. The agent executes continuously; rings intercept at defined boundaries. MCP is the canonical implementation.
+
+**Best for:** Coding agents (Claude Code, Cursor), ops automation, multi-step task agents.
+
+### Graph-Embedded Mode
+
+Verification, governance, and security run concurrently with execution. Speculative execution with a release gate.
+
+**Best for:** Conversational agents, voice assistants, real-time systems.
+
+### Hybrid Is Normal
+
+Systems commonly combine modes. A coding agent operates in middleware mode overall, but within a single response, uses graph-embedded mode for parallel output verification.
+
+## The Signal Protocol
+
+Rings communicate through a standard composability interface — seven signals:
+
+- **PASS** — output accepted, move forward
+- **REVISE(quality)** — Ring 1 says "not good enough, try again"
+- **REVISE(context)** — Ring 2 says "the world changed, re-execute"
+- **HALT** — something is fundamentally wrong, stop
+- **GATE** — pause for human authorization
+- **DELEGATE** — hand off to another agent with depth tracking
+- **ERROR** — something broke; retry, degrade, or halt
+
+This standard contract makes governance rings attachable to any pipeline.
+
+## Starting Simple, Growing Governed
+
+Organizations don't implement all four rings at once:
+
+<Image
+  src="/diagrams/composition-patterns.png"
+  alt="Composition Patterns — Progressive Build-Up from Minimum Viable Control to Full Governed System"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+**Phase 1 — Minimum Viable Control:** Scope, identity, audit trail. Not even Ring 1 yet — just: the agent can't exceed its scope and actions are attributable.
+
+**Phase 2 — Verification (Ring 0 + Ring 1):** Verified outputs. Quality assurance becomes structural, not manual.
+
+**Phase 3 — Governance (+ Ring 2):** Policy evaluation, human gates, transaction control.
+
+**Phase 4 — Security & Assurance:** Defense in depth, pre-deployment testing, trust calibration.
+
+**Phase 5 — Learning (+ Ring 3):** Self-improvement, memory, environment optimization.
+
+Each phase is independently valuable. Phase 1 alone is more governance than most organizations have today.
+
+## Where This Came From
+
+The Rings Model is not a novel invention. It is a composition of established patterns:
+
+- **Separation of duties** → Ring 1 exists because the producer should not be the sole validator
+- **Policy enforcement points** (NIST SP 800-207) → Ring 2 is the PDP, Security Fabric is the PEP
+- **Continuous improvement loops** (Deming, SRE) → Ring 3 is the improvement engine
+- **Defense in depth** → multiple independent layers, each adding different assurance
+- **Proportional controls** → activation intensity matches stakes
+
+The contribution is the composition: pulling them together into a vendor-neutral, composable, adaptable architecture for the agentic context.
+
+**We named it. We didn't invent it.**

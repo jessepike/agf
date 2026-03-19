@@ -1,0 +1,62 @@
+---
+title: "Governance Framework"
+description: "The top-level operating model — governance functions, agent lifecycle, risk classification, and enterprise integration."
+---
+
+The Agentic Governance Framework is the top-level operating model that everything else sits under. It defines five governance functions, an agent lifecycle, risk classification, and enterprise integration points.
+
+## Five Governance Functions
+
+Adapted from NIST AI RMF for the agentic context:
+
+| Function | Purpose | AGF Mapping |
+|----------|---------|-------------|
+| **Discover** | Identify agentic systems, their capabilities, and their risk profile | Risk classification, agent inventory |
+| **Assess** | Evaluate risks, threats, and governance requirements | Threat modeling, standards mapping |
+| **Govern** | Establish policies, controls, and oversight mechanisms | Ring 2 (Governance), Policy as Code (#9) |
+| **Monitor** | Observe system behavior, detect anomalies, measure compliance | Ring 3 + Observability, Event-Driven (#10) |
+| **Evolve** | Improve governance based on operational experience | Self-Improving Cycles (#3), Trust Ladders (#11) |
+
+## Agent Lifecycle
+
+From deployment to retirement, with governance at every stage:
+
+1. **Design & Development** — threat modeling, ring activation decisions, primitive selection
+2. **Evaluation & Assurance (#18)** — pre-deployment testing, regression suites, adversarial evaluation
+3. **Deployment** — initial trust level, governance configuration, monitoring baseline
+4. **Operation** — runtime governance (Rings 0-2), continuous monitoring (Ring 3)
+5. **Evolution** — trust calibration, configuration updates, capability expansion
+6. **Retirement** — graceful decommission, evidence preservation, trust revocation
+
+## Risk Classification
+
+Determines which rings activate and how intensely:
+
+| Risk Level | Ring Activation | Governance Intensity |
+|------------|----------------|---------------------|
+| **Low** | Ring 0 + minimal Ring 1 | Near-zero overhead |
+| **Medium** | Ring 0 + Ring 1 + adaptive Ring 2 | 1.5–3x Ring 0 alone |
+| **High** | All four rings, mandatory gates | 3–5x Ring 0 alone |
+| **Critical** | All rings + enhanced Security Intelligence | 5x+ Ring 0 alone |
+
+## Enterprise Integration
+
+AGF is designed to complement, not replace, existing enterprise systems:
+
+- **IAM** — agent identity integrates with organizational identity (SPIFFE, OAuth, OIDC)
+- **SIEM/SOAR** — agentic events flow to existing security monitoring
+- **GRC platforms** — governance evidence maps to control frameworks
+- **CI/CD** — Evaluation & Assurance (#18) integrates with deployment pipelines
+- **Observability** — OpenTelemetry compatibility ensures standard tooling
+
+## Maturity Model
+
+Organizations grow governance capability over time:
+
+1. **Ad Hoc** — no formal agentic governance
+2. **Aware** — risk identified, initial controls
+3. **Managed** — systematic governance, Ring 0 + Ring 1 operational
+4. **Governed** — full ring activation, policy as code, continuous monitoring
+5. **Optimizing** — Ring 3 active, trust calibration, self-improvement
+
+For the complete governance framework specification, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/agentic-governance-framework.md).

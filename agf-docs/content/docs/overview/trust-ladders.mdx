@@ -1,0 +1,172 @@
+---
+title: "Trust Ladders"
+description: "How agentic systems earn autonomy — a governance pattern for calibrated, evidence-based trust that starts expensive and gets cheaper."
+---
+
+import Image from "next/image";
+
+Most organizations deploying agentic systems face a false binary: trust everything and accept the risk, or review everything and accept the cost. Neither works at scale.
+
+**Trust Ladders resolve this tension dynamically.** Agents start with maximum oversight and earn reduced verification through demonstrated performance. Trust builds slowly, degrades fast, and never bypasses mandatory controls.
+
+This is AGF Primitive #11 — operating across Ring 2 (Governance) and Ring 3 (Learning).
+
+## The Core Mechanic
+
+### All agents start at low trust
+
+A new agent — or an existing agent encountering a new task type — begins with full verification. Every output passes through Ring 1. All adaptive governance gates are active. Human reviewers see everything.
+
+This is expensive. That's by design. You haven't earned cheap yet.
+
+### Performance builds trust
+
+As the agent demonstrates reliable performance, trust incrementally increases based on empirical signals:
+
+| Signal | Effect on Trust |
+|--------|----------------|
+| Consistent Ring 1 verification pass rate | Gradual increase |
+| High human gate approval rate | Gradual increase |
+| Quality score improvement over time | Gradual increase |
+| Stable performance across case types | Gradual increase |
+
+### Higher trust means less overhead
+
+| Trust Level | Verification Intensity | Human Review |
+|-------------|----------------------|--------------|
+| **Low** (new agent, new context) | Full Ring 1 on every output | All material outputs |
+| **Medium** (demonstrated reliability) | Spot checks, sampling | Exceptions and anomalies |
+| **High** (proven track record) | Anomaly-triggered only | By escalation only |
+
+### Mandatory controls never relax
+
+This is the critical invariant. Trust Ladders only affect **adaptive** controls — verification intensity, spot-check frequency, routine review gates.
+
+Mandatory controls are trust-independent:
+
+- Irreversible actions always require authorization
+- Regulatory gates always fire
+- Identity verification runs at every boundary
+- Provenance logging never stops
+
+An agent can earn the right to skip a routine quality spot-check. It can never earn the right to skip regulatory approval or execute an irreversible action without authorization.
+
+### Trust degrades faster than it builds
+
+Earning trust takes many successful executions. Losing it takes one significant anomaly.
+
+| Signal | Effect on Trust |
+|--------|----------------|
+| Ring 1 verification failure | Decrease (proportional to severity) |
+| Security Intelligence alert | Significant decrease |
+| Behavioral anomaly (deviation from baseline) | Significant decrease |
+| Configuration change (new model, new tools) | Reset to lower level until re-evaluated |
+| Human override / rejection at gate | Decrease |
+
+### Trust is contextual
+
+A coding agent that has earned high trust for Python development starts at low trust when asked to write infrastructure-as-code for the first time. Trust does not transfer automatically across task types.
+
+Within a trust domain (same organization, same platform), trust context propagates via identity. Across organizational boundaries, trust resets unless explicit federated trust agreements exist.
+
+## Empirical Evidence
+
+Trust Ladders are not a theoretical design pattern. They are empirically validated by real-world data.
+
+**Anthropic agent autonomy research (March 2026):** Analysis of millions of API interactions shows that new users auto-approve 20% of agent sessions; by 750 sessions, auto-approval reaches 40%. Behavioral shift: experienced users move from pre-approval gating to active monitoring. The deployment gap — models can handle 5-hour autonomous tasks, but the 99.9th percentile session runs only 42 minutes — confirms that trust, not capability, is the bottleneck.
+
+**DeepMind Delegation Framework (February 2026):** Tomašev et al. (arXiv 2602.11865) argue delegation must be adaptive — trust builds or degrades based on observed outcomes, not static configuration. Their six delegation components map directly to the Trust Ladder pattern.
+
+**CSA Agentic Trust Framework (February 2026):** The Cloud Security Alliance defines an earned autonomy maturity model — Intern → Junior → Senior → Principal — with explicit promotion criteria and governance sign-off before autonomy escalation. Independent validation of the same pattern from the security community.
+
+**Oversight scaling research (NeurIPS 2025):** Engels et al. demonstrate that oversight efficacy degrades as the capability gap between overseer and system widens. Success rates range from 9.4% to 51.7% depending on task type. This is the fundamental reason Trust Ladders matter: you cannot solve the governance problem with oversight alone.
+
+## Integration with AGF
+
+### The Governance Connection (Ring 2)
+
+Trust levels determine which adaptive gates fire. Low trust: all adaptive gates active. High trust: most adaptive gates relaxed, only mandatory gates and anomalies pause execution. The two-class system — adaptive vs. mandatory — is how Trust Ladders and Governance Gates coexist without conflict.
+
+### The Learning Connection (Ring 3)
+
+Trust calibration operates at two speeds:
+
+- **Slow path (Ring 3):** Systematic trust adjustment based on patterns across many executions. Periodic review cycles. This is how trust climbs — gradually, based on accumulated evidence.
+- **Fast path (Sentinels):** Trip wires that fire in near-real-time when specific anomaly patterns occur. Three consecutive failures, sudden quality score drop, cost spike. This is how trust degrades — immediately, not at the next weekly review.
+
+### The Security Connection
+
+Trust manipulation is a recognized attack vector (OWASP ASI09 — Human-Agent Trust Exploitation). An adversarial agent could perform well on monitored tasks to climb the ladder, then exploit reduced oversight.
+
+AGF's Security Intelligence layer monitors for this:
+- Anomalous trust trajectory (climbing too fast)
+- Novel behavior following trust promotion
+- Approval patterns that deviate from baseline post-promotion
+
+Trust anomaly detection monitors the trajectory, not just the current level.
+
+### The Economic Connection
+
+| Governance Model | Cost Over Time | Risk Over Time |
+|-----------------|---------------|---------------|
+| No governance | Low (constant) | High (constant, undetected) |
+| Full governance (no trust) | High (constant) | Low (constant) |
+| Trust Ladders | High → decreasing | Low → stable (mandatory controls maintain floor) |
+
+Trust Ladders are the primary cost optimization mechanism for governed agentic systems. The system starts expensive and gets cheaper — the right economic trajectory.
+
+## Implementation Guidance
+
+### What to track
+
+| Metric | Purpose | Cadence |
+|--------|---------|---------|
+| Ring 1 pass rate (per agent, per task type) | Primary trust signal | Every execution |
+| Human gate approval rate | Confirmation signal | Every gate |
+| Quality score distribution | Trend signal | Rolling window (7–30 days) |
+| Anomaly rate (sentinel triggers) | Degradation signal | Real-time |
+| Human override rate and direction | Calibration signal | Every override |
+
+### Trust promotion criteria
+
+Promotion requires convergence across multiple signals — not any single metric:
+
+1. **Sustained performance:** Ring 1 pass rate above threshold for N *consecutive* executions (not just N total)
+2. **Approval consistency:** Human approval rate above threshold for gated decisions
+3. **No anomalies:** Zero sentinel triggers during the evaluation window
+4. **Time-at-level:** Minimum time at current trust level before promotion (prevents gaming through burst performance)
+5. **Governance sign-off:** Promotions above a threshold should be logged and auditable — and for critical systems, require explicit authorization
+
+### Trust demotion triggers
+
+Demotion is immediate (not periodic) and proportional to severity:
+
+| Trigger | Demotion Severity |
+|---------|------------------|
+| Single Ring 1 failure (minor) | One level down, re-evaluation window |
+| Multiple Ring 1 failures in window | Two levels down, full verification re-engaged |
+| Security Intelligence alert | Reset to low trust, investigation required |
+| Configuration change (model, tools) | Reset to previous level, re-earn through evaluation window |
+| Behavioral anomaly (baseline deviation) | One–two levels down depending on deviation magnitude |
+
+### What Trust Ladders do not replace
+
+Trust Ladders reduce adaptive oversight. They do not eliminate:
+
+- **Mandatory governance gates** — irreversible actions, regulatory requirements, high-stakes decisions
+- **Identity verification** — every action carries authenticated identity regardless of trust
+- **Boundary enforcement** — agents cannot exceed their declared scope regardless of trust
+- **Provenance logging** — every action is recorded regardless of trust
+- **Security monitoring** — Intelligence monitors all agents at all trust levels
+
+## The Broader Principle
+
+Trust Ladders embody a principle that extends beyond agentic AI: autonomy should be earned, not assumed.
+
+This is not a new idea. Human organizations have practiced graduated autonomy for centuries. Junior employees have more oversight than senior ones. New contractors are reviewed more carefully than established partners.
+
+What's new is applying this pattern structurally to autonomous AI systems — with explicit metrics, auditable promotion criteria, automatic demotion on anomaly, and governance controls that prevent gaming. The pattern is old. The application is new. The need is urgent.
+
+---
+
+*Trust Ladders are Primitive #11 in the AGF pattern catalog. For the complete framework including all 19 primitives and the Rings Model, see the [Reference Architecture](/docs/reference/architecture). For how governance gates interact with trust levels, see [Governance Gates](/docs/reference/primitives).*

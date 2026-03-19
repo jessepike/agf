@@ -1,0 +1,64 @@
+---
+title: "How the Documents Relate"
+description: "The hub-and-spoke architecture of AGF documents and how the concept areas connect."
+---
+
+AGF is structured as a hub-and-spoke document architecture. One entry point (the hub) routes to domain-specific profiles (the spokes) and deep-dive reference material.
+
+## Document Architecture
+
+```
+AGF Reference Architecture (entry point)
+│
+├── Domain Profiles (the spokes)
+│   ├── Security Profile ─────── For CISOs, security architects
+│   ├── Platform Profile ─────── For platform engineers
+│   ├── GRC Profile ──────────── For compliance officers, auditors
+│   ├── AI Engineering Profile ── For AI engineers, agent developers
+│   └── Observability Profile ── For SREs, detection engineers
+│
+├── Deep Reference (the foundations)
+│   ├── 19 Primitives ─────────── The shared vocabulary
+│   ├── Agentic Observability ── SIEM for agents
+│   ├── Decision Intelligence ── Governed decision flows
+│   └── Governance Framework ─── Top-level operating model
+│
+├── White Papers (focused deep-dives)
+│   ├── Trust Ladders ────────── How agents earn autonomy
+│   └── The Rings Model ─────── Concentric governance architecture
+│
+└── Resources
+    ├── Shared Vocabulary ────── Canonical terminology
+    ├── Standards Alignment ──── Regulatory and standards mappings
+    └── Architecture Diagrams ── 21 visual reference models
+```
+
+## How Concept Areas Connect
+
+The three concept areas share a common foundation:
+
+**Agentic Primitives** is the vocabulary. It defines the 19 patterns, the Rings Model, the security architecture, and the deployment modes. Everything else references it.
+
+**Decision Intelligence** is a specific application of the Governed Decision Flow (Ring 0 + Ring 1 + Ring 2) to risk-bearing decisions. It adds the Belief Layer and Risk Decision Graph.
+
+**Agentic Observability** is the monitoring layer that watches all three. It correlates quality, security, and governance events across every ring.
+
+```
+Primitives (#1-#19) ← shared foundation
+    │
+    ├── Decision Intelligence uses → #1, #2, #4, #5, #6, #8, #9, #11, #12
+    │
+    └── Observability monitors → #10 (events), #14 (identity), #6 (provenance)
+```
+
+## Precedence
+
+When documents conflict, this is the priority:
+
+1. `intent.md` — the North Star
+2. `agentic-primitives.md` — the shared vocabulary
+3. `agentic-governance-framework.md` — the operating model
+4. Capability layer docs (observability, decision intelligence)
+5. Domain profiles
+
+For the complete relationship model, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/cross-concept-relationship.md).

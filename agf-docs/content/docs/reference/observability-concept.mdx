@@ -1,0 +1,69 @@
+---
+title: "Agentic Observability"
+description: "The unified monitoring, detection, and response layer — a SIEM pattern for agentic systems."
+---
+
+import Image from "next/image";
+
+Agentic Observability is the unified monitoring, detection, and response layer for governed agentic systems. It serves three roles simultaneously: quality monitoring (Ring 3 intelligence), security detection and response, and governance compliance verification.
+
+## Why Unified?
+
+The landscape separates security monitoring (SIEM), quality monitoring (LLM observability tools), and compliance monitoring (GRC platforms) into different tools with different event streams. But agentic threats traverse all three domains — a prompt injection is a security event that causes a quality degradation that creates a compliance violation.
+
+**AGF unifies them.** One event stream, one correlation engine, three detection perspectives.
+
+## The SIEM Pattern for Agents
+
+<Image
+  src="/diagrams/event-flow-observability.png"
+  alt="Event Flow — Agentic Observability Architecture"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+### Event Architecture
+
+Every ring emits structured events through [Event-Driven Observability (#10)](/docs/reference/primitives). The canonical event envelope includes:
+
+- **Identity context** — who (agent ID, version, configuration hash)
+- **Ring context** — which ring, which stage in the pipeline
+- **Temporal context** — timestamps, duration, sequence
+- **Semantic context** — what happened, structured payload
+- **Governance context** — policy evaluated, gate outcome, trust level
+
+Built on OpenTelemetry GenAI Semantic Conventions with governance-specific extensions.
+
+### Correlation Engine
+
+Three detection perspectives operate on the same event stream:
+
+| Perspective | What It Detects | Time Horizon |
+|-------------|----------------|--------------|
+| **Quality** | Degraded output quality, validation failures, convergence issues | Real-time + trending |
+| **Security** | Prompt injection, data exfiltration, privilege escalation, behavioral anomalies | Sub-second (sentinels) + hours (analysis) |
+| **Governance** | Policy violations, unauthorized actions, missing approvals, trust level drift | Per-workflow + periodic audit |
+
+### Dual-Speed Detection
+
+- **Fast-path sentinels** — sub-second pattern matching for known attack signatures. Triggers the [Security Response Bus](/docs/profiles/security) for immediate containment.
+- **Slow-path analysis** — hours to days of behavioral pattern analysis. Detects drift, emerging threats, and systemic quality trends.
+
+## Operational Playbooks
+
+The Observability Profile defines structured response procedures for:
+
+- **Quality incidents** — output degradation, verification failures, convergence issues
+- **Security incidents** — detected attacks, containment, forensic investigation
+- **Governance incidents** — policy violations, unauthorized actions, evidence preservation
+
+Each playbook maps to specific ring signals and event patterns.
+
+## Related
+
+- [Observability Profile](/docs/profiles/observability) — operational detail for SREs and detection engineers
+- [Security Profile](/docs/profiles/security) — the Security Response Bus and threat detection patterns
+- [Event-Driven Observability (#10)](/docs/reference/primitives) — the primitive that powers this layer
+
+For the complete observability specification, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/agentic-observability.md).

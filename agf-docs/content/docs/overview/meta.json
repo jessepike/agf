@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "pages": [
+    "what-is-agf",
+    "rings-model",
+    "trust-ladders",
+    "composition-patterns"
+  ]
+}

@@ -1,0 +1,109 @@
+---
+title: "What is AGF?"
+description: "The Agentic Governance Framework — a synthesis of NIST, OWASP, CSA, EU AI Act, and academic research into a composable reference architecture."
+---
+
+import Image from "next/image";
+
+## The Problem
+
+Agentic systems are proliferating faster than the architectural patterns to govern them.
+
+Organizations are deploying autonomous agents — coding assistants, ops automation, customer-facing chatbots, decision-support systems, multi-agent workflows — at extraordinary pace. Most deployments today are brittle. They work in demos but fail under scrutiny because they lack the structural primitives that make automated action trustworthy, auditable, and improvable.
+
+The governance landscape is fragmented. NIST provides risk management frameworks. OWASP provides threat taxonomies. CSA provides trust frameworks. ISO provides management systems. OpenTelemetry provides observability standards. The EU AI Act provides regulatory requirements.
+
+**Every one of these institutions is doing critical work. These are the dots.** The puzzle pieces are on the table.
+
+## What AGF Does
+
+AGF connects those dots. We synthesize the best thinking from standards bodies, government frameworks, security organizations, academic researchers, and industry practitioners into a single coherent reference architecture.
+
+We are not claiming to have invented new governance concepts. The patterns — separation of duties, least privilege, audit trails, zero trust, policy as code — are battle-tested across distributed systems, security engineering, compliance, and control theory. **The contribution is the composition.**
+
+## Core Architecture
+
+<Image
+  src="/diagrams/rings-model-governed-agentic-systems.png"
+  alt="The Rings Model — Governed Agentic Systems"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+### The Rings Model
+
+Four concentric rings organize governance into independent, composable layers:
+
+- **Ring 0 — Execution:** The agent does its work
+- **Ring 1 — Verification:** A separate process validates the output
+- **Ring 2 — Governance:** Policy evaluation, human gates, authorization
+- **Ring 3 — Learning:** The system improves over time (proposes, never autonomously enacts)
+
+Plus a **cross-cutting fabric** (events, identity, provenance, error handling) and an **environment substrate** (governed context, instructions, tools, workspace).
+
+[Learn more about the Rings Model →](/docs/overview/rings-model)
+
+### 19 Named Primitives
+
+AGF defines 19 patterns for governed agentic systems. Not invented — named for the agentic context. They compose into progressively more governed architectures, from Minimum Viable Control to a Full Governed Agentic System.
+
+[See the full primitive catalog →](/docs/profiles/ai-engineering)
+
+### Three-Level Security Model
+
+<Image
+  src="/diagrams/three-level-security-model.png"
+  alt="Three-Level Security Model"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+Security is pervasive, not a single layer:
+- **Level 1: Security Fabric** — Enforcement (wire-speed, always active)
+- **Level 2: Security Governance** — Policy evaluation (Ring 2)
+- **Level 3: Security Intelligence** — Detection (SIEM for agents, dual-speed)
+
+[See the full security architecture →](/docs/profiles/security)
+
+### Three Deployment Modes
+
+<Image
+  src="/diagrams/ring-deployment-modes-v2.png"
+  alt="Ring Deployment Modes"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+The same logical rings, different physical manifestation:
+- **Wrapper** — sequential, highest audit clarity (batch pipelines)
+- **Middleware/Interrupt** — governance at decision points (coding agents, MCP)
+- **Graph-Embedded** — concurrent, lowest latency (conversational agents)
+
+[See deployment mode details →](/docs/profiles/platform)
+
+## Standards Alignment
+
+| Standard | AGF Coverage |
+|----------|-------------|
+| **EU AI Act** | Article-level mapping (Art. 6, 9-15, 50) with phased applicability |
+| **NIST AI RMF** | AGF as an agentic AI RMF-style profile |
+| **OWASP ASI Top 10** | All 10 threats mapped to three-level security model |
+| **OWASP MCP Top 10** | All 10 MCP threats mapped to primitives |
+| **CSA MAESTRO** | 7-layer threat model mapped to primitives |
+| **MITRE ATLAS** | Security architecture aligned to adversarial technique taxonomy |
+| **NIST 800-53 / ISO 27001** | Control crosswalks in [GRC Profile](/docs/profiles/grc) |
+
+## Philosophy
+
+- **Humility before authority.** We synthesize, we don't decree.
+- **Rigor before opinion.** Every claim grounded in evidence or clearly marked as a proposal.
+- **Community over credit.** If this framework helps one organization build a safer agentic system, it has served its purpose.
+
+## Next Steps
+
+- [The Rings Model](/docs/overview/rings-model) — understand the core architecture
+- [Trust Ladders](/docs/overview/trust-ladders) — how agents earn autonomy
+- [Pick your role](/docs) — find the profile for your professional context

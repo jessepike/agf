@@ -1,0 +1,60 @@
+---
+title: "Shared Vocabulary"
+description: "Canonical terminology used across all AGF documents."
+---
+
+AGF uses precise terminology throughout. When a term is used in a concept document, profile, or white paper, it carries the meaning defined here.
+
+## System Properties
+
+| Term | Meaning |
+|------|---------|
+| **Safe** | The system does not cause unintended harm |
+| **Secure** | The system resists adversarial attack |
+| **Durable** | The system survives failures, maintains state, and preserves governance guarantees over time |
+| **Auditable** | The system produces evidence trails sufficient for compliance and forensic review |
+| **Observable** | The system emits structured events that enable monitoring, detection, and response |
+
+## Architecture Terms
+
+| Term | Meaning |
+|------|---------|
+| **Ring** | A logical governance layer in the Rings Model (0=Execution, 1=Verification, 2=Governance, 3=Learning) |
+| **Fabric** | Cross-cutting infrastructure: events, identity, provenance, structured output, error handling |
+| **Substrate** | The agent operating environment: context, instructions, tools, workspace, memory |
+| **Primitive** | A named pattern for governed agentic systems (#1–#19) |
+| **Gate** | An explicit decision point where execution pauses for authorization |
+| **Adaptive gate** | A gate that relaxes as the system proves reliability through Trust Ladders |
+| **Mandatory gate** | A gate that never relaxes (irreversible actions, regulatory requirements) |
+
+## Signal Protocol
+
+| Signal | Meaning |
+|--------|---------|
+| **PASS** | Output accepted, move to next ring |
+| **REVISE(quality)** | Ring 1 says "not good enough, try again" |
+| **REVISE(context)** | Ring 2 says "the world changed, re-execute" |
+| **HALT** | Something is fundamentally wrong, stop execution |
+| **GATE** | Pause for human authorization |
+| **DELEGATE** | Hand off to another agent with depth tracking |
+| **ERROR** | Something broke; retry, degrade, or halt |
+
+## Confidence Levels
+
+Used throughout the framework to mark certainty:
+
+| Level | Meaning |
+|-------|---------|
+| **Established pattern** | Proven across multiple domains. Strong evidence. |
+| **Informed proposal** | Based on our synthesis, not yet battle-tested at scale in agentic systems. |
+| **Open question** | We don't have great answers yet and say so. |
+
+## Deployment Modes
+
+| Mode | Description |
+|------|-------------|
+| **Wrapper** | Rings literally wrap execution. Sequential. |
+| **Middleware/Interrupt** | Rings fire at decision points (tool calls, data access). |
+| **Graph-Embedded** | Rings run concurrently with execution. |
+
+For the complete vocabulary, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/shared-vocabulary.md).

@@ -1,0 +1,71 @@
+---
+title: "Decision Intelligence"
+description: "Governed decision-making systems with structured persistence, belief revision, and multi-agent governance pipelines."
+---
+
+import Image from "next/image";
+
+Decision Intelligence is a governed system that captures **how decisions are made and why** — not just what was decided. Every decision produces a structured, auditable, replayable artifact that traces from evidence through reasoning to outcome.
+
+In AGF terms, Decision Intelligence is a **Governed Decision Flow** — Ring 0 (execution) + Ring 1 (verification) + Ring 2 (governance) applied to risk-bearing decisions, with Ring 3 (learning) enabling cross-case intelligence over time.
+
+## The Problem
+
+Current governance and risk tools are built for recordkeeping, not decision making. Organizations have control libraries, questionnaires, document storage, and static reports. But the critical decisions — security reviews, AI governance approvals, vendor assessments, policy exceptions — are still made manually by committees. These processes are slow, inconsistent, poorly documented, and dependent on scarce expert labor.
+
+## First Principles
+
+1. **Decisions are first-class artifacts.** Every decision is structured, versioned, and queryable.
+2. **The reasoning matters more than the conclusion.** Record what was considered, not just what was decided.
+3. **Beliefs can change.** When new evidence arrives, decisions that depended on outdated beliefs should be flagged for review.
+4. **Governance is proportional.** Low-stakes decisions flow fast. High-stakes decisions get full Ring 2 scrutiny.
+5. **The system learns from its own decisions.** Patterns across decisions reveal organizational knowledge.
+
+## Key Patterns
+
+### Risk Decision Graph (RDG)
+
+A graph of interconnected decisions where each node carries its full evidence chain, reasoning, and outcome. When upstream evidence changes, the graph identifies which downstream decisions may need revision.
+
+### The Belief Layer
+
+<Image
+  src="/diagrams/belief-revision-cascade.png"
+  alt="Belief Revision Cascade"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+The governed epistemic state of the system. Beliefs are propositions with confidence levels, evidence chains, and revision rules. When evidence changes, beliefs revise, and decisions that depended on those beliefs are flagged.
+
+No framework in the landscape has anything like the Belief Layer — it governs agent **epistemic state**, not just agent actions.
+
+### Multi-Agent Decision Pipeline
+
+<Image
+  src="/diagrams/di-multi-agent-pipeline.png"
+  alt="Multi-Agent Decision Pipeline"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+For high-stakes decisions: multiple specialist agents produce independent assessments, a synthesis agent integrates them, and governance gates determine when human review is required.
+
+## Mapping to the Rings
+
+| Ring | Role in Decision Intelligence |
+|------|-------------------------------|
+| **Ring 0** | Domain agents produce decision artifacts — evidence gathering, analysis, recommendation |
+| **Ring 1** | Challenger agent critiques the recommendation, checks for logical gaps and missing evidence |
+| **Ring 2** | Policy evaluation — does this decision comply with governance rules? Does it require human authorization? |
+| **Ring 3** | Cross-case learning — patterns across decisions, trust calibration for decision domains |
+
+## Open Questions
+
+- How should belief revision cascade through multi-system decision graphs?
+- What is the right balance between decision speed and decision quality for different risk tiers?
+- How do you prevent Ring 3 learning from amplifying systematic biases in historical decisions?
+
+For the complete Decision Intelligence specification, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/decision-intelligence.md).

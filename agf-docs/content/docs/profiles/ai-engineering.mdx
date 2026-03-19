@@ -1,0 +1,179 @@
+---
+title: "AI Engineering Profile"
+description: "Which primitives to implement first, and how they compose into governed agentic systems."
+---
+
+import Image from "next/image";
+
+For AI engineers, ML engineers, prompt engineers, and agent developers building agentic systems that need to be governed, auditable, and improvable.
+
+**The key question this profile answers:** *Which primitives do I implement first, and how do they compose into governed systems?*
+
+## The Engineering Challenge
+
+Building an agentic system that works in a demo is straightforward. Building one that is trustworthy, auditable, and improvable in production is a different problem entirely.
+
+1. **Governance must be composable.** You can't implement all 19 primitives at once. You need to know which ones to start with and which to defer.
+2. **The architecture must adapt to your system type.** A batch pipeline and a conversational agent have different governance needs. The primitives are the same; the composition is different.
+3. **The system must improve without breaking governance.** Self-improvement that weakens verification or bypasses gates is worse than no improvement at all.
+
+## Implementation Priority
+
+<Image
+  src="/diagrams/implementation-phases-roadmap.png"
+  alt="Implementation Phases — Progressive Governance Roadmap"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+### Phase 1: Minimum Viable Control (Start Here)
+
+| Primitive | Why First | Effort |
+|-----------|----------|--------|
+| **#7 Bounded Agency** | Without boundaries, everything else is moot | Low |
+| **#14 Identity & Attribution** | Without identity, you can't audit or attribute | Medium |
+| **#6 Provenance Chains** | Without provenance, you can't answer "why did it do that?" | Low |
+| **#10 Event-Driven Observability** | Without events, you're blind | Low |
+| **#19 Agent Environment Governance** (minimal) | Scoped workspace + versioned instructions | Low |
+
+**What this gives you:** Agents that can't exceed their scope, actions that are attributable, an audit trail, and visibility.
+
+### Phase 2: Verification (Ring 0 + Ring 1)
+
+| Primitive | Why Now | Effort |
+|-----------|--------|--------|
+| **#1 Separation of Producer/Verifier** | Verified outputs before release | Medium |
+| **#2 Validation Loops** | Iterative improvement with convergence | Medium |
+| **#5 Structured Output Persistence** | The data contract that makes rings composable | Low |
+| **#13 Error Handling & Recovery** | Graceful failure when things go wrong | Medium |
+
+**What this gives you:** Verified outputs. Quality assurance is structural, not manual.
+
+### Phase 3: Governance (Ring 0 + Ring 1 + Ring 2)
+
+| Primitive | Why Now | Effort |
+|-----------|--------|--------|
+| **#8 Governance Gates** | Human oversight on material decisions | Medium |
+| **#9 Policy as Code** | Governance rules as versioned, testable artifacts | Medium |
+| **#16 Transaction & Side-Effect Control** | Safe handling of irreversible actions | High |
+| **#17 Data Governance** | PII, consent, classification at every data flow | High |
+
+**What this gives you:** Policy-evaluated, human-gateable decisions with side-effect management.
+
+### Phase 4: Security & Assurance
+
+| Primitive | Why Now | Effort |
+|-----------|--------|--------|
+| **#15 Adversarial Robustness** | Defense in depth. Assume breach. | High |
+| **#18 Evaluation & Assurance** | The deployment gate. Validates before production. | Medium |
+| **#11 Trust Ladders** | Calibrated trust. System earns reduced oversight. | Medium |
+
+### Phase 5: Learning (Full System)
+
+| Primitive | Why Now | Effort |
+|-----------|--------|--------|
+| **#3 Self-Improving Cycles** | The learning engine | High |
+| **#4 Adversarial Critique** | Dedicated challenger for high-stakes outputs | Medium |
+| **#12 Memory-Augmented Reasoning** | Persistent knowledge across sessions | Medium |
+| **#19 Agent Environment Governance** (full) | The optimization loop for the environment | High |
+
+**Key principle:** Each phase is independently valuable. You don't need Phase 5 to get value from Phase 1.
+
+## The 19 Primitives at a Glance
+
+| # | Primitive | Ring | One-Line Description |
+|---|-----------|------|---------------------|
+| 1 | Separation of Producer & Verifier | 0+1 | The agent that creates must not be the sole agent that validates |
+| 2 | Validation Loops | 1 | Iterative verification until quality met or budget exhausted |
+| 3 | Self-Improving Cycles | 3 | System learns from execution history — without retraining |
+| 4 | Adversarial Critique | 1 | Dedicated challenger: find flaws, never confirm |
+| 5 | Structured Output Persistence | Fabric | Schema-conformant artifacts — the data contract |
+| 6 | Provenance Chains | Fabric | Full decision history, immutable, tamper-evident |
+| 7 | Bounded Agency | 2 | Explicit, enforced boundaries on scope and authority |
+| 8 | Governance Gates | 2 | Execution pauses for authorization |
+| 9 | Policy as Code | 2 | Governance rules as versioned, testable objects |
+| 10 | Event-Driven Observability | Fabric | Every ring emits structured events |
+| 11 | Trust Ladders | 2+3 | Trust earned through performance, not assumed |
+| 12 | Memory-Augmented Reasoning | 0+3 | Persistent memory, not just immediate context |
+| 13 | Error Handling & Recovery | Fabric | Checkpointing, graceful degradation, compensation |
+| 14 | Identity & Attribution | Fabric | Authenticated, inspectable identity on every action |
+| 15 | Adversarial Robustness | Security | Assume breach. Defense in depth. Verify explicitly. |
+| 16 | Transaction & Side-Effect Control | 0+2 | Pre-commit/commit/post-commit for irreversible actions |
+| 17 | Data Governance | 2+Fabric | Classification, consent, PII, lineage, retention |
+| 18 | Evaluation & Assurance | Pre-deploy | The gate before the gate — validates before production |
+| 19 | Agent Environment Governance | All rings | Governed context, instructions, tools, workspace, memory |
+
+## Composition Patterns
+
+<Image
+  src="/diagrams/composition-patterns.png"
+  alt="Composition Patterns — Progressive Build-Up"
+  width={1200}
+  height={675}
+  className="rounded-xl border border-zinc-200 my-8"
+/>
+
+| Pattern | Primitives | What It Gives You |
+|---------|-----------|------------------|
+| **Minimum Viable Control** | #7, #14, #6, #10, #19 (minimal) | Scope, identity, audit trail — the floor |
+| **Validation Pipeline** | MVC + #1, #2, #5, #13 | Verified outputs. Structural quality assurance. |
+| **Governed Decision Flow** | Pipeline + #8, #9, #16, #17 | Policy-evaluated, human-gateable decisions |
+| **Secure Governed System** | GDF + #15, #18, #11 | Defense in depth, pre-deployment validation |
+| **Full Governed System** | All 19 primitives | Complete governance that improves over time |
+
+### Application Examples
+
+| System Type | Primary Composition | Deployment Mode |
+|-------------|-------------------|----------------|
+| Risk decision platform | Governed Decision Flow | Wrapper |
+| Coding agent (Claude Code, Cursor) | Validation Pipeline + selective Ring 2 | Middleware/Interrupt |
+| Conversational agent | MVC + graph-embedded verification | Graph-Embedded |
+| Document processing pipeline | Validation Pipeline → GDF | Wrapper |
+| Personal productivity agent | Ring 0 + Ring 3 | Middleware |
+
+## Primitive Interaction Tensions
+
+The primitives are not always harmonious. Seven named tensions with architectural invariants:
+
+| Tension | Conflict | Invariant |
+|---------|----------|-----------|
+| Self-Improvement vs. Reproducibility | #3 changes behavior; #6 requires traceability | *Always reproducible at a specific version* |
+| Trust Ladders vs. Governance Gates | #11 reduces oversight; #8 ensures accountability | *Can skip a spot-check, never regulatory approval* |
+| Bounded Agency vs. Self-Improvement | #7 constrains; #3 improves — can it expand itself? | *The box can get smarter inside. It cannot grow itself.* |
+| Validation vs. Latency/Cost | #2 improves quality; each pass costs time and money | *Quality bounded by economics, not just capability* |
+| Memory vs. Signal-to-Noise | #12 accumulates knowledge; stale memories inject noise | *Growth without curation is hoarding, not learning* |
+| Policy as Code vs. Self-Improvement | Can Ring 3 change Ring 2's policy rules? | *Can suggest governance changes, cannot enact them* |
+| Environment vs. Governance Integrity | #19 optimizes the environment — but it IS the control surface | *The environment can get better. It cannot get less governed.* |
+
+## Implementation Checklist
+
+### Phase 1: Minimum Viable Control
+- [ ] Agent scope defined (tool allowlists, data access boundaries, output authority)
+- [ ] Agent identity established (ID, version, configuration hash)
+- [ ] Provenance logging active (append-only, structured, includes identity context)
+- [ ] Structured events emitted at action boundaries
+- [ ] Workspace scoped and instructions versioned
+
+### Phase 2: Verification
+- [ ] Separate verification agent operational
+- [ ] Validation loops with convergence criteria and iteration budget
+- [ ] Structured output schema defined and enforced
+- [ ] Error handling: checkpointing at ring boundaries, graceful degradation
+
+### Phase 3: Governance
+- [ ] Governance gates operational (adaptive + mandatory classes defined)
+- [ ] Policy rules versioned and testable
+- [ ] Transaction control for irreversible actions
+- [ ] Data classification pipeline active
+
+### Phase 4: Security & Assurance
+- [ ] Security posture: defense in depth, supply chain trust policy
+- [ ] Evaluation suites: pre-deployment, regression, adversarial testing
+- [ ] Trust Ladders: initial levels set, promotion/demotion criteria defined
+
+### Phase 5: Learning
+- [ ] Ring 3 learning pipeline operational
+- [ ] Memory infrastructure with relevance filtering and curation
+- [ ] Full environment optimization loop with termination condition
+- [ ] Adversarial Critique: challenger agent for high-stakes outputs

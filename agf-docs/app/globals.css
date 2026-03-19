@@ -1,0 +1,49 @@
+@import "fumadocs-ui/css/style.css";
+
+/* ── Geist / Zed-inspired warm stone palette ── */
+@theme inline {
+  --color-fd-background: #fafaf9;
+  --color-fd-foreground: #1c1917;
+  --color-fd-muted: #f5f5f4;
+  --color-fd-muted-foreground: #78716c;
+  --color-fd-card: #fafaf9;
+  --color-fd-card-foreground: #1c1917;
+  --color-fd-border: #e7e5e4;
+  --color-fd-secondary: #f5f5f4;
+  --color-fd-secondary-foreground: #1c1917;
+  --color-fd-primary: #292524;
+  --color-fd-primary-foreground: #fafaf9;
+  --color-fd-accent: #f5f5f4;
+  --color-fd-accent-foreground: #292524;
+  --color-fd-ring: #a8a29e;
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #1c1917;
+
+  --color-background: #fafaf9;
+  --color-foreground: #1c1917;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-fd-background);
+  color: var(--color-fd-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Force light mode — AGF is a light-theme site */
+html {
+  color-scheme: light;
+  scroll-padding-top: 4rem;
+}
+
+/* ── Sidebar ── */
+aside[data-fd-sidebar],
+[data-fd-sidebar] {
+  background: #f5f5f4;
+}
+
+/* ── Banner height reset ── */
+:root {
+  --fd-banner-height: 0px;
+}

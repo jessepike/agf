@@ -1,0 +1,104 @@
+---
+title: "Architecture Diagrams"
+description: "Visual reference models for the AGF framework — rings, security, deployment, observability, and more."
+---
+
+import Image from "next/image";
+
+AGF includes 21 architecture diagrams. Key diagrams are shown below. All diagrams are available in the [diagrams/ directory](https://github.com/jessepike/agf/tree/main/diagrams).
+
+## The Rings Model
+
+<Image
+  src="/diagrams/rings-model-governed-agentic-systems.png"
+  alt="The Rings Model — Governed Agentic Systems"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Four concentric rings organizing governance into composable layers, with cross-cutting fabric and environment substrate. [Learn more](/docs/overview/rings-model)
+
+## Ring Deployment Modes
+
+<Image
+  src="/diagrams/ring-deployment-modes-v2.png"
+  alt="Ring Deployment Modes — Wrapper, Middleware/Interrupt, and Graph-Embedded"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+The same logical rings manifest differently depending on system type. [Learn more](/docs/overview/rings-model#the-rings-are-logical-not-physical)
+
+## Three-Level Security Model
+
+<Image
+  src="/diagrams/three-level-security-model.png"
+  alt="Three-Level Security Model"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Security as a pervasive concern: Fabric (enforcement), Governance (policy), Intelligence (detection). [Learn more](/docs/profiles/security)
+
+## Composition Patterns
+
+<Image
+  src="/diagrams/composition-patterns.png"
+  alt="Composition Patterns — Progressive Build-Up"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+From Minimum Viable Control to Full Governed System. [Learn more](/docs/overview/composition-patterns)
+
+## Security Response Bus
+
+<Image
+  src="/diagrams/security-response-bus.png"
+  alt="Security Response Bus"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Pre-authorized fast-path from Security Intelligence to Security Fabric, bypassing governance deliberation for defined threat classes.
+
+## Event Flow — Observability
+
+<Image
+  src="/diagrams/event-flow-observability.png"
+  alt="Event Flow — Agentic Observability Architecture"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+How events flow from ring execution through the correlation engine to the three detection perspectives.
+
+## Agent Environment Stack
+
+<Image
+  src="/diagrams/agent-environment-stack.png"
+  alt="Agent Environment Stack"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+The five layers of the agent operating environment governed by Primitive #19.
+
+## Zero Trust Identity Flow
+
+<Image
+  src="/diagrams/zero-trust-identity-flow.png"
+  alt="Zero Trust Identity Flow"
+  width={1200}
+  height={675}
+  className="rounded-lg border border-stone-200 my-8"
+/>
+
+Identity verification at every ring boundary — no implicit trust.
