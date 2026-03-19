@@ -171,6 +171,9 @@ Agentic Observability consumes events from all 19 primitives and provides the de
 | **#1 Separation of Producer/Verifier** | Did verification actually run independently? Or was it bypassed? |
 | **#2 Validation Loops** | How many iterations to convergence? Trending up (degradation) or down (improvement)? |
 | **#13 Error Handling** | What failure modes are occurring? Retry rates? Graceful degradation frequency? |
+| **#17 Data Governance** | Is data classification enforced at every boundary? PII leakage detection? Cross-boundary data flow monitoring? |
+| **#18 Evaluation & Assurance** | Are pre-deployment evaluations running before configuration changes reach production? Regression detection? |
+| **#19 Agent Environment Governance** | Is the environment composed by policy? Are optimization loop proposals logged? Environment drift detection? |
 
 ---
 
@@ -472,11 +475,11 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 ## Open Questions
 
-- **Event schema standardization:** OpenTelemetry GenAI semantic conventions are standardizing LLM-level tracing. Agentic Observability needs governance, security, and ring-level semantics that OTel doesn't cover. Build on OTel as a foundation and extend? Or separate schema that can export to OTel?
+- **Event schema standardization:** ~~OpenTelemetry GenAI semantic conventions are standardizing LLM-level tracing. Build on OTel or separate?~~ **Resolved:** OTel-compatible base + governance extensions. OTel GenAI conventions (Development maturity, v1.40.0) already cover agent spans, tool calls, model identity. AGF adds governance-specific extensions (ring, deployment_mode, policy_reference, gate_type) as custom attributes within the OTel data model. Pursue standardization of reusable governance extensions through OTel community process.
 - **Ingestion breadth vs. depth:** Start with deep observability for one agent framework (LangGraph, CrewAI, custom) or broad but shallow ingestion from many? Deep-first is likely — prove the value, then broaden.
 - **Standalone vs. layer:** Start standalone, integrate over time — same path as cloud SIEM. Feed audit packages into existing GRC platforms. Feed security alerts into existing SIEM. But own the agentic intelligence.
 - **Correlation rule authoring:** Who writes correlation rules? Security team? Governance team? Platform team? Likely all three — domain-specific rule authoring with shared infrastructure.
 - **Relationship to Decision Intelligence:** Shared primitives, distinct products, eventual convergence. AO is the monitoring layer for DI. DI is a primary event source for AO. They are symbiotic but independently valuable.
 - **Personal vs. enterprise:** Is there a "personal agent governance" product? Lightweight trust ladders, basic quality monitoring, simple audit trail. The Level 1-2 maturity model could map to personal use. Level 3+ is enterprise.
-- **Privacy tension:** Event-driven observability says "log everything." Privacy regulations say "minimize data." The Observability vs. Privacy tension (identified in primitives external reviews) needs a resolution pattern here — probably: log governance events with redacted content, full content available only in investigation mode with access controls.
+- **Privacy tension:** ~~Event-driven observability says "log everything." Privacy regulations say "minimize data."~~ **Resolved (pattern):** Log governance events (ring signals, gate decisions, trust changes, identity context) with **redacted content** — the event records *that* an action happened, *who* did it, and *what the governance outcome was*, without persisting full input/output content. Full content available only in investigation mode with access controls and audit trail. For GDPR contexts, retention policies must account for data subject rights. See Observability Profile Known Limitations for operational details.
 - **Pricing model:** Per event volume? Per agent monitored? Per audit package generated? Platform fee? Likely: platform fee + event volume tier — same model as SIEM (Splunk charges by data ingestion volume).

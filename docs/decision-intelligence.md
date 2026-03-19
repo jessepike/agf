@@ -109,6 +109,14 @@ Decision Intelligence is a specific application of the Agentic Primitives framew
 | **#12 Memory-Augmented Reasoning** | Prior decisions, established baselines, and organizational context inform new decisions. The system accumulates institutional knowledge about risk-bearing decisions. |
 | **#13 Error Handling** | Partial decision processing recovers from checkpoints. External evidence source failures degrade gracefully. Pipeline failures don't lose completed analysis. |
 
+### Data governance and environment primitives
+
+| Primitive | Role in Decision Intelligence |
+|-----------|------------------------------|
+| **#17 Data Governance & Confidentiality** | Decision evidence may contain PII, confidential data, or regulated information. Data classification at ingestion, consent tracking through the provenance chain, cross-boundary controls when decisions reference external data. Memory privacy for accumulated institutional knowledge. |
+| **#18 Evaluation & Assurance** | Pre-deployment validation of decision agent configurations. Regression testing when claim extraction models are updated, policy rules are changed, or new case types are onboarded. The gate before the gate — validates that decision pipeline changes don't degrade known-good behaviors. |
+| **#19 Agent Environment Governance** | Decision agents operate within governed environments: scoped workspace per case type, versioned instruction architecture per agent role, trust-gated capability provisioning (high-stakes case types get more constrained environments). Environment optimization loop improves agent performance within governance boundaries. |
+
 ---
 
 ## Key Patterns
@@ -155,7 +163,7 @@ New evidence arrives
 
 When evidence changes, beliefs revise, which cascades through policy evaluation to decision options. In ring terms: Ring 2 detects the context change and issues REVISE(context) back to Ring 0, triggering re-execution of the affected decision pipeline with updated evidence.
 
-**Why this matters:** This is a concrete, production-grade implementation of Bayesian governance for agentic systems. No framework or product in the market has anything like it. The Belief Layer is the mechanism by which an agentic system maintains a *governed epistemic state* — it knows what it knows, what it doesn't know, and what has changed.
+**Why this matters:** The Belief Layer is the mechanism by which an agentic system maintains a *governed epistemic state* — it knows what it knows, what it doesn't know, and what has changed. This draws on established patterns from argumentation frameworks (IBIS, Toulmin), Bayesian belief networks, and decision analysis — applied to the agentic governance context. The revision cascade is the most novel aspect: a concrete mechanism by which governed systems respond to evidence changes through structured belief revision rather than ad-hoc re-evaluation.
 
 ### Adversarial Self-Critique (The Challenger)
 
@@ -279,6 +287,18 @@ Evidence is the foundation of every decision. If evidence is compromised, the en
 - Grounding verification: do extracted claims actually appear in the source document, or were they hallucinated?
 
 These map to Primitive #15 (Adversarial Robustness) applied specifically to the evidence layer.
+
+---
+
+## What This Is NOT
+
+- **Not a chatbot or assistant.** Decision Intelligence structures and governs consequential decisions. It is a governed pipeline, not a conversational interface. The output is a structured, auditable decision artifact — not a generated response.
+
+- **Not a GRC platform.** Traditional GRC (OneTrust, Archer, ServiceNow GRC) manages controls, questionnaires, and compliance workflows. Decision Intelligence governs how specific risk-bearing decisions are made — it produces the decision artifacts that GRC platforms track.
+
+- **Not a business intelligence tool.** BI tools aggregate data for human analysis. Decision Intelligence structures the reasoning process itself — evidence, claims, beliefs, policy evaluation, and authorization — into auditable artifacts. BI answers "what happened?" DI answers "why was this decided, and was the decision governed?"
+
+- **Not a replacement for human judgment.** Agents recommend; humans decide. The system captures how decisions are made and ensures governance rigor. It does not remove human authority from consequential decisions — it makes human authority more effective by providing structured evidence, adversarial challenge, and explicit policy evaluation.
 
 ---
 

@@ -182,8 +182,8 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [x] **Expand SIEM analogy with security events** — Event taxonomy covers all rings + security cross-cutting. DONE.
 - [x] **Correlation rule patterns** — 18 rules across quality, security, and governance domains. DONE.
 - [x] **"What this is NOT" sharpening** — Differentiated from LLM observability, APM, GRC, AND traditional SIEM. DONE.
-- [ ] **Diagrams** — Observability architecture (three roles), event flow through rings, correlation engine, security detection layer, maturity model visualization. Run through Diagram Forge.
-- [ ] **Internal review** — Same process as primitives.
+- [x] **Diagrams** — Mermaid source files created for all architecture diagrams (rings model, composition patterns, security model, deployment modes, environment stack, ring interface, implementation phases, event flow). In `diagrams/`. DONE.
+- [x] **Internal review** — Added missing primitives (#17, #18, #19) to monitoring mapping. Resolved OTel open question (OTel-compatible base + extensions). Resolved privacy tension (redacted content pattern). DONE.
 - [ ] **External review** — After internal cycle. Create review prompt tailored to observability (focus on SIEM analogy viability, correlation rule completeness, market positioning).
 - [ ] **Reference architecture** — How does an org deploy this? OTel integration. Connection to DI event streams.
 - [ ] **Market landscape deep dive** — ServiceNow AI Control Tower, Fiddler AI, Arize, Galileo, Arthur AI, OTel GenAI. Detailed gap analysis.
@@ -192,7 +192,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 - [x] **Update to reference Agentic Primitives** — Mapped all 16 primitives, ring architecture, zero trust overlay, deployment modes, composition patterns. DONE.
 - [ ] **Diagrams** — Decision Intelligence architecture, ring mapping, belief revision cascade, multi-agent decision pipeline. Run through Diagram Forge.
-- [ ] **Internal review** — Same process as primitives: structured review, fix issues, iterate.
+- [x] **Internal review** — Added missing primitives (#17, #18, #19) to mapping tables. Fixed Belief Layer overclaim (reframed with prior art: IBIS, Toulmin, Bayesian networks). Added "What This Is Not" section (not chatbot, not GRC, not BI, not human replacement). DONE.
 - [ ] **External review** — After internal cycle. Create review prompt tailored to decision intelligence (focus on belief layer novelty, RDG viability, market positioning).
 - [ ] **Positioning vision section** — Strengthen category positioning narrative for buyers/investors.
 - [ ] **Revenue gate per phase** — Each build phase needs a funding answer.
@@ -217,7 +217,7 @@ Five domain profiles decompose the AGF reference architecture for different buye
 
 ## Project Identity
 
-- [ ] **Project name decision** — Candidates: Agentic Governance Framework (AGF), Agentic Governance Playbook, Agentic Safety Compass, Meridian. Considerations: community adoption (memorable single word vs. clear descriptive acronym), alignment with humility/service philosophy, standards-body-friendly, reflects synthesis-not-invention positioning. Decision needed before publication.
+- [x] **Project name decision** — **AGF: Agentic Governance Framework** — "A Reference Architecture for Governed Agentic Systems." Clear, descriptive, standards-body-friendly, aligns with synthesis positioning. DECIDED.
 
 ## Captured / Parking Lot
 
