@@ -93,7 +93,7 @@ This decomposition defines that structure.
 - Singapore IMDA alignment (summary table)
 - Full mappings live in the GRC Profile
 
-#### 6. Prior Art & Positioning (1-2 pages)
+#### 6. Existing Work & Positioning (1-2 pages)
 - What we build on (NIST, OWASP, CSA, Anthropic, DeepMind, academic research)
 - What we contribute (composition, rings, environment governance, tensions)
 - Confidence levels: established / informed proposal / open question
@@ -207,7 +207,7 @@ This decomposition defines that structure.
 - Trust Ladders mechanics (#11)
 - Agent Environment Governance (#19) — the practitioner's guide
 - Environment Optimization Loop (the self-improving cycle)
-- Prior art mapping (what to read, what tools to use)
+- Existing work mapping (what to read, what tools to use)
 - Open questions
 
 **Unique to this profile (not in meta):**

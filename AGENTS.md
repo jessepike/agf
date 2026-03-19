@@ -14,9 +14,11 @@
 3. **Never edit `intent.md` without explicit human approval.** It is sacred.
 4. **Use confidence levels** (Established pattern / Informed proposal / Open question) when adding new claims to any concept doc.
 5. **Maintain synthesis positioning.** This framework connects dots from existing standards — it does not invent new governance concepts. Lead with humility.
+6. **Read `.claude/voice.md` before writing or revising content.** It defines AGF's voice and tone — humility over authority, shared struggle not finger-wagging, complement not compete. Apply it to all concept docs, profiles, white papers, and public-facing text.
 6. **Update timestamps** on any concept doc you substantively modify (`Last updated:` in frontmatter).
 7. **Cross-reference integrity.** Observability and Decision Intelligence docs reference primitives by number (#1-#19). If you add, remove, or renumber primitives, update all downstream docs.
 8. **Commit at meaningful milestones.** Use conventional commits: `type(scope): description`. Types: `content`, `research`, `review`, `structure`, `meta`.
+9. **Check `DECISIONS.md` before proposing terminology changes.** It records decided terminology, naming, and structural choices with rationale. When a new decision is made, add it to the log.
 
 ### Inbox Triage Protocol
 
@@ -96,7 +98,7 @@ type(scope): description
 
 Types:
   content    — concept doc additions or revisions
-  research   — landscape research, prior art additions
+  research   — landscape research, existing work additions
   review     — external review processing, findings integration
   structure  — directory changes, file reorganization
   meta       — CLAUDE.md, AGENTS.md, BACKLOG.md, tooling

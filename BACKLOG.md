@@ -216,11 +216,18 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [ ] **Post: Validation Loops with Convergence Gates** — Self-improving pipeline pattern. Engineering audience.
 - [ ] **Post: Adversarial Critique as Structural Pattern** — Producer/verifier separation for AI.
 - [ ] **Post: "The box can get smarter but cannot grow itself"** — Bounded AI autonomy framing.
+- [ ] **Post: "Why I Started This"** — Personal perspective on the puzzle metaphor. Why humans are the bottleneck, why mental models and first-principles matter for staying in control, why sorting the pieces is the real contribution. Origin story for AGF.
 - [ ] **Architectural diagrams** — Rings diagram, composition patterns, ring interface flow. Visual assets.
 
 ## Project Identity
 
 - [x] **Project name decision** — **AGF: Agentic Governance Framework** — "A Reference Architecture for Governed Agentic Systems." Clear, descriptive, standards-body-friendly, aligns with synthesis positioning. DECIDED.
+
+## Adoption & Guidance
+
+- [ ] **Maturity model** — Framework for assessing where an organization is today and what to grow into. Maps primitive adoption to maturity levels. Helps answer "how governed are we?" without requiring all 19 primitives.
+- [ ] **"Where to start" guide** — Practical entry point for organizations new to AGF. Which primitives first, what order, what signals tell you to add more. Builds on the Composition Patterns (Minimum Viable Control → Full Governed).
+- [ ] **Tailoring guide** — How to evaluate which primitives apply to your environment. Not every system needs all 19. Factors: risk level, regulatory requirements, system type, organizational maturity, deployment mode.
 
 ## Captured / Parking Lot
 

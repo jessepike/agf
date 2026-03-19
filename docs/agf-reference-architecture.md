@@ -27,11 +27,11 @@ Organizations are deploying autonomous agents — coding assistants, ops automat
 
 The governance landscape is fragmented. NIST provides risk management frameworks. OWASP provides threat taxonomies. The Cloud Security Alliance provides trust frameworks. ISO provides management systems. OpenTelemetry provides observability standards. The EU AI Act provides regulatory requirements. Singapore published the world's first government agentic governance framework. Model providers ship their own governance features. Enterprise platforms build their own control planes. Security vendors build point solutions.
 
-**Every one of these institutions is doing critical work. These are the dots.** The puzzle pieces are on the table.
+**Every one of these institutions is doing critical work. The puzzle pieces are on the table.** We can see the picture on the box — governed agentic systems that are safe, secure, durable, auditable, and observable — but it's still coming into focus, and nobody has assembled the whole thing yet.
 
-The Agentic Governance Framework (AGF) connects those dots. We synthesize the best thinking from standards bodies, government frameworks, security organizations, academic researchers, and industry practitioners into a single coherent reference architecture that shows organizations how to build agentic systems that are safe, secure, durable, auditable, and observable.
+AGF is an attempt to sort the pieces: security patterns, governance mechanisms, observability standards, risk frameworks. Then we show where the pieces connect — where NIST meets OWASP, where zero trust meets observability, where policy enforcement meets deployment architecture — so that organizations can start assembling the picture for their own context.
 
-We are not claiming to have invented new governance concepts. The patterns in this framework — separation of duties, least privilege, audit trails, zero trust, policy as code — are battle-tested across distributed systems, security engineering, compliance, and control theory. They have governed critical infrastructure for decades. **The contribution is the composition:** pulling these patterns together, naming them for the agentic context, showing where they conflict, and proposing how to resolve those conflicts.
+We are not claiming to have invented new pieces. The patterns in this framework — separation of duties, least privilege, audit trails, zero trust, policy as code — are battle-tested across distributed systems, security engineering, compliance, and control theory. They have governed critical infrastructure for decades. **The contribution is the composition:** sorting the pieces, showing how they fit together, naming the gaps where pieces are still missing, and being honest about where the picture is still blurry.
 
 This is a living framework, not a monument. Where our understanding evolves — because new research emerges, new technologies shift the landscape, or community feedback challenges our assumptions — we will update this work. We lead with humility, lead with rigor, and serve the community.
 
@@ -47,7 +47,7 @@ The design position: build the architecture so that governance works *with* over
 
 ## Core Concepts
 
-AGF is built on four foundational ideas: the Rings Model, the 19 Primitives, the Three-Level Security Model, and three Deployment Modes. Together, they form a composable architecture that adapts to any agentic system — from a personal coding assistant to a fleet of enterprise agents making consequential decisions.
+AGF is built on four foundational ideas: the Rings Model, the 19 Primitives, the Three-Level Security Model, and three Deployment Modes. Together, they form a composable architecture designed to adapt to a wide range of agentic systems — from a personal coding assistant to a fleet of enterprise agents making consequential decisions.
 
 ### The Rings Model
 
@@ -104,7 +104,9 @@ The Rings Model is AGF's central architectural contribution. It is a vendor-neut
 
 ### The 19 Primitives
 
-AGF defines 19 named patterns for governed agentic systems, organized into three categories:
+AGF defines 19 named patterns for governed agentic systems, organized into three categories.
+
+**Nineteen primitives is the complete picture, not a starting checklist.** These are concepts to evaluate against your environment — not all will apply to every system, and those that do won't all apply at once. Think of this as the North Star: the full set of patterns available when you need them. The [Composition Patterns](#composition-patterns) section below shows how to start with as few as four or five primitives and grow as your stakes and maturity demand.
 
 **Runtime Primitives (#1–#17)** — operate within or across the ring pipeline during agent execution:
 

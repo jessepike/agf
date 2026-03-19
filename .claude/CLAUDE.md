@@ -27,10 +27,12 @@ This is the **Agentic Governance Framework (AGF)** — a synthesis framework tha
 | `BACKLOG.md` | **Always** | ~17KB | Live work queue, priorities, what's resolved vs. open. Single source of truth for session direction. |
 | `strategic-positioning.md` | Writing/revising concept docs, processing review feedback, publication work | ~18KB | Landscape gaps, differentiators, market context. Ensures content maintains positioning discipline. |
 | `agentic-governance-framework.md` | Working on framework-level structure, governance functions, lifecycle | ~38KB | Top-level operating model. Read when touching the umbrella, not for primitives-level work. |
-| `agentic-primitives.md` | Working on primitives, security architecture, deployment modes, prior art | ~150KB | **Read selectively.** Grep for section headers. Never load whole file. |
+| `agentic-primitives.md` | Working on primitives, security architecture, deployment modes, existing work | ~150KB | **Read selectively.** Grep for section headers. Never load whole file. |
 | `agentic-observability.md` | Working on observability, event architecture, SIEM pattern | ~33KB | Capability layer. References primitives by number. |
 | `decision-intelligence.md` | Working on decision systems, belief layer, RDG | ~25KB | Capability layer. References primitives by number. |
 | `review-prompts/cross-review-synthesis.md` | Processing review findings, adding to backlog | varies | Synthesized findings from all external reviewers. |
+| `DECISIONS.md` | Terminology choices, structural changes, naming decisions | ~2KB | Decision log with rationale. Check before proposing terminology changes — it may already be decided. |
+| `.claude/voice.md` | **Always when writing/revising content** | ~3KB | Voice and tone guide. Gitignored (private). Defines the posture: humility, shared struggle, complement not compete. Load before any content work. |
 
 ## Architecture: How the Documents Relate
 
@@ -40,7 +42,7 @@ intent.md                          ← North Star. Sacred. Never edit without hu
 agentic-governance-framework.md    ← Top-level operating model (umbrella)
     │
     ├── agentic-primitives.md      ← Foundation layer: 19 primitives, Rings Model,
-    │                                 security architecture, deployment modes, prior art
+    │                                 security architecture, deployment modes, existing work
     │
     ├── decision-intelligence.md   ← Capability layer: governed decision flows,
     │                                 belief revision, Risk Decision Graph
@@ -82,15 +84,21 @@ The primitives doc (`agentic-primitives.md`, ~160KB) is the most substantial art
 
 ### Document Editing
 - **intent.md is sacred.** Never edit without explicit human approval.
+- **Read `.claude/voice.md` before writing or revising any content.** It defines AGF's voice: humility over authority, shared struggle not finger-wagging, complement not compete.
 - All concept docs are "living documents" — update timestamps when making substantive changes.
 - Use confidence levels (Established/Informed proposal/Open question) when adding new claims.
-- Lead with humility: "we synthesize, we don't decree." Position as building on prior art, not inventing.
-- When adding prior art references, include specific document names, dates, and how they relate (not just that they exist).
+- Lead with humility: "we synthesize, we don't decree." Position as building on existing work, not inventing.
+- When adding existing work references, include specific document names, dates, and how they relate (not just that they exist).
 
 ### Review Process
 - Two rounds of external review are complete (Opus, GPT 5.4, Gemini 3.1 Pro).
 - Review results live in `review-prompts/`. Cross-review synthesis is in `cross-review-synthesis.md`.
 - BACKLOG.md tracks all findings by priority. P0 structural decisions are resolved. P0.5 items are next.
+
+### Decision Log
+- **`DECISIONS.md`** records terminology, structural, and positioning decisions with rationale.
+- Check DECISIONS.md before proposing terminology changes — it may already be decided.
+- When a terminology or naming decision is made, add it to DECISIONS.md with date, rationale, and alternatives considered.
 
 ### Backlog Management
 - BACKLOG.md is the single source of truth for work queue.

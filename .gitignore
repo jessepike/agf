@@ -10,6 +10,9 @@ data/
 # Session transcripts (large, not useful in VCS)
 *.txt
 
+# Private author voice/tone guide (not for public repo)
+.claude/voice.md
+
 # Capabilities registry (auto-generated)
 INVENTORY.md
 inventory.json

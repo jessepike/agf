@@ -4,7 +4,7 @@
 
 AGF is a synthesis framework that integrates NIST AI RMF, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, Singapore IMDA, MITRE ATLAS, and academic research into a single coherent reference architecture for organizations building safe, secure, durable, auditable, and observable agentic systems.
 
-We did not invent these patterns. We connected them.
+We did not invent these patterns. We sorted the pieces and showed how they fit together.
 
 ---
 

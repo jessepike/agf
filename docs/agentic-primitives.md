@@ -19,7 +19,7 @@
 9. [Primitive Interaction Tensions](#primitive-interaction-tensions) — 7 tensions with resolutions
 10. [Cost of Governance](#cost-of-governance) — Economic model, real cost drivers, minimum viable ring stack
 11. [How the Primitives Compose](#how-the-primitives-compose) — Higher-order patterns
-12. [Prior Art Mapping](#prior-art-mapping) — Standards, government frameworks, security frameworks, academic research, protocols, evaluation
+12. [Existing Work Mapping](#existing-work-mapping) — Standards, government frameworks, security frameworks, academic research, protocols, evaluation
 13. [Open Questions](#open-questions)
 
 ---
@@ -53,7 +53,7 @@ The dots have already been laid down. NIST has done extraordinary work on risk m
 ### What This Framework Is Not
 
 - **Not a novel invention of new security or governance concepts.** The primitives existed before we named them. The composition is the work.
-- **Not a replacement for standards.** We integrate NIST, OWASP, CSA, ISO, and others — we don't compete with them. We depend on them. See [Prior Art Mapping](#prior-art-mapping) for explicit acknowledgments.
+- **Not a replacement for standards.** We integrate NIST, OWASP, CSA, ISO, and others — we don't compete with them. We depend on them. See [Existing Work Mapping](#existing-work-mapping) for explicit acknowledgments.
 - **Not a finished product.** Some parts of this framework reflect high confidence based on strong empirical evidence and established practice. Other parts are proposals — our best current thinking informed by the literature, but genuinely uncertain. We mark confidence levels where they matter and we invite challenge on every claim.
 - **Not an implementation specification.** This document defines what should be true, not how to build it. Implementations will vary by system type, technology stack, and organizational context.
 
@@ -1592,7 +1592,7 @@ These composition patterns are general-purpose. To illustrate how they map to co
 
 ---
 
-## Prior Art Mapping
+## Existing Work Mapping
 
 This framework stands on the shoulders of extraordinary work by standards bodies, security organizations, government agencies, academic researchers, and industry practitioners. We did not invent the patterns in this document. We connected them.
 
@@ -1705,7 +1705,7 @@ We are deeply grateful for the academic community's contributions to agentic gov
 | **NVIDIA OpenShell** (Mar 2026) | Secure agent runtime with kernel-level isolation, per-binary/endpoint/method policy control | The security-first approach to agent environment management. Validates our position that environment governance is a security concern — OpenShell treats the runtime environment as an attack surface requiring granular policy control. |
 | **Google ADK** (Agent Development Kit, 2026) | Tiered context storage, compiled views, pipeline processing, strict scoping | Validates our environment stack's layered architecture. ADK's tiered storage maps to our L1-L5 layers; their strict scoping maps to our workspace scoping governance. |
 | **Denis Rothman "Context Engine"** (Packt, Nov 2025) | Context Fabric with structured slots, orchestrator, governance plane. Ch. 8 covers policy-driven AI; Ch. 10 covers production guardrails. | Application-level governance treatment (moderation, content safety) rather than a formalized governance architecture. Validates the direction but does not define "governance plane" as a distinct architectural layer. |
-| **Prompt Governance** (Douglas Jackson, Dec 2025; CIO.com five-pillar framework) | Treats prompts as governed artifacts — versioning, auditing, lifecycle management, organizational accountability. Layered governance of system/policy, domain, task, and formatting layers. | Direct partial precursor to Agent Environment Governance (#19) instruction architecture component. The five-pillar framework aligns with NIST AI RMF. Acknowledged as prior art for the instruction governance dimension. |
+| **Prompt Governance** (Douglas Jackson, Dec 2025; CIO.com five-pillar framework) | Treats prompts as governed artifacts — versioning, auditing, lifecycle management, organizational accountability. Layered governance of system/policy, domain, task, and formatting layers. | Direct partial precursor to Agent Environment Governance (#19) instruction architecture component. The five-pillar framework aligns with NIST AI RMF. Acknowledged as existing work for the instruction governance dimension. |
 | **Microsoft MCP Governance** (Feb 2026) | Internal four-layer governance framework for MCP: discovery/metadata, identity/credentials, content/data, infrastructure. Includes "MCP Firewalls" and "Governance Registries." | The most concrete example of governance applied *to* MCP at scale. Validates our MCP integration in Middleware mode and provides implementation-level specificity for MCP governance patterns. |
 
 ### Observability Standards

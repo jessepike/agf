@@ -28,7 +28,7 @@ AI engineers, ML engineers, prompt engineers, agent developers, and anyone respo
 5. [Primitive Interaction Tensions](#primitive-interaction-tensions)
 6. [Trust Ladders: How Agents Earn Autonomy](#trust-ladders-how-agents-earn-autonomy)
 7. [The Environment Optimization Loop](#the-environment-optimization-loop)
-8. [Prior Art: What to Read, What Tools to Use](#prior-art-what-to-read-what-tools-to-use)
+8. [Existing Work: What to Read, What Tools to Use](#existing-work-what-to-read-what-tools-to-use)
 9. [Implementation Checklist](#implementation-checklist)
 
 ---
@@ -434,7 +434,7 @@ Agent Environment Governance (#19) includes a governed self-improving cycle for 
 
 ---
 
-## Prior Art: What to Read, What Tools to Use
+## Existing Work: What to Read, What Tools to Use
 
 ### Standards and Frameworks (Read These)
 

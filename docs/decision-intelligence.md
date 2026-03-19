@@ -184,7 +184,7 @@ When evidence changes, beliefs revise, which cascades through policy evaluation 
 - **Hysteresis bands:** Promotion and demotion thresholds differ to prevent oscillation. A belief that was just demoted requires a higher evidence bar to be re-promoted than a belief being promoted for the first time.
 - **Cascade budget:** Maximum number of belief state changes per evidence event (recommended: 50). Budget exhaustion triggers review.
 
-**Prior art and intellectual lineage:**
+**Existing work and intellectual lineage:**
 
 The Belief Layer draws on established traditions:
 - **Argumentation frameworks** — IBIS (Kunz & Rittel), Toulmin model, Dung's abstract argumentation (1995), Carneades (Gordon, Prakken, Walton, 2007) with dialectical statuses and proof standards, ASPIC+ for structured argumentation
