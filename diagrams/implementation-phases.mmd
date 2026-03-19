@@ -1,0 +1,79 @@
+%% AGF Implementation Phases — 5-Phase Progressive Roadmap
+%% From Minimum Viable Control through Full Governed Agentic System
+
+graph LR
+    subgraph P1["Phase 1<br/>Minimum Viable Control"]
+        direction TB
+        P1_title["<b>START HERE</b>"]
+        P1_7["#7 Bounded Agency"]
+        P1_14["#14 Identity & Attribution"]
+        P1_6["#6 Provenance Chains"]
+        P1_10["#10 Event-Driven Observability"]
+        P1_19["#19 Environment Governance<br/><i>minimal — scoped workspace,<br/>versioned instructions</i>"]
+        P1_val["<i>Agents scoped, actions<br/>attributable, audit trail</i>"]
+    end
+
+    subgraph P2["Phase 2<br/>Verification"]
+        direction TB
+        P2_title["<b>Ring 0 + Ring 1</b>"]
+        P2_1["#1 Separation of<br/>Producer & Verifier"]
+        P2_2["#2 Validation Loops<br/>with Convergence"]
+        P2_5["#5 Structured Output<br/>Persistence"]
+        P2_13["#13 Error Handling<br/>& Recovery"]
+        P2_val["<i>Verified outputs<br/>before release</i>"]
+    end
+
+    subgraph P3["Phase 3<br/>Governance"]
+        direction TB
+        P3_title["<b>+ Ring 2</b>"]
+        P3_8["#8 Governance Gates"]
+        P3_9["#9 Policy as Code"]
+        P3_16["#16 Transaction &<br/>Side-Effect Control"]
+        P3_17["#17 Data Governance<br/>& Confidentiality"]
+        P3_val["<i>Policy-evaluated,<br/>human-gateable decisions</i>"]
+    end
+
+    subgraph P4["Phase 4<br/>Security & Assurance"]
+        direction TB
+        P4_title["<b>+ Security</b>"]
+        P4_15["#15 Adversarial Robustness"]
+        P4_18["#18 Evaluation & Assurance"]
+        P4_11["#11 Trust Ladders"]
+        P4_val["<i>Defense in depth,<br/>pre-deploy validation,<br/>calibrated trust</i>"]
+    end
+
+    subgraph P5["Phase 5<br/>Learning"]
+        direction TB
+        P5_title["<b>+ Ring 3 — Full System</b>"]
+        P5_3["#3 Self-Improving Cycles"]
+        P5_4["#4 Adversarial Critique"]
+        P5_12["#12 Memory-Augmented<br/>Reasoning"]
+        P5_19["#19 Environment Governance<br/><i>full optimization loop</i>"]
+        P5_val["<i>System improves over<br/>time under governance</i>"]
+    end
+
+    P1 ==> P2 ==> P3 ==> P4 ==> P5
+
+    %% Bottom annotation
+    NOTE["Each phase is independently valuable.<br/>Start where the risk is. Grow governance as stakes increase."]
+
+    %% Styles
+    style P1 fill:#3498DB,stroke:#2471A3,color:#fff
+    style P2 fill:#2ECC71,stroke:#27AE60,color:#fff
+    style P3 fill:#F39C12,stroke:#D68910,color:#fff
+    style P4 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style P5 fill:#9B59B6,stroke:#7D3C98,color:#fff
+
+    style P1_title fill:#2471A3,stroke:#1A5276,color:#fff
+    style P2_title fill:#27AE60,stroke:#1E8449,color:#fff
+    style P3_title fill:#D68910,stroke:#B9770E,color:#fff
+    style P4_title fill:#C0392B,stroke:#922B21,color:#fff
+    style P5_title fill:#7D3C98,stroke:#6C3483,color:#fff
+
+    style P1_val fill:#1A5276,stroke:#0E2F44,color:#fff
+    style P2_val fill:#1E8449,stroke:#145A32,color:#fff
+    style P3_val fill:#B9770E,stroke:#7E5109,color:#fff
+    style P4_val fill:#922B21,stroke:#641E16,color:#fff
+    style P5_val fill:#6C3483,stroke:#512E5F,color:#fff
+
+    style NOTE fill:#566573,stroke:#2C3E50,color:#fff

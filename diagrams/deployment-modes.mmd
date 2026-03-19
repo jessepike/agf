@@ -1,0 +1,93 @@
+%% AGF Deployment Modes — Three physical manifestations of the logical Rings Model
+%% Wrapper (sequential), Middleware/Interrupt (decision-point), Graph-Embedded (concurrent)
+
+graph TD
+    subgraph WRAPPER["Wrapper Mode"]
+        direction TB
+        W_desc["Sequential · Highest governance clarity<br/>Best for: batch pipelines, regulatory workflows"]
+        W_R0["Ring 0: Produce output"]
+        W_CP1["--- checkpoint ---"]
+        W_R1["Ring 1: Verify<br/><i>loop until converge</i>"]
+        W_CP2["--- checkpoint ---"]
+        W_R2["Ring 2: Evaluate policy<br/>Gate if required"]
+        W_CP3["--- checkpoint ---"]
+        W_OUT["Output Released"]
+        W_R3["Ring 3: Learn<br/><i>async</i>"]
+
+        W_R0 --> W_CP1 --> W_R1 --> W_CP2 --> W_R2 --> W_CP3 --> W_OUT
+        W_OUT -.-> W_R3
+        W_R1 -- "REVISE" --> W_R0
+    end
+
+    subgraph MIDDLEWARE["Middleware / Interrupt Mode"]
+        direction TB
+        M_desc["Interrupt-driven · MCP canonical impl<br/>Best for: coding agents, ops automation"]
+        M_S1["Step 1"]
+        M_S2["Step 2"]
+        M_R1a["R1: verify tool"]
+        M_S3["Step 3"]
+        M_R2["R2: gate<br/><i>destructive action</i>"]
+        M_HUMAN["Human approves"]
+        M_S4["Step 4"]
+        M_S5["Step 5"]
+        M_R1b["R1: verify output"]
+        M_S6["Step 6 → Done"]
+        M_R3["Ring 3: learns from full trace"]
+        M_SF["Security Fabric: active at every interrupt"]
+
+        M_S1 --> M_S2 --> M_R1a --> M_S3
+        M_S3 --> M_R2 --> M_HUMAN --> M_S4
+        M_S4 --> M_S5 --> M_R1b --> M_S6
+        M_S6 -.-> M_R3
+        M_SF -.- M_R1a
+        M_SF -.- M_R2
+        M_SF -.- M_R1b
+    end
+
+    subgraph GRAPH["Graph-Embedded Mode"]
+        direction TB
+        G_desc["Concurrent · Lowest latency<br/>Best for: conversational agents, voice, real-time"]
+
+        subgraph G_EXEC["Execution Graph — Concurrent"]
+            direction LR
+            G_R0["Ring 0<br/>produce<br/>stream"]
+            G_R1["Ring 1<br/>quality<br/>signal"]
+            G_R2["Ring 2<br/>auth<br/>signal"]
+            G_SEC["Security<br/>safety<br/>signal"]
+        end
+
+        G_R0 --> G_R1 --> G_R2 --> G_SEC
+
+        G_GATE["Release Gate<br/><i>all signals must PASS</i>"]
+        G_SEC --> G_GATE
+        G_GATE --> G_OUT["Output"]
+        G_R3["Ring 3: async on event stream"]
+        G_OUT -.-> G_R3
+    end
+
+    %% Styles
+    style WRAPPER fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style MIDDLEWARE fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style GRAPH fill:#E8A838,stroke:#B07820,color:#fff
+
+    style W_R0 fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style W_R1 fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style W_R2 fill:#E8A838,stroke:#B07820,color:#fff
+    style W_R3 fill:#9B59B6,stroke:#6C3483,color:#fff
+    style W_OUT fill:#27AE60,stroke:#1E8449,color:#fff
+
+    style M_R1a fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style M_R1b fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style M_R2 fill:#E8A838,stroke:#B07820,color:#fff
+    style M_HUMAN fill:#F39C12,stroke:#D68910,color:#fff
+    style M_R3 fill:#9B59B6,stroke:#6C3483,color:#fff
+    style M_SF fill:#E74C3C,stroke:#C0392B,color:#fff
+
+    style G_R0 fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style G_R1 fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style G_R2 fill:#E8A838,stroke:#B07820,color:#fff
+    style G_SEC fill:#E74C3C,stroke:#C0392B,color:#fff
+    style G_GATE fill:#34495E,stroke:#1C2833,color:#fff
+    style G_OUT fill:#27AE60,stroke:#1E8449,color:#fff
+    style G_R3 fill:#9B59B6,stroke:#6C3483,color:#fff
+    style G_EXEC fill:#2C3E50,stroke:#1A252F,color:#fff

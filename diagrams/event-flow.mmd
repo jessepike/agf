@@ -1,0 +1,107 @@
+%% AGF Event Flow — Observability Architecture
+%% Rings emit events → Event Stream → Detection Domains → Correlation → Response
+%% Dual-speed paths: fast sentinels vs slow analysis
+
+graph TD
+    subgraph EMITTERS["Event Emitters"]
+        direction LR
+        R0["Ring 0<br/>Execution<br/>Events"]
+        R1["Ring 1<br/>Verification<br/>Events"]
+        R2["Ring 2<br/>Governance<br/>Events"]
+        R3["Ring 3<br/>Learning<br/>Events"]
+        FAB["Fabric<br/>Identity, Error,<br/>Provenance Events"]
+    end
+
+    R0 --> ES
+    R1 --> ES
+    R2 --> ES
+    R3 --> ES
+    FAB --> ES
+
+    ES["Event Stream<br/><i>Structured events with<br/>identity context, timestamps,<br/>ring source, event type</i>"]
+
+    ES --> QD
+    ES --> SD
+    ES --> GD
+
+    subgraph DETECTION["Detection Domains"]
+        direction TB
+
+        subgraph QD_box["Quality Detection"]
+            QD["Output quality regression<br/>Verification failure patterns<br/>Convergence anomalies<br/>Trust score trajectories"]
+        end
+
+        subgraph SD_box["Security Detection"]
+            SD["Behavioral anomaly detection<br/>Lateral movement patterns<br/>Memory/state introspection<br/>Identity anomalies"]
+        end
+
+        subgraph GD_box["Governance Detection"]
+            GD["Policy violation patterns<br/>Gate override frequency<br/>Scope creep indicators<br/>Compliance drift"]
+        end
+    end
+
+    QD --> CE
+    SD --> CE
+    GD --> CE
+
+    CE["Correlation Engine<br/><i>Cross-domain pattern matching<br/>A quality issue may be a security attack<br/>A compliance anomaly may be behavioral drift</i>"]
+
+    %% Dual-speed paths
+    subgraph FAST["Fast Path — Sentinels"]
+        direction LR
+        F_desc["Sub-second · Known patterns"]
+        F_action["Immediate trigger on<br/>pattern match"]
+    end
+
+    subgraph SLOW["Slow Path — Analysis"]
+        direction LR
+        S_desc["Hours to days · Behavioral drift"]
+        S_action["Cross-execution analysis,<br/>memory evolution tracking"]
+    end
+
+    CE --> FAST
+    CE --> SLOW
+
+    FAST --> ACTIONS
+    SLOW --> ACTIONS
+
+    subgraph ACTIONS["Response Actions"]
+        direction LR
+        A1["Alert<br/><i>notify</i>"]
+        A2["Degrade<br/>Trust<br/><i>reduce autonomy</i>"]
+        A3["Quarantine<br/><i>isolate agent</i>"]
+        A4["Contain<br/><i>circuit breaker<br/>via Response Bus</i>"]
+        A5["Escalate<br/><i>human review</i>"]
+    end
+
+    %% Response Bus fast path
+    FAST == "pre-authorized<br/>match" ==> A4
+    A4 == "Security Response Bus" ==> FABRIC_CONTAIN["Fabric Containment<br/><i>sub-second</i>"]
+
+    %% Styles
+    style EMITTERS fill:#2C3E50,stroke:#1A252F,color:#fff
+    style R0 fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style R1 fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style R2 fill:#E8A838,stroke:#B07820,color:#fff
+    style R3 fill:#9B59B6,stroke:#6C3483,color:#fff
+    style FAB fill:#34495E,stroke:#1C2833,color:#fff
+
+    style ES fill:#5DADE2,stroke:#2E86C1,color:#fff
+
+    style QD_box fill:#2ECC71,stroke:#27AE60,color:#fff
+    style SD_box fill:#E74C3C,stroke:#C0392B,color:#fff
+    style GD_box fill:#F39C12,stroke:#D68910,color:#fff
+    style DETECTION fill:#1C2833,stroke:#0E1A24,color:#fff
+
+    style CE fill:#8E44AD,stroke:#6C3483,color:#fff
+
+    style FAST fill:#E74C3C,stroke:#C0392B,color:#fff
+    style SLOW fill:#2E86C1,stroke:#1A5276,color:#fff
+
+    style ACTIONS fill:#34495E,stroke:#1C2833,color:#fff
+    style A1 fill:#F4D03F,stroke:#D4AC0D,color:#000
+    style A2 fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style A3 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style A4 fill:#922B21,stroke:#641E16,color:#fff
+    style A5 fill:#3498DB,stroke:#2471A3,color:#fff
+    style FABRIC_CONTAIN fill:#641E16,stroke:#4A1411,color:#fff

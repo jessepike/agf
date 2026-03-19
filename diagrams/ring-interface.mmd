@@ -1,0 +1,75 @@
+%% AGF Composability Interface — Signal Protocol
+%% Ring receives (output, context, config) → returns signal
+%% Signal restrictions per ring
+
+graph TD
+    subgraph INPUT["Ring Receives"]
+        direction LR
+        I_OUT["<b>output</b><br/>Structured artifact<br/>from inner ring"]
+        I_CTX["<b>context</b><br/>Execution metadata,<br/>provenance chain,<br/>policy context,<br/>trust level,<br/>iteration count"]
+        I_CFG["<b>config</b><br/>Ring-specific<br/>configuration"]
+    end
+
+    INPUT --> RING["Ring Evaluates"]
+
+    RING --> PASS["<b>PASS</b><br/>output + annotations<br/><i>Output accepted</i>"]
+    RING --> REVISE_Q["<b>REVISE quality</b><br/>output + findings + reason<br/><i>Not good enough — retry</i>"]
+    RING --> REVISE_C["<b>REVISE context</b><br/>output + findings + reason<br/><i>World changed — re-execute</i>"]
+    RING --> HALT["<b>HALT</b><br/>reason<br/><i>Stop execution, escalate</i>"]
+    RING --> GATE["<b>GATE</b><br/>evidence + requirements<br/><i>Pause for authorization</i>"]
+    RING --> DELEGATE["<b>DELEGATE</b><br/>target + context + scope + depth<br/><i>Hand off to another agent</i>"]
+    RING --> ERROR["<b>ERROR</b><br/>reason + partial state + recovery<br/><i>retry / degrade / halt</i>"]
+
+    GATE --> GATE_R["APPROVE | REJECT |<br/>MODIFY | DEFER | ESCALATE"]
+
+    DELEGATE --> DEL_CHECK{"depth >= max?"}
+    DEL_CHECK -- "yes" --> HALT
+    DEL_CHECK -- "no" --> DEL_EXEC["Delegation proceeds"]
+
+    subgraph R1_SIGNALS["Ring 1 — Verification Signals"]
+        direction LR
+        R1_P["PASS"]
+        R1_RQ["REVISE<br/>quality"]
+        R1_H["HALT"]
+        R1_E["ERROR"]
+    end
+
+    subgraph R2_SIGNALS["Ring 2 — Governance Signals"]
+        direction LR
+        R2_P["PASS"]
+        R2_RC["REVISE<br/>context"]
+        R2_H["HALT"]
+        R2_G["GATE"]
+        R2_D["DELEGATE"]
+        R2_E["ERROR"]
+    end
+
+    subgraph R3_SIGNALS["Ring 3 — Learning"]
+        direction LR
+        R3_NOTE["No signals on individual outputs<br/>Modifies configuration between executions"]
+    end
+
+    subgraph BUDGET["Execution Budgets"]
+        direction LR
+        B1["max_iterations"]
+        B2["max_cost"]
+        B3["max_wall_clock"]
+        B4["budget_exhausted → HALT"]
+    end
+
+    %% Styles
+    style INPUT fill:#34495E,stroke:#1C2833,color:#fff
+    style RING fill:#2C3E50,stroke:#1A252F,color:#fff
+    style PASS fill:#27AE60,stroke:#1E8449,color:#fff
+    style REVISE_Q fill:#F39C12,stroke:#D68910,color:#fff
+    style REVISE_C fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style HALT fill:#E74C3C,stroke:#C0392B,color:#fff
+    style GATE fill:#3498DB,stroke:#2471A3,color:#fff
+    style DELEGATE fill:#9B59B6,stroke:#7D3C98,color:#fff
+    style ERROR fill:#95A5A6,stroke:#7F8C8D,color:#fff
+    style GATE_R fill:#2E86C1,stroke:#1A5276,color:#fff
+
+    style R1_SIGNALS fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style R2_SIGNALS fill:#E8A838,stroke:#B07820,color:#fff
+    style R3_SIGNALS fill:#9B59B6,stroke:#6C3483,color:#fff
+    style BUDGET fill:#566573,stroke:#2C3E50,color:#fff

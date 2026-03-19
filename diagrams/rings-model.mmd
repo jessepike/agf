@@ -1,0 +1,70 @@
+%% AGF Rings Model — Central Architecture Diagram
+%% Concentric rings: Ring 0 (Execution) → Ring 1 (Verification) → Ring 2 (Governance) → Ring 3 (Learning)
+%% Cross-cutting Fabric and Environment Substrate (#19)
+
+graph TD
+    subgraph R3["Ring 3 — Learning"]
+        direction TB
+        R3_desc["Self-improvement, memory, trust calibration<br/>Time horizon: days/weeks + real-time sentinels"]
+
+        subgraph R2["Ring 2 — Governance"]
+            direction TB
+            R2_desc["Policy gates, provenance, authorization<br/>Time horizon: minutes/hours"]
+
+            subgraph R1["Ring 1 — Verification"]
+                direction TB
+                R1_desc["Validation loops, critique, review<br/>Time horizon: seconds/minutes"]
+
+                subgraph R0["Ring 0 — Execution"]
+                    R0_desc["Agent domain logic, output generation<br/>Time horizon: ms/minutes"]
+                end
+            end
+        end
+    end
+
+    %% Signal flows between rings
+    R0 -- "output" --> R1
+    R1 -- "REVISE quality" --> R0
+    R1 -- "PASS / HALT" --> R2
+    R2 -- "REVISE context" --> R0
+    R2 -- "PASS" --> OUTPUT["Output Released"]
+    R2 -- "HALT" --> ESCALATE["Escalation"]
+    R2 -- "GATE" --> HUMAN["Human Review<br/>APPROVE / REJECT / MODIFY"]
+    HUMAN -- "decision" --> R2
+    R3 -. "observes all rings" .-> R0
+    R3 -. "proposes improvements" .-> R2
+    R2 -. "validates proposals" .-> R3
+
+    subgraph FABRIC["Cross-Cutting Fabric"]
+        F1["Structured Output<br/>Persistence #5"]
+        F2["Event-Driven<br/>Observability #10"]
+        F3["Error Handling<br/>& Recovery #13"]
+        F4["Identity &<br/>Attribution #14"]
+        F5["Provenance<br/>Chains #6"]
+        SF["Security Fabric<br/>Input sanitization · Output scanning<br/>Runtime containment · Identity verification"]
+    end
+
+    subgraph ENV["Environment Substrate — #19 Agent Environment Governance"]
+        E1["L1: Identity & Policy"]
+        E2["L2: Instructions"]
+        E3["L3: Capabilities"]
+        E4["L4: Retrieved Context"]
+        E5["L5: Session State"]
+    end
+
+    FABRIC -.- R0
+    FABRIC -.- R1
+    FABRIC -.- R2
+    FABRIC -.- R3
+    ENV --- FABRIC
+
+    %% Styles
+    style R0 fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style R1 fill:#7AB648,stroke:#4A7A2E,color:#fff
+    style R2 fill:#E8A838,stroke:#B07820,color:#fff
+    style R3 fill:#9B59B6,stroke:#6C3483,color:#fff
+    style FABRIC fill:#34495E,stroke:#1C2833,color:#fff
+    style ENV fill:#2C3E50,stroke:#1A252F,color:#fff
+    style OUTPUT fill:#27AE60,stroke:#1E8449,color:#fff
+    style ESCALATE fill:#E74C3C,stroke:#C0392B,color:#fff
+    style HUMAN fill:#F39C12,stroke:#D68910,color:#fff
