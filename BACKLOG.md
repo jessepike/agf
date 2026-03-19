@@ -157,8 +157,22 @@ Five domain profiles decompose the AGF reference architecture for different buye
 - [x] **Fix broken cross-references** — Security and Platform profiles now link to AI Engineering Profile + primitives catalog. All observability links now resolve. DONE.
 - [x] **Fix parent doc relative paths** — All profiles now correctly link to `../docs/agf-reference-architecture.md`. DONE.
 - [x] **External review prompts created** — Three tailored prompts: Claude Opus (adversarial — positioning, cross-profile coherence, audience targeting), GPT 5.4 (deep research — regulatory accuracy, crosswalk verification, threat mapping, OTel alignment), Gemini 3.1 Pro (deep research — practitioner usability, "would I use this?" test, navigation, missing personas). DONE.
-- [ ] **Run external reviews** — Claude, GPT, Gemini. Capture results in `inbox/`, triage to backlog.
-- [ ] **Process external review findings** — Address findings, update profiles, iterate.
+- [x] **Run external reviews** — Claude (adversarial), GPT (deep research — regulatory accuracy), Gemini (deep research — practitioner usability). All three complete. DONE.
+- [x] **Process critical factual errors** — 10 errors fixed: Art. 62→73, CSA ATF 4 levels (not 5), AGT/Bifrost recharacterized, EU AI Act phased applicability added, Art. 50 expanded, MCP06 renamed, NCCoE softened, ISO control names fixed, MITRE ATLAS added, AGF-vs-EU risk tier mapping added. DONE.
+
+### Remaining External Review Findings (To Address)
+
+**Strategic (next iteration):**
+- [ ] **Add "coverage boundary" annotations** to every regulatory mapping — state not just what's covered, but what's NOT (Claude finding)
+- [ ] **Add EU AI Act GPAI chapter** (Art. 51-56) as a mapping domain in GRC profile — relevant for all agentic systems built on foundation models
+- [ ] **Add competitive landscape references** — AWS Agentic AI Security Scoping Matrix (Nov 2025), Microsoft Azure AI agent governance guidance (Dec 2025), Google Cloud Vertex AI tool governance (Dec 2025), ServiceNow AI Control Tower/Gateway, Salesforce Agentforce governance
+- [ ] **Missing personas** — Product Manager profile (UX for governance gates, latency budgets, guardrail design) and Procurement/Vendor Risk profile (third-party agent evaluation rubrics) identified as gaps by Gemini
+- [ ] **Per-profile reference artifacts** — each profile needs one concrete implementation artifact: Security (red team payload repo), Platform (MCP OAuth federation reference), GRC (evidence exporter template), AI Engineering (trust calibration algorithms), Observability (OTel config snippets)
+- [ ] **Trust Ladders mathematical formalization** — move from conceptual to algorithmic (time-series models, ARIMAX-style calibration, temporal decay)
+- [ ] **NIST AI RMF coverage honesty** — add explicit "what AGF covers vs. what sits outside" for each of the 4 NIST functions (GOVERN has 23 subcategories; Ring 2 addresses a subset)
+- [ ] **Deployment mode ecosystem nuance** — middleware/interrupt is one of several coequal patterns, not dominant; MCP is connectivity, not governance; LangGraph uses graph-embedded, not middleware
+- [ ] **OTel semantic convention proposal** — pursue standardization of AGF governance extensions as OTel semantic conventions for reusable pieces
+- [ ] **Primitives doc: fix AGT/Bifrost/Reflexion characterizations** — Bifrost is AI gateway (not security fabric), AGT 0.43s is cumulative (not per-decision), Reflexion 50x needs direct source citation
 
 ---
 

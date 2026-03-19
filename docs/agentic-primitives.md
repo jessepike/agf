@@ -1524,8 +1524,8 @@ Every ring adds cost. The rings should be independently activatable so you only 
 The multipliers above (1.5-3x, 3-5x) are not safe general planning assumptions. They describe LLM compute costs only.
 
 **Empirical reference points from the literature:**
-- **Policy evaluation latency:** Microsoft AutoGen Governance Toolkit achieves 0.43s per governance decision across 7,000+ decisions — demonstrating that runtime governance overhead is sub-second for policy evaluation.
-- **Security fabric latency:** Bifrost-style access control achieves 11μs per enforcement check — confirming that Security Fabric enforcement at wire speed is feasible without meaningful latency impact.
+- **Policy evaluation overhead:** Microsoft AutoGen Governance Toolkit achieves 0.43s total overhead across 7,000+ decisions over 11 days (~0.06ms per decision) — demonstrating that runtime governance overhead is negligible at per-decision scale.
+- **Gateway routing latency:** Bifrost AI gateway achieves 11μs per request at 5,000 RPS — demonstrating that wire-speed routing overhead is feasible for governance middleware layers.
 - **Explainability overhead:** SHAP/LIME-based explanation generation adds approximately 2x compute relative to the base inference — a real cost when transparency is required at every gate.
 - **Self-improvement costs:** Reflexion-style learning loops (Ring 3 patterns) consume approximately 50x the tokens of a single execution — the learning ring is a genuine investment, not a rounding error. This validates our framing of Ring 3 as an investment that must demonstrate ROI through efficiency gains in Rings 0-2.
 
@@ -1627,7 +1627,7 @@ The EU AI Act provides the regulatory foundation that makes governance framework
 | **Art. 15 — Accuracy, robustness, cybersecurity** | Resilience against attacks including data poisoning, adversarial examples, model manipulation, and exploitation of supply chain vulnerabilities | Adversarial Robustness (#15) + Security Architecture + Evaluation & Assurance (#18). Art. 15 explicitly names attack categories our three-level security model addresses: data poisoning → Data Governance (#17) + Intelligence memory introspection; adversarial examples → Security Fabric input sanitization; model manipulation → configuration integrity attestation; supply chain → supply chain trust policy. Art. 15's cybersecurity requirement for "appropriate levels of accuracy, robustness and cybersecurity" supports our risk-proportional ring activation — higher-risk classification triggers more intensive ring processing. |
 | **Art. 50 — Transparency obligations** | Users must be informed they are interacting with AI | Identity context at gates includes AI-system identification. |
 
-**What this mapping does NOT cover:** Art. 43 (conformity assessment procedures), Art. 62 (serious incident reporting to market surveillance authorities), and ongoing post-market monitoring obligations. These are organizational/regulatory processes that sit above our runtime architecture. We acknowledge these gaps — our framework provides the technical evidence substrate that these processes require, but does not define the processes themselves.
+**What this mapping does NOT cover:** Art. 43 (conformity assessment procedures), Art. 73 (serious incident reporting to market surveillance authorities), Art. 51-56 (GPAI model obligations), Art. 72 (post-market monitoring), and Art. 26 (deployer obligations). These are organizational/regulatory processes that sit above our runtime architecture. We acknowledge these gaps — our framework provides the technical evidence substrate that these processes require, but does not define the processes themselves.
 
 #### Singapore — Agentic AI Governance
 
@@ -1657,7 +1657,7 @@ OWASP also published two MCP-specific resources: the **OWASP MCP Top 10** (note:
 
 The Cloud Security Alliance's work on agentic trust is the most directly applicable zero trust governance framework for AI agents. Mapped in detail in [Security Architecture](#security-architecture).
 
-Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern → Associate → Senior → Staff → Principal). The ATF's promotion gates — requiring time-at-level, performance thresholds, security validation, and governance sign-off before autonomy escalation — provide operational specificity that our trust ladder architecture should adopt more formally.
+Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern → Junior → Senior → Principal). The ATF's promotion gates — requiring time-at-level, performance thresholds, security validation, and governance sign-off before autonomy escalation — provide operational specificity that our trust ladder architecture should adopt more formally.
 
 CSA's **MAESTRO** (Multi-Agent Environment, Security, Threat, Risk, and Outcome) threat modeling framework provides 7-layer threat modeling with per-layer and cross-layer threat analysis. Primitive mapping to MAESTRO layers:
 

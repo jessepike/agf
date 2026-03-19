@@ -145,7 +145,7 @@ Trust is earned through demonstrated performance, not granted by default. Agents
 - **Trust affects:** Adaptive gate frequency, verification intensity, autonomy scope
 - **Trust never affects:** Mandatory gates, boundary enforcement, identity verification
 - **Calibration:** Trust promotions/demotions are logged, justified, and auditable. Trust escalation anomalies trigger Security Intelligence alerts.
-- **Aligns with:** CSA ATF earned autonomy maturity model (Intern → Associate → Senior → Staff → Principal)
+- **Aligns with:** CSA ATF earned autonomy maturity model (Intern → Junior → Senior → Principal)
 
 #### #12 — Memory-Augmented Reasoning
 **Ring:** 0 + 3 | **Category:** Knowledge management
@@ -445,7 +445,7 @@ Agent Environment Governance (#19) includes a governed self-improving cycle for 
 | **CSA Agentic Trust Framework** | Earned autonomy maturity model | Trust Ladders (#11) aligns with ATF's promotion model |
 | **CSA MAESTRO** | 7-layer threat model for agentic systems | Layer-by-layer mapping to AGF primitives |
 | **Singapore IMDA MGF for Agentic AI** | First government agentic governance framework | Four dimensions validate AGF's scope, including operational environments |
-| **NIST NCCoE Agent Identity** (Feb 2026) | Agent-specific identity protocols | SPIFFE/SPIRE, OAuth 2.1, OIDC, NGAC for Identity #14 |
+| **NIST NCCoE Agent Identity** (concept paper, Feb 2026) | Candidate agent-specific identity protocols | SPIFFE/SPIRE, OAuth 2.1, OIDC, NGAC under consideration for Identity #14 |
 
 ### Academic Research (Key Papers)
 

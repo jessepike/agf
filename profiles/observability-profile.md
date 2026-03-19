@@ -218,7 +218,7 @@ The event architecture builds on OpenTelemetry GenAI semantic conventions as a f
 - **OTel provides:** LLM-level tracing (model calls, token usage, latency, streaming)
 - **AGF extends:** Ring-level semantics, governance gate events, trust ladder changes, security signals, provenance links, identity context depth
 
-Implementation approach: emit events as OTel spans/events where possible. Governance, security, and ring-level semantics use custom attributes within the OTel data model. This is custom extension within OTel, not native semantic compatibility — an honest distinction.
+Implementation approach: OTel GenAI semantic conventions already provide substantial native compatibility — agent spans, tool-call capture, model identity, token usage, and emerging MCP conventions. AGF should be described as **OTel-compatible base + governance extensions**, not "not compatible." Governance, security, and ring-level semantics (ring, deployment_mode, policy_reference, gate_type) use custom attributes within the OTel data model. These governance extensions could potentially be proposed as OTel semantic convention extensions for the widely reusable pieces (policy decision events, gate outcomes, evidence/provenance pointers). OTel GenAI conventions are at Development maturity (not yet stable) as of v1.40.0, making interoperability a versioned, evolving target.
 
 ---
 

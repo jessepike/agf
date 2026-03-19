@@ -26,11 +26,12 @@ CISOs, security architects, application security teams, red teams, SOC analysts,
 6. [Threat Analysis: OWASP MCP Top 10](#threat-analysis-owasp-mcp-top-10)
 7. [The Agent Environment as Attack Surface](#the-agent-environment-as-attack-surface)
 8. [CSA Agentic Trust Framework Alignment](#csa-agentic-trust-framework-alignment)
-9. [Red Team Scenarios](#red-team-scenarios)
-10. [Incident Response Playbook Structure](#incident-response-playbook-structure)
-11. [Security Primitives Reference](#security-primitives-reference)
-12. [Known Limitations and Open Questions](#known-limitations-and-open-questions)
-13. [Security Assessment Checklist](#security-assessment-checklist)
+9. [MITRE ATLAS Alignment](#mitre-atlas-alignment)
+10. [Red Team Scenarios](#red-team-scenarios)
+11. [Incident Response Playbook Structure](#incident-response-playbook-structure)
+12. [Security Primitives Reference](#security-primitives-reference)
+13. [Known Limitations and Open Questions](#known-limitations-and-open-questions)
+14. [Security Assessment Checklist](#security-assessment-checklist)
 
 ---
 
@@ -160,7 +161,7 @@ In agentic zero trust, identity is richer than traditional identity:
 - **Data identity:** whose data, classification level, consent scope
 - **Human identity:** who is in the governance loop, what authority do they hold
 
-These bind into an **identity context** that travels with every action through every ring. Implementation protocols (per NIST NCCoE, Feb 2026): SPIFFE/SPIRE for cryptographic workload identity (SVIDs), OAuth 2.1 for user-delegated agent authority, OIDC for federated identity, NGAC for attribute-based access control, JWT for per-interaction authorization.
+These bind into an **identity context** that travels with every action through every ring. Candidate implementation protocols (identified in the NIST NCCoE concept paper, Feb 2026): SPIFFE/SPIRE for cryptographic workload identity (SVIDs), OAuth 2.1 for user-delegated agent authority, OIDC for federated identity, NGAC for attribute-based access control, JWT for per-interaction authorization.
 
 ---
 
@@ -280,7 +281,7 @@ The Model Context Protocol has become the de facto standard for agent-tool integ
 | **MCP03 — Tool Poisoning** | Compromised tools inject malicious context. Rug pulls, schema poisoning, tool shadowing. | Adversarial Robustness #15 supply chain trust. Tool schema integrity verification. |
 | **MCP04 — Supply Chain Attacks** | Malicious components in open-source packages or connectors | Signed components, dependency monitoring, provenance tracking. Governance-defined trust tiers. |
 | **MCP05 — Command Injection** | Agents construct system commands from untrusted input | Fabric input sanitization + execution isolation. |
-| **MCP06 — Prompt Injection via Contextual Payloads** | Malicious instructions embedded in context hijack agent goals | Fabric input sanitization + Governance semantic evaluation. #19 treats tool descriptions as untrusted input. |
+| **MCP06 — Intent Flow Subversion** | In-flow context manipulation that hijacks agent goals through contextual payloads | Fabric input sanitization + Governance semantic evaluation. #19 treats tool descriptions as untrusted input. |
 | **MCP07 — Insufficient Auth** | MCP servers fail to verify identities or enforce access controls | Identity #14 + Fabric identity enforcement at every MCP tool invocation boundary. |
 | **MCP08 — Lack of Audit/Telemetry** | Limited logging impedes investigation and incident response | Event-Driven Observability #10. Immutable audit trails. |
 | **MCP09 — Shadow MCP Servers** | Unapproved instances outside organizational governance | Security Governance policy enforcement. Authorized server registries. |
@@ -316,7 +317,23 @@ Agent Environment Governance (#19) identifies the agent's operating environment 
 | **Segmentation** | Governance (boundary policy, least privilege) | Fabric (enforcement), Intelligence (violation detection) |
 | **Incident Response** | Intelligence + Fabric via Response Bus | Governance (pre-authorization, post-incident review) |
 
-Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern → Associate → Senior → Staff → Principal). The ATF's promotion gates — requiring time-at-level, performance thresholds, security validation, and governance sign-off — provide operational specificity for trust ladder implementation.
+Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern → Junior → Senior → Principal). The ATF's promotion gates — requiring time-at-level, performance thresholds, security validation, and governance sign-off — provide operational specificity for trust ladder implementation.
+
+---
+
+## MITRE ATLAS Alignment
+
+MITRE ATLAS (Adversarial Threat Landscape for AI Systems) is the de facto standard for AI adversarial threat modeling, modeled after ATT&CK. As of October 2025, it includes 15 tactics, 66 techniques, 46 sub-techniques, and 33 real-world case studies. A 2025 update added 14 techniques specifically focused on AI agents and generative AI systems.
+
+AGF's three-level security model complements ATLAS:
+
+| AGF Security Level | ATLAS Alignment |
+|-------------------|----------------|
+| **Security Fabric** (L1) | Maps to ATLAS mitigations at the infrastructure/enforcement layer — input validation, containment, identity verification |
+| **Security Governance** (L2) | Maps to ATLAS mitigations at the policy/authorization layer — access control, supply chain trust, semantic evaluation |
+| **Security Intelligence** (L3) | Maps to ATLAS detection techniques — behavioral analysis, anomaly detection, cross-pipeline correlation |
+
+**Relationship:** ATLAS provides the adversarial technique taxonomy. AGF provides the defensive architecture. OWASP ASI provides the agentic-specific threat categories. These three are complementary — ATLAS for adversarial technique enumeration, OWASP for agentic threat categorization, AGF for governance architecture and defense mapping. Red team exercises should reference ATLAS techniques alongside the OWASP ASI categories mapped in this profile.
 
 ---
 

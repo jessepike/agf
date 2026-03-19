@@ -67,9 +67,11 @@ The EU AI Act provides the most comprehensive regulatory framework for AI system
 | **Art. 13 — Transparency** | Sufficient transparency for deployers to interpret output and detect anomalies | Identity & Attribution (#14) — full identity context on every action. Provenance chains, confidence signals, gate decision explanations. | Identity context records, decision explanation artifacts |
 | **Art. 14 — Human oversight** | Ability to understand capabilities/limitations, monitor operation, intervene/interrupt/halt in safe state | Governance Gates (#8) with human interface requirements — evidence presentation, counterfactual framing, rubber-stamping detection. Security Response Bus safe-halt mechanics. | Gate decision logs, human intervention records, halt/containment records |
 | **Art. 15 — Accuracy, robustness, cybersecurity** | Resilience against data poisoning, adversarial examples, model manipulation, supply chain exploitation | Adversarial Robustness (#15) + Security Architecture + Evaluation & Assurance (#18) | Security test results, red team reports, evaluation suite outcomes |
-| **Art. 50 — Transparency obligations** | Users informed they are interacting with AI | Identity context at gates includes AI-system identification | AI identification disclosure records |
+| **Art. 50 — Transparency obligations** | Users informed they are interacting with AI; disclosure/labelling for certain AI-generated content (e.g., deepfakes); transparency duties for emotion recognition and biometric categorisation systems | Identity & Attribution (#14) — AI-system identification in identity context. Provenance Chains (#6) for content provenance. | AI identification disclosure records, content provenance records |
 
-**What AGF does NOT cover:** Art. 43 (conformity assessment procedures), Art. 62 (serious incident reporting), and ongoing post-market monitoring obligations. These are organizational/regulatory processes above AGF's runtime architecture. AGF provides the technical evidence substrate these processes require.
+**What AGF does NOT cover:** Art. 43 (conformity assessment procedures), Art. 73 (serious incident reporting), Art. 51-56 (GPAI model obligations — relevant when agentic systems are built on general-purpose AI models), Art. 72 (post-market monitoring system), and Art. 26 (deployer obligations including log retention ≥6 months). These are organizational/regulatory processes above AGF's runtime architecture. AGF provides the technical evidence substrate these processes require.
+
+**Applicability timing (as of March 2026):** The EU AI Act entered into force in 2024 with phased applicability. Prohibitions, definitions, and AI literacy (Art. 4) have applied since 2 February 2025. Governance rules and GPAI obligations have applied since 2 August 2025. High-risk system obligations (Art. 6, 9-15) become applicable 2 August 2026. Organizations should begin preparation now; the obligations in this profile are transitional as of this writing.
 
 ### Human Oversight: An Honest Constraint
 
@@ -81,7 +83,7 @@ For compliance purposes: document both the human oversight mechanisms (gates, re
 
 ## NIST AI RMF Alignment
 
-AGF primitives are **agentic specializations of** NIST AI RMF functions — runtime mechanisms within broader organizational functions. AGF does not claim to cover the full breadth of each function.
+AGF primitives constitute an **agentic AI RMF-style profile** — runtime mechanisms that partially address aspects of NIST AI RMF functions in the agentic context. NIST describes its functions as flexibly applicable; AGF applies them to agentic systems specifically. AGF does not claim to cover the full breadth of each function.
 
 | NIST Function | Scope | AGF Mapping |
 |---------------|-------|-------------|
@@ -100,11 +102,11 @@ Maps AI agent security onto NIST CSF 2.0's six functions across three focus area
 | **AI-Enabled Cyber Defense** | Security Intelligence + Security Response Bus with human oversight |
 | **Thwarting AI-Enabled Attacks** | Adversarial Robustness (#15) |
 
-Key alignment: IR 8596 treats AI agents as *actors* (entities that make decisions at machine speed), not just applications. This validates AGF's Identity primitive position that agent identity must be first-class.
+Key alignment: IR 8596 treats AI agents as security-relevant entities requiring unique identity, privileged-user-level precautions, and agent-specific security controls — not just applications. This validates AGF's Identity primitive position that agent identity must be first-class.
 
 ### NIST NCCoE Agent Identity
 
-Implementation protocols for Identity & Attribution (#14): SPIFFE/SPIRE for cryptographic workload identity, OAuth 2.1 for user-delegated agent authority, OIDC for federated identity, NGAC for attribute-based access control.
+The NCCoE published a concept paper (February 2026, public comment period Feb-Apr 2026) exploring agent identity and authorization. The paper identifies candidate protocols for Identity & Attribution (#14): SPIFFE/SPIRE for cryptographic workload identity, OAuth 2.1 for user-delegated agent authority, OIDC for federated identity, NGAC for attribute-based access control. Note: these are protocols under consideration for a potential NCCoE project, not formal NIST recommendations.
 
 ---
 
@@ -229,6 +231,8 @@ AGF uses risk-proportional governance — higher stakes trigger more intensive r
 | **Critical** | All rings + enhanced monitoring + continuous evaluation | Full stack + Security Intelligence active monitoring + continuous red-teaming | Autonomous systems with irreversible real-world impact |
 
 For EU AI Act: high-risk classification under Art. 6 implies full ring stack activation at minimum.
+
+**AGF tiers vs. EU AI Act risk categories:** The EU AI Act uses four categories: unacceptable risk (prohibited), high-risk, limited risk, and minimal risk. AGF's tiers are operational governance levels, not legal categories. The mapping: EU "high-risk" → AGF Tier 3 (High) minimum. EU "limited risk" → AGF Tier 2 (Medium) minimum. EU "minimal risk" → AGF Tier 1 (Low). AGF "Critical" has no direct EU AI Act equivalent — it is an operational designation for systems with irreversible real-world impact that may or may not be classified as high-risk under the Act.
 
 ### Classification Dimensions
 
@@ -373,9 +377,9 @@ This crosswalk maps AGF primitives to established security and compliance contro
 | **#15 Adversarial Robustness** | SI-3 (Malicious Code Protection), SI-7 (Software/Firmware/Info Integrity), RA-5 (Vulnerability Monitoring and Scanning) | A.8.7 (Protection Against Malware), A.8.8 (Management of Technical Vulnerabilities) | Art. 15 (Robustness, Cybersecurity) |
 | **#16 Transaction & Side-Effect Control** | CP-9 (System Backup), CP-10 (System Recovery and Reconstitution), SI-10 (Information Input Validation) | A.8.13 (Information Backup), A.8.14 (Redundancy of Information Processing Facilities) | Art. 15 (Accuracy) |
 | **#17 Data Governance** | MP-2 (Media Access), PM-25 (Minimization of PII), PT-2 (Authority to Process PII), PT-3 (PII Processing Purposes) | A.5.34 (Privacy and Protection of PII), A.5.12 (Classification of Information) | Art. 10 (Data Governance), GDPR |
-| **#18 Evaluation & Assurance** | CA-2 (Control Assessments), CA-8 (Penetration Testing), SA-11 (Developer Testing and Evaluation) | A.8.29 (Security Testing in Development and Acceptance), A.8.8 (Technical Vulnerabilities) | Art. 15 (Accuracy, Robustness) |
+| **#18 Evaluation & Assurance** | CA-2 (Control Assessments), CA-8 (Penetration Testing), SA-11 (Developer Testing and Evaluation) | A.8.29 (Security Testing in Development and Acceptance), A.8.8 (Management of Technical Vulnerabilities) | Art. 15 (Accuracy, Robustness) |
 | **#19 Agent Environment Governance** | CM-2 (Baseline Configuration), CM-6 (Configuration Settings), CM-8 (System Component Inventory) | A.8.9 (Configuration Management), A.5.9 (Inventory of Information and Other Associated Assets) | IMDA Dim. 1 (Operational Environments) |
-| **Security Fabric** | SC-7 (Boundary Protection), SC-8 (Transmission Confidentiality/Integrity), SI-10 (Information Input Validation) | A.8.20 (Networks Security), A.8.21 (Security of Network Services), A.8.24 (Use of Cryptography) | Art. 15 (Cybersecurity) |
+| **Security Fabric** | SC-7 (Boundary Protection), SC-8 (Transmission Confidentiality/Integrity), SI-10 (Information Input Validation) | A.8.20 (Network Security), A.8.21 (Security of Network Services), A.8.24 (Use of Cryptography) | Art. 15 (Cybersecurity) |
 | **Security Response Bus** | IR-4 (Incident Handling), IR-5 (Incident Monitoring), IR-6 (Incident Reporting) | A.5.24 (Information Security Incident Management Planning), A.5.26 (Response to Information Security Incidents) | Art. 15 (Robustness) |
 
 ### How to Use This Crosswalk

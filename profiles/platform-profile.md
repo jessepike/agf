@@ -319,7 +319,7 @@ The Model Context Protocol is the canonical implementation of middleware/interru
 
 2. **Server trust chain.** Community MCP servers undergo no security review. Supply chain trust (#15) policy must define trust tiers (verified publisher, community-reviewed, unvetted) with different ring activation intensity per tier.
 
-3. **Context window as attack surface.** MCP tool descriptions are injected into the agent's context. Tool poisoning (OWASP MCP03) and prompt injection (MCP06) operate through this channel. The Security Fabric must treat MCP tool descriptions as untrusted input.
+3. **Context window as attack surface.** MCP tool descriptions are injected into the agent's context. Tool poisoning (OWASP MCP03) and intent flow subversion (MCP06) operate through this channel. The Security Fabric must treat MCP tool descriptions as untrusted input.
 
 4. **Session isolation.** Multi-tenant MCP servers must enforce context compartmentalization (OWASP MCP10). Ring 2 policy defines isolation boundaries; Fabric enforces them.
 
@@ -366,8 +366,8 @@ When agents cross organizational boundaries:
 
 | Metric | Value | Implication |
 |--------|-------|------------|
-| **Policy evaluation latency** | 0.43s / 7K decisions (Microsoft AGT) | Runtime governance overhead is sub-second |
-| **Security fabric latency** | 11μs per check (Bifrost) | Fabric enforcement at wire speed is feasible |
+| **Policy evaluation overhead** | 0.43s total across 7K+ decisions over 11 days (Microsoft AGT) — ~0.06ms per decision | Runtime governance overhead is negligible at per-decision scale |
+| **Gateway routing latency** | 11μs per request at 5K RPS (Bifrost AI gateway) | Wire-speed routing overhead is feasible for governance middleware |
 | **Explainability overhead** | ~2× compute (SHAP/LIME) | Transparency at every gate has real cost |
 | **Self-improvement cost** | ~50× tokens (Reflexion-style) | Ring 3 learning is a genuine investment |
 
