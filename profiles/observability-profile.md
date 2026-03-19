@@ -214,12 +214,22 @@ Events classified by ring, mapping to the three detection domains:
 
 ### OTel Integration
 
-The event architecture builds on OpenTelemetry GenAI semantic conventions as a foundation, with governance-specific extensions:
+AGF is an **OTel-compatible base + governance extensions** architecture. OTel GenAI semantic conventions (Development maturity, v1.40.0) already provide substantial native compatibility — agent spans, tool-call capture, model identity, token usage, and emerging MCP conventions.
 
-- **OTel provides:** LLM-level tracing (model calls, token usage, latency, streaming)
-- **AGF extends:** Ring-level semantics, governance gate events, trust ladder changes, security signals, provenance links, identity context depth
+**OTel Signal Mapping:**
 
-Implementation approach: OTel GenAI semantic conventions already provide substantial native compatibility — agent spans, tool-call capture, model identity, token usage, and emerging MCP conventions. AGF should be described as **OTel-compatible base + governance extensions**, not "not compatible." Governance, security, and ring-level semantics (ring, deployment_mode, policy_reference, gate_type) use custom attributes within the OTel data model. These governance extensions could potentially be proposed as OTel semantic convention extensions for the widely reusable pieces (policy decision events, gate outcomes, evidence/provenance pointers). OTel GenAI conventions are at Development maturity (not yet stable) as of v1.40.0, making interoperability a versioned, evolving target.
+| AGF Event Category | OTel Signal Type | Examples |
+|-------------------|-----------------|---------|
+| Operations with duration | **Spans** | `agent_started/completed`, `tool_called/returned`, `verification_started/completed`, `gate_triggered/resolved` |
+| Point-in-time within an operation | **Span Events** | `finding_produced`, `adversarial_critique`, `output_validated_schema` |
+| Standalone occurrences | **Log Records** | `trust_level_changed`, `sentinel_triggered`, `boundary_violation_detected` |
+| Aggregations | **Metrics** | Token usage (`gen_ai.usage.*`), policy evaluation counts, quality scores |
+
+**Correlation context mapping:** `run_id` → OTel `trace_id`, `parent_event_id` → `parent_span_id`, `session_id` → `gen_ai.conversation.id`, `case_id` → OTel Baggage (no direct equivalent).
+
+Governance-specific extensions (`ring`, `deployment_mode`, `policy_reference`, `gate_type`) use custom attributes within the OTel data model under an `agf.*` namespace. These could be proposed as OTel semantic convention extensions for reusable pieces (policy decision events, gate outcomes, provenance pointers).
+
+**Complementary specifications:** OpenInference (Arize/Phoenix — GUARDRAIL and EVALUATOR span kinds), CloudEvents (CNCF — event transport), W3C Trace Context (distributed agent tracing), OTel GenAI Agentic Systems Proposal #2664.
 
 ---
 
@@ -227,35 +237,45 @@ Implementation approach: OTel GenAI semantic conventions already provide substan
 
 The correlation engine consumes the event stream and applies rules across the three detection domains. Rules are versioned, explicit, and auditable — the same principle as Policy as Code (#9) applied to detection logic.
 
+**Note on abstraction level:** The rules below are a **detection strategy taxonomy**, not production-level detection rules. Each conceptual rule decomposes into 3-10 implementable detections with specific log fields, thresholds, and time windows. Rules are tagged with OWASP ASI identifiers where applicable. For the full rule set, see the [Agentic Observability concept doc](../docs/agentic-observability.md#correlation-engine).
+
 ### Quality Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| **Quality regression** | Agent's Ring 1 pass rate drops >15% over rolling 7-day window | Alert, investigate, consider trust demotion |
-| **Convergence degradation** | Average validation loop iterations trending up >25% | Alert, investigate prompt/model degradation |
-| **Override clustering** | Human overrides clustering on same field type across agents | Alert, flag for prompt improvement |
-| **Cost anomaly** | Per-execution cost >2σ above baseline for >24 hours | Alert, investigate resource usage |
-| **Trust-quality divergence** | Trust level increasing while Ring 1 pass rate is flat or declining | Alert, investigate calibration — trust is rising without quality justification |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| **Quality regression** | Ring 1 pass rate drops >15% over rolling 7-day window | Alert, investigate, consider trust demotion | — |
+| **Convergence degradation** | Average validation loop iterations trending up >25% | Alert, investigate prompt/model degradation | — |
+| **Override clustering** | Human overrides clustering on same field type across agents | Alert, flag for prompt improvement | — |
+| **Cost / resource anomaly** | Per-execution cost >2σ above baseline, or token runaway / recursive loop | Budget circuit breaker + alert | ASI02 |
+| **Trust-quality divergence** | Trust level increasing while Ring 1 pass rate is flat or declining | Alert, investigate calibration | — |
+| **Hallucination spike** | Output claims not grounded in source evidence (grounding check failure rate up) | Alert + verification intensity increase | — |
 
 ### Security Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| **Lateral movement** | Privilege escalation in Agent A → coordinated behavior change in Agent B within 60s | Response Bus containment, critical alert |
-| **Trust manipulation** | Trust level increase >2 tiers in <7 days followed by novel high-stakes action | Immediate trust reset, quarantine output, investigate |
-| **Memory drift** | Memory store embedding distribution shifts >threshold from baseline | Alert, memory introspection, potential quarantine |
-| **Identity anomaly** | Delegation chain inconsistency OR unexpected model version in identity context | Critical alert, halt pipeline, investigate |
-| **Ring bypass** | Output released without Ring 1 or Ring 2 events in provenance chain | Critical alert, quarantine all outputs since bypass, investigate |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| **Agent goal hijacking** | Behavioral divergence from authorized objectives, instruction drift | Containment + investigation | ASI01 |
+| **Tool misuse** | Permitted tools used in anomalous parameter combinations or sequences | Alert + scope review | ASI02 |
+| **Lateral movement** | Privilege escalation in Agent A → coordinated behavior change in Agent B within 60s | Response Bus containment, critical alert | ASI07 |
+| **Trust manipulation** | Trust level increase >2 tiers in <7 days followed by novel high-stakes action | Immediate trust reset, quarantine, investigate | ASI09 |
+| **Memory drift** | Memory store embedding distribution shifts >threshold from baseline | Alert, memory introspection, quarantine | ASI06 |
+| **Identity anomaly** | Delegation chain inconsistency OR unexpected model version | Critical alert, halt pipeline, investigate | ASI03 |
+| **Ring bypass** | Output released without Ring 1 or Ring 2 events in provenance chain | Critical alert, quarantine all outputs since bypass | — |
+| **Supply chain compromise** | MCP server integrity failure, tool schema mutation, untrusted server | Quarantine tool + isolate agents + alert | ASI04 |
+| **Cascading failure** | Error rate >3× baseline across ≥2 agents within 30s | Circuit breakers + Response Bus | ASI08 |
+| **Data exfiltration** | Abnormal cross-boundary data flows or classification-violating output | Block data flows + isolate + critical alert | ASI03 |
 
 ### Governance Correlation Rules
 
-| Rule | Pattern | Response |
-|------|---------|----------|
-| **Gate bypass** | Mandatory gate not triggered for action that should have triggered it | Critical alert, halt pipeline, quarantine outputs |
-| **Stale approval** | Active approval granted >24 hours ago AND context has materially changed | Invalidate approval, re-gate |
-| **Policy drift** | Policy evaluation running against outdated policy version | Alert, flag for policy sync |
-| **Provenance gap** | Gap in provenance chain (event N → event N+3, no N+1 or N+2) | Alert, investigate, flag affected outputs |
-| **Transaction violation** | Side effect committed without pre-commit event OR confirmation timeout | Alert, trigger compensation evaluation |
+| Rule | Pattern | Response | Ref |
+|------|---------|----------|-----|
+| **Gate bypass** | Mandatory gate not triggered for action that should have triggered it | Critical alert, halt pipeline, quarantine outputs | — |
+| **Stale approval** | Active approval granted >24 hours ago AND context has materially changed | Invalidate approval, re-gate | — |
+| **Policy drift** | Policy evaluation running against outdated policy version | Alert, flag for policy sync | — |
+| **Provenance gap** | Gap in provenance chain (event N → event N+3, no N+1 or N+2) | Alert, investigate, flag affected outputs | Art. 12 |
+| **Transaction violation** | Side effect committed without pre-commit event OR confirmation timeout | Alert, trigger compensation evaluation | — |
+| **Missing required telemetry** | Expected governance event not observed within time window | Alert + flag for audit | — |
+| **Data governance violation** | PII processed without classification, consent exceeded, unauthorized cross-boundary flow | Halt data flow + alert | Art. 10 |
 
 ### Dual-Speed Detection
 
@@ -433,9 +453,9 @@ The following AGF primitives are directly relevant to observability and operatio
 - [ ] Trust level visualization operational
 
 ### Level 3: Correlation & Detection
-- [ ] Quality correlation rules active (regression, convergence, override clustering)
-- [ ] Security correlation rules active (lateral movement, trust manipulation, memory drift)
-- [ ] Governance correlation rules active (gate bypass, stale approvals, provenance gaps)
+- [ ] Quality correlation rules active (regression, convergence, override clustering, hallucination, resource exhaustion)
+- [ ] Security correlation rules active (goal hijacking, tool misuse, lateral movement, trust manipulation, supply chain, cascading failure, data exfil)
+- [ ] Governance correlation rules active (gate bypass, stale approvals, provenance gaps, missing telemetry, data governance violations)
 - [ ] Behavioral baselines established per agent
 - [ ] Anomaly detection against baselines configured
 
