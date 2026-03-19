@@ -79,7 +79,7 @@ research/
 ## Philosophy
 
 - **Humility before authority.** We synthesize, we don't decree. We acknowledge what came before.
-- **Rigor before opinion.** Every claim grounded in evidence, prior art, or clearly marked as a proposal.
+- **Rigor before opinion.** Every claim grounded in evidence, existing work, or clearly marked as a proposal.
 - **Community > credit.** If this framework helps one organization build a safer agentic system, it has served its purpose.
 
 ## Status
@@ -92,4 +92,4 @@ See [LICENSE](LICENSE).
 
 ## About
 
-AGF is developed and maintained by [Jesse Pike](https://jessepike.com). Documentation site: [agf.jessepike.com](https://agf.jessepike.com) (coming soon).
+AGF is developed and maintained by [Jesse Pike](https://jessepike.dev). Documentation site: [agf.jessepike.dev](https://agf.jessepike.dev) (coming soon).

@@ -14,7 +14,7 @@
 3. [How It Fits Together](#how-it-fits-together)
 4. [Who Uses What](#who-uses-what)
 5. [Standards & Regulatory Alignment](#standards--regulatory-alignment)
-6. [Prior Art & Positioning](#prior-art--positioning)
+6. [Existing Work & Positioning](#existing-work--positioning)
 7. [Where to Go Next](#where-to-go-next)
 
 ---
@@ -23,7 +23,7 @@
 
 Agentic systems are proliferating faster than the architectural patterns to govern them.
 
-Organizations are deploying autonomous agents — coding assistants, ops automation, customer-facing chatbots, decision-support systems, multi-agent workflows — at an extraordinary pace. Most deployments today are brittle. They work in demos but fail under scrutiny because they lack the structural primitives that make automated action trustworthy, auditable, and improvable.
+Organizations are deploying autonomous agents — coding assistants, ops automation, customer-facing chatbots, decision-support systems, multi-agent workflows — at an extraordinary pace. The capabilities are emerging fast, and the governance patterns haven't caught up. Teams are running pilots, experimenting with new architectures, and in some cases moving to production before the guardrails are fully in place — not because they're careless, but because the space is evolving so quickly that best practices are still being established. We don't yet fully understand how all the components interact, and keeping up is a shared challenge across the industry.
 
 The governance landscape is fragmented. NIST provides risk management frameworks. OWASP provides threat taxonomies. The Cloud Security Alliance provides trust frameworks. ISO provides management systems. OpenTelemetry provides observability standards. The EU AI Act provides regulatory requirements. Singapore published the world's first government agentic governance framework. Model providers ship their own governance features. Enterprise platforms build their own control planes. Security vendors build point solutions.
 
@@ -39,7 +39,7 @@ This is a living framework, not a monument. Where our understanding evolves — 
 
 This framework is built on an honest assessment of oversight's limitations.
 
-Research demonstrates that oversight efficacy degrades as the capability gap between overseer and system increases (Engels et al., "Scaling Laws For Scalable Oversight," NeurIPS 2025). As agentic systems grow more capable, overseers — whether human or AI — face a widening gap. AGF does not pretend that oversight alone solves the governance problem. It is why we invest in structural guarantees — verification layers, automated policy enforcement, containment mechanisms — that function whether or not the overseer catches every issue.
+Research demonstrates that oversight efficacy degrades as the capability gap between overseer and system increases (Engels et al., "Scaling Laws For Scalable Oversight," NeurIPS 2025). As agentic systems grow more capable, overseers — whether human or AI — face a widening gap. AGF acknowledges that oversight alone does not solve the governance problem. It is why we invest in structural guarantees — verification layers, automated policy enforcement, containment mechanisms — that function whether or not the overseer catches every issue.
 
 The design position: build the architecture so that governance works *with* oversight, not *only because of* oversight.
 
@@ -88,7 +88,7 @@ The Rings Model is AGF's central architectural contribution. It is a vendor-neut
 └───────────────────────────────────────────────────────────┘
 ```
 
-**Ring 0 — Execution.** The core agent performs its domain task: generates text, writes code, makes a recommendation, executes an action. Ring 0 is where the work happens. Without governance, this is all there is.
+**Ring 0 — Execution.** The core agent performs its domain task: generates text, writes code, makes a recommendation, executes an action. This is where the work happens — governance adds the structure around it.
 
 **Ring 1 — Verification.** A separate process evaluates Ring 0's output against quality criteria. The fundamental principle: *the agent that creates output must not be the sole agent that validates it.* Verification can loop — sending output back to Ring 0 for revision until it converges. This is the first structural guarantee.
 
@@ -140,7 +140,7 @@ AGF defines 19 named patterns for governed agentic systems, organized into three
 |---|-----------|-------|---------------------|
 | 19 | Agent Environment Governance | All rings | Governed composition of context, instructions, tools, workspace, and memory |
 
-These primitives are not new inventions — they are named, not coined. Every pattern is established across multiple domains. The contribution is pulling them together into a composable architecture for the agentic context.
+These primitives are not new inventions — they are named patterns drawn from established practice across multiple domains. The contribution is pulling them together into a composable architecture for the agentic context.
 
 ### The Three-Level Security Model
 
@@ -269,7 +269,7 @@ This profile provides: EU AI Act article-by-article mapping, NIST AI RMF functio
 **For:** AI engineers, ML engineers, prompt engineers, agent developers
 **Key question:** *Which primitives do I implement first, and how?*
 
-This profile provides: all 19 primitives in full detail (the pattern catalog), composition patterns with implementation priority, primitive interaction tensions with resolutions, Trust Ladders mechanics, the Environment Optimization Loop, prior art mapping (what to read, what tools to use), and worked examples.
+This profile provides: all 19 primitives in full detail (the pattern catalog), composition patterns with implementation priority, primitive interaction tensions with resolutions, Trust Ladders mechanics, the Environment Optimization Loop, existing work mapping (what to read, what tools to use), and worked examples.
 
 **Start here if:** You are building agents and want to make them governed.
 
@@ -320,7 +320,7 @@ AGF is a synthesis framework. It integrates, not replaces, established standards
 
 | Standard | How AGF Maps |
 |----------|-------------|
-| **ISO/IEC 42001** | Policy as Code #9 and continuous audit map to operational planning; AGF addresses the runtime gap ISO 42001 leaves open |
+| **ISO/IEC 42001** | Policy as Code #9 and continuous audit map to operational planning; AGF complements ISO 42001 by providing runtime mechanisms for the operational planning it defines |
 | **IEEE P2863** | Organizational governance practice that AGF's runtime architecture implements |
 | **OpenTelemetry GenAI** | Event architecture builds on OTel conventions with governance-specific extensions |
 
@@ -328,7 +328,7 @@ Full regulatory mappings with article-level detail are in the **GRC Profile**.
 
 ---
 
-## Prior Art & Positioning
+## Existing Work & Positioning
 
 ### What We Build On
 
@@ -376,7 +376,7 @@ Not everything carries the same certainty:
 
 These explore specific aspects of the framework in depth:
 
-- **[Agentic Primitives](agentic-primitives.md)** — The full 19-primitive catalog with complete patterns, tensions, deployment modes, security architecture, and prior art mapping
+- **[Agentic Primitives](agentic-primitives.md)** — The full 19-primitive catalog with complete patterns, tensions, deployment modes, security architecture, and existing work mapping
 - **[Agentic Observability](agentic-observability.md)** — The SIEM pattern for agents: event architecture, correlation engine, playbooks, maturity model
 - **[Decision Intelligence](decision-intelligence.md)** — Governed decision flows: Risk Decision Graph, Belief Layer, revision cascade, multi-agent decision pipeline
 - **[Trust Ladders](white-papers/trust-ladders.md)** — How agentic systems earn autonomy through demonstrated performance
@@ -395,4 +395,4 @@ Our hope is that this work serves the community: that it gives practitioners a b
 
 ---
 
-*AGF is developed and maintained by [Jesse Pike](https://jessepike.com). For the complete framework including all domain profiles and the full primitive catalog, visit [agf.jessepike.com](https://agf.jessepike.com).*
+*AGF is developed and maintained by [Jesse Pike](https://jessepike.dev). For the complete framework including all domain profiles and the full primitive catalog, visit [agf.jessepike.dev](https://agf.jessepike.dev).*
