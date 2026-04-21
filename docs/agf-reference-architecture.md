@@ -326,7 +326,7 @@ AGF is a synthesis framework. It integrates, not replaces, established standards
 | **IEEE P2863** | Organizational governance practice that AGF's runtime architecture implements |
 | **OpenTelemetry GenAI** | Event architecture builds on OTel conventions with governance-specific extensions |
 
-Full regulatory mappings with article-level detail are in the **GRC Profile**.
+Full regulatory mappings with article-level detail are in the **GRC Profile**. For the complete landscape view — how AGF relates to NIST, OWASP, CSA AICM/ATF/MAESTRO, Microsoft AGT, ISO, EU AI Act, FAIR, TOGAF, SABSA, and more — see **[Relationship to Frameworks](./relationship-to-frameworks.md)**.
 
 ---
 

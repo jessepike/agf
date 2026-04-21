@@ -1,6 +1,6 @@
 # AGF Publication Map
 
-**Last updated:** 2026-03-18
+**Last updated:** 2026-04-21
 
 How all AGF artifacts relate, link to each other, and should be packaged for publication.
 
@@ -31,6 +31,7 @@ AGF: A Reference Architecture for Governed Agentic Systems
 │   └── The Rings Model ─────── Concentric governance architecture
 │
 ├── Supporting Docs (docs/)
+│   ├── Relationship to Frameworks ── AGF's position in the governance landscape (7-layer stack)
 │   ├── Shared Vocabulary ────── Canonical terminology
 │   ├── Cross-Concept Model ─── How DI, AO, and primitives relate
 │   ├── Strategic Positioning ── Market landscape, differentiation
@@ -73,9 +74,10 @@ AGF: A Reference Architecture for Governed Agentic Systems
 
 ### Path E: "I'm evaluating this framework"
 1. **Start:** Meta doc — architecture overview, composition patterns, standards alignment
-2. **Depth:** White papers (Trust Ladders, Rings Model) for key concepts
-3. **Credibility:** GRC Profile for regulatory rigor
-4. **Positioning:** Strategic positioning doc for market context
+2. **Context:** Relationship to Frameworks — how AGF relates to NIST, OWASP, CSA, ISO, Microsoft AGT, FAIR, TOGAF, SABSA
+3. **Depth:** White papers (Trust Ladders, Rings Model) for key concepts
+4. **Credibility:** GRC Profile for regulatory rigor
+5. **Positioning:** Strategic positioning doc for market context
 
 ---
 

@@ -1,0 +1,99 @@
+---
+title: "Relationship to Frameworks"
+description: "How AGF relates to NIST, OWASP, CSA AICM/ATF/MAESTRO, Microsoft AGT, ISO, EU AI Act, FAIR, TOGAF, SABSA, and more — the seven-layer stack."
+---
+
+Any organization deploying agentic systems in 2026 is looking at a crowded field: threat catalogs (OWASP, MITRE ATLAS), threat-modeling frameworks (CSA MAESTRO, Microsoft Failure Mode Taxonomy), control catalogs (CSA AICM, ISO 42001, NIST 800-53, EU AI Act, BSI AIC4), operating models (CSA ATF, NIST CSF), runtime implementations (Microsoft AGT, AWS, Google, open-source), and risk quantification methodologies (FAIR, FAIR-CAM, ISO 31000).
+
+Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them — it's the architectural substrate that explains how they compose.
+
+## Status Note
+
+AGF ships human-readable primitive forms today. Machine-readable primitive schemas (dual-form artifacts), FAIR-CAM control-effectiveness templates, and full maturity-level conformance criteria are planned for v0.2. Where this document describes AGF "operationalizing at machine speed," treat that as the architectural commitment — the artifacts that make it real are the next major work product.
+
+## The Core Question
+
+> "We already have NIST. We're evaluating AICM. Our CSO wants ISO 42001. Our security team is reading about MAESTRO. Microsoft is shipping AGT. Do we need another framework?"
+
+**No. You need the architecture that makes the frameworks you already use work together for agentic systems. That is AGF.**
+
+AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, prescribes pathways for implementation, and is designed to operationalize at machine speed.
+
+## The Seven-Layer Stack
+
+AGF sits inside a seven-layer conceptual stack. Six layers describe what an organization needs to know and do. A seventh, orthogonal layer — the risk quantification lens — cuts across the rest.
+
+| Layer | Answers | Frameworks |
+|-------|---------|------------|
+| **6** (orthogonal) | What's the quantified risk? How should we prioritize investment? | FAIR, FAIR-CAM, ISO 31000, NIST AI RMF "Measure" |
+| **5** | What does a production implementation look like? | Microsoft AGT (MIT, ATF-conformant), Azure CAF, Agent 365 (planned May 2026) |
+| **4** | How do we organize our team, policies, and decisions? | CSA Agentic Trust Framework (ATF) — 5 governance questions, 4-tier maturity, 25 requirements |
+| **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.0.3, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
+| **2** | What specifically can go wrong, by what mechanism, where? | CSA MAESTRO (7 layers), Microsoft Failure Mode Taxonomy (28 modes, 2×2) |
+| **1** | What are the most important things that can go wrong? | OWASP Agentic Top 10 (ASI-01 through ASI-10) |
+| **0** (substrate) | How do the pieces fit together architecturally for an agentic system? | **AGF** — 4 Rings + 19 Primitives + 3 deployment modes + 3-level security model + 7 tensions + OTAA |
+
+AGF at Layer 0 is the architectural substrate. Risk quantification at Layer 6 is orthogonal — methodology, not content.
+
+## How AGF Plays Across the Layers
+
+The four verbs from AGF's positioning pillars describe how AGF operates:
+
+- **Synthesizes** — pulls from every layer; does not invent primitives
+- **Unifies** — places the synthesized material on a shared architectural substrate
+- **Prescribes** — converts synthesis into actionable implementation pathways per primitive
+- **Operationalizes** — emits machine-readable forms of its primitives alongside human-readable forms (the dual-form principle). Load-bearing at gate boundaries: every gate decision emits both forms simultaneously.
+
+## Important Honest Observations
+
+**AICM's explicit agentic coverage is thin.** 5 of 243 controls are agent-native as of v1.0.3 (AIS-11, AIS-13, AIS-15, IAM-19, TVM-11). The remaining 238 are AI-general or cloud-inherited. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
+
+**Industry is converging.** Microsoft AGT is formally ATF-conformant. This strengthens AGF's substrate position — when frameworks converge on shared operating models, AGF's role as the architecture underneath becomes clearer, not weaker.
+
+**A note on "Rings" terminology.** AGT uses "Ring 0–3" for CPU-style privilege tiers (Root/Trusted/Standard/Sandbox) that enforce execution isolation. AGF uses "R0–R3" for governance control loops (Execution/Verification/Governance/Learning). Same numbering, orthogonal concepts. AGT's privilege rings live inside AGF's R0 Execution ring.
+
+## Trust Ladders and ATF Tiers
+
+AGF's Trust Ladders (Primitive #11) and ATF's four-tier maturity model are parallel expressions of the earned-autonomy pattern, operating at different scopes. AGF Primitive #11 governs per-agent, per-task runtime trust adjustment. ATF's tiers specify organizational deployment-maturity stages with explicit promotion gates. Organizations adopting AGF typically implement both.
+
+AGF also maintains its own 5-level program-maturity model (L1 Non-existent → L2 Foundation → L3 Governed → L4 Adaptive → L5 Optimized) in the Governance Framework doc. This is a program-level scale complementary to ATF's per-deployment scale.
+
+## How to Use This Document
+
+Different roles enter this stack at different layers:
+
+- **Security lead** (OWASP / MAESTRO entry) — Layers 1–2. Primary docs: Security Profile, primitives, three-level security model.
+- **GRC lead** (AICM / ISO 42001 / EU AI Act entry) — Layer 3. Primary docs: GRC Profile, governance framework.
+- **Executive sponsor** (ATF / program-level) — Layer 4. Primary docs: this one, governance framework.
+- **Platform / AI engineer** (Microsoft AGT / open-source runtime) — Layer 5. Primary docs: Platform Profile, AI Engineering Profile.
+- **Risk officer / CFO** (FAIR / ISO 31000) — Layer 6. Primary docs: Decision Intelligence.
+
+## What AGF Commits To
+
+1. **Vendor neutrality.** AGF does not privilege one vendor's runtime, one consortium's operating model, or one regulator's control catalog.
+2. **Honest attribution.** Every primitive carries attribution to the prior work it synthesizes. Where AGF introduces novel framing, it marks it with explicit confidence level.
+3. **Gap disclosure.** Where existing frameworks leave agentic-specific failure modes uncovered, AGF surfaces the gap rather than papering over it.
+
+## What Sits Above This Stack
+
+AGF's seven-layer stack covers content frameworks and risk quantification. It does not include **enterprise architecture methods** that organizations use to develop, maintain, and integrate architecture artifacts into their broader business context:
+
+- **TOGAF** — enterprise architecture method (ADM, Architecture Repository). AGF can be adopted as an architecture artifact within a TOGAF Architecture Repository.
+- **SABSA** — security architecture method driven from business attributes. AGF's three-level security model can be expressed as inputs to SABSA's Logical and Component layers.
+- **COBIT** — IT governance and management framework. AGF's operating-model primitives integrate with COBIT's governance and management objectives.
+
+AGF-to-TOGAF/SABSA/COBIT crosswalks are not currently prioritized; they'll be addressed in future profile docs if demand emerges.
+
+## What AGF Does Not Claim
+
+- **AGF is not a runtime.** Do not install AGF. Install Microsoft AGT, AWS-native agent governance, or whatever runtime your organization converges on.
+- **AGF is not a certification.** CSA STAR for AI and ISO 42001 certification are the relevant assurance programs.
+- **AGF is not a control catalog.** AICM, NIST 800-53, and ISO 42001 are the catalogs.
+- **AGF is not a threat list.** OWASP Agentic Top 10 is the canonical list.
+- **AGF is not consensus.** AGF is synthesized by a single author, in public, with explicit confidence levels and acknowledged open questions.
+
+---
+
+*AGF is the architecture beneath the frameworks you already use. When the next one ships, AGF is the map that tells you where it fits.*
+
+For the complete document — including per-layer detail, role-based entry points, and full commitments — see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/relationship-to-frameworks.md).
