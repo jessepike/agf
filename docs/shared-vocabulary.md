@@ -1,8 +1,66 @@
 # AGF Shared Vocabulary
 
-**Last updated:** 2026-03-18
+**Last updated:** 2026-04-21
 
 This document defines the canonical terms used across all AGF documents — the reference architecture, primitives catalog, domain profiles, capability layer docs, and white papers. When terminology conflicts between documents, this vocabulary is authoritative.
+
+---
+
+## Positioning Terms
+
+These define AGF's position in the broader governance landscape. Introduced in DECISIONS.md #3 (AGF Positioning Pillars) and #4 (Seven-Layer Stack).
+
+| Term | Definition |
+|------|-----------|
+| **Agentic Governance** | AGF's category. The governance of systems with agency, autonomy, memory, tool use, and inter-agent collaboration. Narrower than AI governance; distinct from responsible AI (upstream) and ML governance (training-time). |
+| **Four verbs** | What AGF does, in causal order: **Synthesizes** (pulls from NIST, OWASP, CSA, ISO, Microsoft, EU AI Act, academic research), **Unifies** (places synthesis on a shared architectural substrate), **Prescribes** (converts synthesis into actionable implementation pathways per primitive), **Operationalizes** (emits machine-readable artifacts so agents consume governance programmatically). |
+| **OTAA invariant** | Every AGF primitive MUST be **Observable** (runtime state externally visible), **Traceable** (every action links to principal, authorization basis, delegation chain), **Auditable** (evidence meets regulator/auditor requirements), **Agent-operable** (machine-readable form exists alongside human-readable form). A primitive that fails any OTAA property is not shipped. |
+| **Agent-operable** | A property of governance artifacts: a machine-readable form exists that agents can parse, interpret, and act on programmatically, alongside the human-readable form. Part of the OTAA invariant. |
+| **Dual-form principle** | "Machine-consumable, human-decidable." Every AGF primitive exists in two forms simultaneously — human (markdown prose, diagrams, rationale) and machine (JSON/YAML schema with control mappings, MUST/SHOULD/MAY requirements, evidence schemas, test criteria). Same truth, two audiences. Load-bearing at gate boundaries — every gate decision emits both forms. |
+| **Tempo taxonomy** | Three governance speeds: **Wire-speed enforcement** (<1 ms, deterministic policy/identity/tool allowlists/sandbox boundaries — R0/R1), **Near-realtime supervision** (sec–min, behavioral anomaly, trust scoring, revocation — R1/R2), **Human-speed governance** (hours–weeks, promotion reviews, post-mortems, policy revision — R2/R3). Governance infrastructure must support all three and hand off cleanly. |
+| **Wire-speed** | Sub-millisecond governance enforcement. The tempo at which R0/R1 controls operate — identity verification, tool allowlists, policy evaluation, sandbox boundaries. Deterministic, not LLM-evaluative. |
+| **Seven-layer stack** | AGF's model of how governance artifacts compose. Layer 0 = AGF substrate (Rings + Primitives + deployment modes + security model + tensions + OTAA). Layer 1 = OWASP Agentic Top 10. Layer 2 = CSA MAESTRO + Microsoft Failure Mode Taxonomy. Layer 3 = control catalogs (AICM, ISO 42001/27001, NIST 800-53, EU AI Act, BSI AIC4). Layer 4 = CSA ATF. Layer 5 = runtime references (Microsoft AGT + CAF + Agent 365). Layer 6 (orthogonal) = risk quantification (FAIR, FAIR-CAM, ISO 31000, NIST AI RMF Measure). |
+| **NIST CSF parallel** | "AGF's Rings are to agentic governance what NIST CSF Functions are to cybersecurity" — a simple human-comprehensible top layer that unfolds into progressively detailed, machine-actionable primitives. |
+| **Architectural substrate** | AGF's position at Layer 0 of the seven-layer stack. The shared vocabulary and architectural model onto which all other governance layers project. |
+
+---
+
+## Harness Terms
+
+Introduced in DECISIONS.md #7. The agent harness is the governance envelope around an AI agent.
+
+| Term | Definition |
+|------|-----------|
+| **Harness** | The governance envelope around an AI agent — declarative source artifacts (intent, constraints, capabilities, policy, evaluation criteria) plus the runtime enforcement adapters that translate them into deterministic controls at call time. Captures "everything that governs the agent except the model itself." Exists in two inseparable forms: source (versioned, reviewable, portable) and runtime (SDK-specific adapter hooks). Industry formula: `Agent = Model + Harness`. |
+| **Tier 0 — Provider Harness** | Model-level safety from the foundation vendor. Precondition, not a security layer AGF controls. |
+| **Tier 1 — Agent Harness** | Per-agent governance envelope. Declarative source plus runtime adapter hooks enforcing tool allowlists, path restrictions, budget limits, output schemas, and audit logging. Maps to AGF Security Fabric. |
+| **Tier 2 — Orchestration Harness** | Cross-agent ACL enforcement, inheritance validation (child ⊆ parent), inter-agent communication. Maps to AGF Security Governance. |
+| **Source → Build → Runtime** | The canonical harness workflow. Source artifacts (YAML + Markdown) → `harness build` generates runtime configuration → SDK adapters enforce at call time. Analogous to Terraform (`.tf` → `plan` → `apply`). |
+| **Hard constraint** | A harness-declared constraint that is mechanically enforced at runtime and never relaxes. Fits AGF's mandatory-gate category. |
+| **Adaptive constraint** | A harness-declared constraint that is mechanically enforced but whose enforcement intensity is trust-dependent. Fits AGF's adaptive-gate category; interacts with Trust Ladders (Primitive #11). |
+| **Behavioral rule** | A harness-declared instruction embedded in agent prose (agent.md). Not mechanically enforceable — can be skipped under friction. Not citable as a security control. |
+| **Governance Decision Record (GDR)** | A standard audit artifact capturing a governed decision: inputs, context, decision, conditions, approver, expiry. Produced by tool authorization, trust level changes, governance gate outcomes, constraint overrides, and escalation resolutions. |
+
+**Harness is not to be confused with:**
+- **Wrapper** — one of AGF's three deployment modes; a specific runtime interception pattern. A Tier 1 harness may be implemented *via* the wrapper deployment mode, but harness is broader than any single deployment mode.
+- **Hypervisor** — AGT-specific runtime isolation kernel implementing CPU-style privilege rings (Root / Trusted / Standard / Sandbox). Hypervisors are a runtime mechanism harnesses can target; harnesses specify policy, hypervisors enforce execution isolation.
+- **Test harness** (classical software engineering) — a test execution framework (stubs, drivers, input data, expected results). Agent harnesses include test harnesses as a component (eval suites, policy test harnesses) but are substantially broader.
+
+---
+
+## Maturity Terms
+
+Introduced in DECISIONS.md #6.
+
+| Term | Definition |
+|------|-----------|
+| **L1: Non-existent** | Agents deployed but no formal governance process exists. No inventory, no classification, no governance artifacts. Most organizations with agents in production today. |
+| **L2: Foundation** | Agent inventory maintained; agents classified by risk tier; Ring 0 + Ring 1 operational for high-risk agents; event capture; policy rules for critical domains. |
+| **L3: Governed** | Full R0 + R1 + R2 operational; Agentic Observability at correlation level; Trust Ladders calibrating; audit packages producible on demand. |
+| **L4: Adaptive** | Ring 3 (Learning) operational; self-improving cycles; predictive quality and security monitoring; governance overhead decreasing as the system matures. |
+| **L5: Optimized** | Full framework across all agent types; continuous assurance; governance as competitive advantage; cross-organizational intelligence. |
+| **Program maturity (AGF L1–L5)** | An organization's AGF governance posture across the full framework. Complementary to ATF's per-deployment tiers. |
+| **Deployment autonomy tier (ATF Intern/Junior/Senior/Principal)** | CSA Agentic Trust Framework's per-deployment autonomy-posture scale with explicit promotion gates (Performance, Security Validation, Business Value, Incident Record, Governance Sign-off). Complementary to AGF's program-level maturity. |
 
 ---
 
@@ -204,9 +262,15 @@ Used throughout the framework to mark certainty:
 | Abbreviation | Full Name |
 |-------------|-----------|
 | **AGF** | Agentic Governance Framework |
+| **AGT** | Microsoft Agent Governance Toolkit (MIT-licensed runtime reference) |
+| **AICM** | CSA AI Controls Matrix (control catalog) |
 | **ASI** | OWASP Agentic Security Issues (Top 10 for Agentic Applications) |
 | **ATF** | CSA Agentic Trust Framework |
+| **BSI AIC4** | Germany's AI cloud service compliance criteria catalogue |
+| **CAF** | Azure Cloud Adoption Framework for AI Agents |
 | **EU AI Act** | Regulation (EU) 2024/1689 — Artificial Intelligence Act |
+| **FAIR** | Factor Analysis of Information Risk (Jack Jones, 2005) |
+| **FAIR-CAM** | FAIR Controls Analytics Model — quantifies control effectiveness |
 | **IMDA MGF** | Singapore IMDA Model AI Governance Framework for Agentic AI (Jan 2026) |
 | **IR 8596** | NIST Cybersecurity Framework Profile for AI (Cyber AI Profile) |
 | **MAESTRO** | CSA Multi-Agent Environment Security Threat and Risk Operations (7-layer threat model) |
@@ -215,9 +279,42 @@ Used throughout the framework to mark certainty:
 | **MITRE ATLAS** | Adversarial Threat Landscape for AI Systems — AI adversarial threat taxonomy |
 | **NCCoE** | NIST National Cybersecurity Center of Excellence |
 | **NGAC** | Next-Generation Access Control |
+| **OTAA** | Observable / Traceable / Auditable / Agent-operable — AGF's primitive quality invariant |
 | **OTel** | OpenTelemetry |
 | **RDG** | Risk Decision Graph |
 | **SPIFFE/SPIRE** | Secure Production Identity Framework for Everyone / SPIFFE Runtime Environment |
+
+---
+
+## Identity & Credentialing Terms
+
+Terms drawn from CSA Agentic IAM and related identity papers. Used across Primitive #14 (Identity & Attribution) and the security profile.
+
+| Term | Definition |
+|------|-----------|
+| **Agent ID** | An authenticated, inspectable identity assigned to a specific agent instance or deployment. Used for attribution, authorization, audit, and revocation. |
+| **NHI** | Non-Human Identity. The identity category covering agents, workloads, service accounts, and automation — distinct from human user identity. |
+| **DID** | Decentralized Identifier. W3C-standard identifier format for verifiable identity independent of any centralized registry. Common forms: `did:web`, `did:key`, `did:plc`. |
+| **VC** | Verifiable Credential. W3C-standard format for issuer-signed claims about a subject. Used to assert capabilities, roles, or attributes about an agent. |
+| **ZKP** | Zero-Knowledge Proof. Cryptographic proof that a statement is true without revealing the underlying data. Applied to privacy-preserving credential validation. |
+| **ANS** | Agent Naming Service. Proposed registry pattern analogous to DNS for naming and resolving agent identities across organizational boundaries. |
+| **JIT / Ephemeral Credentials** | Just-In-Time credentials issued at the moment of need with short TTLs and narrow scope. Reduces blast radius compared to long-lived credentials. |
+| **PBAC** | Policy-Based Access Control. Authorization model where access decisions evaluate against expressive policy rules at runtime, rather than static role-permission mappings. |
+| **Behavioral Attestation** | Continuous verification that an agent's runtime behavior matches its declared profile. Deviation triggers re-authentication, demotion, or quarantine. |
+| **Authenticated Delegation** | A pattern where an agent acts on behalf of a user (or another agent) with the delegation chain cryptographically verifiable. OAuth 2.1 extensions (e.g., `requested_actor` / `actor_token`) are one implementation. |
+| **Confused Deputy (agentic)** | An attack pattern where a more-privileged agent is tricked into performing an action on behalf of a less-privileged caller. Classical confused-deputy extended to agent-to-agent scenarios. |
+| **Agent Registry** | Centralized or federated catalog of agents in an environment, with metadata (owner, capabilities, trust level, lifecycle state). Foundation for discovery, governance, and revocation. |
+| **XPIA** | Cross-Prompt Injection Attack. Injection via untrusted content (retrieved documents, tool output) rather than direct user input. Agentic-specific attack class. |
+| **Agent Hijacking** | An attack pattern where an adversary takes control of an agent's decision-making loop via prompt manipulation, memory poisoning, or tool-output tampering. |
+
+---
+
+## Governance Program Terms
+
+| Term | Definition |
+|------|-----------|
+| **Frontier Governance** | The governance posture required for frontier-capability AI systems — systems at the capability edge where established evaluation methods may not yet apply. Typically implies enhanced Ring 3 (Learning), continuous red-teaming, and accelerated evidence collection. |
+| **AI CoE** | AI Center of Excellence. An organizational pattern where AI governance, platform, and engineering expertise is centralized as a cross-functional unit supporting distributed teams. Often the institutional owner of an organization's AGF implementation. |
 
 ---
 

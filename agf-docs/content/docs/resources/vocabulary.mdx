@@ -57,4 +57,37 @@ Used throughout the framework to mark certainty:
 | **Middleware/Interrupt** | Rings fire at decision points (tool calls, data access). |
 | **Graph-Embedded** | Rings run concurrently with execution. |
 
-For the complete vocabulary, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/shared-vocabulary.md).
+## Positioning Terms
+
+| Term | Meaning |
+|------|---------|
+| **Agentic Governance** | AGF's category. Governance of systems with agency, autonomy, memory, tool use, and inter-agent collaboration. Narrower than AI governance. |
+| **Four verbs** | What AGF does: Synthesizes / Unifies / Prescribes / Operationalizes. |
+| **OTAA invariant** | Every AGF primitive must be Observable, Traceable, Auditable, Agent-operable. |
+| **Dual-form principle** | "Machine-consumable, human-decidable." Every primitive exists in human and machine form simultaneously. |
+| **Tempo taxonomy** | Wire-speed enforcement (<1ms) / near-realtime supervision (sec–min) / human-speed governance (hours–weeks). |
+| **Wire-speed** | Sub-millisecond governance enforcement — deterministic policy, identity, tool allowlists, sandbox. |
+| **Architectural substrate** | AGF's position at Layer 0 of the seven-layer stack. The shared model onto which other governance layers project. |
+
+## Harness Terms
+
+| Term | Meaning |
+|------|---------|
+| **Harness** | The governance envelope around an AI agent — declarative source plus runtime enforcement adapters. Industry formula: `Agent = Model + Harness`. |
+| **Tier 0 / 1 / 2** | Harness tiers: Provider (model vendor), Agent (per-agent, maps to AGF Security Fabric), Orchestration (cross-agent, maps to AGF Security Governance). |
+| **Source → Build → Runtime** | Harness workflow: YAML/Markdown source → `harness build` → SDK adapters enforce at call time. Terraform analogy. |
+| **Hard / Adaptive / Behavioral constraints** | Hard = machine-enforced, never relaxes. Adaptive = machine-enforced, trust-dependent. Behavioral = instruction-based, not mechanically enforced. Only hard and adaptive are citable as controls. |
+
+## Maturity Levels
+
+AGF L1–L5 is a program-level scale. Complementary to CSA ATF's per-deployment scale (Intern → Junior → Senior → Principal).
+
+| Level | Label | State |
+|-------|-------|-------|
+| L1 | Non-existent | Agents deployed, no formal governance. Most orgs today. |
+| L2 | Foundation | Inventory + classification; Ring 0 + Ring 1 operational. |
+| L3 | Governed | Full R0+R1+R2; observability at correlation; Trust Ladders calibrating. |
+| L4 | Adaptive | Ring 3 operational; self-improving cycles. |
+| L5 | Optimized | Full framework; governance as competitive advantage. |
+
+For the complete vocabulary — including positioning pillars, harness terms, identity & credentialing terms (DIDs, VCs, NHIs, JIT credentials, behavioral attestation), and standards abbreviations — see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/shared-vocabulary.md).
