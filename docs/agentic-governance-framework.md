@@ -474,16 +474,18 @@ The boundary is clear: the framework governs **agents specifically**. It connect
 
 Organizations adopt the framework progressively. Trying to implement everything at once is a recipe for failure.
 
-### Level 1: Awareness
+### Level 1: Non-existent
 
-- Agent inventory exists (even if incomplete)
-- Basic risk classification applied
-- Some agents have structured output and event logging
-- No formal ring architecture
-- **Most organizations are here or below**
+- Agents are deployed (chatbots, copilots, task agents, internal automation) but no formal governance process exists
+- No agent inventory, no risk classification, no governance artifacts
+- Any Ring 0 controls in place are accidental, not deliberate
+- No structured event capture, no policy rules, no identity structure for agents
+- Trust is implicit and binary — the organization either permits an agent or doesn't, with no graduated oversight
+- **Most organizations with agentic systems in production are here today.** This is the honest starting state, not a pejorative — the L1 → L2 transition is the most consequential governance investment an organization can make.
 
 ### Level 2: Foundation
 
+- Agent inventory maintained; agents are classified by risk tier
 - Ring 0 + Ring 1 operational for high-risk agents
 - Structured event capture flowing to basic dashboards
 - Policy rules defined for critical governance domains
@@ -520,7 +522,9 @@ Organizations adopt the framework progressively. Trying to implement everything 
 - Cross-organizational intelligence (federated learning, shared baselines)
 - Governance posture is a trust signal for customers, regulators, and partners
 
-**Realistic timeline:** Most organizations will take 12-24 months to reach Level 3. Level 4-5 requires operational data, organizational maturity, and likely 2-3 years.
+**Realistic timeline:** Most organizations will take 12-24 months to move from L1 Non-existent to L3 Governed. L4-L5 requires operational data, organizational maturity, and likely 2-3 years from L3.
+
+**Relationship to other maturity scales.** AGF's L1–L5 describes an organization's governance program across the full framework (Rings, primitives, observability, decision intelligence). CSA ATF's four-tier per-deployment autonomy scale (Intern → Junior → Senior → Principal) describes the maturity posture of a specific agent deployment. These are complementary scales: an organization can sit at AGF L3 (Governed) at program level while running agents at varying ATF tiers — some at Intern, some at Principal, based on the risk and track record of each deployment. A crosswalk will live in `docs/profiles/grc-profile.md`.
 
 ---
 
