@@ -4,6 +4,9 @@
 # ── Claude Code config (session-specific) ──
 .claude/
 
+# ── Research inbox (external PDFs + upstream repo clones — too large for git) ──
+docs/inbox/
+
 # ── OS ──
 .DS_Store
 
