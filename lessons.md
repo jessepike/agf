@@ -12,16 +12,14 @@ Hot buffer of insights, patterns, and gotchas from recent sessions. One line per
 
 ## 2026-04-17
 
-- Industry convergence (MS AGT formally ATF-conformant) strengthens "architectural substrate" positioning rather than threatening it
-- AICM's agentic surface is thin (~5 of 243 controls are agent-native) — substantial open territory for AGF
-- Intent.md sacred — correctly deferred to post-pillar-confidence review
 
 ## 2026-04-21
 
-- **Precise language on relationships matters.** "Primitive X is underneath Y" overclaims when X and Y are parallel expressions of a shared pattern at different scopes/cadences. Trust Ladders and ATF tiers both express earned autonomy but operate per-agent-runtime vs per-deployment-program. Correct framing: "parallel expressions," not "underneath."
-- **Industry converged on "harness" = full governance envelope, not design-time scaffold.** Anthropic, Parallel, Jiun Kim SSRN paper, Philschmid all treat harness as source + runtime adapters combined. Agent = Model + Harness is the dominant formula. Earlier AGF-internal framing that drew a hard line between design-time and runtime was wrong; Source → Build → Runtime is the pattern *within* the harness.
-- **TOGAF/SABSA/COBIT are meta-frameworks above content frameworks.** They don't sit as peers to AICM/ATF/OWASP in a layer stack — they're enterprise-architecture methods that wrap any architecture artifact. Correct treatment: acknowledge as "What Sits Above This Stack," defer crosswalks until demand emerges.
-- **Calibration > rewrite for positioning drafts.** External review (user voice) flagged 8 credibility issues (canonical overclaims, vendor-weight imbalance, future-dated claims, implementation-ahead language). Tightening claims preserved architecture while making the doc defensible. Promotion after calibration, not structural rewrite, was the right call.
-- **"Non-existent" beats "Awareness" as L1 for honest maturity assessment.** Most orgs with agents in production have zero formal governance. "Non-existent" names that state accurately; "Awareness" implies prior investment that usually doesn't exist. L1 → L2 becomes the headline governance investment story.
-- **Dual-form has teeth at gate boundaries, not just at primitive level.** D12 §4 refinement: gate decisions (PASS/REVISE/HALT/GATE/ERROR) MUST emit human-readable rationale AND machine-readable artifact simultaneously. A gate that emits only one form forces manual translation and breaks both auditability and agent-operability.
+- **Concentric rings reclaim the Rings Model metaphor in diagrams.** TOGAF horizontal-band translation was accurate but lost the iconic AGF visual. Concentric is the right shape.
+- **Cross-cutting capability layers render best as radial sectors/wedges in concentric-ring visuals.** Horizontal bands above rings convey "cuts across" weakly; radial sectors cutting from center through all rings convey it literally.
+- **AGF-coined acronyms (OTAA) need spelling out at first use.** OTAA in the wild = LoRaWAN "Over-the-Air Activation" (unrelated). Macro visuals should show "Observable · Traceable · Auditable · Agent-operable" rather than the acronym.
+- **"Invariant" is CS jargon.** At macro altitude, "Every AGF primitive must…" reads cleaner than "universal invariant."
+- **BE / PRODUCE verb parallel visually reinforces the OTAA-vs-Dual-Form distinction.** OTAA = properties the primitive *has* (external visibility + invocability); Dual-Form = format of what it *emits*. Same-altitude peers under a shared "Every AGF primitive must:" header.
+- **Save diagram prompts to DIAGRAM-SPECS.md, not diagram-forge templates.** Project-local spec files are lightweight reproducibility; template creation is Forge-scope overhead that only pays off with cross-project reuse.
+
 
