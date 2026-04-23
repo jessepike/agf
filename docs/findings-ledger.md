@@ -3,8 +3,10 @@
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
 **Last updated:** 2026-04-23
-**Open findings:** 23 (all pending triage)
-**Reviews ingested:** 1 — `docs/reviews/2026-04-23-gpt-5-4.md`
+**Open findings:** 29 (all pending triage — 23 external from GPT-5.4 + 6 internal mechanical from baseline tooling run)
+**Reviews ingested:** 2
+- `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
+- `docs/reviews/2026-04-23-mechanical-baseline.md` (internal tooling)
 
 ---
 
@@ -58,6 +60,12 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | open |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | open |
 | G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |
+| MI-F01 | cspell dictionary uninitialized — 61 technical terms flag as unknown | Medium | Established | Mechanical | open |
+| MI-F02 | markdownlint errors in vocabulary.mdx Gate Vocabulary section (line-length + table-style) | Low | Established | Mechanical | open |
+| MI-F03 | Broken internal link `/docs` in what-is-agf.mdx:109 | High | Established | Mechanical | open |
+| MI-F04 | check-links.mjs false positives on `/` root + `/llms.txt` route | Low | Established | Mechanical | open |
+| MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | open |
+| MI-F06 | preflight.sh treats untracked files as uncommitted; friction with in-flight iterations | Low | Established | Mechanical | open |
 
 ---
 
@@ -336,6 +344,78 @@ Baseline established 2026-04-23. Re-score on next external or internal review.
 
 | Review date | Reviewer | Clarity | Coherence | Defensibility | Differentiation | Actionability | Credibility | Public Readiness | Mechanical | Avg |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 2026-04-23 | GPT-5.4 | 5 | 6 | 5 | 6 | 4 | 5 | 5 | — | 5.1 |
+| 2026-04-23 | GPT-5.4 | 5 | 6 | 5 | 6 | 4 | 5 | 5 | — | 5.1 (7 dims) |
+| 2026-04-23 | internal-tooling | — | — | — | — | — | — | — | 6 | — |
+| **Composite** | **v0.2.0 baseline** | **5** | **6** | **5** | **6** | **4** | **5** | **5** | **6** | **5.25** |
 
 Target progression TBD on triage.
+
+---
+
+## Mechanical baseline finding details
+
+### MI-F01
+
+> cspell dictionary uninitialized — 61 technical terms flag as unknown
+
+- **Severity:** Medium (cosmetic; blocks clean lint runs)
+- **Confidence:** Established
+- **Dimension:** Mechanical
+- **Source:** `docs/reviews/2026-04-23-mechanical-baseline.md`
+- **State:** open
+- **Proposed action:** Populate `.cspell-agf.txt` (or equivalent) with the flagged terms. Batch: CISO, SIEM, SIEMs, GPAI, IMDA, SPIFFE, SVIDs, NGAC, HITL, Microsegmentation, Exfiltration, exfiltration, Checkpointing, checkpointing, Tomašev, Neur, Astrix, gateable, chatbots, Operationalizes, operationalizing, recordkeeping, replayable, inspectable, walkback, Braintrust, Helicone, deployers.
+
+### MI-F02
+
+> markdownlint errors in `vocabulary.mdx` Gate Vocabulary section (lines 90, 98, 105)
+
+- **Severity:** Low
+- **Confidence:** Established
+- **Dimension:** Mechanical
+- **Source:** introduced by 2026-04-22 Gate Vocabulary section addition
+- **State:** open
+- **Proposed action:** Reformat the Gate Vocabulary table — break long lines, conform to MD060 table-column-style (leading/trailing spaces around pipes)
+
+### MI-F03
+
+> Broken internal link `/docs` in `what-is-agf.mdx:109`
+
+- **Severity:** High
+- **Confidence:** Established
+- **Dimension:** Mechanical
+- **Source:** `bin/check-links.mjs` output
+- **State:** open
+- **Related:** G5-F10 (same file, adjacent broken-intent link), G5-F11 (homepage IA)
+- **Proposed action:** Determine intended target — likely `/docs/overview/what-is-agf` or `/docs/reference/primitives` based on context — and fix
+
+### MI-F04
+
+> `bin/check-links.mjs` false positives on `/` (homepage) and `/llms.txt` (asset route)
+
+- **Severity:** Low
+- **Confidence:** Established
+- **Dimension:** Mechanical (tooling)
+- **State:** open
+- **Proposed action:** Extend script to recognize: (a) `/` as valid homepage route, (b) routes terminating in `.txt`/other asset paths that exist in `agf-docs/app/*/route.ts`
+
+### MI-F05
+
+> `bin/lint-mdx.sh` MDX parse-landmine grep false positive inside YAML code fences
+
+- **Severity:** Low
+- **Confidence:** Established
+- **Dimension:** Mechanical (tooling)
+- **Source:** `<2%` inside YAML block at `governance-decision-record.mdx:202`
+- **State:** open
+- **Proposed action:** Teach grep to skip fenced code blocks (triple-backtick delimited). Either awk-based state machine or switch to remark-lint plugin that respects fences natively.
+
+### MI-F06
+
+> `bin/preflight.sh` treats untracked files as uncommitted; friction with in-flight iterations
+
+- **Severity:** Low
+- **Confidence:** Established
+- **Dimension:** Mechanical (tooling / UX)
+- **Source:** user has intentional in-flight diagrams (`rings-model-governed-agentic-systems_v2..v6.png`) that aren't ready to commit; preflight blocks release
+- **State:** open
+- **Proposed action:** Distinguish modified-tracked (block) from untracked (warn with list + continue). Align with conventional pre-commit behavior — untracked is intentional workspace noise, not a release blocker.
