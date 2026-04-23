@@ -84,6 +84,38 @@ AGF's gate-related concepts form a four-part vocabulary — not alternative spel
 
 Every Gate Resolution and every Domain Outcome emits a [Governance Decision Record](/docs/reference/governance-decision-record) — AGF's canonical audit artifact at gate boundaries. The GDR is the machine-readable companion to the human-readable rationale (dual-form principle, DECISIONS.md #5). The corresponding `gate_resolved` observability event references the GDR by `decision_id`.
 
+## Primitive Attribution
+
+AGF's position is that the primitives are **named patterns drawn from prior art, not novel inventions**. The contribution is composition — pulling these patterns into a coherent architecture for the agentic context, naming their relationships, and specifying the invariants that let them work together. This table shows where each primitive's intellectual lineage sits.
+
+<Confidence level="informed">
+The attributions below are AGF's synthesis reading of the source landscape. They are not exhaustive — most primitives have deep roots across multiple communities. If you believe a primitive is miscredited or a major source is missing, [open an issue](https://github.com/jessepike/agf/issues).
+</Confidence>
+
+| # | Primitive | Primary lineage | AGF contribution |
+|---|-----------|-----------------|------------------|
+| 1 | Separation of Producer & Verifier | Distributed systems (code review, formal verification); CSA MAESTRO; NIST SP 800-53 SA-11 | Naming the producer/verifier split as a first-class agentic invariant |
+| 2 | Validation Loops with Convergence Gates | Control theory; agentic research (reflection, ReAct); NIST AI RMF "Measure" | Adding explicit budget/convergence gates to the verification loop |
+| 3 | Self-Improving Cycles | Reinforcement learning; MLOps continuous training; meta-learning research | Ring 3 placement + tension invariants with reproducibility and bounded agency |
+| 4 | Adversarial Critique | Red teaming; OWASP Top 10 for LLM Apps; adversarial robustness research | Dedicated Ring 1 challenger role distinct from the verifier |
+| 5 | Structured Output Persistence | Event sourcing; data contracts; OpenTelemetry semantic conventions | Ring-to-ring data contract as Fabric primitive |
+| 6 | Provenance Chains | SLSA provenance; W3C PROV; SOC 2 / EU AI Act Art. 12 traceability | Extending provenance to agent decisions, not just artifacts |
+| 7 | Bounded Agency | Capability-based security (POLA); sandboxing; NIST AC controls | Applying capability discipline to agent action surfaces |
+| 8 | Governance Gates | Approval workflows; COBIT; ISO 9001; ITIL change management | Unified gate primitive + Gate Resolution enum + GDR artifact |
+| 9 | Policy as Code | OPA / Rego; GitOps; NIST CSF; CSA AICM | Specifying policy-as-code as a governance-ring primitive |
+| 10 | Event-Driven Observability | OpenTelemetry; SIEM practice; DORA research | Mandating event emission at every ring boundary |
+| 11 | Trust Ladders | CSA ATF (Intern → Principal tiers); Microsoft AGT maturity | Cross-ring (2+3) placement tying trust to observed performance |
+| 12 | Memory-Augmented Reasoning | RAG; MemGPT; vector-store research | Governance invariants over memory curation and revision |
+| 13 | Error Handling & Recovery | Fault tolerance (Erlang/OTP); SAGA compensation; NIST CSF Respond/Recover | Ring-aware error contracts (Fabric primitive) |
+| 14 | Identity & Attribution | SPIFFE/SPIRE; NIST SP 800-63; Non-Human Identity practice | Identity as a Fabric primitive spanning all rings |
+| 15 | Adversarial Robustness | OWASP Top 10 for LLM; MITRE ATLAS; NIST AI RMF; CSA MAESTRO | Cross-cutting Security primitive with defense-in-depth invariant |
+| 16 | Transaction & Side-Effect Control | Database transactions (2PC); functional purity; tool-use safety research | Pre-commit/commit/post-commit pattern for agent actions |
+| 17 | Data Governance & Confidentiality | ISO 27001; NIST SP 800-53 SC/MP; GDPR; EU AI Act | Data-governance invariants at every agent data flow |
+| 18 | Evaluation & Assurance | MLOps eval; FDA software assurance; HELM / BIG-bench | Pre-deployment lifecycle placement ("gate before the gate") |
+| 19 | Agent Environment Governance | Container isolation; capability security; agent sandboxing research | Composed governance of context + tools + workspace + memory |
+
+**How to read the table:** "Primary lineage" names the source communities or specific works that AGF draws from. "AGF contribution" names what we think is genuinely additive — usually placement, naming, or invariant specification, not new theory. Where AGF's contribution is framing or synthesis, the underlying ideas remain the intellectual property of the cited communities.
+
 ## Implementation Priority
 
 For a practical implementation roadmap organized by phase, see the [AI Engineering Profile](/docs/profiles/ai-engineering).

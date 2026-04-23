@@ -3,11 +3,11 @@
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
 **Last updated:** 2026-04-23
-**Open findings:** 19 (16 GPT-5.4 open + 2 meta + 1 mechanical MI-F07)
-**Resolved:** 4 (MI-F01, MI-F02, G5-F04 infra + initial apply, G5-F05)
+**Open findings:** 16 (13 GPT-5.4 open + 2 meta + 1 mechanical MI-F07)
+**Resolved:** 7 (MI-F01, MI-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F17)
 **Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
 **Deferred (tooling sprint):** 4 (MI-F03 collapsed into MI-F04; MI-F04/F05/F06 batched in BACKLOG)
-**Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) — infra + overclaim fix shipped, content pass queued
+**Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓
 **Reviews ingested:** 2
 - `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
 - `docs/reviews/2026-04-23-mechanical-baseline.md` (internal tooling)
@@ -46,8 +46,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | **accepted** (Credibility Pass v0.3) |
 | G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | **resolved** (infra + initial apply; batch-apply queued in Credibility Pass v0.3) |
 | G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | **resolved** (Status Note already existed, now wrapped in Confidence level="open") |
-| G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | open |
-| G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | open |
+| G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | **resolved** (bounded claim + Confidence=informed + link to attribution table) |
+| G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | **resolved** (expanded inline in relationship-to-frameworks Layer 0 row) |
 | G5-F08 | No "Core Concepts in Order" orientation page | High | Informed | Clarity | open |
 | G5-F09 | Growth model drift: 4 composition patterns vs 5 implementation phases | High | Established | Coherence | open |
 | G5-F10 | "See full primitive catalog" link points to AI Engineering, not primitives ref | High | Established | Mechanical | open |
@@ -57,7 +57,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | **accepted — infra shipped** (`<Status>` component; apply pending primitive stability content decision) |
 | G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | open |
 | G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | open |
-| G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | open |
+| G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | **resolved** (Primitive Attribution section added to `/docs/reference/primitives`) |
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | open |
 | G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | open |
 | G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **accepted** (bundled into Credibility Pass v0.3 audit) |
@@ -357,6 +357,7 @@ Baseline established 2026-04-23. Re-score on next external or internal review.
 | **Composite** | **v0.2.0 baseline** | **5** | **6** | **5** | **6** | **4** | **5** | **5** | **6** | **5.25** |
 | 2026-04-23 | post-Cluster-A | 5 | 6 | 5 | 6 | 4 | 5 | 5 | **7** | **5.38** |
 | 2026-04-23 | post-Cluster-B (infra) | 5 | 6 | 5 | 6 | 4 | **6** | **6** | 7 | **5.63** |
+| 2026-04-23 | post-Cluster-C | **6** | 6 | **7** | **7** | 4 | 6 | 6 | 7 | **6.13** |
 
 Target progression TBD on triage.
 
@@ -367,6 +368,13 @@ Target progression TBD on triage.
 - **G5-F05 resolved:** "Operationalize at machine speed" Status Note wrapped in `<Confidence level="open">` block — now visibly distinct as architectural commitment, not current claim.
 - **G5-F04 initial apply:** Homepage Philosophy card shows all three confidence badges; what-is-agf Philosophy section dogfoods the gradient on its own rigor claim.
 - **Ceiling before Pass v0.3:** G5-F03 citations + G5-F20 dated sources + broader `<Confidence>` application across flagship claims unlock Credibility → 7–8. `<Status>` batch-apply is gated on primitive stability content decision (backlogged).
+
+**Cluster C delta (2026-04-23):** Defensibility 5 → 7, Differentiation 6 → 7, Clarity 5 → 6.
+- **G5-F06 resolved:** "No framework has the Belief Layer" rewritten as bounded-survey claim + `<Confidence level="informed" />` + cross-link to Primitive Attribution. Dogfoods the gradient on a novelty claim — exactly the meta-pattern G5-M01 called for.
+- **G5-F07 resolved:** OTAA expanded inline ("Observable · Traceable · Auditable · Agent-operable") at its first public-facing appearance in the Seven-Layer Stack table.
+- **G5-F17 resolved:** New Primitive Attribution section on `/docs/reference/primitives` — 19-row table mapping each primitive to its primary lineage (NIST, OWASP, CSA, ISO, OTel, academic, industry practice) plus AGF's specific contribution (naming, placement, invariant). This is the highest-leverage defensibility move: it converts "we invented these primitives" (indefensible) into "we composed these primitives from prior art" (defensible).
+- **Pattern:** F06 + F17 together convert AGF's implicit synthesis posture into an explicit, auditable claim. The rewrite of F06 now *depends* on the attribution table — you can't separate the novelty bound from the sourcing evidence.
+- **Remaining in Cluster C scope:** G5-F13 (end-to-end walkthrough) deferred to Cluster D (Actionability); G5-M02 (naming density) deferred to editorial pass.
 
 ---
 
