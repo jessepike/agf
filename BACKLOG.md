@@ -97,6 +97,17 @@ Each crosswalk: table of standard controls/requirements → AGF primitive → co
 - "Architectural Patterns that Span Layers" subsection in `docs/relationship-to-frameworks.md` to describe harness as a spanning architectural pattern — defer to v0.2 follow-up pass
 - AGF-to-ATF maturity crosswalk in `docs/profiles/grc-profile.md` — after D14 maturity rewrite ships
 
+### Community + credibility + adoption (NEW 2026-04-23)
+
+Driven by the governance/lifecycle conversation on 2026-04-23. Added as considerations, not scheduled. Pick up when release infrastructure is proven and external awareness-building begins.
+
+- **CMO-led public peer review program** — CMO identifies and invites 2–3 recognized names from the NIST AI RMF / OWASP Agentic / CSA ATF / AICM communities to conduct attributed reviews of AGF v0.x. Named reviewers + their findings surface on the site. Highest-leverage credibility move.
+- **Primitive stability markers** — label each of the 19 primitives as Stable / Experimental / Proposed. Signals to implementers where to lean vs where to expect change. Candidate location: `docs/agentic-primitives.md` and primitive summary tables.
+- **Deprecation policy** — document how primitive semantics or vocabulary can change without breaking users. Versioned per primitive, with migration notes. Pairs with SemVer-ish framework versioning in GOVERNANCE.md.
+- **Citation format standard** — canonical citation format ("AGF v0.X.X, Primitive #N (Name)"). Add to README + site header + site footer. Makes AGF discoverable and standardizes how external docs reference it.
+- **Reference implementations** — working code demonstrating primitives. Tool Gate MVP (for Primitive #8) is the natural starter — partially scoped already. Separate repo or subdir; Apache-2.0 or MIT license (not CC, which is docs-only). Shifts AGF from doc-only to doc+code, much harder to dismiss.
+- **Challenge ledger** — public list of open challenges, counter-arguments, unresolved debates (`docs/challenges.md` or similar). Signals intellectual honesty — deliberately visible "we don't have all the answers."
+
 ### Queue dependencies (from `.private/change-queue.md`)
 - ~~Q1: Governance Decision Record (GDR)~~ **PROMOTED 2026-04-22** as DECISIONS.md #8 + #9 + `docs/governance-decision-record.md` + `docs/schemas/gdr.yaml`. Update `.private/change-queue.md` to reflect.
 - Q2: Agent Harness Concept — Needs scoping (older)
