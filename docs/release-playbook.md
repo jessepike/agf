@@ -18,6 +18,22 @@ The pre-push hook enforces mechanical gates. The release skill automates the seq
 
 ---
 
+## Automation layers
+
+Three layers, ordered from proactive to safety-net. Each catches different failure modes.
+
+| Layer | Trigger | Runs | Catches |
+|---|---|---|---|
+| **1. Proactive pipeline** — `/agf-release` skill | Manual: `/agf-release` instead of `git push` | Preflight → architect review → build → push → smoke | Strategic issues before ship (agent-level) |
+| **2. Pre-push hook** — `.githooks/pre-push` | Auto on every `git push` | preflight + lint + link-check + build | Local build/link/lint failures before push |
+| **3. Post-deploy smoke** — `.github/workflows/smoke.yml` | Auto on every push to `main` | Waits for Vercel, hits every route + asset sample | Production-only failures (404s, blank renders, asset drift) that only surface after deploy |
+
+**One-time activation per clone** (Layer 2): `git config core.hooksPath .githooks`. Check via `git config --get core.hooksPath` — should return `.githooks`. This is per-working-copy, not committed, so any fresh clone must repeat.
+
+Layer 3 requires no setup — it runs in GitHub Actions on every push to `main`. Failures appear as red X on the commit and in the Actions tab. Smoke logs upload as artifacts for 30 days.
+
+---
+
 ## 5-Stage Pipeline Overview
 
 ```

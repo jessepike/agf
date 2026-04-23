@@ -58,4 +58,4 @@ Full spec: `docs/reviews/README.md`.
 
 ## Release pipeline
 
-`Preflight → Sync+Lint → Build → Tag+Publish → Smoke`. Details: `docs/release-playbook.md`. Pre-push hook enforces lint + links + build.
+`Preflight → Sync+Lint → Build → Tag+Publish → Smoke`. Details: `docs/release-playbook.md`. Three automation layers: `/agf-release` skill (proactive), pre-push hook (requires `git config core.hooksPath .githooks` per clone), GitHub Actions smoke (auto post-push on main).

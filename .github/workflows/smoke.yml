@@ -1,0 +1,55 @@
+name: Post-deploy smoke
+
+# Runs after every push to main. Waits for Vercel to finish deploying the new
+# build, then hits every route and a sample of assets. Fails the check if any
+# route 404s, returns wrong content-type, or renders a suspiciously small body.
+#
+# This is the automatic safety net. The proactive path is /agf-release
+# (preflight + agent review + build + push + smoke, user-invoked).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      wait_seconds:
+        description: "Max seconds to wait for Vercel deploy (default 240)"
+        required: false
+        default: "240"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BASE_URL: "https://agf.jessepike.dev"
+      WAIT_SECONDS: ${{ github.event.inputs.wait_seconds || '240' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate wait seconds (numeric only)
+        run: |
+          case "$WAIT_SECONDS" in
+            ''|*[!0-9]*) echo "WAIT_SECONDS must be a non-negative integer, got: $WAIT_SECONDS" >&2; exit 1 ;;
+          esac
+
+      - name: Run smoke test
+        run: |
+          node bin/smoke-deployed.mjs \
+            --base-url "$BASE_URL" \
+            --wait-for-deploy "$WAIT_SECONDS"
+
+      - name: Upload smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-log-${{ github.sha }}
+          path: .status/releases/
+          if-no-files-found: ignore
+          retention-days: 30

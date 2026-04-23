@@ -86,7 +86,7 @@ Full rubric + baseline in `docs/reviews/README.md`.
 Preflight → Sync+Lint → Build → Tag+Publish → Smoke
 ```
 
-Details in `docs/release-playbook.md`. Pre-push hook enforces lint + links + build. Invoke full pipeline via `/agf-release`.
+Details in `docs/release-playbook.md`. **Three automation layers:** (1) `/agf-release` skill — proactive full pipeline with agent review. (2) Pre-push hook — local lint/links/build, **requires one-time activation per clone:** `git config core.hooksPath .githooks`. (3) GitHub Actions `smoke.yml` — post-deploy smoke on every push to `main`, catches production-only failures.
 
 ## When something new arrives
 
