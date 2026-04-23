@@ -338,8 +338,14 @@ export default function Home() {
                 </h3>
                 <p className="text-sm text-stone-500 leading-relaxed">
                   Every claim grounded in evidence or clearly marked as an
-                  informed proposal. Confidence levels throughout:{" "}
-                  <Confidence level="established" />
+                  informed proposal.{" "}
+                  <Link
+                    href="/docs/reference/confidence-levels"
+                    className="underline underline-offset-2 hover:text-stone-700"
+                  >
+                    Confidence levels
+                  </Link>{" "}
+                  throughout: <Confidence level="established" />
                   {" · "}
                   <Confidence level="informed" />
                   {" · "}

@@ -1,0 +1,46 @@
+---
+title: "Confidence Levels"
+description: "AGF labels every substantive claim with one of three confidence levels so readers can audit where AGF stands on evidence."
+---
+
+AGF is a synthesis framework. Some of what it claims is settled — multiple authoritative sources agree. Some is our own synthesis — plausible, single-source, not yet independently validated at scale. Some is flagged as open for investigation. Readers deserve to know which is which.
+
+Every substantive claim across AGF content is labeled with one of three confidence levels. You'll see them inline next to claims and as block markers on sections where the whole topic is speculative.
+
+## The three levels
+
+<Confidence level="established" />
+
+**Established.** Clear evidence; multiple sources agree. The claim is load-bearing and defensible against scrutiny. Most synthesis of NIST, OWASP, CSA, ISO, and EU AI Act material lands here because it represents the consensus of those communities.
+
+<Confidence level="informed" />
+
+**Informed.** Our synthesis; single-source; plausible but unverified at scale. This is where AGF does its composition work — connecting patterns across frameworks, naming relationships that haven't been formally named elsewhere. Credible but not yet validated by independent review or production deployment.
+
+<Confidence level="open" />
+
+**Open.** Flagged but speculative; needs investigation. Claims marked Open are deliberately visible so readers, contributors, and reviewers can help close or refute them. Architectural commitments that don't yet have implementation artifacts also land here.
+
+## How they appear
+
+**Inline** — a small badge next to the specific claim it labels:
+
+> Every primitive is derived from prior art. <Confidence level="established" />
+
+**Block** — when an entire section, note, or artifact is at a single confidence level:
+
+<Confidence level="open">
+Example: claims about AGF "operationalizing at machine speed" are architectural commitments, not current reality. The machine-readable primitive schemas, conformance criteria, and dual-form artifacts that would make this real are planned, not shipped.
+</Confidence>
+
+## Why we do this
+
+Promising rigor without showing it is an easy trap for reference frameworks. Naming every claim's confidence level does three things:
+
+1. **Forces honesty at author time.** You can't hide a stretch claim behind passive voice when the prose requires a label.
+2. **Invites contribution.** An Open claim is an explicit ask for evidence, critique, or a counter-example.
+3. **Makes the framework auditable.** Any reader, reviewer, or regulator can ask: *"Which claims are Established? Which are Informed? Which are Open?"* — and get a direct answer from the page itself.
+
+## Related
+
+The same gradient applies to internal review findings. See [`docs/reviews/README.md`](https://github.com/jessepike/agf/blob/main/docs/reviews/README.md) in the source repository for how the gradient is used to label findings in AGF's own governance ledger.
