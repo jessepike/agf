@@ -5,8 +5,71 @@ stage: operate (v0.2.0 shipped; release infrastructure scaffolded 2026-04-23)
 
 # Status — AGF
 
-**Updated:** 2026-04-23
-**Stage:** Operate — v0.2.0 released (2026-04-22); release infrastructure scaffolded (2026-04-23); site update + cross-doc passes queued
+## Handoff — 2026-04-23 21:45
+
+**From:** Sonnet 4.6 deep working session (Opus-planned, Sonnet-executed)
+**To:** Fresh session (next day or later) — model tier depends on task chosen below
+**Context:** Four review clusters shipped, composite scorecard 5.25 → 6.38, three-layer release automation live. All commits deployed to agf.jessepike.dev (10b2829 latest). Session exited mid-triage — Clusters D (Actionability) and two v0.3 content passes remain.
+
+**Next actions (pick one path):**
+
+1. **Validate what shipped** — run `claude-agf-architect` and use `/agf-review --validate <F-ID>` against the 13 resolved findings. Catches anything this session's author graded wrong. Best first move if any doubt on the work. ~45 min. Sonnet is fine.
+2. **Cluster D — Actionability** (G5-F12, F13, plus BACKLOG items) — real 3-4h workstream: end-to-end reference walkthrough, 30-day Minimum Viable Control starter path, adopter archetypes. Biggest remaining quality lift. **Opus recommended** (strategic content shaping).
+3. **v0.3 content release prep** — Credibility Pass + Content Cohesion Pass are both queued in BACKLOG as P1. Each is ~3-4h. Ship together as v0.3. **Sonnet** for both (execution-heavy, strategy already set in ledger).
+4. **Transparency pages** (`/changelog`, `/decisions`, `/roadmap`, `/contribute`) — currently Backlogged; recommended promotion to P1. ~1h. **Sonnet**.
+
+**Key files the next session must read:**
+
+- `docs/findings-ledger.md` — full finding state, scorecard trajectory, cluster notes
+- `BACKLOG.md` — Credibility Pass v0.3 + Content Cohesion Pass v0.3 + Tooling refinement sections
+- `docs/reviews/README.md` — review format spec, rubric, lifecycle
+- `docs/release-playbook.md` — three-layer automation now documented here
+- `CLAUDE.md` — one-time per-clone: `git config core.hooksPath .githooks` if working in a fresh checkout
+
+**Known gotcha:** Pre-push hook activation in THIS clone only. A fresh clone won't have it active. One command fixes it; documented in CLAUDE.md.
+
+**Not shipped this session but worth eyeballing on live site:**
+- Homepage hero definition + "What AGF is / is not" grid + Confidence badges
+- `/docs/reference/confidence-levels` (now position 2 in Reference nav)
+- `/docs/reference/primitives` Primitive Attribution section
+- `/docs/overview/core-concepts` new orientation page
+
+---
+
+**Updated:** 2026-04-23 (evening session)
+**Stage:** Operate — v0.2.0 released (2026-04-22); release infrastructure + review process shipped (2026-04-23); 4 deploys live on agf.jessepike.dev; v0.3 content passes queued
+
+## 2026-04-23 (evening session) — Review ingestion, 4 clusters shipped, 3-layer release automation
+
+**What landed (7 commits, all deployed to agf.jessepike.dev):**
+
+- **Review process established** — GPT-5.4 external review ingested verbatim at `docs/reviews/2026-04-23-gpt-5-4.md`; internal mechanical-baseline review at `docs/reviews/2026-04-23-mechanical-baseline.md`; `docs/findings-ledger.md` with F-ID schema, severity × confidence grid, lifecycle states, and trajectory tracking
+- **v0.2.0 baseline scorecard:** 5.25/10 composite across 8 dimensions. Current: **6.38/10** (+1.13)
+- **Cluster A — Mechanical** (commit `3be6350`): cspell dict populated, markdownlint config fixed (666 → 108 → ~0 errors)
+- **Cluster B — Credibility infra** (commit `90964c5` + `f8c7bb1`): `<Confidence>` + `<Status>` MDX components built + registered globally; `/docs/reference/confidence-levels` reference page shipped; homepage Philosophy card dogfoods the gradient; G5-F05 "operationalize at machine speed" wrapped in `<Confidence level="open">` block
+- **Cluster C — Defensibility** (commit `1556459`): Primitive Attribution table (19-row lineage) on `/docs/reference/primitives`; Belief Layer novelty claim bounded + confidence-marked; OTAA expanded at first use
+- **Cluster E — Clarity quick wins** (commit `54e808d`): homepage CTA anchor fix, canonical one-sentence definition on hero + what-is-agf, "What AGF is / is not" homepage grid, `/docs/overview/core-concepts` orientation page, primitive catalog link fix, observability slug rename
+- **Release automation shipped** (commit `3037a6e`): `.github/workflows/smoke.yml` post-deploy smoke on every push to main; pre-push hook activated (`git config core.hooksPath .githooks`); three-layer pipeline documented in CLAUDE.md + AGENTS.md + release-playbook.md
+- **Tooling blockers resolved** (commit `3afefb4`): pre-push hook activation forced MI-F04 (check-links route resolution) and MI-F05 (lint-mdx fence-awareness) out of "deferred" into "resolved" — both were real release blockers disguised as cosmetic polish. Plus MD032 auto-fixes across 7 files, MD040 fence-language tags, cspell dict extended.
+- **Nav discoverability** (commit `10b2829`): confidence-levels promoted to position 2 in Reference sidebar (was buried at 7/7)
+
+**Findings ledger state:**
+- 13 resolved (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, F02, F04, F05, F06, F07, F08, F10, F11, F17, F19)
+- 4 accepted / queued → Credibility Pass v0.3 (G5-F03, F14 infra only, F20)
+- 4 deferred → Content Cohesion Pass v0.3 (G5-F09, F15, F16, F18)
+- Remaining open: G5-F12, F13 (Cluster D actionability lift); G5-M02, M03 (meta, resolve via other findings); MI-F07 (near-zero residual)
+
+**Scorecard progression (v0.2.0 baseline → now):**
+- Clarity 5 → 7
+- Coherence 6 → 6
+- Defensibility 5 → 7
+- Differentiation 6 → 7
+- Actionability 4 → 4 (unchanged — Cluster D not yet run)
+- Credibility 5 → 6
+- Public Readiness 5 → 7
+- Mechanical 6 → 7
+
+**Original 2026-04-23 infrastructure session (morning):**
 
 ## Current State
 
