@@ -2,11 +2,11 @@
   "root": true,
   "pages": [
     "primitives",
+    "confidence-levels",
+    "governance-decision-record",
+    "governance-framework",
     "decision-intelligence",
     "agentic-observability",
-    "governance-framework",
-    "relationship-to-frameworks",
-    "governance-decision-record",
-    "confidence-levels"
+    "relationship-to-frameworks"
   ]
 }
