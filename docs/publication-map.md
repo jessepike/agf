@@ -32,13 +32,17 @@ AGF: A Reference Architecture for Governed Agentic Systems
 │
 ├── Supporting Docs (docs/)
 │   ├── Relationship to Frameworks ── AGF's position in the governance landscape (7-layer stack)
+│   ├── Governance Decision Record (GDR) ── Canonical audit artifact at gate boundaries (DECISIONS #9)
 │   ├── Shared Vocabulary ────── Canonical terminology
 │   ├── Cross-Concept Model ─── How DI, AO, and primitives relate
 │   ├── Strategic Positioning ── Market landscape, differentiation
 │   └── Governance Framework ── Top-level operating model (5 functions)
 │
+├── Schemas (docs/schemas/)
+│   └── gdr.yaml ────────────── JSON Schema for Governance Decision Records
+│
 ├── Diagrams (diagrams/)
-│   └── 21 PNG architecture diagrams
+│   └── 24 PNG architecture diagrams
 │
 └── Intent (intent.md)
     └── North Star — never auto-edited

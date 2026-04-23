@@ -1,0 +1,149 @@
+# AGF Governance Decision Record schema v1.0
+# See docs/governance-decision-record.md for narrative spec
+# JSON Schema dialect: draft-2020-12
+#
+# This schema enforces structural validation only.
+# Lifecycle invariants (which fields are required for which status values,
+# valid default_action values, timeout transition rules) are specified
+# normatively in docs/governance-decision-record.md § Lifecycle Invariants
+# and MUST be enforced by implementations alongside this schema.
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://github.com/jessepike/agf/blob/main/docs/schemas/gdr.yaml"
+title: "AGF Governance Decision Record"
+description: "Canonical audit artifact at gate boundaries. See DECISIONS.md #9."
+type: object
+
+required: [metadata, decision, subject, inputs, rationale, conditions, authorization, audit]
+
+properties:
+  metadata:
+    type: object
+    required: [decision_id, timestamp, gdr_schema_version, status]
+    properties:
+      decision_id:
+        type: string
+        pattern: "^GDR-\\d{4}-\\d{4}-\\d{3,}$"
+      timestamp:
+        type: string
+        format: date-time
+      gdr_schema_version:
+        type: string
+        const: "1.0"
+      status:
+        type: string
+        enum: [pending, resolved, expired, superseded, aborted]
+      supersedes:
+        type: [string, "null"]
+        description: "decision_id of a prior GDR this record supersedes"
+
+  decision:
+    type: object
+    required: [gate_resolution, label]
+    properties:
+      gate_resolution:
+        type: [string, "null"]
+        enum: [APPROVE, REJECT, MODIFY, DEFER, ESCALATE, null]
+        description: |
+          Primitive #8 Gate Resolution. MUST be null when metadata.status is
+          'pending' or 'aborted'; MUST be non-null when status is 'resolved'
+          or 'expired'. Lifecycle invariants enforced by implementations,
+          not schema. See docs/governance-decision-record.md § Lifecycle
+          Invariants.
+      domain_outcome:
+        type: [string, "null"]
+        description: "Domain-specific outcome (e.g., Tool Gate enums). Optional."
+      label:
+        type: string
+
+  subject:
+    type: object
+    required: [type]
+    properties:
+      type:
+        type: string
+        description: "e.g., tool_authorization, trust_promotion, policy_override"
+    additionalProperties: true   # subject sub-fields are type-specific
+
+  inputs:
+    type: object
+    description: |
+      References to evidence. Use classifications, hashes, and URIs — NOT raw
+      sensitive payloads. See docs/governance-decision-record.md § Sensitive
+      Content Handling.
+    additionalProperties: true
+
+  rationale:
+    type: object
+    required: [evaluator]
+    properties:
+      composite_risk_score:
+        type: [string, "null"]
+      triggering_policies:
+        type: array
+        items:
+          type: object
+          required: [name, matched]
+          properties:
+            name: { type: string }
+            matched: { type: boolean }
+            reason: { type: string }
+      evaluator:
+        type: object
+        required: [type]
+        properties:
+          type:
+            type: string
+            enum: [human, automated, hybrid]
+
+  conditions:
+    type: array
+    items:
+      type: [string, object]
+
+  authorization:
+    type: object
+    properties:
+      granted_by:
+        type: [string, "null"]
+      valid_from:
+        type: [string, "null"]
+        format: date
+      valid_until:
+        type: [string, "null"]
+        format: date
+      reassessment_required:
+        type: boolean
+      reassessment_date:
+        type: [string, "null"]
+        format: date
+      timeout_at:
+        type: [string, "null"]
+        format: date-time
+      default_action:
+        type: [string, "null"]
+        enum: [HALT, ESCALATE, REJECT, null]
+        description: |
+          Action taken if pending GDR's timeout_at elapses without authorizer
+          response. ESCALATE/REJECT transition to status='resolved' with
+          gate_resolution set to that value. HALT transitions to status='aborted'
+          with gate_resolution null and a ring-layer HALT signal emitted as
+          observability event referencing this GDR. See § Default Action on
+          Timeout.
+
+  audit:
+    type: object
+    required: [policy_version]
+    properties:
+      policy_version: { type: string }
+      context_version: { type: string }
+      resolved_at:
+        type: [string, "null"]
+        format: date-time
+      signatures:
+        type: array
+        items:
+          type: object
+          properties:
+            signer: { type: string }
+            sig_hash: { type: string }

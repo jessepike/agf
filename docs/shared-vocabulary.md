@@ -103,6 +103,20 @@ The standard contract between rings:
 
 ---
 
+## Gate Vocabulary
+
+AGF's gate-related vocabularies form a four-part vocabulary of distinct, scoped enums. They are NOT alternative spellings of one concept. See `DECISIONS.md` #8 (Gate Vocabulary Disambiguation).
+
+| Term | Definition |
+|------|-----------|
+| **Gate Boundary** | Where a Gate Resolution or Domain Outcome occurs. Dual-form (DECISIONS.md #5) and GDR emission (#9) are required at every gate boundary. |
+| **Ring Control Signal** | The Composability Interface enum: `PASS / REVISE / HALT / GATE / DELEGATE / ERROR`. How primitives in adjacent rings signal each other. Defined in `docs/agentic-primitives.md` Composability Interface section. Emits observability events (see Primitive #10), not GDRs. |
+| **Gate Resolution** | The Primitive #8 (Governance Gates) enum: `APPROVE / REJECT / MODIFY / DEFER / ESCALATE`. The authorizer's response when a gate fires. Also the return value of the `GATE` Ring Control Signal. Emits a GDR. |
+| **Domain Outcome** | Domain-specific gate decision enums. Each domain application defines its own outcome vocabulary that maps onto Gate Resolutions. Tool Gate's `Authorized / Conditionally Authorized / Denied` is the first reference application. Emits a GDR. |
+| **Governance Decision Record (GDR)** | AGF's canonical audit artifact at gate boundaries. A single record format that serializes any Gate Resolution or Domain Outcome into an auditable record. See `docs/governance-decision-record.md`. |
+
+---
+
 ## The 19 Primitives
 
 Three categories. All are first-class; the distinction is temporal and structural, not hierarchical.

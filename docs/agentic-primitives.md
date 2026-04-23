@@ -247,6 +247,8 @@ Checkpoints before consequential actions. The system pauses, presents evidence, 
 - **Adaptive gates** — trust-dependent. Can relax as the system demonstrates reliability. Controlled by Trust Ladders (#11).
 - **Mandatory gates** — always active regardless of trust level. Legally required, regulatorily mandated, or organizationally non-negotiable.
 
+**Gate boundary emission (dual-form).** Every gate resolution MUST emit a Governance Decision Record (GDR) — the machine-readable companion to the human-readable rationale. See `docs/governance-decision-record.md` and DECISIONS.md #5, #8, #9. The GDR captures the resolution enum value, the inputs that informed it, the authorizer identity, and any attached conditions. This is the dual-form requirement at gates. The corresponding observability event (`gate_resolved`, see `docs/profiles/observability-profile.md`) references the GDR by `decision_id`.
+
 **Why it endures:** The enduring pattern is not "human in the loop" specifically — it is **"checkpoint before consequential action."** Today, most checkpoints require human authorization. As regulatory frameworks and algorithmic accountability mature, some checkpoints may be satisfied by automated authorization with sufficient audit trail. The primitive endures because *some form of checkpoint* will always be needed before irreversible, consequential actions. What evolves is who or what can satisfy the checkpoint — human, algorithmic, or hybrid.
 
 ---
@@ -1330,6 +1332,8 @@ Ring returns one of:
       depth >= max → converts to HALT("delegation depth exceeded")
   - ERROR(reason, partial_state, recovery) → ring failure
       recovery: retry | degrade | halt
+
+**Vocabulary scoping.** The above signals form AGF's Ring Control Signal set (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`). The GATE signal returns a Gate Resolution from the Primitive #8 set (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`). Domain applications layer Domain Outcomes on top (e.g., Tool Gate's `Authorized / Conditionally Authorized / Denied` map onto Gate Resolutions). Ring Control Signals continue to emit observability events; Gate Resolutions and Domain Outcomes emit Governance Decision Records (GDRs). See DECISIONS.md #8 for the full four-part disambiguation and `docs/governance-decision-record.md` for the GDR schema.
 
 Ring receives (in context):
   - execution_budget:
