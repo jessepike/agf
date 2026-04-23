@@ -56,6 +56,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 ### Quality Detection (Ring 3 Intelligence)
 
 **Monitors:**
+
 - Verification pass/fail rates by agent, task type, document type
 - Human override patterns (which fields, which directions, which agents)
 - Convergence speed (validation loop iterations to pass)
@@ -63,6 +64,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 - Cost and latency per ring, per agent, per task type
 
 **Produces:**
+
 - Trust ladder adjustments (empirical, data-driven)
 - Prompt improvement recommendations (from override patterns)
 - Threshold recalibration signals (from false positive analysis)
@@ -71,6 +73,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 ### Security Detection (Cross-cutting)
 
 **Monitors:**
+
 - Ring bypass attempts (outputs without expected verification events)
 - Trust manipulation trajectories (building trust on low-stakes for high-stakes exploitation)
 - Evidence integrity anomalies (source authentication failures, provenance tampering)
@@ -80,6 +83,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 - Cross-pipeline poisoning (compromised Pipeline A output feeding Pipeline B)
 
 **Produces:**
+
 - Immediate trust degradation on anomaly detection (sentinel fast path)
 - Quarantine of affected outputs pending investigation
 - Forensic investigation packages (event timeline, provenance walkback, identity trace)
@@ -89,6 +93,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 ### Governance Detection (Compliance)
 
 **Monitors:**
+
 - Policy compliance rates across all Ring 2 evaluations
 - Mandatory gate activation (was every required gate triggered?)
 - Transaction lifecycle completeness (pre-commit → commit → confirm)
@@ -96,6 +101,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 - Provenance chain completeness (gaps in the evidence → decision trace)
 
 **Produces:**
+
 - Audit packages: complete governance evidence for a scope (time range, agent, case type)
 - Regulatory evidence: documentation for EU AI Act, NIST AI RMF, ISO 42001
 - Compliance dashboards: policy violation rates, gate compliance, provenance coverage
@@ -106,7 +112,7 @@ The unified event stream feeds three detection domains. Separating them into dif
 
 Every material agent action emits an event with a common schema. The envelope is the atomic unit of agentic observability.
 
-```
+```text
 Event Envelope:
   event_id:           Unique event identifier
   timestamp:          When the event occurred
@@ -148,11 +154,13 @@ Event Envelope:
 Events classified by ring, mapping to the three detection domains:
 
 **Execution events (Ring 0):**
+
 - `agent_started`, `agent_completed`, `agent_failed`
 - `tool_called`, `tool_returned`, `tool_failed`
 - `output_produced`, `output_validated_schema`
 
 **Verification events (Ring 1):**
+
 - `verification_started`, `verification_completed`
 - `validation_loop_iteration`, `validation_loop_converged`, `validation_loop_exhausted`
 - `adversarial_critique_started`, `adversarial_critique_completed`
@@ -160,6 +168,7 @@ Events classified by ring, mapping to the three detection domains:
 - `revise_quality_issued`
 
 **Governance events (Ring 2):**
+
 - `policy_evaluated`, `policy_passed`, `policy_violated`
 - `gate_triggered` (gate_type: mandatory | adaptive)
 - `gate_resolved` (resolution: approve | reject | modify | defer | escalate)
@@ -169,6 +178,7 @@ Events classified by ring, mapping to the three detection domains:
 - `approval_granted`, `approval_expired`, `approval_invalidated`
 
 **Learning events (Ring 3):**
+
 - `trust_level_changed` (direction: increased | decreased | reset)
 - `sentinel_triggered` (fast path anomaly detection)
 - `improvement_recommended`, `improvement_applied`, `improvement_rolled_back`
@@ -194,7 +204,8 @@ Raw events are necessary but not sufficient. The correlation engine is where eve
 ### Correlation Rule Examples
 
 **Trust manipulation detection:**
-```
+
+```text
 DETECT: trust_escalation_then_anomaly
   PATTERN:
     - trust_level_changed(direction: increased) × N times over T days
@@ -204,7 +215,8 @@ DETECT: trust_escalation_then_anomaly
 ```
 
 **Ring bypass detection:**
-```
+
+```text
 DETECT: verification_gap
   PATTERN:
     - output_produced in Ring 0
@@ -215,7 +227,8 @@ DETECT: verification_gap
 ```
 
 **Cross-pipeline poisoning:**
-```
+
+```text
 DETECT: cross_pipeline_contamination
   PATTERN:
     - agent_failed OR policy_violated in Pipeline A
@@ -225,7 +238,8 @@ DETECT: cross_pipeline_contamination
 ```
 
 **Approval fatigue exploitation:**
-```
+
+```text
 DETECT: rubber_stamping
   PATTERN:
     - human reviewer: approval rate ≥ 95% over last N decisions
@@ -239,11 +253,13 @@ DETECT: rubber_stamping
 The correlation engine runs at two speeds:
 
 **Fast path (sentinels) — sub-second:**
+
 - Known-pattern matching against pre-defined threat signatures
 - Triggers Security Response Bus for pre-authorized containment actions
 - Outputs: immediate trust degradation, quarantine signals, real-time alerts
 
 **Slow path (analysis) — hours to days:**
+
 - Cross-execution pattern analysis across full event history
 - Behavioral drift modeling (how is this agent's behavior changing over time?)
 - Memory evolution tracking (what has Ring 3 learned, and is it drifting?)
@@ -322,29 +338,34 @@ Agentic observability as described here is an architecture pattern, not a produc
 ## Operations Checklist
 
 **Event collection:**
+
 - [ ] Structured event emission from all ring boundaries
 - [ ] Common event envelope schema deployed
 - [ ] Event signing at emission (integrity verification)
 - [ ] Append-only forensic evidence store
 
 **Detection:**
+
 - [ ] Behavioral baseline established per agent (requires ≥2 weeks of data)
 - [ ] Sentinel fast path configured with pre-authorized response classes
 - [ ] Cross-pipeline correlation rules active
 - [ ] Rubber-stamping detection configured for all human reviewers
 
 **Playbooks:**
+
 - [ ] Behavioral anomaly playbook documented and tested
 - [ ] Provenance chain gap playbook documented and tested
 - [ ] Incident severity classification defined
 - [ ] Escalation paths to security and management documented
 
 **Governance evidence:**
+
 - [ ] Audit package generation tested (time range, agent, case type)
 - [ ] Regulatory evidence export configured (EU AI Act, NIST)
 - [ ] Compliance dashboard covering gate compliance, policy violation rates, provenance coverage
 
 **Zero trust monitoring:**
+
 - [ ] Dead-man's switches active on correlation engine
 - [ ] Monitoring infrastructure itself subject to Ring 1 verification
 - [ ] Evidence tamper detection configured

@@ -67,8 +67,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **resolved** |
 | MI-F02 | markdownlint errors in vocabulary.mdx (root cause: config, not content) | Low | Established | Mechanical | **resolved** |
 | ~~MI-F03~~ | ~~Broken internal link `/docs` in what-is-agf.mdx:109~~ | — | — | — | **collapsed → MI-F04** (tooling false positive; `/docs` route valid) |
-| MI-F04 | check-links.mjs route resolution incomplete (exact `/docs`, `/`, app-dir `.txt` routes) | Low | Established | Mechanical | **deferred** (BACKLOG tooling sprint) |
-| MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | **deferred** (BACKLOG tooling sprint) |
+| MI-F04 | check-links.mjs route resolution incomplete (exact `/docs`, `/`, app-dir `.txt` routes) | Low | Established | Mechanical | **resolved** (app-dir route discovery + exact `/docs` handling + anchor-fragment support) |
+| MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | **resolved** (awk fence-state machine replaces naive `grep -v '```'`) |
 | MI-F06 | preflight.sh treats untracked files as uncommitted; friction with in-flight iterations | Low | Established | Mechanical | **deferred** (BACKLOG tooling sprint) |
 | MI-F07 | Residual markdownlint content hygiene (108 errors: list spacing, long prose, missing fence languages) | Low | Established | Mechanical | **open** (editorial pass) |
 

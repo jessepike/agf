@@ -71,6 +71,7 @@ Security in AGF is not a single ring, layer, or feature. It is a pervasive archi
 | **Response playbooks** | Quarantine, trust degradation, blast radius containment, human escalation, forensic preservation. | On trigger |
 
 **Dual-speed operation:**
+
 - **Fast path (sentinels):** Sub-second. Known-pattern anomaly-triggered responses.
 - **Slow path (analysis):** Hours to days. Cross-execution pattern analysis, behavioral drift, memory evolution tracking.
 
@@ -90,7 +91,7 @@ Security in AGF is not a single ring, layer, or feature. It is a pervasive archi
   className="rounded-lg border border-stone-200 my-8"
 />
 
-```
+```text
 Normal path (seconds–minutes):
   Intelligence detects → Governance evaluates → Fabric contains
 
@@ -245,6 +246,7 @@ Agents taking consequential actions that cannot be undone — financial transact
 ## Security Assessment Checklist
 
 **Security Fabric:**
+
 - [ ] Input sanitization active at all ring boundaries
 - [ ] Output scanning before every ring boundary crossing
 - [ ] Runtime sandboxing with resource limits per agent
@@ -252,18 +254,21 @@ Agents taking consequential actions that cannot be undone — financial transact
 - [ ] Cryptographic identity verification per interaction (no static credentials)
 
 **Security Governance:**
+
 - [ ] Access control policy covers agent × tool × data × trust level
 - [ ] Irreversible actions classified and mandatory gate configured
 - [ ] Supply chain trust policy: approved sources, version pins, trust tiers
 - [ ] MCP server identity verification and tool schema integrity
 
 **Security Intelligence:**
+
 - [ ] Behavioral baseline established for each agent
 - [ ] Cross-pipeline correlation rules active
 - [ ] Security Response Bus pre-authorization policy defined and versioned
 - [ ] Incident response playbooks tested
 
 **Zero Trust:**
+
 - [ ] No static credentials anywhere in the agent stack
 - [ ] Delegation chains bounded and auditable
 - [ ] Trust Ladders calibrated from empirical performance data

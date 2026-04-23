@@ -5,7 +5,7 @@
     // MDX uses JSX-style components — allow inline HTML
     "MD033": false,
     // Line length — exempt table rows and code blocks (MDX tables are dense)
-    "MD013": { "line_length": 300, "tables": false, "code_blocks": false },
+    "MD013": { "line_length": 800, "tables": false, "code_blocks": false },
     // First heading level — MDX often starts with frontmatter, not H1
     "MD041": false,
     // Allow bare URLs in MDX (referenced in many concept docs)
@@ -13,7 +13,10 @@
     // Table column style — AGF uses standard GitHub pipe style (leading+trailing with spaces)
     "MD060": false,
     // Emphasis-as-heading — AGF uses **bold** as visual dividers in composition patterns
-    "MD036": false
+    "MD036": false,
+    // Duplicate headings — AGF profiles legitimately reuse "Phase N" headings across
+    // primitive tables and checklists (intentional narrative parallelism)
+    "MD024": false
   },
   "globs": ["content/docs/**/*.mdx"],
   "ignorePatterns": []

@@ -79,3 +79,8 @@ replayable
 subagent
 subagents
 walkback
+# Added 2026-04-23 from Primitive Attribution table (G5-F17)
+ITIL
+Rego
+SLSA
+miscredited

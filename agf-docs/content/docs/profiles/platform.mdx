@@ -39,7 +39,7 @@ The Rings Model is a logical architecture. How the rings manifest physically dep
 
 The rings literally wrap execution. Sequential, concentric — Ring 0 produces, Ring 1 verifies, Ring 2 governs, output releases.
 
-```
+```text
 Ring 0: Produce output
 ──── checkpoint ────
 Ring 1: Verify (loop until converge)
@@ -64,7 +64,7 @@ Ring 3: Learn (async)
 
 Ring logic fires at specific decision points within an execution graph — tool calls, data access, state mutations. The agent executes continuously; the rings intercept at defined boundaries.
 
-```
+```text
 step 1 → step 2 → [R1: verify tool] → step 3
                                           │
                     [R2: gate — destructive] ←┘
@@ -106,6 +106,7 @@ Verification, governance, and security run concurrently with execution as peer n
 | **Tradeoff** | Latency for governance clarity. Systems subject to regulatory audit should strongly consider wrapper or middleware. |
 
 **Speculative execution bounds** *(Informed proposal):*
+
 - **Depth limit:** 3–4 levels of speculative chaining. Governance overhead grows super-linearly beyond depth 4.
 - **Entropy constraint:** If historical rejection rate for an action class exceeds ~20%, exclude from speculation and process sequentially.
 - **Side-effect fence:** Speculative steps that produce irreversible side effects are held in a commit buffer until the governance release gate clears.
@@ -137,7 +138,7 @@ Choose the deployment mode based on system characteristics. When multiple modes 
 
 Every agent operates within a 5-layer environment. Each layer has its own composition policy, governance intensity, and lifecycle:
 
-```
+```text
 ┌──────────────────────────────────────────────────┐
 │ L5: Session State                     20-30%     │
 │ conversation history, tool results, working      │
@@ -199,6 +200,7 @@ AGF defines a standard contract for how agents expose themselves to the ring sta
 The Model Context Protocol (MCP) is the current dominant protocol for tool integration. AGF's governance layer sits on top of MCP, not inside it.
 
 **MCP as the interrupt boundary:** Each MCP tool call is a natural interrupt point. The governance layer:
+
 1. Intercepts the tool call intent before execution
 2. Evaluates against policy (is this tool permitted? with these parameters? at this trust level?)
 3. Either passes, modifies, or blocks
@@ -236,6 +238,7 @@ Governance is not free. Every ring boundary adds latency, compute, and complexit
 | **Graph-Embedded** | Near-zero (concurrent) | Near-zero (concurrent) | Disruptive (blocks stream) |
 
 **Cost reduction strategies:**
+
 - **Trust Ladders (#11):** Higher-trust agents pass verification faster (fewer iterations, lighter checks).
 - **Risk-based ring activation:** Not every execution triggers all rings. Risk classification determines which rings activate at what intensity.
 - **Async Ring 3:** Learning and analysis run asynchronously — no latency impact on the critical path.
@@ -246,27 +249,32 @@ Governance is not free. Every ring boundary adds latency, compute, and complexit
 ## Infrastructure Checklist
 
 **Deployment mode selection:**
+
 - [ ] System type mapped to deployment mode (wrapper / middleware / graph-embedded)
 - [ ] Latency budget documented and mode selection justified
 - [ ] Regulatory jurisdiction requirements checked against mode properties
 
 **Agent environment:**
+
 - [ ] 5-layer stack composed (L1–L5) with trust boundary respected
 - [ ] Versioned system prompts and instructions in source control
 - [ ] Tool provisioning scoped per role and trust level
 - [ ] Workspace boundaries enforced (tenant isolation)
 
 **MCP integration:**
+
 - [ ] MCP server inventory documented with trust tier assignments
 - [ ] Static API keys eliminated from Tier 2–4 servers
 - [ ] Dynamic discovery blocked by default
 
 **Composability interface:**
+
 - [ ] Signal set implemented (PASS/REVISE/HALT/GATE/ERROR)
 - [ ] Execution budgets defined per ring boundary
 - [ ] Delegation chain bounds enforced
 
 **Cost of governance:**
+
 - [ ] Latency overhead measured per ring per deployment mode
 - [ ] Trust Ladders configured for high-volume, proven agents
 - [ ] Async Ring 3 confirmed off critical path

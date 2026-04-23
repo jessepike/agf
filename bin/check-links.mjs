@@ -73,6 +73,33 @@ function addIndexRoutes() {
 }
 addIndexRoutes();
 
+// Set of app-dir routes served by route.ts / page.tsx (e.g. /, /llms.txt).
+// Includes homepage plus any app/<slug>/route.ts or app/<slug>/page.tsx.
+const validAppRoutes = new Set(["/"]);
+function collectAppRoutes(dir, prefix = "") {
+  if (!existsSync(dir)) return;
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    const s = statSync(full);
+    if (s.isDirectory()) {
+      // Skip docs catch-all and dynamic segments
+      if (entry === "docs" || entry.startsWith("[") || entry.startsWith("(")) continue;
+      // If this dir contains route.ts or page.tsx, it's a route
+      const hasRoute = ["route.ts", "route.js", "page.tsx", "page.ts", "page.js"].some((f) =>
+        existsSync(join(full, f)),
+      );
+      if (hasRoute) {
+        // Preserve file extension if it's a literal file route like /llms.txt
+        const match = entry.match(/^(.+?)(\.txt|\.xml|\.json)$/);
+        validAppRoutes.add(`${prefix}/${entry}`);
+        if (match) validAppRoutes.add(`${prefix}/${match[1]}${match[2]}`);
+      }
+      collectAppRoutes(full, `${prefix}/${entry}`);
+    }
+  }
+}
+collectAppRoutes(APP_DIR);
+
 // Build set of valid public assets
 function getPublicAssets(dir, prefix = "", results = new Set()) {
   if (!existsSync(dir)) return results;
@@ -157,19 +184,26 @@ for (const filePath of filesToCheck) {
     }
 
     // Internal links
-    if (href.startsWith("/docs/")) {
-      // Strip trailing slash
-      const normalized = href.replace(/\/$/, "");
+    const normalized = href.replace(/\/$/, "") || "/";
+
+    // Docs routes — includes /docs (index) and /docs/*
+    if (normalized === "/docs" || normalized.startsWith("/docs/")) {
       if (!validDocRoutes.has(normalized)) {
         console.log(`  [BROKEN-DOC] ${relPath}:${line} → ${href}`);
         brokenInternalCount++;
       }
-    } else if (href.startsWith("/diagrams/") || href.startsWith("/")) {
-      // Check against public assets
-      // Convert /foo/bar.png → /foo/bar.png
+      continue;
+    }
+
+    // App-dir routes (/, /llms.txt, etc.)
+    if (validAppRoutes.has(normalized)) {
+      continue;
+    }
+
+    // Everything else (diagrams, public assets)
+    if (href.startsWith("/diagrams/") || href.startsWith("/")) {
       const assetPath = href;
       if (!publicAssets.has(assetPath) && !publicAssets.has("/" + href.replace(/^\//, ""))) {
-        // Also check without leading slash normalization
         const found = [...publicAssets].some(
           (a) => a === assetPath || a === "/" + assetPath || a.endsWith(assetPath)
         );

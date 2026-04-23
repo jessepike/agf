@@ -187,32 +187,63 @@ else
 fi
 echo ""
 
-# --- Step 3: MDX parse-landmine grep ---
+# --- Step 3: MDX parse-landmine check (fence-aware) ---
+#
+# Fence-awareness (MI-F05): we scan each file with awk, tracking whether we're
+# inside a fenced code block (``` ... ```). Only lines OUTSIDE fences are
+# matched against the landmine patterns. Content inside code fences is
+# exempt from MDX parsing anyway, so flagging e.g. "<2%" inside a YAML
+# example would be a false positive.
 echo "--- MDX parse-landmine check ---"
 cd "$REPO_ROOT"
 LANDMINES=0
 
-# Pattern 1: bare numeric HTML-like tags e.g. <10 or <0 in non-code context
-# These can confuse MDX parser into thinking they're JSX elements
-while IFS= read -r match; do
-  if [ -n "$match" ]; then
-    echo "  [WARN] Possible numeric tag: $match"
-    LANDMINES=$((LANDMINES+1))
-  fi
-done << GREP
-$(grep -rn '<[0-9]' "$AGFDOCS/content/docs" --include="*.mdx" 2>/dev/null | grep -v '```' | grep -v '^[^:]*:[0-9]*:[[:space:]]*>' || true)
-GREP
+scan_file() {
+  file="$1"
+  awk '
+    BEGIN { in_fence = 0 }
+    /^[[:space:]]*```/ {
+      in_fence = !in_fence
+      next
+    }
+    in_fence { next }
 
-# Pattern 2: unescaped < followed by a letter (outside code blocks) — potential JSX confusion
-# Simple heuristic: lines with <[a-zA-Z] that aren't import/export/component lines
-while IFS= read -r match; do
-  if [ -n "$match" ]; then
-    echo "  [WARN] Possible unescaped HTML/JSX: $match"
-    LANDMINES=$((LANDMINES+1))
+    # Pattern 1: bare numeric HTML-like tag e.g. <10 or <0 — confuses MDX parser as JSX
+    /<[0-9]/ && $0 !~ /^[^:]*:[0-9]*:[[:space:]]*>/ {
+      print "P1:" FILENAME ":" NR ":" $0
+    }
+
+    # Pattern 2: unescaped < followed by a letter outside import/export/known-tag lines
+    /<[a-z][a-z]/ &&
+      $0 !~ /^[[:space:]]*\/\// &&
+      $0 !~ /^import / && $0 !~ /^export / &&
+      $0 !~ /<a / && $0 !~ /<br/ && $0 !~ /<span/ &&
+      $0 !~ /<div/ && $0 !~ /<p>/ {
+      print "P2:" FILENAME ":" NR ":" $0
+    }
+  ' "$file"
+}
+
+# Collect all matches across all MDX files
+MATCHES=""
+for f in $(find "$AGFDOCS/content/docs" -name '*.mdx' 2>/dev/null); do
+  result=$(scan_file "$f")
+  if [ -n "$result" ]; then
+    MATCHES="$MATCHES
+$result"
   fi
-done << GREP2
-$(grep -rn '<[a-z][a-z]' "$AGFDOCS/content/docs" --include="*.mdx" 2>/dev/null | grep -v '^\s*//' | grep -v 'import ' | grep -v 'export ' | grep -v '```' | grep -v '<a ' | grep -v '<br' | grep -v '<span' | grep -v '<div' | grep -v '<p>' | head -20 || true)
-GREP2
+done
+
+# Report
+printf '%s\n' "$MATCHES" | while IFS= read -r line; do
+  case "$line" in
+    P1:*) echo "  [WARN] Possible numeric tag: ${line#P1:}" ;;
+    P2:*) echo "  [WARN] Possible unescaped HTML/JSX: ${line#P2:}" ;;
+  esac
+done
+
+# Count non-empty matches (one per line, excluding the leading empty line)
+LANDMINES=$(printf '%s\n' "$MATCHES" | grep -c '^P[12]:' || true)
 
 if [ "$LANDMINES" = "0" ]; then
   echo "[ OK ] No MDX parse landmines detected."
