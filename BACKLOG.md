@@ -14,6 +14,16 @@ Prioritized work queue. P0 = blocking. P1 = high value. Active = in progress. Ba
 
 ## P1 — High Priority
 
+### Credibility Pass v0.3 (NEW 2026-04-23, from Cluster B triage)
+
+Closes umbrella meta-finding G5-M01 (promises rigor/evidence/confidence without showing enough) and specific children G5-F03 (citations) + G5-F20 (dated sources) + completes G5-F04 batch-apply. Infra already shipped (Confidence + Status components, commit pending).
+
+- **Audit flagship pages for numeric/empirical/comparative claims** — Homepage, what-is-agf, rings-model, trust-ladders, primitives, relationship-to-frameworks, composition-patterns. Every claim that starts "X% of", "most orgs", "the leading framework", "proven to", "typically reduces" needs either a footnote citation or a `<Confidence>` marker.
+- **Apply `<Confidence>` markers at the claim** — not just page-level. Inline `<Confidence level="informed" />` on synthesis claims; block `<Confidence level="open">...</Confidence>` on speculative sections.
+- **Time-sensitive claim audit (G5-F20)** — search for dates/years/"planned"/"coming soon"/vendor release references. Add `(as of YYYY-MM-DD, source: X)` inline annotation.
+- **Acceptance signal** — G5-M01 re-check: reviewer (human or agent) confirms the pattern is resolved, not just line items.
+- **Scope target:** ~3–4h single focused pass. Ship as v0.3 of the site.
+
 ### Site update execution (NEW 2026-04-22)
 - Execute changelist at `.private/drafts/site-update-changelist.md` covering v1.0 positioning batch + GDR primitive + macro diagrams + 3 broken-link fixes + homepage card
 - Coordinate with Jesse's parallel diagram work before deploy

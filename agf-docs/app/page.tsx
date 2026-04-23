@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Confidence } from "@/components/confidence";
 
 const roles = [
   {
@@ -337,7 +338,13 @@ export default function Home() {
                 </h3>
                 <p className="text-sm text-stone-500 leading-relaxed">
                   Every claim grounded in evidence or clearly marked as an
-                  informed proposal. Confidence levels throughout.
+                  informed proposal. Confidence levels throughout:{" "}
+                  <Confidence level="established" />
+                  {" · "}
+                  <Confidence level="informed" />
+                  {" · "}
+                  <Confidence level="open" />
+                  .
                 </p>
               </div>
               <div>

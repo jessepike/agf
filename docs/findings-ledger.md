@@ -3,10 +3,11 @@
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
 **Last updated:** 2026-04-23
-**Open findings:** 24 (23 external from GPT-5.4 + 1 new mechanical MI-F07)
-**Resolved:** 2 (MI-F01 cspell dict populated, MI-F02 markdownlint config fixed)
+**Open findings:** 19 (16 GPT-5.4 open + 2 meta + 1 mechanical MI-F07)
+**Resolved:** 4 (MI-F01, MI-F02, G5-F04 infra + initial apply, G5-F05)
+**Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
 **Deferred (tooling sprint):** 4 (MI-F03 collapsed into MI-F04; MI-F04/F05/F06 batched in BACKLOG)
-**Triage progress:** Cluster A (Mechanical quick-wins) — complete 2026-04-23
+**Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) — infra + overclaim fix shipped, content pass queued
 **Reviews ingested:** 2
 - `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
 - `docs/reviews/2026-04-23-mechanical-baseline.md` (internal tooling)
@@ -42,9 +43,9 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 |---|---|---|---|---|---|
 | G5-F01 | Homepage CTA "Start with your role" misroutes to AI Engineering; should go to `/docs` | High | Established | Clarity | open |
 | G5-F02 | Missing one-sentence definition of AGF at top of homepage and What-is-AGF | High | Established | Clarity | open |
-| G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | open |
-| G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | open |
-| G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | open |
+| G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | **accepted** (Credibility Pass v0.3) |
+| G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | **resolved** (infra + initial apply; batch-apply queued in Credibility Pass v0.3) |
+| G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | **resolved** (Status Note already existed, now wrapped in Confidence level="open") |
 | G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | open |
 | G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | open |
 | G5-F08 | No "Core Concepts in Order" orientation page | High | Informed | Clarity | open |
@@ -53,13 +54,13 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F11 | No "What AGF is / is not" box on homepage | High | Informed | Clarity | open |
 | G5-F12 | No 30-day implementation starter path for Minimum Viable Control | Medium | Informed | Actionability | open |
 | G5-F13 | No end-to-end reference architecture walkthrough | Medium | Informed | Actionability | open |
-| G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | open |
+| G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | **accepted — infra shipped** (`<Status>` component; apply pending primitive stability content decision) |
 | G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | open |
 | G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | open |
 | G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | open |
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | open |
 | G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | open |
-| G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | open |
+| G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **accepted** (bundled into Credibility Pass v0.3 audit) |
 | G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | open |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | open |
 | G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |
@@ -120,6 +121,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **State:** open
 - **Related:** G5-M01
 - **Proposed action:** Either remove the claim OR add visible confidence markers on major claims (AGF vocabulary: Established / Informed / Open). Dogfood.
+- **State:** **resolved** 2026-04-23 — chose dogfood path. Built `<Confidence>` component (inline + block forms), registered globally in `mdx-components.tsx`, applied to homepage Philosophy card + what-is-agf Philosophy section. Batch-apply across all flagship pages queued in **Credibility Pass v0.3** (BACKLOG).
 
 ### G5-F05
 
@@ -132,6 +134,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **State:** open
 - **Related:** G5-M01
 - **Proposed action:** Rewrite as future-state language; mark as architectural commitment not current reality
+- **State:** **resolved** 2026-04-23 — existing Status Note in `relationship-to-frameworks.mdx` was correct tempering text but not visually distinct. Wrapped in `<Confidence level="open">` block form so readers see the speculative flag immediately. Also bumped v0.2 reference in note text to v0.3 (artifact delivery timeline).
 
 ### G5-F06
 
@@ -232,6 +235,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **Source:** Section 10 Fix #14
 - **State:** open
 - **Proposed action:** Badge system on primitive and concept pages — `Conceptual` / `Specified` / `Implemented`. Useful also for the primitive stability markers already in backlog (Community+credibility+adoption section).
+- **State:** **accepted — infra shipped** 2026-04-23. `<Status state="conceptual|specified|implemented">` component built and registered globally. Batch-apply deferred: requires per-primitive status content decisions (see "Primitive stability markers" in BACKLOG Community+credibility section) before we can label anything. One finding, two-phase resolution: infra now, content later.
 
 ### G5-F15
 
@@ -352,10 +356,17 @@ Baseline established 2026-04-23. Re-score on next external or internal review.
 | 2026-04-23 | internal-tooling | — | — | — | — | — | — | — | 6 | — |
 | **Composite** | **v0.2.0 baseline** | **5** | **6** | **5** | **6** | **4** | **5** | **5** | **6** | **5.25** |
 | 2026-04-23 | post-Cluster-A | 5 | 6 | 5 | 6 | 4 | 5 | 5 | **7** | **5.38** |
+| 2026-04-23 | post-Cluster-B (infra) | 5 | 6 | 5 | 6 | 4 | **6** | **6** | 7 | **5.63** |
 
 Target progression TBD on triage.
 
 **Cluster A delta (2026-04-23):** Mechanical Integrity 6 → 7. Content-side is clean (cspell 61 issues → 0; markdownlint 666 errors → ~15 residual over a 300-char threshold). Ceiling of 7 imposed by three deferred tooling-script bugs (MI-F04/F05/F06) and residual content hygiene (MI-F07). Full 9+ is reachable once tooling sprint ships.
+
+**Cluster B delta (2026-04-23, partial):** Credibility 5 → 6, Public Readiness 5 → 6.
+- **Infra shipped:** `<Confidence level="established|informed|open">` + `<Status state="conceptual|specified|implemented">` components registered globally via `mdx-components.tsx`. Both inline-badge and block-form variants. Dogfoods AGF's own vocabulary.
+- **G5-F05 resolved:** "Operationalize at machine speed" Status Note wrapped in `<Confidence level="open">` block — now visibly distinct as architectural commitment, not current claim.
+- **G5-F04 initial apply:** Homepage Philosophy card shows all three confidence badges; what-is-agf Philosophy section dogfoods the gradient on its own rigor claim.
+- **Ceiling before Pass v0.3:** G5-F03 citations + G5-F20 dated sources + broader `<Confidence>` application across flagship claims unlock Credibility → 7–8. `<Status>` batch-apply is gated on primitive stability content decision (backlogged).
 
 ---
 
