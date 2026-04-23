@@ -1,0 +1,299 @@
+---
+title: Governance Decision Record (GDR)
+description: AGF's canonical audit artifact at gate boundaries — a single record format that serializes any Gate Resolution or Domain Outcome into an auditable artifact.
+---
+
+**Status:** Active
+**Related decisions:** [DECISIONS.md](https://github.com/jessepike/agf/blob/main/DECISIONS.md) #5 (Dual-Form at Gate Boundaries), #8 (Gate Vocabulary Disambiguation), #9 (GDR as Canonical Audit Artifact)
+
+The Governance Decision Record (GDR) is AGF's canonical audit artifact at gate boundaries. It is a single record format with polymorphic content that serializes any governed runtime decision — across primitives, across domain applications, across automation modes — into a reusable, auditable form. GDR is the format that fulfills the evidence-artifact promises already made in the [GRC Profile](/docs/profiles/grc) for Primitive #8 (Governance Gates) and Primitive #11 (Trust Ladders).
+
+## What a GDR is
+
+A GDR captures *what was decided, by whom or what, on what evidence, under what conditions, with what consequences*. It is the machine-readable companion to the human-readable rationale that every gate resolution emits — together fulfilling the dual-form principle (DECISIONS.md #5).
+
+GDRs are emitted at two boundary classes (see DECISIONS.md #8):
+
+- **Gate Resolution** — when a Governance Gate (Primitive #8) fires and an authorizer returns one of `APPROVE / REJECT / MODIFY / DEFER / ESCALATE`
+- **Domain Outcome** — when a domain application of a gate produces a domain-specific outcome (e.g., Tool Gate emits `Authorized / Conditionally Authorized / Denied`); a Domain Outcome maps onto a Gate Resolution
+
+Ring Control Signals (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`) crossing ring boundaries continue to emit observability events per Primitive #10 (`policy_evaluated`, `gate_triggered`, `gate_resolved`, etc., as catalogued in the [Observability Profile](/docs/profiles/observability)). Observability events are the **log** that something happened; GDRs are the **record** of the decision and its reasoning. Both are emitted at gate resolution; they are not redundant.
+
+## What a GDR is not
+
+- **Not an ADR.** Architectural Decision Records capture engineering design choices made by humans during system design. GDRs capture runtime governance decisions made during system operation.
+- **Not an evidence record.** Evidence records (e.g., AICM control evidence) describe a system's posture against a control catalog; GDRs describe individual runtime decisions. Evidence may *cite* GDRs as supporting artifacts.
+- **Not an observability event.** Events log that something happened; GDRs record the decision with its full reasoning, inputs, and conditions. The two are paired at gate resolution.
+- **Not the Risk Decision Graph (RDG).** The RDG (see [Decision Intelligence](/docs/reference/decision-intelligence)) is AGF's rich internal reasoning substrate — claims, beliefs, evidence relationships, scenarios, decision options. GDRs are the externally shareable serialization of the RDG's `Final Decision` and `Approval` nodes plus their supporting context. The RDG holds the full graph; GDR is the export format for governance handoffs.
+
+## Schema
+
+A GDR has eight required sections.
+
+1. **`metadata`** — `decision_id`, `timestamp` (decision creation), `gdr_schema_version`, `status` (`pending | resolved | expired | superseded | aborted`), `supersedes` (optional GDR id reference if this record supersedes a prior one).
+2. **`decision`** — `gate_resolution` (one of `APPROVE / REJECT / MODIFY / DEFER / ESCALATE`), optional `domain_outcome` (domain-specific enum value), `label` (free-text human-readable summary).
+3. **`subject`** — what the decision is about. `type` (e.g., `tool_authorization`, `trust_promotion`, `policy_override`); typed sub-fields for the specific subject (tool reference, agent reference, action reference).
+4. **`inputs`** — what evidence informed the decision. References to scanner findings, organizational policy, workflow context, prior GDRs cited, observability signals. **Inputs MUST use classifications, hashes, and access-controlled URIs for sensitive content; raw payloads MUST NOT be embedded.**
+5. **`rationale`** — why the decision came out this way. `composite_risk_score` (where applicable), `triggering_policies` (with version pins), `evaluator` (`type: human | automated | hybrid` with sub-fields for each).
+6. **`conditions`** — constraints attached to the decision. Time bounds, scope restrictions, monitoring requirements, reassessment triggers. Free-text or structured.
+7. **`authorization`** — who authorized and the validity envelope. `granted_by`, `valid_from`, `valid_until`, `reassessment_required`, `reassessment_date`, `timeout_at` (when status was `pending`), `default_action` (action taken on timeout per Primitive #8).
+8. **`audit`** — provenance metadata. Policy version, context version, hashes of source artifacts (scan results, policy file, context file), authorization signatures, `resolved_at` (timestamp of status transition to `resolved` or `aborted`).
+
+A canonical YAML schema lives at [`docs/schemas/gdr.yaml`](https://github.com/jessepike/agf/blob/main/docs/schemas/gdr.yaml). The schema enforces structural validation (required sections, enum membership, type shapes). Lifecycle invariants — which fields are required for which `status` values, valid `default_action` values, and timeout transition rules — are specified normatively in the "Lifecycle Invariants" subsection below. Implementations MUST emit valid YAML or JSON conforming to both the schema and the lifecycle invariants.
+
+### Sensitive Content Handling
+
+Per the [Observability Profile](/docs/profiles/observability) § Known Limitations and Operational Realities, governance records MUST minimize sensitive content. GDRs follow the same principle and extend it as a normative requirement:
+
+- **Inputs containing PII/PHI/financial/regulated data**: store data classifications and content hashes in the GDR; store the raw evidence in a separate access-controlled location with an opaque URI reference in the GDR.
+- **Scanner findings with embedded payloads** (e.g., a finding that includes the leaked credential value): store the finding code, severity, and a hash of the payload; do NOT embed the raw payload.
+- **Workflow context**: data classification labels (`pii`, `phi`, etc.) and compliance regime labels (`hipaa`, `co-sb21-169`, etc.) are NOT sensitive and SHOULD be embedded directly — they are the metadata that makes the decision evaluable.
+- **Authorization audit trail** (signatures, signer identity, timestamp) is durable in the GDR.
+
+This separation enables GDRs to serve as durable audit records while keeping regulated content under access controls aligned with the host organization's data minimization policy.
+
+### Lifecycle
+
+GDR `status` evolves through five states:
+
+- **`pending`** — created when an authorizer is required but has not yet responded. This is the initial state for asynchronous gates and gates routed for human review. `timeout_at` and `default_action` MUST be set. `gate_resolution` MUST be null. The pending GDR transitions on either authorizer response (→ `resolved`) or timeout (→ per `default_action` table below).
+- **`resolved`** — the decision has been made by an authorizer (human or automated) and is final. `resolved_at` and `gate_resolution` MUST be set. **DEFER is a `resolved` state**, not pending — when an authorizer returns DEFER, they are deliberately deferring (the decision was made: defer this). A successor GDR (with `supersedes` referencing this id) captures the eventual non-DEFER resolution.
+- **`expired`** — a previously `resolved` decision's `valid_until` window has elapsed. The decision is no longer operative; reassessment (a new GDR) is required to resume. Distinct from `aborted`: `expired` applies to authorized decisions whose authorization window ended.
+- **`superseded`** — a newer GDR (`supersedes` referencing this id) has replaced this decision. The original GDR is preserved for audit.
+- **`aborted`** — a `pending` GDR whose `default_action` was HALT and whose `timeout_at` elapsed without an authorizer response. `gate_resolution` stays null (HALT is a Ring Control Signal, not a Gate Resolution). The ring-layer HALT signal is emitted as an observability event referencing this GDR's `decision_id`. `resolved_at` is set to the timeout instant for audit.
+
+### Lifecycle Invariants
+
+Normative constraints (enforced by implementations, not by the JSON Schema skeleton):
+
+| `status` | Required fields | Forbidden fields |
+|---|---|---|
+| `pending` | `metadata`, `subject`, `inputs`, `rationale.evaluator`, `authorization.timeout_at`, `authorization.default_action` | `decision.gate_resolution` (must be null), `audit.resolved_at` |
+| `resolved` | `metadata`, `decision.gate_resolution`, `subject`, `inputs`, `rationale`, `authorization.granted_by`, `audit.resolved_at` | — |
+| `expired` | `metadata`, `decision.gate_resolution` (preserved from prior `resolved` state), `authorization.valid_until` | — |
+| `superseded` | `metadata.supersedes` (on the SUCCESSOR GDR; this GDR's `metadata.status` becomes `superseded`), `audit.resolved_at` (preserved) | — |
+| `aborted` | `metadata.status: aborted`, `authorization.default_action: HALT`, `authorization.timeout_at`, `audit.resolved_at` (set to timeout instant) | `decision.gate_resolution` (must be null) |
+
+### Default Action on Timeout
+
+When a `pending` GDR's `timeout_at` elapses without an authorizer response, the GDR transitions per the `authorization.default_action` value:
+
+| `default_action` | Transition | `decision.gate_resolution` | Side effect |
+|---|---|---|---|
+| `ESCALATE` | `pending` → `resolved` | Set to `ESCALATE` | Escalation routing per Primitive #8; successor GDR may be created by the escalation target |
+| `REJECT` | `pending` → `resolved` | Set to `REJECT` | Standard fail-closed path; the requested action does not proceed |
+| `HALT` | `pending` → `aborted` | Stays `null` | Ring-layer HALT signal emitted as observability event referencing this GDR's `decision_id`; the requested action does not proceed |
+
+ESCALATE and REJECT are valid Gate Resolutions and resolve the GDR cleanly. HALT is a Ring Control Signal at the Composability Interface layer; it is not a Gate Resolution. Modeling HALT-on-timeout as `aborted` rather than `resolved` preserves the four-part vocabulary boundaries.
+
+### Examples
+
+**Example 1: Tool Gate authorization (Domain Outcome → Gate Resolution APPROVE with conditions)**
+
+```yaml
+metadata:
+  decision_id: GDR-2026-0402-001
+  timestamp: 2026-04-02T14:30:00Z
+  gdr_schema_version: "1.0"
+  status: resolved
+
+decision:
+  gate_resolution: APPROVE
+  domain_outcome: conditional_authorization
+  label: "Conditionally authorize document-parser-mcp for insurance-claims-processing"
+
+subject:
+  type: tool_authorization
+  tool:
+    name: document-parser-mcp
+    server_type: stdio
+    source: third-party
+    vendor: acme-corp
+
+inputs:
+  scanner_findings:
+    scanner: snyk-agent-scan
+    scan_version: 0.4.13
+    scan_hash: sha256:abc123...
+    finding_summary:
+      - code: W007
+        severity: warning
+        payload_hash: sha256:def456...
+        description: "Credential handling — long-lived API key in config"
+  workflow_context:
+    name: insurance-claims-processing
+    environment: production
+    data_classifications: [pii, phi, financial]
+    compliance_regimes: [co-sb21-169, hipaa]
+    context_uri: secure-store://ctx/claims-workflow-v3.1
+  policy_references:
+    - flag-credential-weakness-regulated@v1.2
+
+rationale:
+  composite_risk_score: high
+  triggering_policies:
+    - name: flag-credential-weakness-regulated
+      matched: true
+      reason: "W007 in HIPAA/CO SB21-169 regulated workflow"
+  evaluator:
+    type: hybrid
+    automated_recommendation: conditional_authorization
+    human_authorizer:
+      identity: security-review-team
+      review_id: SR-2026-0402-018
+
+conditions:
+  - "Rotate API key to short-lived OAuth token within 30 days"
+  - "Enable enhanced monitoring on all tool invocations"
+  - "Restrict tool to read-only operations — no data write-back"
+
+authorization:
+  granted_by: security-review-team
+  valid_from: 2026-04-02
+  valid_until: 2026-05-02
+  reassessment_required: true
+  reassessment_date: 2026-05-02
+
+audit:
+  policy_version: agf-policy-default-enterprise-v1.2
+  context_version: claims-workflow-v3.1
+  resolved_at: 2026-04-02T14:30:00Z
+  signatures:
+    - signer: security-review-team
+      sig_hash: sha256:789abc...
+```
+
+**Example 2: Trust Ladder promotion (Domain Outcome → Gate Resolution APPROVE; automated)**
+
+```yaml
+metadata:
+  decision_id: GDR-2026-0415-014
+  timestamp: 2026-04-15T09:12:00Z
+  gdr_schema_version: "1.0"
+  status: resolved
+
+decision:
+  gate_resolution: APPROVE
+  domain_outcome: trust_promotion
+  label: "Promote agent claims-triage-bot from ATF Junior to ATF Senior"
+
+subject:
+  type: trust_promotion
+  agent:
+    name: claims-triage-bot
+    current_tier: ATF-Junior
+    target_tier: ATF-Senior
+
+inputs:
+  observability_signals:
+    window: last-90-days
+    signal_uri: secure-store://obs/claims-triage-bot/2026-Q1
+    summary:
+      deployments: 14237
+      gate_overrides: 0
+      revision_rate: 0.012
+  policy_references:
+    - junior-to-senior-promotion@v2.0
+
+rationale:
+  triggering_policies:
+    - name: junior-to-senior-promotion
+      matched: true
+      reason: "90-day clean record, override rate 0%, revision rate <2%"
+  evaluator:
+    type: automated
+    rule_engine_version: trust-ladders-v1.4
+
+conditions:
+  - "Re-evaluate at 180 days"
+  - "Demote on any P0 incident in next 30 days"
+
+authorization:
+  granted_by: trust-ladders-rule-engine
+  valid_from: 2026-04-15
+  valid_until: 2026-10-15
+  reassessment_required: true
+  reassessment_date: 2026-10-15
+
+audit:
+  policy_version: trust-ladders-policy-v1.4
+  resolved_at: 2026-04-15T09:12:00Z
+  rule_engine_signature: sha256:111aaa...
+```
+
+**Example 3: Pending gate awaiting human authorizer (status: pending)**
+
+```yaml
+metadata:
+  decision_id: GDR-2026-0420-007
+  timestamp: 2026-04-20T11:00:00Z
+  gdr_schema_version: "1.0"
+  status: pending
+
+decision:
+  gate_resolution: null   # set on resolution
+  domain_outcome: null
+  label: "Awaiting CISO approval for emergency policy override request"
+
+subject:
+  type: policy_override
+  policy_reference: block-cross-border-data-transfer@v3.1
+  override_request:
+    requestor: incident-response-team
+    justification_uri: secure-store://incidents/IR-2026-0420-003
+
+inputs:
+  context_uri: secure-store://incidents/IR-2026-0420-003/context
+
+rationale:
+  evaluator:
+    type: human
+    pending_authorizer: ciso
+
+conditions: []
+
+authorization:
+  granted_by: null
+  valid_from: null
+  valid_until: null
+  timeout_at: 2026-04-20T15:00:00Z
+  default_action: ESCALATE
+
+audit:
+  policy_version: agf-policy-default-enterprise-v1.2
+  resolved_at: null
+```
+
+## Relationship to existing AGF artifacts
+
+GDR formalizes the format for evidence artifacts AGF has already promised in other docs. It does NOT introduce competing artifact types.
+
+| Existing artifact / promise | Source | GDR's relationship |
+|---|---|---|
+| Gate resolution records, evidence packages, human decision records, override logs (Primitive #8) | [GRC Profile](/docs/profiles/grc) Evidence Artifacts table | GDR IS the format for the resolution / human-decision / override records. **Gate trigger records** (the event that a gate was fired) are observability events per Primitive #10 (`gate_triggered`), NOT GDRs. The `gate_triggered` event creates the corresponding `pending` GDR; on resolution, the `gate_resolved` event references the GDR by `decision_id`. |
+| Trust level history, promotion/demotion records, calibration justifications (Primitive #11) | [GRC Profile](/docs/profiles/grc) Evidence Artifacts table | GDR IS the format for promotion/demotion records. |
+| `gate_triggered`, `gate_resolved` observability events (Primitive #10) | [Observability Profile](/docs/profiles/observability) Governance events | Observability events log THAT a decision occurred (and its enum value). GDRs RECORD the decision with full reasoning. Both emitted at gate resolution; not redundant. The event references the GDR by `decision_id`. |
+| `Final Decision` and `Approval` nodes in the Risk Decision Graph (RDG) | [Decision Intelligence](/docs/reference/decision-intelligence) Risk Decision Graph | The RDG is AGF's rich internal reasoning substrate (claims, beliefs, evidence relationships, scenarios). The GDR is the externally shareable serialization of the Final Decision + Approval nodes plus their supporting context. RDG holds the full graph; GDR is the export format for governance handoffs. |
+| Verification decision records (pass/revise/fail per output) for Primitive #1 | [GRC Profile](/docs/profiles/grc) Evidence Artifacts table | NOT a GDR. Verification records are produced inside Ring 1 by the Verifier as part of normal output verification — they are observability event records, not gate-boundary decisions. Distinct artifact class. |
+
+The current promotion ships GDR + the canonical schema. Cross-doc integration passes (updating grc-profile evidence table to reference GDR, adding GDR id references to observability event payloads, RDG export format spec) are tracked as backlog items.
+
+## Standards alignment
+
+GDRs provide evidence in support of regulatory record-keeping and decision-documentation requirements. They do not by themselves satisfy these requirements; the host organization's overall governance program does. Specific regulatory mappings:
+
+- **EU AI Act Art. 12 (Record-keeping)** — GDRs are durable records of governance decisions affecting high-risk AI systems; they support the Art. 12 logging requirement when retention and integrity controls meet the regulatory standard. (See [Relationship to Frameworks](/docs/reference/relationship-to-frameworks) for AGF's broader Art. 12 evidence story across primitives.)
+- **EU AI Act Art. 14 (Human Oversight)** — GDRs capture the authorizer identity, evidence presented, and decision rationale for gates that satisfy Art. 14 oversight requirements; they support the auditable demonstration of human oversight.
+- **NIST AI RMF MANAGE 4.1** — GDRs document override decisions, appeal outcomes, incident-response gates, and change-management approvals that fall under MANAGE 4.1's scope.
+- **ISO 42001** — GDRs support the documented information requirements (Clause 7.5) and the management review requirements (Clause 9.3) where governance decisions need to be evidenced.
+- **AICM** — where AICM controls require documented governance decisions, GDRs provide a consistent format. Specific control crosswalks live in the [GRC Profile](/docs/profiles/grc).
+
+The GDR schema does not encode any single regulatory framework's vocabulary; it carries the decision content, and crosswalks between GDR fields and regulatory fields are produced per regime.
+
+## Tooling
+
+A schema validator and emission helpers will be published as part of the AGF tooling release. The first reference implementation is the AGF Tool Gate MVP (forthcoming).
+
+---
+
+For the complete document and the canonical YAML schema, see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/governance-decision-record.md) and [`docs/schemas/gdr.yaml`](https://github.com/jessepike/agf/blob/main/docs/schemas/gdr.yaml).

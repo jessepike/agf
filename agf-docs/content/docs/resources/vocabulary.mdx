@@ -65,7 +65,7 @@ Used throughout the framework to mark certainty:
 | **Four verbs** | What AGF does: Synthesizes / Unifies / Prescribes / Operationalizes. |
 | **OTAA invariant** | Every AGF primitive must be Observable, Traceable, Auditable, Agent-operable. |
 | **Dual-form principle** | "Machine-consumable, human-decidable." Every primitive exists in human and machine form simultaneously. |
-| **Tempo taxonomy** | Wire-speed enforcement (<1ms) / near-realtime supervision (sec–min) / human-speed governance (hours–weeks). |
+| **Tempo taxonomy** | Wire-speed enforcement (&lt;1ms) / near-realtime supervision (sec–min) / human-speed governance (hours–weeks). |
 | **Wire-speed** | Sub-millisecond governance enforcement — deterministic policy, identity, tool allowlists, sandbox. |
 | **Architectural substrate** | AGF's position at Layer 0 of the seven-layer stack. The shared model onto which other governance layers project. |
 
@@ -77,6 +77,18 @@ Used throughout the framework to mark certainty:
 | **Tier 0 / 1 / 2** | Harness tiers: Provider (model vendor), Agent (per-agent, maps to AGF Security Fabric), Orchestration (cross-agent, maps to AGF Security Governance). |
 | **Source → Build → Runtime** | Harness workflow: YAML/Markdown source → `harness build` → SDK adapters enforce at call time. Terraform analogy. |
 | **Hard / Adaptive / Behavioral constraints** | Hard = machine-enforced, never relaxes. Adaptive = machine-enforced, trust-dependent. Behavioral = instruction-based, not mechanically enforced. Only hard and adaptive are citable as controls. |
+
+## Gate Vocabulary
+
+AGF's gate-related vocabularies form a four-part vocabulary of distinct, scoped enums. They are NOT alternative spellings of one concept. See [DECISIONS.md #8](https://github.com/jessepike/agf/blob/main/DECISIONS.md) (Gate Vocabulary Disambiguation).
+
+| Term | Definition |
+|------|-----------|
+| **Gate Boundary** | Where a Gate Resolution or Domain Outcome occurs. Dual-form (DECISIONS.md #5) and GDR emission (#9) are required at every gate boundary. |
+| **Ring Control Signal** | The Composability Interface enum: `PASS / REVISE / HALT / GATE / DELEGATE / ERROR`. How primitives in adjacent rings signal each other. Emits observability events (Primitive #10), not GDRs. |
+| **Gate Resolution** | The Primitive #8 (Governance Gates) enum: `APPROVE / REJECT / MODIFY / DEFER / ESCALATE`. The authorizer's response when a gate fires. Also the return value of the `GATE` Ring Control Signal. Emits a GDR. |
+| **Domain Outcome** | Domain-specific gate decision enums. Each domain application defines its own outcome vocabulary that maps onto Gate Resolutions. Tool Gate's `Authorized / Conditionally Authorized / Denied` is the first reference application. Emits a GDR. |
+| **Governance Decision Record (GDR)** | AGF's canonical audit artifact at gate boundaries. A single record format that serializes any Gate Resolution or Domain Outcome into an auditable record. See [Governance Decision Record](/docs/reference/governance-decision-record). |
 
 ## Maturity Levels
 

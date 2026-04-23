@@ -74,6 +74,16 @@ The primitives are not always harmonious. AGF names seven tensions with architec
 | Policy as Code vs. Self-Improvement | Can Ring 3 change Ring 2's policy rules? | *Can suggest governance changes, cannot enact them* |
 | Environment vs. Governance Integrity | #19 optimizes the environment — but it IS the control surface | *The environment can get better. It cannot get less governed.* |
 
+## Gate Vocabulary & Governance Decision Records
+
+AGF's gate-related concepts form a four-part vocabulary — not alternative spellings of one concept. See [DECISIONS.md #8](https://github.com/jessepike/agf/blob/main/DECISIONS.md) for the full disambiguation.
+
+- **Ring Control Signals** (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`) — how primitives in adjacent rings signal each other via the Composability Interface. Emit observability events (Primitive #10), not GDRs.
+- **Gate Resolutions** (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`) — the Primitive #8 enum returned by an authorizer when a gate fires; also the return value of the `GATE` Ring Control Signal. Emit a Governance Decision Record (GDR).
+- **Domain Outcomes** — domain-specific gate decision enums (e.g., Tool Gate's `Authorized / Conditionally Authorized / Denied`) that map onto Gate Resolutions. Emit a GDR.
+
+Every Gate Resolution and every Domain Outcome emits a [Governance Decision Record](/docs/reference/governance-decision-record) — AGF's canonical audit artifact at gate boundaries. The GDR is the machine-readable companion to the human-readable rationale (dual-form principle, DECISIONS.md #5). The corresponding `gate_resolved` observability event references the GDR by `decision_id`.
+
 ## Implementation Priority
 
 For a practical implementation roadmap organized by phase, see the [AI Engineering Profile](/docs/profiles/ai-engineering).

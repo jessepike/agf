@@ -210,6 +210,45 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── v1.0 Positioning ── */}
+        <section className="border-b border-stone-200/80 bg-stone-50/60">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+              <div className="lg:col-span-2">
+                <p className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-3">
+                  v1.0 Positioning
+                </p>
+                <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-4 leading-snug">
+                  AGF synthesizes the governance landscape — see how it fits.
+                </h2>
+                <p className="text-sm text-stone-500 leading-relaxed mb-6">
+                  NIST, OWASP, CSA AICM/ATF/MAESTRO, ISO 42001, EU AI Act, Microsoft
+                  AGT, FAIR — each authoritative, none sufficient alone. AGF is the
+                  architectural substrate that makes the frameworks you already use
+                  work together for agentic systems.
+                </p>
+                <Link
+                  href="/docs/reference/relationship-to-frameworks"
+                  className="group inline-flex items-center gap-1 text-sm font-medium text-stone-700 hover:text-stone-900 transition-colors"
+                >
+                  Read the seven-layer stack
+                  <ArrowIcon />
+                </Link>
+              </div>
+              <div className="lg:col-span-3">
+                <Image
+                  src="/diagrams/seven-layer-landscape-stack.png"
+                  alt="The Agentic Governance Landscape — seven-layer stack with AGF as architectural substrate (Layer 0) and unifying frame around OWASP (L1), MAESTRO (L2), AICM/ISO/NIST catalogs (L3), CSA ATF (L4), Microsoft AGT (L5), with FAIR as orthogonal Layer 6"
+                  width={1200}
+                  height={900}
+                  className="w-full h-auto rounded-lg border border-stone-200 bg-white"
+                  priority={false}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Role Router ── */}
         <section className="mx-auto max-w-6xl px-6 py-20">
           <div className="mb-10">
