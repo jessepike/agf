@@ -140,10 +140,11 @@ export default function Home() {
               <br />
               framework for agentic systems
             </h1>
-            <p className="text-lg text-stone-500 leading-relaxed max-w-2xl mb-10">
-              AGF synthesizes NIST, OWASP, CSA, EU AI Act, and academic research
-              into a single coherent architecture for building safe, secure,
-              auditable, and observable agentic systems.
+            <p className="text-lg text-stone-700 leading-relaxed max-w-2xl mb-4 font-medium">
+              <strong>AGF is a reference architecture and operating model for governing agentic systems</strong> — synthesizing NIST, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, and academic research into a coherent, composable playbook.
+            </p>
+            <p className="text-base text-stone-500 leading-relaxed max-w-2xl mb-10">
+              Built to make agent behavior observable, traceable, auditable, and agent-operable — so the systems shipping today can be governed without rebuilding them tomorrow.
             </p>
             <div className="flex items-center gap-4">
               <Link
@@ -153,7 +154,7 @@ export default function Home() {
                 Read the framework
               </Link>
               <Link
-                href="/docs/profiles/ai-engineering"
+                href="#roles"
                 className="inline-flex h-10 items-center rounded-md border border-stone-300 px-5 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:border-stone-400"
               >
                 Start with your role
@@ -187,6 +188,41 @@ export default function Home() {
                   {s}
                 </span>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── What AGF is / is not ── */}
+        <section className="border-b border-stone-200/80">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <h2 className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-8 text-center">
+              What AGF is — and what it isn&apos;t
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+              <div>
+                <h3 className="text-sm font-semibold text-stone-800 mb-3">
+                  AGF <span className="text-emerald-700">is</span>
+                </h3>
+                <ul className="space-y-2 text-sm text-stone-600 leading-relaxed">
+                  <li>— A reference architecture for agentic systems</li>
+                  <li>— An operating model synthesizing existing frameworks</li>
+                  <li>— A vocabulary of primitives, rings, gates, and invariants</li>
+                  <li>— A crosswalk between NIST, OWASP, CSA, ISO, EU AI Act</li>
+                  <li>— Openly licensed (CC BY 4.0 docs; Apache-2.0 / MIT code)</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-stone-800 mb-3">
+                  AGF <span className="text-stone-500">is not</span>
+                </h3>
+                <ul className="space-y-2 text-sm text-stone-600 leading-relaxed">
+                  <li>— A new control catalog (use NIST 800-53, CSA AICM, ISO 27001)</li>
+                  <li>— A new threat taxonomy (use OWASP, MITRE ATLAS, MAESTRO)</li>
+                  <li>— A platform, product, or vendor solution</li>
+                  <li>— A compliance certification or a replacement for one</li>
+                  <li>— A claim that AGF invented these patterns</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -251,7 +287,7 @@ export default function Home() {
         </section>
 
         {/* ── Role Router ── */}
-        <section className="mx-auto max-w-6xl px-6 py-20">
+        <section id="roles" className="mx-auto max-w-6xl px-6 py-20 scroll-mt-16">
           <div className="mb-10">
             <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-2">
               Start with your role

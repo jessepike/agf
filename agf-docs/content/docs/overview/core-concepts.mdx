@@ -1,0 +1,68 @@
+---
+title: "Core Concepts in Order"
+description: "A sequenced orientation to AGF's core concepts — what to read and in what order to build a working mental model of the framework."
+---
+
+AGF has a lot of named constructs. Read in the wrong order, they pile up. Read in the right order, they build on each other cleanly.
+
+This page is the orientation path. Each concept links to its canonical reference doc. Work through them top-down and you'll have a working mental model in about 30 minutes.
+
+## 1. What AGF Is
+
+[AGF is a reference architecture](/docs/overview/what-is-agf) — a synthesis of NIST, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, and academic research into a composable governance framework for agentic systems. Start here. It's the single-sentence definition plus the problem AGF is trying to solve.
+
+**Key takeaways before moving on:**
+- AGF synthesizes; it does not invent
+- The contribution is the composition, not the individual patterns
+- Every claim is labeled with a [confidence level](/docs/reference/confidence-levels)
+
+## 2. The Rings Model
+
+[Four concentric rings](/docs/overview/rings-model) describe where governance happens: **Execution (Ring 0)**, **Verification (Ring 1)**, **Governance (Ring 2)**, **Learning (Ring 3)**. Cross-cutting this: the **Fabric** (data contracts, events, identity, errors) and the **Security** spine.
+
+**Key takeaways before moving on:**
+- Rings are not a lifecycle or a pipeline — they are concurrent concerns
+- Rings emit signals to each other via the Composability Interface
+- Rings 0+1 are the execution loop; Ring 2 gates; Ring 3 learns
+
+## 3. The 19 Primitives
+
+[The 19 Primitives](/docs/reference/primitives) are named patterns drawn from distributed systems, security engineering, compliance, and control theory — placed into the Rings Model. Each primitive has a primary lineage (NIST, OWASP, CSA, academic, industry) and a specific AGF contribution (placement, naming, invariant).
+
+**Key takeaways before moving on:**
+- Primitives are not inventions — see the [Primitive Attribution](/docs/reference/primitives#primitive-attribution) for sourcing
+- Seven named **tensions** exist between primitives; each has an architectural invariant
+- Read the [attribution table](/docs/reference/primitives#primitive-attribution) before accepting any novelty claim
+
+## 4. Gate Vocabulary and the Governance Decision Record
+
+[Four scoped gate vocabularies](/docs/reference/primitives#gate-vocabulary--governance-decision-records) disambiguate what used to be one overloaded word "gate":
+
+- **Ring Control Signals** — how primitives across rings signal each other (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`)
+- **Gate Resolutions** — the Primitive #8 enum (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`) returned when a gate fires
+- **Domain Outcomes** — domain-specific enums (e.g., Tool Gate `Authorized / Conditionally Authorized / Denied`) that map to Gate Resolutions
+- **Governance Decision Record (GDR)** — the canonical audit artifact emitted at every gate boundary
+
+The [Governance Decision Record](/docs/reference/governance-decision-record) is the machine-readable companion to the human-readable rationale. Every Gate Resolution and every Domain Outcome emits one.
+
+## 5. Trust Ladders
+
+[Trust Ladders](/docs/overview/trust-ladders) explain how agents earn autonomy. Trust is not granted by default — it's observed, calibrated, and promoted (or demoted) based on performance against gate resolutions over time. This is where Ring 2 and Ring 3 meet: governance watches, learning calibrates.
+
+## 6. Composition Patterns and the Agentic Observability Layer
+
+[Composition Patterns](/docs/overview/composition-patterns) describe the four ways AGF's rings compose in practice — from constrained single agents to full multi-ring self-improving systems. Each pattern implies a different [Agentic Observability](/docs/reference/agentic-observability) posture — the unified monitoring, detection, and response layer that turns ring events into signal for operators, security, and governance.
+
+## 7. Relationship to Frameworks
+
+Finally, [how AGF relates to NIST, OWASP, CSA, ISO, EU AI Act, and the rest](/docs/reference/relationship-to-frameworks). The seven-layer stack explains where AGF sits (Layer 0, the substrate) and what it explicitly does **not** try to replace.
+
+## What to read next
+
+- **Building or deploying agents?** Start with the [AI Engineering profile](/docs/profiles/ai-engineering).
+- **Security or red-teaming?** Start with the [Security profile](/docs/profiles/security).
+- **Compliance or audit?** Start with the [GRC profile](/docs/profiles/grc).
+- **Platform / infrastructure?** Start with the [Platform profile](/docs/profiles/platform).
+- **Operations / observability?** Start with the [Observability profile](/docs/profiles/observability).
+
+Or return to the [homepage role chooser](/#roles).

@@ -2,6 +2,7 @@
   "root": true,
   "pages": [
     "what-is-agf",
+    "core-concepts",
     "rings-model",
     "trust-ladders",
     "composition-patterns"
