@@ -1,12 +1,12 @@
 ---
-updated: 2026-04-22
-stage: operate (v1.0 positioning + GDR primitive landed; site update + cross-doc passes queued)
+updated: 2026-04-23
+stage: operate (v0.2.0 shipped; release infrastructure scaffolded 2026-04-23)
 ---
 
 # Status — AGF
 
-**Updated:** 2026-04-22
-**Stage:** Operate — v1.0 positioning landed (2026-04-21); GDR primitive (D16+D17) landed (2026-04-22); site update changelist drafted for site manager; downstream cross-doc integration passes queued
+**Updated:** 2026-04-23
+**Stage:** Operate — v0.2.0 released (2026-04-22); release infrastructure scaffolded (2026-04-23); site update + cross-doc passes queued
 
 ## Current State
 

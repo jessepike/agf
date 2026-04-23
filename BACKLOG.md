@@ -6,7 +6,11 @@ Prioritized work queue. P0 = blocking. P1 = high value. Active = in progress. Ba
 
 ## P0 — Blocking
 
-_(none — all work below is unblocked except where Jesse review is pending)_
+### LICENSE decision (BLOCKER before external contributors)
+- Current `LICENSE` file has CC BY 4.0 language — confirm this is intentional.
+- See `LICENSE-TODO.md` for options (CC-BY-4.0, CC-BY-SA-4.0, Apache-2.0) with pros/cons.
+- Decision required before onboarding any external contributor or accepting PRs from outside Jesse's network.
+- Jesse's call — do not decide unilaterally.
 
 ## P1 — High Priority
 
@@ -37,6 +41,28 @@ _(none — all work below is unblocked except where Jesse review is pending)_
 _(nothing actively in flight — session paused at checkpoint 2026-04-17)_
 
 ## Backlogged
+
+### Site pages — deferred from release-infrastructure session (2026-04-23)
+
+- **`/changelog` page on site** — expose `CHANGELOG.md` as an MDX route under `/docs/changelog` or `/changelog`. Route + MDX needed; content is the canonical `CHANGELOG.md`.
+- **`/decisions` page on site** — promote `DECISIONS.md` to MDX route. Enables linking to individual decision entries from doc pages.
+- **`/roadmap` page on site** — lightweight roadmap page. Content can be extracted from backlog + next-steps in `status.md`.
+- **`/contribute` page on site** — contributor guide surface. Expose `CONTRIBUTING.md` as a docs route with onboarding guidance.
+
+### Crosswalk files (`docs/crosswalks/`) — P1 when prioritized
+
+Starter structure deferred from release-infrastructure session. Recommended P1 set:
+- `docs/crosswalks/nist-ai-rmf.md` — NIST AI RMF ↔ AGF primitives mapping
+- `docs/crosswalks/owasp-agentic.md` — OWASP Agentic Security ↔ AGF controls mapping
+- `docs/crosswalks/aicm.md` — AICM 18 domains ↔ AGF primitives
+- `docs/crosswalks/eu-ai-act.md` — EU AI Act obligations ↔ AGF primitives (Art. 12, Art. 14 already cited in GDR doc — good starting point)
+
+Each crosswalk: table of standard controls/requirements → AGF primitive → confidence level → implementation guidance stub.
+
+### Rings-model canonical diagram selection
+- Five untracked v2–v6 iterations of `rings-model-governed-agentic-systems.png` in `diagrams/`.
+- Jesse to select canonical version and archive others, or formally supersede v1 with selected iteration.
+- Do NOT auto-select — this is a Jesse decision.
 
 ### Primitive upgrades (driven by 2026-04-17 extractions)
 - Primitive #14 Identity & Attribution — 10-point upgrade spec in `.private/research/extractions-2026-04-17/ms-docs-and-csa-identity.md` §11

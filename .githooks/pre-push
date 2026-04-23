@@ -1,0 +1,60 @@
+#!/bin/sh
+# .githooks/pre-push — AGF pre-push gate
+#
+# Blocks push on: preflight failure, MDX lint errors, broken internal links, build failure.
+# Bypass (emergencies only): git push --no-verify
+#
+# Activate: git config core.hooksPath .githooks
+# See docs/release-playbook.md for bypass policy.
+
+set -e
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+echo ""
+echo "=== AGF Pre-Push Gate ==="
+echo ""
+
+# Step 1: Preflight (allow-dirty since pre-push runs during a push, not release)
+echo "--- Step 1/4: Preflight ---"
+if ! "$REPO_ROOT/bin/preflight.sh" --allow-dirty; then
+  echo ""
+  echo "[BLOCKED] Pre-push gate failed at preflight."
+  echo "Fix issues above or bypass with: git push --no-verify"
+  exit 1
+fi
+echo ""
+
+# Step 2: MDX lint
+echo "--- Step 2/4: MDX Lint ---"
+if ! "$REPO_ROOT/bin/lint-mdx.sh"; then
+  echo ""
+  echo "[BLOCKED] Pre-push gate failed at MDX lint."
+  echo "Fix issues above or bypass with: git push --no-verify"
+  exit 1
+fi
+echo ""
+
+# Step 3: Link check
+echo "--- Step 3/4: Link Check ---"
+if ! node "$REPO_ROOT/bin/check-links.mjs"; then
+  echo ""
+  echo "[BLOCKED] Pre-push gate failed at link check."
+  echo "Fix issues above or bypass with: git push --no-verify"
+  exit 1
+fi
+echo ""
+
+# Step 4: Build
+echo "--- Step 4/4: agf-docs Build ---"
+if ! pnpm --dir "$REPO_ROOT/agf-docs" build; then
+  echo ""
+  echo "[BLOCKED] Pre-push gate failed at agf-docs build."
+  echo "Fix build errors above or bypass with: git push --no-verify"
+  exit 1
+fi
+echo ""
+
+echo "=== Pre-Push Gate PASSED — pushing ==="
+echo ""
+exit 0
