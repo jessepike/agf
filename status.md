@@ -12,6 +12,37 @@ stage: operate (v0.2.0 shipped; release infrastructure scaffolded 2026-04-23)
 
 Agentic Governance Framework v0.1 published. Documentation site live at agf.jessepike.dev. Core framework docs complete. 24 architecture diagrams (3 new macro positioning visuals added 2026-04-21 PM; additional pass in flight 2026-04-22). `DECISIONS.md` active with 9 entries.
 
+**2026-04-23 — Release infrastructure + AGF domain agent scaffolded:**
+
+Built the three buckets from the lifecycle/governance conversation:
+
+**Bucket 1 — Governance scaffolding (this repo):**
+- `GOVERNANCE.md` — BDFL model, versioning policy, decision process, evolution path
+- `CHANGELOG.md` — Keep-a-Changelog format with retroactive v0.1.0 + v0.2.0 entries
+- `VERSION` — `0.2.0`
+- `LICENSE-TODO.md` — options flagged (CC-BY-4.0, CC-BY-SA-4.0, Apache-2.0); current LICENSE remains CC BY 4.0, confirmed intentional for adoption-first commercial posture
+- `docs/release-playbook.md` — 5-stage pipeline, per-stage detail, rollback procedure
+- `docs/tooling-guide.md` — operational reference + sanity tests + troubleshooting
+
+**Bucket 2 — Release scripts (this repo `bin/` + `.githooks/`):**
+- `bin/preflight.sh`, `bin/drift-report.mjs`, `bin/sync-to-site.sh`, `bin/lint-mdx.sh`, `bin/check-links.mjs`, `bin/smoke-deployed.mjs`
+- `.githooks/pre-push` — 4-stage gate (preflight → lint → links → build)
+- One-time setup: `git config core.hooksPath .githooks`
+- Commit: `c39f412`
+
+**Bucket 3 — `agf-architect` agent + `agf-release` skill (dev system, outside this repo):**
+- Agent at `~/code/_shared/pike-agents/plugins/agf-architect/` — thought partner (80%) + release reviewer (20%); 6 slash commands (`/agf-think`, `/agf-review`, `/agf-crosswalk`, `/agf-primitive`, `/agf-surveil`, `/agf-release`)
+- Skill at `~/code/tools/ai-dev/skills/agf-release/SKILL.md`
+- Shell launcher: `claude-agf-architect` in `~/.zshrc`
+- Registered in capabilities-registry
+- Entry in `~/code/_shared/pike-agents/CHANGELOG.md`
+
+**Backlog additions (deferred):** CMO-led public peer review program, primitive stability markers, deprecation policy, citation format standard, reference implementations, challenge ledger. See `BACKLOG.md` § "Community + credibility + adoption (NEW 2026-04-23)".
+
+**Quality scoring / multi-agent review cycle (NEW 2026-04-23):** Discussed but deferred. Jesse has a GPT 5.4 review with scoring + findings to be incorporated when we resume this track. Intended shape: separate `agf-quality-review` skill, periodic multi-reviewer cycle (Architect + Standards + Editorial + Practitioner + Adversarial + External Model), scoring rubric across framework consistency / standards accuracy / evidence discipline / completeness / actionability / novelty defensibility / doc quality / mechanical integrity.
+
+---
+
 **2026-04-22 — GDR primitive promotion (CPO session):**
 
 Promoted Q1 (Governance Decision Record) from change queue to public framework as DECISIONS.md #8 (D16 — Gate Vocabulary Disambiguation) + #9 (D17 — GDR as Canonical Audit Artifact). Three atomic commits:
