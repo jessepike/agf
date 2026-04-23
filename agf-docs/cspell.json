@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [],
+  "dictionaryDefinitions": [
+    {
+      "name": "agf-terms",
+      "path": "./.cspell-agf.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["agf-terms"],
+  "ignorePaths": ["node_modules", ".next", "out", "public"],
+  "ignoreRegExpList": [
+    "/\\`[^\\`]*\\`/g",
+    "/```[\\s\\S]*?```/g",
+    "/^import .*/m",
+    "/https?:\\/\\/[^\\s]+/g"
+  ]
+}

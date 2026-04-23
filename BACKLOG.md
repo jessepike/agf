@@ -108,6 +108,15 @@ Driven by the governance/lifecycle conversation on 2026-04-23. Added as consider
 - **Reference implementations** — working code demonstrating primitives. Tool Gate MVP (for Primitive #8) is the natural starter — partially scoped already. Separate repo or subdir; Apache-2.0 or MIT license (not CC, which is docs-only). Shifts AGF from doc-only to doc+code, much harder to dismiss.
 - **Challenge ledger** — public list of open challenges, counter-arguments, unresolved debates (`docs/challenges.md` or similar). Signals intellectual honesty — deliberately visible "we don't have all the answers."
 
+### Tooling refinement — release infrastructure (NEW 2026-04-23, from findings ledger)
+
+Mechanical-baseline review surfaced tooling bugs/UX issues in `bin/` scripts. None are release-blocking; batch when touching the release pipeline next.
+
+- **MI-F03/F04: `check-links.mjs` false positives** — script doesn't recognize (a) exact `/docs` route (only matches `/docs/*`), (b) homepage `/`, (c) asset routes like `/llms.txt` that exist as `app/*/route.ts`. Fix: extend route resolution to include app-dir routes and exact-prefix matches.
+- **MI-F05: `lint-mdx.sh` MDX parse-landmine grep not fence-aware** — flags `<2%` inside YAML code blocks as an MDX hazard. Fix: awk-based state machine that skips fenced blocks, or replace with remark-lint plugin.
+- **MI-F06: `preflight.sh` blocks on untracked files** — treats `git status` output uniformly, failing on intentional in-flight workspace files (e.g., diagram iterations). Fix: distinguish modified-tracked (block) from untracked (warn + continue).
+- **MI-F07: markdownlint content hygiene pass** — config updated 2026-04-23 (MD013 tables/code-blocks exempt, MD060/MD036 disabled) reduced errors 666→108. Residual 108 are real content issues: MD032 blanks-around-lists (45), MD013 long prose (42), MD040 missing code-fence languages (11), MD022/031/024 minor. Editorial pass at next content sweep.
+
 ### Queue dependencies (from `.private/change-queue.md`)
 - ~~Q1: Governance Decision Record (GDR)~~ **PROMOTED 2026-04-22** as DECISIONS.md #8 + #9 + `docs/governance-decision-record.md` + `docs/schemas/gdr.yaml`. Update `.private/change-queue.md` to reflect.
 - Q2: Agent Harness Concept — Needs scoping (older)
