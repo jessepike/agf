@@ -1,16 +1,27 @@
 ---
-updated: 2026-04-21-pm
-stage: operate (v1.0 positioning landed; downstream implementation work queued)
+updated: 2026-04-22
+stage: operate (v1.0 positioning + GDR primitive landed; site update + cross-doc passes queued)
 ---
 
 # Status — AGF
 
-**Updated:** 2026-04-21 (PM)
-**Stage:** Operate — v1.0 positioning landed in public repo; macro positioning visuals Campaign-03-ready; downstream implementation work queued
+**Updated:** 2026-04-22
+**Stage:** Operate — v1.0 positioning landed (2026-04-21); GDR primitive (D16+D17) landed (2026-04-22); site update changelist drafted for site manager; downstream cross-doc integration passes queued
 
 ## Current State
 
-Agentic Governance Framework v0.1 published. Documentation site live at agf.jessepike.dev. Core framework docs complete. 24 architecture diagrams generated (3 new macro positioning visuals added 2026-04-21 PM). `DECISIONS.md` active.
+Agentic Governance Framework v0.1 published. Documentation site live at agf.jessepike.dev. Core framework docs complete. 24 architecture diagrams (3 new macro positioning visuals added 2026-04-21 PM; additional pass in flight 2026-04-22). `DECISIONS.md` active with 9 entries.
+
+**2026-04-22 — GDR primitive promotion (CPO session):**
+
+Promoted Q1 (Governance Decision Record) from change queue to public framework as DECISIONS.md #8 (D16 — Gate Vocabulary Disambiguation) + #9 (D17 — GDR as Canonical Audit Artifact). Three atomic commits:
+- `962f2b2` — `feat(decisions): D16 gate vocabulary disambiguation + D17 GDR primitive` — DECISIONS.md rows #5 refined + #8 + #9 added
+- `288ddee` — `feat(framework): add Governance Decision Record as canonical audit artifact` — new `docs/governance-decision-record.md` (~440 lines), new `docs/schemas/gdr.yaml` (JSON Schema draft-2020-12), edits to `docs/agentic-primitives.md` (Primitive #8 + Composability Interface inserts), new "Gate Vocabulary" section in `docs/shared-vocabulary.md`, registration in `docs/publication-map.md`
+- `078abea` — `docs(consistency): align relationship-to-frameworks gate boundary language with D16/D17` — fixes the D12.4a wording bug propagation in relationship-to-frameworks.md:201
+
+**Process:** Two rounds of Codex external review. Round 1 caught 9 findings (5 accepted unconditionally, 3 accepted with modification, 1 accepted in part). Round 2 caught 5 new defects in v2 (all accepted, biggest = HALT-on-timeout couldn't be modeled because HALT is a Ring Control Signal not a Gate Resolution). Final v3 added five-state lifecycle (`pending / resolved / expired / superseded / aborted`), Lifecycle Invariants table, Default Action on Timeout table, and "Sensitive Content Handling" subsection. EU AI Act Art. 12 + Art. 14 and NIST AI RMF MANAGE 4.1 citations independently verified against primary sources before commit. ISO 42001 clause numbers (7.5/9.3) used with high confidence based on Annex SL but NOT independently verified — logged as backlog item.
+
+**Site update changelist drafted:** `.private/drafts/site-update-changelist.md` — covers all canonical-to-MDX sync needed since 2026-04-21 (v1.0 positioning batch + GDR work + macro diagrams + 3 broken-link fixes from external review + homepage positioning card recommendation). Ready for site manager execution. Estimated 2–4 hours focused effort.
 
 **2026-04-17 — Major positioning work landed in workshop (not yet public):**
 - Six-pillar positioning (D12): Category "Agentic Governance" + four verbs (Synthesize/Unify/Prescribe/Operationalize) + OTAA invariant + dual-form principle + tempo taxonomy + NIST CSF parallel
@@ -47,14 +58,18 @@ Public artifacts now live:
 
 ## Next Steps
 
-1. **Gate-boundary dual-form audit** (per DECISIONS.md #5) — Primitive #8, Composability Interface, Primitive #11. Specify JSON/YAML schema for gate decision artifacts.
-2. **Primitive #14 Identity & Attribution upgrade** — 10-point spec ready in `.private/research/extractions-2026-04-17/ms-docs-and-csa-identity.md` §11
-3. **Primitive #15 rename to "Agent SRE"** + SLO/error-budget/chaos additions
-4. **Publishable content:** "Agentic Compliance Blind Spots" analysis (10-gap assertion, source in extraction reports)
-5. **Profile doc upgrades:** security-profile MS Failure Mode Taxonomy section + AICM crosswalk; GRC-profile AGF↔ATF maturity crosswalk
-6. **Intent.md review** — produce DIFF PROPOSAL (not edit) against new pillars (DECISIONS.md #3)
-7. **Content production** via pike-acm (Campaign 03: AGF series C3-003+) — positioning now stable enough to resume; three macro visuals ready to anchor content
-8. **Publishable content candidate:** "Agentic Compliance Blind Spots" 10-gap analysis (source: `.private/research/extractions-2026-04-17/aicm-and-ms-failure-modes.md` §14)
+1. **Site update execution** — site manager works through `.private/drafts/site-update-changelist.md`. Coordinate with Jesse's parallel diagram work before deploy.
+2. **Cross-doc integration passes for GDR** (P1 backlog) — update `docs/profiles/grc-profile.md` Evidence Artifacts table to reference GDR as the format; add GDR `decision_id` reference to observability event payloads in `docs/profiles/observability-profile.md`; RDG → GDR export format spec in `docs/decision-intelligence.md` (P2). Closes the cross-doc coherence loop.
+3. **Primitive #8 timeout-behavior prose cleanup** (P1 backlog, NEW from this session) — the canonical doc itself conflates HALT (Ring Control Signal) with ESCALATE (Gate Resolution) in default-action prose. Surfaced by Codex round 2 review while drafting GDR. Revise to describe the three valid default actions (ESCALATE, REJECT, HALT) per the Default Action on Timeout table now in `docs/governance-decision-record.md`.
+4. **Original gate-boundary dual-form audit** (was P1) — partially superseded by D17/GDR. Remaining work: audit Composability Interface for dual-form emission per signal type; audit Primitive #11 (Trust Ladders) — promotions/demotions are Domain Outcomes that emit GDRs.
+5. **Primitive #14 Identity & Attribution upgrade** — 10-point spec ready in `.private/research/extractions-2026-04-17/ms-docs-and-csa-identity.md` §11
+6. **Primitive #15 rename to "Agent SRE"** + SLO/error-budget/chaos additions
+7. **Profile doc upgrades:** security-profile MS Failure Mode Taxonomy section + AICM crosswalk; GRC-profile AGF↔ATF maturity crosswalk
+8. **Intent.md review** — produce DIFF PROPOSAL (not edit) against new pillars (DECISIONS.md #3)
+9. **Content production** via pike-acm (Campaign 03: AGF series C3-003+) — positioning now stable enough to resume; three macro visuals ready to anchor content
+10. **Publishable content candidate:** "Agentic Compliance Blind Spots" 10-gap analysis (source: `.private/research/extractions-2026-04-17/aicm-and-ms-failure-modes.md` §14)
+11. **Q3 (Tool Governance) promotion** — first GDR domain application; depends on this session's GDR primitive landing (now done). Source: `.private/inbox/AGF-Tool-Governance-v2.md`. Ready when prioritized.
+12. **ISO 42001 clause verification** (LOW) — confirm Clauses 7.5 + 9.3 against official ISO text (paywalled); soften GDR doc Standards section if numbers are wrong.
 
 ## Blockers / Open Questions
 
