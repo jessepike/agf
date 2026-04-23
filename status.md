@@ -34,6 +34,8 @@ stage: operate (v0.2.0 shipped; release infrastructure scaffolded 2026-04-23)
 - `/docs/reference/primitives` Primitive Attribution section
 - `/docs/overview/core-concepts` new orientation page
 
+**Model recommendation:** **Sonnet 4.6** for paths 1, 3, 4 (execution-heavy; strategic framing already set in `docs/findings-ledger.md` and `BACKLOG.md` — this is content shipping + validation, not strategy). **Opus 4.7** for path 2 (Cluster D Actionability) — reference walkthrough, adopter archetypes, and 30-day starter require strategic content shaping and structural decisions that benefit from Opus depth. Default to **Sonnet** unless going straight to path 2.
+
 ---
 
 **Updated:** 2026-04-23 (evening session)
