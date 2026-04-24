@@ -1465,8 +1465,12 @@ When a GATE signal pauses for human authorization, the quality of the human deci
 
 **Timeout behavior:**
 
-- Gates have configurable timeout periods. If a gate is not resolved within the timeout, the system takes a defined default action — which may be HALT (fail closed) or ESCALATE (route to a different reviewer).
+- Gates have configurable timeout periods. If a gate is not resolved within the timeout, the system takes a defined `default_action`. Three values are valid:
+  - **`ESCALATE`** — route to a different reviewer. A Gate Resolution; resolves the gate with `gate_resolution = ESCALATE` and emits a GDR (`status: resolved`).
+  - **`REJECT`** — standard fail-closed path. A Gate Resolution; resolves with `gate_resolution = REJECT` and emits a GDR (`status: resolved`).
+  - **`HALT`** — hard fail-closed. A Ring Control Signal, not a Gate Resolution; the pending GDR transitions to `status: aborted` with `gate_resolution` null, and the ring-layer HALT signal is emitted as an observability event referencing the GDR's `decision_id`.
 - Fail-closed is the default for high-risk gates. Fail-open is never the default — it must be explicitly configured and documented as a governance decision.
+- The `default_action` semantics and resulting GDR lifecycle are specified in `docs/governance-decision-record.md` § Default Action on Timeout.
 
 **Cognitive load management:**
 
