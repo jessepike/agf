@@ -2,15 +2,17 @@
 
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
-**Last updated:** 2026-04-23
-**Open findings:** 9 (6 GPT-5.4 open + 2 meta + 1 mechanical MI-F07)
-**Resolved:** 13 (MI-F01, MI-F02, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19)
+**Last updated:** 2026-04-24
+**Open findings:** 6 (2 GPT-5.4 open + 3 meta + 1 mechanical MI-F07)
+**Validated:** 15 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19) — all validated 2026-04-24 (agf-architect Mode C batch)
 **Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
-**Deferred:** 8 (MI-F03 collapsed; MI-F04/F05/F06 → tooling sprint; G5-F09/F15/F16 → Content Cohesion Pass v0.3; G5-F18 → editorial pass with MI-F07)
+**Deferred:** 6 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F09/F15/F16 → Content Cohesion Pass v0.3; G5-F18 → editorial pass with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
 **Reviews ingested:** 2
 - `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
 - `docs/reviews/2026-04-23-mechanical-baseline.md` (internal tooling)
+**Validation passes:** 1
+- 2026-04-24 — agf-architect Mode C batch: 15/15 validated, 0 insufficient, 0 regressed
 
 ---
 
@@ -41,34 +43,34 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 
 | F-ID | Summary | Severity | Confidence | Dimension | State |
 |---|---|---|---|---|---|
-| G5-F01 | Homepage CTA "Start with your role" misroutes to AI Engineering; should go to `/docs` | High | Established | Clarity | **resolved** (CTA now anchors to on-page `#roles` grid + scroll-mt-16) |
-| G5-F02 | Missing one-sentence definition of AGF at top of homepage and What-is-AGF | High | Established | Clarity | **resolved** (canonical definition placed on homepage hero + what-is-agf intro) |
+| G5-F01 | Homepage CTA "Start with your role" misroutes to AI Engineering; should go to `/docs` | High | Established | Clarity | **validated** 2026-04-24 (CTA now anchors to on-page `#roles` grid + scroll-mt-16) |
+| G5-F02 | Missing one-sentence definition of AGF at top of homepage and What-is-AGF | High | Established | Clarity | **validated** 2026-04-24 (canonical definition placed on homepage hero + what-is-agf intro) |
 | G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | **accepted** (Credibility Pass v0.3) |
-| G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | **resolved** (infra + initial apply; batch-apply queued in Credibility Pass v0.3) |
-| G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | **resolved** (Status Note already existed, now wrapped in Confidence level="open") |
-| G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | **resolved** (bounded claim + Confidence=informed + link to attribution table) |
-| G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | **resolved** (expanded inline in relationship-to-frameworks Layer 0 row) |
-| G5-F08 | No "Core Concepts in Order" orientation page | High | Informed | Clarity | **resolved** (new `/docs/overview/core-concepts` page, positioned as step 2 in nav) |
+| G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | **validated** 2026-04-24 (infra + initial apply; batch-apply queued in Credibility Pass v0.3) |
+| G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | **validated** 2026-04-24 (Status Note already existed, now wrapped in Confidence level="open") |
+| G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | **validated** 2026-04-24 (bounded claim + Confidence=informed + link to attribution table) |
+| G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | **validated** 2026-04-24 (expanded inline in relationship-to-frameworks Layer 0 row) |
+| G5-F08 | No "Core Concepts in Order" orientation page | High | Informed | Clarity | **validated** 2026-04-24 (new `/docs/overview/core-concepts` page, positioned as step 2 in nav) |
 | G5-F09 | Growth model drift: 4 composition patterns vs 5 implementation phases | High | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
-| G5-F10 | "See full primitive catalog" link points to AI Engineering, not primitives ref | High | Established | Mechanical | **resolved** (link → `/docs/reference/primitives`) |
-| G5-F11 | No "What AGF is / is not" box on homepage | High | Informed | Clarity | **resolved** (two-column is/is-not grid between Standards strip and Rings diagram) |
+| G5-F10 | "See full primitive catalog" link points to AI Engineering, not primitives ref | High | Established | Mechanical | **validated** 2026-04-24 (link → `/docs/reference/primitives`) |
+| G5-F11 | No "What AGF is / is not" box on homepage | High | Informed | Clarity | **validated** 2026-04-24 (two-column is/is-not grid between Standards strip and Rings diagram) |
 | G5-F12 | No 30-day implementation starter path for Minimum Viable Control | Medium | Informed | Actionability | open |
 | G5-F13 | No end-to-end reference architecture walkthrough | Medium | Informed | Actionability | open |
 | G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | **accepted — infra shipped** (`<Status>` component; apply pending primitive stability content decision) |
 | G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
 | G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
-| G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | **resolved** (Primitive Attribution section added to `/docs/reference/primitives`) |
+| G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | **validated** 2026-04-24 (Primitive Attribution section added to `/docs/reference/primitives`) |
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | **deferred → editorial pass bundled with MI-F07** |
-| G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | **resolved** (slug renamed to `agentic-observability` matching page title) |
+| G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | **validated** 2026-04-24 (slug renamed to `agentic-observability` matching page title) |
 | G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **accepted** (bundled into Credibility Pass v0.3 audit) |
 | G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | open |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | open |
 | G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |
-| MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **resolved** |
-| MI-F02 | markdownlint errors in vocabulary.mdx (root cause: config, not content) | Low | Established | Mechanical | **resolved** |
+| MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **validated** 2026-04-24 |
+| MI-F02 | markdownlint errors in vocabulary.mdx (root cause: config, not content) | Low | Established | Mechanical | **validated** 2026-04-24 |
 | ~~MI-F03~~ | ~~Broken internal link `/docs` in what-is-agf.mdx:109~~ | — | — | — | **collapsed → MI-F04** (tooling false positive; `/docs` route valid) |
-| MI-F04 | check-links.mjs route resolution incomplete (exact `/docs`, `/`, app-dir `.txt` routes) | Low | Established | Mechanical | **resolved** (app-dir route discovery + exact `/docs` handling + anchor-fragment support) |
-| MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | **resolved** (awk fence-state machine replaces naive `grep -v '```'`) |
+| MI-F04 | check-links.mjs route resolution incomplete (exact `/docs`, `/`, app-dir `.txt` routes) | Low | Established | Mechanical | **validated** 2026-04-24 (app-dir route discovery + exact `/docs` handling + anchor-fragment support) |
+| MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | **validated** 2026-04-24 (awk fence-state machine replaces naive `grep -v '```'`) |
 | MI-F06 | preflight.sh treats untracked files as uncommitted; friction with in-flight iterations | Low | Established | Mechanical | **deferred** (BACKLOG tooling sprint) |
 | MI-F07 | Residual markdownlint content hygiene (108 errors: list spacing, long prose, missing fence languages) | Low | Established | Mechanical | **open** (editorial pass) |
 
@@ -364,6 +366,8 @@ Target progression TBD on triage.
 
 **Cluster A delta (2026-04-23):** Mechanical Integrity 6 → 7. Content-side is clean (cspell 61 issues → 0; markdownlint 666 errors → ~15 residual over a 300-char threshold). Ceiling of 7 imposed by three deferred tooling-script bugs (MI-F04/F05/F06) and residual content hygiene (MI-F07). Full 9+ is reachable once tooling sprint ships.
 
+**Cluster A update (2026-04-24):** MI-F04 and MI-F05 shipped in commit `3afefb4` (pre-push hook activation surfaced them as real release-blockers). Ceiling gates reduce from four (F04/F05/F06/F07) to two (F06/F07). Score unchanged at 7 pending re-rating; target ceiling now 9+ after MI-F06 (preflight.sh untracked-file handling) + MI-F07 (content hygiene editorial pass) land.
+
 **Cluster B delta (2026-04-23, partial):** Credibility 5 → 6, Public Readiness 5 → 6.
 - **Infra shipped:** `<Confidence level="established|informed|open">` + `<Status state="conceptual|specified|implemented">` components registered globally via `mdx-components.tsx`. Both inline-badge and block-form variants. Dogfoods AGF's own vocabulary.
 - **G5-F05 resolved:** "Operationalize at machine speed" Status Note wrapped in `<Confidence level="open">` block — now visibly distinct as architectural commitment, not current claim.
@@ -420,10 +424,9 @@ Target progression TBD on triage.
 - **Severity:** Low
 - **Confidence:** Established
 - **Dimension:** Mechanical (tooling)
-- **State:** **deferred** 2026-04-23 — queued in BACKLOG under "Tooling refinement — release infrastructure"
 - **Absorbs:** MI-F03
 - **Scope expansion:** Original finding was `/` + `/llms.txt`; add exact `/docs` (was MI-F03) and any `app/*/route.ts`-served route
-- **Proposed action:** Extend script to recognize: (a) exact `/docs` route mapping to `content/docs/index.mdx`, (b) `/` as valid homepage, (c) routes served by `agf-docs/app/*/route.ts` (scan for route handlers)
+- **State:** **validated** 2026-04-24 — resolved by commit `3afefb4`. `collectAppRoutes()` walks `app/` for `route.ts`/`page.tsx`; exact `/docs` resolves to `content/docs/index.mdx`; `/` treated as valid homepage; anchor-fragment support added. Deferral status was promoted to release-blocker when the pre-push hook activated in the same session.
 
 ### MI-F05
 
@@ -433,9 +436,8 @@ Target progression TBD on triage.
 - **Confidence:** Established
 - **Dimension:** Mechanical (tooling)
 - **Source:** `<2%` inside YAML block at `governance-decision-record.mdx:202`
-- **State:** open
 - **Proposed action:** Teach grep to skip fenced code blocks (triple-backtick delimited). Either awk-based state machine or switch to remark-lint plugin that respects fences natively.
-- **State:** **deferred** 2026-04-23 — queued in BACKLOG under "Tooling refinement — release infrastructure"
+- **State:** **validated** 2026-04-24 — resolved by commit `3afefb4`. awk fence-state machine (`BEGIN { in_fence = 0 }`, toggle on `/^[[:space:]]*\x60\x60\x60/`) replaces naive `grep -v` approach. Same session promotion-to-blocker as MI-F04.
 
 ### MI-F06
 
