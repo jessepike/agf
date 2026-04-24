@@ -5,6 +5,43 @@ stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D
 
 # Status — AGF
 
+## Handoff — 2026-04-24 (Credibility Pass v0.3 shipped — G5-F03 + F20 resolved)
+
+**From:** CPO session (Opus) — Credibility Pass v0.3 immediately following Cluster D
+**To:** Next session (→ **G5-M01 closeout** as Tier 1 — see below)
+**Tree state:** clean post-commit; pending push.
+
+**What shipped this session (single commit):**
+
+- `relationship-to-frameworks.mdx` — AICM 5/243 claim wrapped in `<Confidence level="established" />` with verification date 2026-04-24; Agent 365 reference rewritten to "announced; GA target May 2026 per Microsoft Ignite 2025; verify current status on Microsoft Learn" (closes G5-F20); "Organizations adopting AGF typically implement both" wrapped in `<Confidence level="open">` block flagging absence of adopter data.
+- `composition-patterns.mdx` — empirical reference points (Microsoft AGT / Bifrost) now in `<Confidence level="established">` block with full source attribution + dates; "most organizations" / "most regulated deployments" claims now carry `<Confidence level="informed" />`.
+- `rings-model.mdx` — "more governance than most organizations have today" carries `<Confidence level="informed" />`.
+- `trust-ladders.mdx` — Empirical Evidence section now carries section-level `<Confidence level="established" />` qualifier; all four research citations now read "published Month YYYY" with verification guidance.
+- `governance-framework.mdx` — overhead multiplier table now followed by `<Confidence level="informed">` block labeling them as design-target estimates not validated benchmarks.
+- Findings ledger: F03 + F20 marked resolved; F14 narrowed to infra-shipped/content-gated; open count 4 → 2.
+
+**Scorecard impact (projected, pending re-rating):**
+
+- Credibility 6 → **8 likely** (was the lever this session targeted; dogfooded confidence markers on all flagged claims)
+- Public Readiness 7 → **8 likely** (artifact unevenness reduces further)
+- Composite ~6.75–7.0 (post-Cluster-D projection) → **~7.25–7.5** likely
+
+**Findings ledger state after this session:**
+
+- **Validated:** 15 (unchanged)
+- **Resolved (pending validation):** 7 → G5-F09/F15/F16 (Cohesion) + G5-F12/F13 (Cluster D) + G5-F03/F20 (Credibility)
+- **Open:** G5-F18 (editorial), MI-F07 (residual), G5-M01/M02/M03 (meta — now M01 triggerable)
+
+**Tier 1 next:** **G5-M01 meta closeout.** Per `docs/reviews/README.md` Meta-Finding Closeout Protocol, M01 (umbrella for F03/F04/F05/F14) is now triggerable — F03/F04/F05 resolved, F14 infra-shipped/content-gated. Run a holistic re-read with an independent reviewer (Codex CLI or fresh Sonnet); verdict expected `pattern-shifted` toward `pattern-closed` (the dogfooded confidence-marker discipline directly addresses the meta-pattern of "promising rigor without showing it"). 1-2h Sonnet or Codex.
+
+**Tier 2:** G5-F18 + MI-F07 editorial pass — Sonnet, 2h. Slogan density + remaining markdownlint hygiene. Unlocks G5-M02 closeout.
+
+**Tier 3 quick wins:** Transparency pages (1h Sonnet) · ai-engineering profile rewrite (2h Sonnet).
+
+**Tier 4 deferred:** G5-M03 closeout requires Public Readiness re-score ≥8/10 by independent reviewer per strategic-meta rule. Likely triggerable after F18 + ai-engineering rewrite.
+
+---
+
 ## Handoff — 2026-04-24 (Cluster D Actionability shipped — G5-F12 + F13 resolved)
 
 **From:** CPO session (Opus) — Cluster D content shaping

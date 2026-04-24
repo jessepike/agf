@@ -27,7 +27,7 @@ Primitives: Bounded Agency (#7) + Identity (#14) + Provenance (#6) + Observabili
 
 What it gives you: agents that can't exceed their scope, actions that are attributable, an audit trail, and scoped operating environments.
 
-This is Ring 0 only — no verification layer yet. But it's more governance than most organizations have today. If you're starting from zero, start here.
+This is Ring 0 only — no verification layer yet. But it's more governance than most organizations have today. <Confidence level="informed" /> ("most organizations" reflects practitioner observation across consulting engagements 2024–2026; we have no industry survey to cite.) If you're starting from zero, start here.
 
 ### Validation Pipeline
 
@@ -52,7 +52,7 @@ Ring 2 adds two classes of gates:
 - **Adaptive gates** relax as agents build a track record through [Trust Ladders](/docs/overview/trust-ladders)
 - **Mandatory gates** never relax — irreversible actions, regulatory requirements, and legally mandated reviews always fire
 
-This is the pattern for most regulated enterprise deployments.
+This is the pattern for most regulated enterprise deployments. <Confidence level="informed" />
 
 ### Full Governed Agentic System
 
@@ -81,7 +81,7 @@ Between Governed Decision Flow and Full Governed Agentic System sits a real arch
 
 This is a **posture applied within Governed Decision Flow** — or as a precondition for entering Full Governed — not a fifth named pattern. Naming it as a peer of MVC/Validation Pipeline/GDF/Full Governed would be redundant (it's "Full Governed minus Ring 3 learning") and would worsen naming density without adding architectural distinction. Express as posture language in prose: "a production-hardened Governed Decision Flow applying #11/#15/#18."
 
-Most regulated enterprise deployments live in this posture on top of GDF, whether or not they ever enable Ring 3.
+Most regulated enterprise deployments live in this posture on top of GDF, whether or not they ever enable Ring 3. <Confidence level="informed" />
 
 ## Cost of Governance
 
@@ -96,7 +96,9 @@ Every ring adds overhead. AGF is designed for proportional activation:
 
 [Trust Ladders](/docs/overview/trust-ladders) are the primary cost optimization mechanism. As trust builds through demonstrated performance, verification intensity decreases and adaptive Governance Gates relax. Mandatory Governance Gates always fire regardless of trust level. The system starts expensive and gets cheaper.
 
-Empirical reference points: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT); AI gateway routing at 11μs per request at 5K RPS (Bifrost). Governance overhead is measurable and manageable at production scale.
+<Confidence level="established">
+Empirical reference points: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT — published benchmark, Microsoft 2025); AI gateway routing at 11μs per request at 5K RPS (Bifrost — open-source benchmark, Maxim Labs 2024). Governance overhead is measurable and manageable at production scale. (Numbers verified at original sources 2026-04-24; check vendor docs for current figures.)
+</Confidence>
 
 ## The Self-Improving Loop
 

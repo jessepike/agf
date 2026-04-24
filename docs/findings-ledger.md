@@ -2,11 +2,11 @@
 
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
-**Last updated:** 2026-04-24 (Cluster D Actionability — G5-F12 + F13 resolved)
-**Open findings:** 4 (3 meta + 1 mechanical MI-F07)
+**Last updated:** 2026-04-24 (Credibility Pass v0.3 — G5-F03 + F20 resolved; G5-M01 now triggerable for closeout)
+**Open findings:** 2 (G5-M02, G5-M03 + G5-M01 awaiting closeout pass + 1 mechanical MI-F07)
 **Validated:** 15 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19) — all validated 2026-04-24 (agf-architect Mode C batch)
-**Resolved (pending validation):** 5 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability)
-**Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
+**Resolved (pending validation):** 7 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability; G5-F03, G5-F20 — Credibility Pass v0.3)
+**Accepted / queued:** 1 (G5-F14 infra shipped — content batch-apply still gated on primitive stability decision)
 **Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
 **Reviews ingested:** 2
@@ -49,7 +49,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 |---|---|---|---|---|---|
 | G5-F01 | Homepage CTA "Start with your role" misroutes to AI Engineering; should go to `/docs` | High | Established | Clarity | **validated** 2026-04-24 (CTA now anchors to on-page `#roles` grid + scroll-mt-16) |
 | G5-F02 | Missing one-sentence definition of AGF at top of homepage and What-is-AGF | High | Established | Clarity | **validated** 2026-04-24 (canonical definition placed on homepage hero + what-is-agf intro) |
-| G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | **accepted** (Credibility Pass v0.3) |
+| G5-F03 | No inline citations for numeric/empirical claims; breaks "evidence grounded" promise | High | Established | Credibility | **resolved** 2026-04-24 (Credibility Pass v0.3 — flagship-page audit applied: empirical reference points in `composition-patterns` wrapped in `<Confidence level="established">` block with source attribution + dates; AICM 5/243 claim now carries `<Confidence level="established" />` + verification date; Trust Ladders Empirical Evidence section gets section-level `<Confidence level="established" />` with publication-date qualifications on all four research citations; "most organizations" / "most regulated deployments" / "typically implement both" claims now carry `<Confidence level="informed">` or `<Confidence level="open">` markers proportional to evidence base; governance-framework overhead multipliers labeled as design-target estimates) |
 | G5-F04 | Homepage claims "confidence levels throughout" — not visibly delivered on pages | High | Established | Credibility | **validated** 2026-04-24 (infra + initial apply; batch-apply queued in Credibility Pass v0.3) |
 | G5-F05 | "Operationalize at machine speed" overclaims; artifacts still planned | High | Established | Credibility | **validated** 2026-04-24 (Status Note already existed, now wrapped in Confidence level="open") |
 | G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | **validated** 2026-04-24 (bounded claim + Confidence=informed + link to attribution table) |
@@ -66,7 +66,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | **validated** 2026-04-24 (Primitive Attribution section added to `/docs/reference/primitives`) |
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | **deferred → editorial pass bundled with MI-F07** |
 | G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | **validated** 2026-04-24 (slug renamed to `agentic-observability` matching page title) |
-| G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **accepted** (bundled into Credibility Pass v0.3 audit) |
+| G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **resolved** 2026-04-24 (Credibility Pass v0.3 — Agent 365 reference now annotated "announced; GA target May 2026 per Microsoft Ignite 2025; verify current status on Microsoft Learn"; AICM v1.0.3 reference now annotated "verified against the published catalog 2026-04-24"; Trust Ladders empirical citations now read "published Month YYYY" with verification guidance) |
 | G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | open |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | open |
 | G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |

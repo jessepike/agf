@@ -39,6 +39,10 @@ Determines which rings activate and how intensely:
 | **High** | All four rings, mandatory gates | 3–5x Ring 0 alone |
 | **Critical** | All rings + enhanced Security Intelligence | 5x+ Ring 0 alone |
 
+<Confidence level="informed">
+The overhead multipliers above are AGF's design-target estimates derived from a small set of published reference points (e.g., Microsoft AGT policy evaluation 0.43s across 7,000+ decisions; Bifrost AI gateway routing at 11μs / 5K RPS; see [Composition Patterns](/docs/overview/composition-patterns#cost-of-governance)). They are not yet validated against a representative sample of production deployments. Treat them as planning ranges, not benchmarks.
+</Confidence>
+
 ## Enterprise Integration
 
 AGF is designed to complement, not replace, existing enterprise systems:

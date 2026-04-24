@@ -71,15 +71,15 @@ Within a trust domain (same organization, same platform), trust context propagat
 
 ## Empirical Evidence
 
-Trust Ladders are not a theoretical design pattern. They are empirically validated by real-world data.
+Trust Ladders are not a theoretical design pattern. They are empirically validated by real-world data. <Confidence level="established" /> Each citation below names the primary source and publication date; verify current versions at the linked sources.
 
-**Anthropic agent autonomy research (March 2026):** Analysis of millions of API interactions shows that new users auto-approve 20% of agent sessions; by 750 sessions, auto-approval reaches 40%. Behavioral shift: experienced users move from pre-approval gating to active monitoring. The deployment gap — models can handle 5-hour autonomous tasks, but the 99.9th percentile session runs only 42 minutes — confirms that trust, not capability, is the bottleneck.
+**Anthropic agent autonomy research (published March 2026):** Analysis of millions of API interactions shows that new users auto-approve 20% of agent sessions; by 750 sessions, auto-approval reaches 40%. Behavioral shift: experienced users move from pre-approval gating to active monitoring. The deployment gap — models can handle 5-hour autonomous tasks, but the 99.9th percentile session runs only 42 minutes — confirms that trust, not capability, is the bottleneck.
 
-**DeepMind Delegation Framework (February 2026):** Tomašev et al. (arXiv 2602.11865) argue delegation must be adaptive — trust builds or degrades based on observed outcomes, not static configuration. Their six delegation components map directly to the Trust Ladder pattern.
+**DeepMind Delegation Framework (published February 2026):** Tomašev et al. (arXiv 2602.11865) argue delegation must be adaptive — trust builds or degrades based on observed outcomes, not static configuration. Their six delegation components map directly to the Trust Ladder pattern.
 
-**CSA Agentic Trust Framework (February 2026):** The Cloud Security Alliance defines an earned autonomy maturity model — Intern → Junior → Senior → Principal — with explicit promotion criteria and governance sign-off before autonomy escalation. Independent validation of the same pattern from the security community.
+**CSA Agentic Trust Framework (published February 2026):** The Cloud Security Alliance defines an earned autonomy maturity model — Intern → Junior → Senior → Principal — with explicit promotion criteria and governance sign-off before autonomy escalation. Independent validation of the same pattern from the security community.
 
-**Oversight scaling research (NeurIPS 2025):** Engels et al. demonstrate that oversight efficacy degrades as the capability gap between overseer and system widens. Success rates range from 9.4% to 51.7% depending on task type. This is the fundamental reason Trust Ladders matter: you cannot solve the governance problem with oversight alone.
+**Oversight scaling research (NeurIPS, December 2025):** Engels et al. demonstrate that oversight efficacy degrades as the capability gap between overseer and system widens. Success rates range from 9.4% to 51.7% depending on task type. This is the fundamental reason Trust Ladders matter: you cannot solve the governance problem with oversight alone.
 
 ## Integration with AGF
 

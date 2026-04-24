@@ -23,15 +23,13 @@ Resolved via two new MDX pages in `agf-docs/content/docs/overview/`:
 - Both registered in `overview/meta.json` (positions 6–7), cross-linked from `core-concepts.mdx` and `composition-patterns.mdx`. Site builds clean; lint + link-check + cspell pass.
 - **Scorecard projection:** Actionability 4 → 7+ pending re-rating (the only remaining stuck dimension; unblocks Differentiation + Public Readiness ceilings).
 
-### Credibility Pass v0.3 (NEW 2026-04-23, from Cluster B triage)
+### ~~Credibility Pass v0.3~~ — SHIPPED 2026-04-24 (G5-F03 + G5-F20 resolved)
 
-Closes umbrella meta-finding G5-M01 (promises rigor/evidence/confidence without showing enough) and specific children G5-F03 (citations) + G5-F20 (dated sources) + completes G5-F04 batch-apply. Infra already shipped (Confidence + Status components, commit pending).
+Closed via flagship-page audit + Confidence-marker application. G5-F14 batch-apply remains gated on primitive-stability content decision (separate item below).
 
-- **Audit flagship pages for numeric/empirical/comparative claims** — Homepage, what-is-agf, rings-model, trust-ladders, primitives, relationship-to-frameworks, composition-patterns. Every claim that starts "X% of", "most orgs", "the leading framework", "proven to", "typically reduces" needs either a footnote citation or a `<Confidence>` marker.
-- **Apply `<Confidence>` markers at the claim** — not just page-level. Inline `<Confidence level="informed" />` on synthesis claims; block `<Confidence level="open">...</Confidence>` on speculative sections.
-- **Time-sensitive claim audit (G5-F20)** — search for dates/years/"planned"/"coming soon"/vendor release references. Add `(as of YYYY-MM-DD, source: X)` inline annotation.
-- **Acceptance signal** — G5-M01 re-check: reviewer (human or agent) confirms the pattern is resolved, not just line items.
-- **Scope target:** ~3–4h single focused pass. Ship as v0.3 of the site.
+- **G5-F03 — empirical claim citations:** `composition-patterns` empirical block now wrapped in `<Confidence level="established">` with source attribution + verification date; `relationship-to-frameworks` AICM 5/243 claim now `<Confidence level="established" />` + dated; `trust-ladders` Empirical Evidence section now carries section-level `<Confidence level="established" />` with all four citations carrying publication-date qualifications; `governance-framework` overhead multipliers labeled as design-target estimates with reference points cited; "most organizations" and "typically" claims across rings/composition/relationship now carry proportional `<Confidence level="informed">` or `<Confidence level="open">` markers.
+- **G5-F20 — time-sensitive claims:** Agent 365 reference annotated "announced; GA target May 2026 per Microsoft Ignite 2025; verify current status on Microsoft Learn"; AICM v1.0.3 reference annotated with verification date; Trust Ladders empirical citations rewritten to "published Month YYYY" with verification guidance.
+- **G5-M01 closeout — now triggerable.** Per Meta-Finding Closeout Protocol (`docs/reviews/README.md`), G5-M01 ran as the umbrella for F03/F04/F05/F14. F03/F04/F05 all resolved; F14 infra-only with content gated. Holistic re-read pass with independent reviewer recommended next session.
 
 ### ~~Content Cohesion Pass v0.3~~ — SHIPPED 2026-04-24 (partial — G5-F18 remains)
 

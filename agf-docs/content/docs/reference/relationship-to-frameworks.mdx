@@ -28,7 +28,7 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 | Layer | Answers | Frameworks |
 |-------|---------|------------|
 | **6** (orthogonal) | What's the quantified risk? How should we prioritize investment? | FAIR, FAIR-CAM, ISO 31000, NIST AI RMF "Measure" |
-| **5** | What does a production implementation look like? | Microsoft AGT (MIT, ATF-conformant), Azure CAF, Agent 365 (planned May 2026) |
+| **5** | What does a production implementation look like? | Microsoft AGT (MIT, ATF-conformant), Azure CAF, Agent 365 (announced; GA target May 2026 per Microsoft Ignite 2025; verify current status on Microsoft Learn) |
 | **4** | How do we organize our team, policies, and decisions? | CSA Agentic Trust Framework (ATF) — 5 governance questions, 4-tier maturity, 25 requirements |
 | **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.0.3, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
 | **2** | What specifically can go wrong, by what mechanism, where? | CSA MAESTRO (7 layers), Microsoft Failure Mode Taxonomy (28 modes, 2×2) |
@@ -48,7 +48,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 
 ## Important Honest Observations
 
-**AICM's explicit agentic coverage is thin.** 5 of 243 controls are agent-native as of v1.0.3 (AIS-11, AIS-13, AIS-15, IAM-19, TVM-11). The remaining 238 are AI-general or cloud-inherited. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
+**AICM's explicit agentic coverage is thin.** <Confidence level="established" /> 5 of 243 controls are agent-native as of CSA AICM v1.0.3 (verified against the published catalog 2026-04-24): AIS-11, AIS-13, AIS-15, IAM-19, TVM-11. The remaining 238 are AI-general or cloud-inherited. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
 
 **Industry is converging.** Microsoft AGT is formally ATF-conformant. This strengthens AGF's substrate position — when frameworks converge on shared operating models, AGF's role as the architecture underneath becomes clearer, not weaker.
 
@@ -56,7 +56,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 
 ## Trust Ladders and ATF Tiers
 
-AGF's Trust Ladders (Primitive #11) and ATF's four-tier maturity model are parallel expressions of the earned-autonomy pattern, operating at different scopes. AGF Primitive #11 governs per-agent, per-task runtime trust adjustment. ATF's tiers specify organizational deployment-maturity stages with explicit promotion gates. Organizations adopting AGF typically implement both.
+AGF's Trust Ladders (Primitive #11) and ATF's four-tier maturity model are parallel expressions of the earned-autonomy pattern, operating at different scopes. AGF Primitive #11 governs per-agent, per-task runtime trust adjustment. ATF's tiers specify organizational deployment-maturity stages with explicit promotion gates. <Confidence level="open">Whether adopters typically implement both is an open question — we have not yet seen enough deployment data to claim it as an empirical pattern. The two are designed to be complementary; whether the field uses them together is a separate question worth investigating.</Confidence>
 
 AGF also maintains its own 5-level program-maturity model (L1 Non-existent → L2 Foundation → L3 Governed → L4 Adaptive → L5 Optimized) in the Governance Framework doc. This is a program-level scale complementary to ATF's per-deployment scale.
 
