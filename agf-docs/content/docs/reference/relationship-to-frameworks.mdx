@@ -33,7 +33,7 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 | **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.0.3, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
 | **2** | What specifically can go wrong, by what mechanism, where? | CSA MAESTRO (7 layers), Microsoft Failure Mode Taxonomy (28 modes, 2×2) |
 | **1** | What are the most important things that can go wrong? | OWASP Agentic Top 10 (ASI-01 through ASI-10) |
-| **0** (substrate) | How do the pieces fit together architecturally for an agentic system? | **AGF** — 4 Rings + 19 Primitives + 3 deployment modes + 3-level security model + 7 tensions + OTAA (Observable · Traceable · Auditable · Agent-operable) |
+| **0** (substrate) | How do the pieces fit together architecturally for an agentic system? | **AGF** — the architectural substrate beneath the layers above. See [What is AGF?](/docs/overview/what-is-agf) for the construct catalog. |
 
 AGF at Layer 0 is the architectural substrate. Risk quantification at Layer 6 is orthogonal — methodology, not content.
 
@@ -44,7 +44,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 - **Synthesizes** — pulls from every layer; does not invent primitives
 - **Unifies** — places the synthesized material on a shared architectural substrate
 - **Prescribes** — converts synthesis into actionable implementation pathways per primitive
-- **Operationalizes** — emits machine-readable forms of its primitives alongside human-readable forms (the dual-form principle). Dual-form has teeth at every gate boundary: every Gate Resolution (`APPROVE/REJECT/MODIFY/DEFER/ESCALATE`) and every Domain Outcome emits both a human-readable rationale and a machine-readable [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) simultaneously — see [DECISIONS.md](https://github.com/jessepike/agf/blob/main/DECISIONS.md) #5 (dual-form at gate boundaries), #8 (gate vocabulary disambiguation), and #9 (GDR as canonical audit artifact).
+- **Operationalizes** — emits machine-readable forms of its primitives alongside human-readable forms (the dual-form principle). At gate boundaries this materializes as a [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) — see DECISIONS.md #5, #8, and #9 for the full vocabulary.
 
 ## Important Honest Observations
 
