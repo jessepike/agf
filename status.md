@@ -5,21 +5,48 @@ stage: operate (v0.2.0 shipped; validation pass complete 2026-04-24; v0.3 conten
 
 # Status — AGF
 
-## Handoff — 2026-04-24 (Codex meta-finding closeout protocol draft)
+## Handoff — 2026-04-24 (close — 5 commits pushed to origin)
 
-**From:** Codex
-**To:** Jesse / next reviewer touching review governance
-**Context:** Drafted canonical proposal at `.private/drafts/meta-finding-closeout-protocol-codex.md`. Purpose: define how umbrella meta-findings (`M` IDs) close without auto-closing on child validation.
+**From:** agf-architect session — Sonnet 4.6 + Codex (gpt-5.4) collaboration
+**To:** Next session (model tier depends on path chosen — see sequencing below)
+**Tree state:** Clean. Origin/main at `9af96c5`. GitHub Actions smoke workflow will fire post-deploy automatically.
 
-**What changed:**
-- New draft: `.private/drafts/meta-finding-closeout-protocol-codex.md`
-- Position taken: meta closeout should be a validation method layered onto the existing lifecycle, not a parallel state machine
-- Tightening vs supplied draft: trigger requires child findings to be in stable non-open states (`validated` / `deferred` / `rejected`), not merely `accepted`; verdicts map back to `validated` / `accepted` rather than inventing new ledger states
+**What shipped this session (5 commits):**
 
-**Open decisions for Jesse:**
-1. Whether "fresh eyes" is mandatory or preferred
-2. Whether the ledger should gain an explicit `Closeout pass` field for meta-findings
-3. Whether strategic/public-readiness metas like `G5-M03` should require a scorecard threshold in addition to a re-read
+| Commit | Summary |
+|---|---|
+| `532aa91` | Ledger Mode C validation pass — 15 findings validated, counter drift fixed, MI-F04/F05 detail-state reconciled |
+| `cf807cc` | Session wrap — validation outcome captured in status/lessons |
+| `bd7d32c` | Codex handoff — meta-finding closeout protocol draft at `.private/drafts/` |
+| `ed07ba7` | Rings-model v6 canonical — supersedes v1, prompt archived in DIAGRAM-SPECS, site copy synced, BACKLOG rings-model + MI-F03/F04/F05 closed |
+| `9af96c5` | Meta-finding closeout protocol canonized to `docs/reviews/README.md` with cross-ref from `docs/findings-ledger.md` |
+
+**New AGF canon:** Meta-finding closeout protocol. Lives at `docs/reviews/README.md § Meta-Finding Closeout Protocol`. Three verdicts (`pattern-closed` / `pattern-persists` / `pattern-shifted`) map onto existing lifecycle. Tiered reviewer independence (Strong/Acceptable/Weak) with scaling rule — higher-stakes metas require multiple reviewers with different models. Strategic-meta rule: G5-M03 and any dimension-tied meta require BOTH re-read AND scorecard re-score at ≥8/10 by independent reviewer. `pattern-persists` requires at least one new concrete child filed (no rationale-only hold-open).
+
+**Scorecard (unchanged from 6.38/10 — this session was validation + governance, not content):**
+Clarity 7 · Coherence 6 · Defensibility 7 · Differentiation 7 · **Actionability 4 (stuck)** · Credibility 6 · Public Readiness 7 · Mechanical 7
+
+**Next session sequence (agf-architect recommendation — unchanged from earlier in session; Jesse deferred on pick):**
+
+1. **Cohesion Pass v0.3** (G5-F09, F15, F16, F18 + M02) — 3–4h · Opus for vocabulary decisions then Sonnet for editorial execution
+2. **Transparency pages** (`/changelog`, `/decisions`, `/roadmap`, `/contribute`) — 1h · Sonnet · independent
+3. **Cluster D — Actionability** (G5-F12, F13) — 3–4h · Opus · reference walkthrough + 30-day MVC path
+4. **Credibility Pass v0.3** (G5-F03, F14, F20 + M01) — 3–4h · Sonnet · runs last
+
+**Rationale for Cohesion-first:** vocabulary decisions in F09/F15/F16 are prerequisites for clean Cluster D prose. Cohesion-before-content is the general principle.
+
+**Meta-finding closeout triggers (none ready yet):**
+- G5-M01 (rigor promise) — triggerable after Credibility Pass v0.3 ships
+- G5-M02 (naming density) — triggerable after Cohesion Pass v0.3 ships
+- G5-M03 (public readiness) — triggerable after both + Cluster D; also requires Public Readiness re-score at ≥8/10 by independent reviewer
+
+**No open blockers. No residual housekeeping.**
+
+---
+
+## Handoff — 2026-04-24 (Codex meta-finding closeout protocol draft) — SUPERSEDED
+
+Meta-finding closeout protocol draft landed in `.private/drafts/meta-finding-closeout-protocol-codex.md` during session; canonized via Jesse's decisions to `docs/reviews/README.md` in commit `9af96c5`. Open decisions (fresh-eyes tier, ledger field, scorecard threshold) all resolved — see top-of-file handoff for applied answers.
 
 ---
 

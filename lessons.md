@@ -16,6 +16,8 @@ Hot buffer of insights, patterns, and gotchas from recent sessions. One line per
 ## 2026-04-24
 
 - **"Cohesion-first" sequencing thesis.** G5-F09/F15/F16 are dependencies for Cluster D actionability content. If Cluster D ships first, new prose introduces the same vocabulary conflations Cohesion Pass is supposed to fix, and Cohesion has to chase rewrites. General rule: coherence/vocabulary work precedes new-content work, not the reverse.
+- **Multi-model governance review is load-bearing.** Codex's refinement of the Meta-Finding Closeout Protocol caught 3 structural issues in my draft (trigger too loose, parallel state machine instead of lifecycle mapping, missing edge cases for deferred/rejected children) that would have shipped broken. Rule: framework-governance artifacts warrant multi-reviewer cross-check by default; scaling with severity. Encoded in the protocol's own "when in doubt, add a reviewer" principle.
+- **Codex prompts recoverable from session transcripts.** When diagram-forge's usage.db doesn't store the prompt text (only metadata), the `mcp__*__generate_diagram` / `edit_diagram` tool calls are in `~/.claude/projects/<project>/*.jsonl` session files. Match by session-file mtime to diagram mtime, parse the jsonl for the tool-use input. Useful recovery pattern when DIAGRAM-SPECS.md wasn't updated live.
 
 ## 2026-04-23
 
