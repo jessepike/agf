@@ -6,11 +6,11 @@ Prioritized work queue. P0 = blocking. P1 = high value. Active = in progress. Ba
 
 ## P0 — Blocking
 
-### LICENSE decision (BLOCKER before external contributors)
-- Current `LICENSE` file has CC BY 4.0 language — confirm this is intentional.
-- See `LICENSE-TODO.md` for options (CC-BY-4.0, CC-BY-SA-4.0, Apache-2.0) with pros/cons.
-- Decision required before onboarding any external contributor or accepting PRs from outside Jesse's network.
-- Jesse's call — do not decide unilaterally.
+_(none — all P0 items resolved)_
+
+### ~~LICENSE decision (BLOCKER before external contributors)~~ — RESOLVED 2026-04-23
+- Resolution: **CC BY 4.0 retained** for docs; Apache-2.0/MIT for any reference implementations / tooling. Recorded as DECISIONS.md #11 (entry added 2026-04-24 retroactively after operational confirmation 2026-04-23).
+- `LICENSE` file is correct as-is. `LICENSE-TODO.md` can be archived (consider moving to `.private/archive/` or deleting).
 
 ## P1 — High Priority
 
