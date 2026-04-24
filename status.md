@@ -5,6 +5,24 @@ stage: operate (v0.2.0 shipped; validation pass complete 2026-04-24; v0.3 conten
 
 # Status — AGF
 
+## Handoff — 2026-04-24 (Codex meta-finding closeout protocol draft)
+
+**From:** Codex
+**To:** Jesse / next reviewer touching review governance
+**Context:** Drafted canonical proposal at `.private/drafts/meta-finding-closeout-protocol-codex.md`. Purpose: define how umbrella meta-findings (`M` IDs) close without auto-closing on child validation.
+
+**What changed:**
+- New draft: `.private/drafts/meta-finding-closeout-protocol-codex.md`
+- Position taken: meta closeout should be a validation method layered onto the existing lifecycle, not a parallel state machine
+- Tightening vs supplied draft: trigger requires child findings to be in stable non-open states (`validated` / `deferred` / `rejected`), not merely `accepted`; verdicts map back to `validated` / `accepted` rather than inventing new ledger states
+
+**Open decisions for Jesse:**
+1. Whether "fresh eyes" is mandatory or preferred
+2. Whether the ledger should gain an explicit `Closeout pass` field for meta-findings
+3. Whether strategic/public-readiness metas like `G5-M03` should require a scorecard threshold in addition to a re-read
+
+---
+
 ## Handoff — 2026-04-24 (agf-architect Mode C validation + sequence recommendation)
 
 **From:** agf-architect (Sonnet 4.6) — short session following 2026-04-23 evening handoff

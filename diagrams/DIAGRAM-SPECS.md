@@ -178,6 +178,101 @@ STYLE: Light theme, clean white background, sans-serif typography throughout, ge
 
 ---
 
+## Rings Model — Canonical (2026-04-22)
+
+Canonical rings-model diagram shown on the site and referenced across canonical docs. Iterated v1 → v6; v6 selected 2026-04-24 after side-by-side comparison.
+
+### rings-model-governed-agentic-systems.png
+
+**Purpose:** Canonical Rings Model visualization — 4 concentric rings with primitive placement, Cross-Cutting Fabric + Zero Trust Overlay sidebars, Ring Signals, Time Horizons, and an Outside-Pipeline block for #18/#19. Referenced from homepage, `/docs/reference/rings-model`, and `/docs/overview/core-concepts`.
+**Diagram type:** `architecture` · **Aspect:** 16:9 · **Resolution:** 2K
+**Provider:** OpenAI · **Model:** `gpt-image-2-2026-04-21` · **Quality:** high · **Temperature:** 0.2
+**Iteration history:** v1 (committed 2026-03-16), superseded 2026-04-24 by v6. v6 was generated fresh (not an edit) on 2026-04-22 19:13 PDT after five prior iterations (v2 generate, v3 generate, v4/v5 edit attempts) that each mis-placed the Adversarial Critique primitive across Ring 1 / Ring 2 boundary. v6 resolved placement by explicitly constraining band thickness and border-color matching rules.
+
+**Prompt:**
+
+```
+Technical architecture diagram titled "The Rings Model — Governed Agentic Systems" in large bold black sans-serif at top center. White background. Professional, publication-ready. All text crystal clear, perfectly legible, no blurring.
+
+LAYOUT: Four concentric rings centered. CRITICAL — each ring must be a WIDE band with enough radial thickness to fully contain primitive boxes inside it. Primitive boxes MUST sit entirely within their assigned ring band, with a colored border that exactly matches that band's color.
+
+RING BANDS (inside out) — make each band THICK enough to hold a full-sized box:
+- Ring 0 Execution: innermost filled circle, soft light BLUE fill. Contains 5 boxes.
+- Ring 1 Verification: green band wrapping Ring 0, soft light GREEN fill. Must be thick. Contains 3 boxes.
+- Ring 2 Governance: yellow band wrapping Ring 1, soft light YELLOW/GOLD fill. Must be thick. Contains 5 boxes.
+- Ring 3 Learning: lavender band wrapping Ring 2, soft LIGHT PURPLE fill. Contains 3 boxes.
+
+RING LABELS — bold black text at the TOP arc of each band:
+"Ring 0 — Execution" / "Ring 1 — Verification" / "Ring 2 — Governance" / "Ring 3 — Learning"
+
+PRIMITIVE BOXES — white-fill rounded rectangles with a 3px colored border. The border color MUST match the ring band the box sits in.
+
+RING 0 BOXES (BLUE 3px border, sitting fully inside the blue inner circle):
+- "Structured Output #5" upper-left
+- "Bounded Agency #7" upper-right
+- "Identity #14" middle-left
+- "Error Handling #13" middle-right
+- "Transaction Control #16" bottom center
+
+RING 1 BOXES (GREEN 3px border, sitting FULLY INSIDE THE GREEN BAND — do not place in the yellow band, do not cross into yellow):
+- "Validation Loops #2" at the 9 o'clock position, inside the green band
+- "Adversarial Critique #4" at the 3 o'clock position, inside the green band, MIRROR OF #2
+- "Producer/Verifier Separation #1" at the 6 o'clock position, inside the green band
+
+RING 2 BOXES (YELLOW/GOLD 3px border, sitting fully inside the yellow band):
+- "Governance Gates #8" at 10 o'clock
+- "Provenance Chains #6" at 2 o'clock
+- "Policy as Code #9" at 4 o'clock
+- "Data Governance #17" at 5 o'clock
+- "Transaction Control #16" at 7 o'clock (dual-placement with Ring 0)
+
+RING 3 BOXES (PURPLE 3px border, sitting fully inside the lavender band, may extend slightly outside the outermost edge):
+- "Trust Ladders #11" at 9 o'clock
+- "Memory-Augmented Reasoning #12" at 3 o'clock
+- "Self-Improving Cycles #3" at 7 o'clock
+
+CURVED FEEDBACK ARROWS: Two thin black curved arrows between Ring 0 and Ring 1 — one showing REVISE flowing inward, one showing PASS flowing outward. Small label "REVISE" and "PASS".
+
+LEFT SIDEBAR (white rounded rectangle panel with thin gray border):
+Heading "Cross-Cutting Fabric" (large bold)
+- ⇌ Events Bus (#10)
+- ▦ Structured Output (#5)
+- ↻ Error Recovery (#13)
+- 🛡 Adversarial Robustness (#15)
+
+Heading "Zero Trust Overlay" (large bold, below)
+- Identity Verification (#14)
+- Least Privilege (#7)
+- Audit Trail (#6)
+
+RIGHT SIDEBAR (white rounded rectangle panel with thin gray border):
+Heading "Ring Signals" (large bold) — each with a colored dot:
+- 🟢 PASS — forward
+- 🟡 REVISE quality — re-produce
+- 🟠 REVISE context — re-execute
+- 🔴 HALT — escalate
+- 🔵 GATE — authorize
+- ⚫ ERROR — recover
+
+Heading "Time Horizons" (large bold, below):
+- Ring 0: Per-task (milliseconds)
+- Ring 1: Per-output (seconds)
+- Ring 2: Per-decision (minutes-hours)
+- Ring 3: Per-pattern (days-weeks) + sentinels
+
+Heading "Outside Pipeline" (large bold, below):
+- #18 Evaluation & Assurance — pre-deploy gate
+- #19 Agent Environment Governance — substrate
+
+BOTTOM BAR: Full-width light gray rounded rectangle.
+Line 1 centered small gray: "Cross-Cutting Fabric Layer"
+Line 2 centered large bold black: "Events + Structured Output + Error Recovery + Adversarial Robustness + Zero Trust Identity"
+
+STYLE: Clean modern sans-serif. Flat colors. No gradients. Thin subtle shadows on boxes. High contrast black text on white box fills. Publication quality.
+```
+
+---
+
 ## Older Specs (2026-03-18) — status and drift
 
 The following diagrams were originally specced 2026-03-18. Check `diagrams/` for current state — several have been generated since this list was written.

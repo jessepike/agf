@@ -80,10 +80,8 @@ Starter structure deferred from release-infrastructure session. Recommended P1 s
 
 Each crosswalk: table of standard controls/requirements → AGF primitive → confidence level → implementation guidance stub.
 
-### Rings-model canonical diagram selection
-- Five untracked v2–v6 iterations of `rings-model-governed-agentic-systems.png` in `diagrams/`.
-- Jesse to select canonical version and archive others, or formally supersede v1 with selected iteration.
-- Do NOT auto-select — this is a Jesse decision.
+### ~~Rings-model canonical diagram selection~~ — RESOLVED 2026-04-24
+- v6 selected as canonical, superseding v1. v2–v5 removed. v6 renamed to `rings-model-governed-agentic-systems.png` and synced to `agf-docs/public/diagrams/`. Generation prompt archived in `diagrams/DIAGRAM-SPECS.md` under "Rings Model — Canonical (2026-04-22)".
 
 ### Primitive upgrades (driven by 2026-04-17 extractions)
 - Primitive #14 Identity & Attribution — 10-point upgrade spec in `.private/research/extractions-2026-04-17/ms-docs-and-csa-identity.md` §11
@@ -131,12 +129,10 @@ Driven by the governance/lifecycle conversation on 2026-04-23. Added as consider
 
 ### Tooling refinement — release infrastructure (NEW 2026-04-23, from findings ledger)
 
-Mechanical-baseline review surfaced tooling bugs/UX issues in `bin/` scripts. None are release-blocking; batch when touching the release pipeline next.
+Residual tooling items. MI-F03/F04/F05 shipped in commit `3afefb4` (pre-push hook activation surfaced them as release-blockers); validated 2026-04-24. F06 and F07 remain.
 
-- **MI-F03/F04: `check-links.mjs` false positives** — script doesn't recognize (a) exact `/docs` route (only matches `/docs/*`), (b) homepage `/`, (c) asset routes like `/llms.txt` that exist as `app/*/route.ts`. Fix: extend route resolution to include app-dir routes and exact-prefix matches.
-- **MI-F05: `lint-mdx.sh` MDX parse-landmine grep not fence-aware** — flags `<2%` inside YAML code blocks as an MDX hazard. Fix: awk-based state machine that skips fenced blocks, or replace with remark-lint plugin.
-- **MI-F06: `preflight.sh` blocks on untracked files** — treats `git status` output uniformly, failing on intentional in-flight workspace files (e.g., diagram iterations). Fix: distinguish modified-tracked (block) from untracked (warn + continue).
-- **MI-F07: markdownlint content hygiene pass** — config updated 2026-04-23 (MD013 tables/code-blocks exempt, MD060/MD036 disabled) reduced errors 666→108. Residual 108 are real content issues: MD032 blanks-around-lists (45), MD013 long prose (42), MD040 missing code-fence languages (11), MD022/031/024 minor. Editorial pass at next content sweep.
+- **MI-F06: `preflight.sh` blocks on untracked files** — treats `git status` output uniformly, failing on intentional in-flight workspace files. Fix: distinguish modified-tracked (block) from untracked (warn + continue). Align with conventional pre-commit behavior.
+- **MI-F07: markdownlint content hygiene pass** — 108 residual errors after MI-F02 config fix. Breakdown: MD032 blanks-around-lists (45), MD013 long prose (42), MD040 missing code-fence languages (11), MD022/031/024 minor. Editorial pass at next content sweep; pair with G5-F18 (slogan density).
 
 ### Queue dependencies (from `.private/change-queue.md`)
 - ~~Q1: Governance Decision Record (GDR)~~ **PROMOTED 2026-04-22** as DECISIONS.md #8 + #9 + `docs/governance-decision-record.md` + `docs/schemas/gdr.yaml`. Update `.private/change-queue.md` to reflect.
