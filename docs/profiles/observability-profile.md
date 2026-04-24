@@ -194,12 +194,15 @@ Events classified by ring, mapping to the three detection domains:
 **Governance events (Ring 2):**
 
 - `policy_evaluated`, `policy_passed`, `policy_violated`
-- `gate_triggered` (gate_type: mandatory | adaptive)
-- `gate_resolved` (resolution: approve | reject | modify | defer | escalate)
+- `gate_triggered` (gate_type: mandatory | adaptive; `decision_id`: references the newly-created pending GDR)
+- `gate_resolved` (resolution: approve | reject | modify | defer | escalate; `decision_id`: references the now-resolved GDR)
+- `gate_aborted` (emitted when a pending GDR transitions to `status: aborted` via HALT-on-timeout; `decision_id`: references the aborted GDR — see [GDR lifecycle](../governance-decision-record.md#lifecycle))
 - `provenance_recorded`
 - `revise_context_issued`
 - `transaction_pre_commit`, `transaction_committed`, `transaction_confirmed`
-- `approval_granted`, `approval_expired`, `approval_invalidated`
+- `approval_granted`, `approval_expired`, `approval_invalidated` (each carries `decision_id` referencing the underlying GDR)
+
+Gate-boundary governance events are the **log** that a governed decision occurred; the corresponding [Governance Decision Record (GDR)](../governance-decision-record.md) is the **record** of the decision itself, carrying inputs, rationale, authorizer identity, and conditions. Events and records are emitted together at every gate boundary and linked via `decision_id`. See DECISIONS.md #5 (Dual-Form at Gate Boundaries), #8 (Gate Vocabulary Disambiguation), #9 (GDR as Canonical Audit Artifact).
 
 **Learning events (Ring 3):**
 

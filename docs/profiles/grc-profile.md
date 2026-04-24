@@ -162,10 +162,10 @@ For auditors: every AGF primitive produces specific, auditable artifacts.
 | **#1 Separation of Producer/Verifier** | Verification decision records (pass/revise/fail per output) | Art. 15 (accuracy), NIST MEASURE |
 | **#6 Provenance Chains** | Full decision history for any output — every agent, model, decision, input, context | Art. 11 (documentation), Art. 12 (record-keeping) |
 | **#7 Bounded Agency** | Scope definition records, boundary enforcement logs, escalation records | Art. 9 (risk management), IMDA Dim. 1 |
-| **#8 Governance Gates** | Gate trigger records, evidence packages, human decision records, override logs | Art. 14 (human oversight), IMDA Dim. 2 |
+| **#8 Governance Gates** | Gate trigger records (observability events, see `observability-profile.md`); resolution records, evidence packages, human decision records, override logs — all emitted as [Governance Decision Records (GDRs)](../governance-decision-record.md) | Art. 14 (human oversight), IMDA Dim. 2 |
 | **#9 Policy as Code** | Versioned policy rules, policy test results, policy change audit trail | Art. 9, NIST GOVERN |
-| **#10 Event-Driven Observability** | Structured event logs from all rings, correlation records | Art. 12 (record-keeping), NIST MEASURE |
-| **#11 Trust Ladders** | Trust level history, promotion/demotion records, calibration justifications | NIST MANAGE, CSA ATF |
+| **#10 Event-Driven Observability** | Structured event logs from all rings, correlation records. Gate-boundary events (`gate_triggered`, `gate_resolved`, `approval_granted`, `approval_expired`, `approval_invalidated`) carry the associated GDR's `decision_id` — see [Governance Decision Record](../governance-decision-record.md) | Art. 12 (record-keeping), NIST MEASURE |
+| **#11 Trust Ladders** | Trust level history; promotion/demotion decisions recorded as [GDRs](../governance-decision-record.md) (trust promotions/demotions are Domain Outcomes per DECISIONS.md #9); calibration justifications | NIST MANAGE, CSA ATF |
 | **#14 Identity & Attribution** | Agent identity records, delegation chains, authentication logs | Art. 13 (transparency), Art. 50 |
 | **#17 Data Governance** | Data classification records, consent logs, PII handling logs, retention/deletion records | Art. 10 (data governance), GDPR |
 | **#18 Evaluation & Assurance** | Pre-deployment test results, red team reports, regression suite outcomes, configuration change approvals | Art. 15 (accuracy/robustness), NIST MEASURE |
