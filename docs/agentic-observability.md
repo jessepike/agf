@@ -1,10 +1,22 @@
 # Agentic Observability & Governance
 
 **Status:** Living concept document
-**Last updated:** 2026-03-19
+**Last updated:** 2026-04-24
 **Terminology:** [Shared Vocabulary](shared-vocabulary.md)
 **Relationship:** The **event fabric + Ring 3 intelligence + security monitoring layer** of the Agentic Primitives framework. Consumes the event stream from all rings, provides detection/correlation/response for both quality and security concerns, and feeds Ring 3 learning.
 **Origin material:** `research/AI-Risk-Tools-Deep-Dive-Analysis.md` (Part 7, Section 7.5 — "Pipeline Observatory: The SIEM Pattern"), `research/pipeline-verification-spec-v0.3.md` (event envelope architecture)
+
+---
+
+## Where This Fits in AGF
+
+AGF's observability story has three layers. They are not synonyms — they compose.
+
+- **Primitive #10 — Event-Driven Observability** — fabric primitive. Every ring emits structured events through a canonical envelope. The emission mechanism.
+- **Agentic Observability (this document)** — the unified correlation concept. One event stream, three detection perspectives (quality, security, governance). Consumes Primitive #10's events.
+- **Observability Profile** — role-based implementation guide for observability engineers and SREs. Applies both layers above.
+
+Rule: **Primitive #10 emits. Agentic Observability correlates. The Profile implements.** See [Shared Vocabulary — Observability: Three Distinct Layers](shared-vocabulary.md) for the canonical disambiguation.
 
 ---
 

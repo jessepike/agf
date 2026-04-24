@@ -71,6 +71,18 @@ This includes:
 
 **The invariant across all levels:** The system can suggest governance changes. It cannot enact them autonomously.
 
+## Hardening Posture — a modifier, not a pattern
+
+Between Governed Decision Flow and Full Governed Agentic System sits a real architectural distinction: a system can be production-hardened with defense-in-depth, pre-deployment assurance, and trust calibration **before** Ring 3 learning is enabled. That hardening posture is:
+
+- **Adversarial Robustness (#15)** — defense in depth, assume breach
+- **Evaluation & Assurance (#18)** — pre-deployment validation, the gate before the gate
+- **Trust Ladders (#11)** — earned autonomy, not granted by default
+
+This is a **posture applied within Governed Decision Flow** — or as a precondition for entering Full Governed — not a fifth named pattern. Naming it as a peer of MVC/Validation Pipeline/GDF/Full Governed would be redundant (it's "Full Governed minus Ring 3 learning") and would worsen naming density without adding architectural distinction. Express as posture language in prose: "a production-hardened Governed Decision Flow applying #11/#15/#18."
+
+Most regulated enterprise deployments live in this posture on top of GDF, whether or not they ever enable Ring 3.
+
 ## Cost of Governance
 
 Every ring adds overhead. AGF is designed for proportional activation:
@@ -123,7 +135,8 @@ If you are responsible for an agentic system in production today, the practical 
 - **No scope constraints, no attribution, no audit trail** → Start at Minimum Viable Control
 - **MVC in place, outputs reviewed manually** → Move to Validation Pipeline
 - **Verification structured, governance ad hoc** → Move to Governed Decision Flow
-- **Regulated, high-stakes, or autonomous** → Full Governed
+- **Regulated or high-stakes with a defensible security story** → GDF + hardening posture (#11/#15/#18)
+- **Continuous learning with governance on the improvement loop** → Full Governed Agentic System
 
 Each stage is independently valuable. The goal is not to reach Full Governed as fast as possible — it's to match governance intensity to the stakes of what you're building.
 

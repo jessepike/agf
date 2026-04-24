@@ -5,8 +5,9 @@ Cross-review ledger of findings extracted from every review of AGF. Format, rubr
 **Last updated:** 2026-04-24
 **Open findings:** 6 (2 GPT-5.4 open + 3 meta + 1 mechanical MI-F07)
 **Validated:** 15 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19) — all validated 2026-04-24 (agf-architect Mode C batch)
+**Resolved (pending validation):** 3 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10)
 **Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
-**Deferred:** 6 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F09/F15/F16 → Content Cohesion Pass v0.3; G5-F18 → editorial pass with MI-F07)
+**Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
 **Reviews ingested:** 2
 - `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
@@ -53,14 +54,14 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F06 | "No framework has the Belief Layer" novelty claim unsupported | High | Established | Defensibility | **validated** 2026-04-24 (bounded claim + Confidence=informed + link to attribution table) |
 | G5-F07 | OTAA appears in public layer summary without definition at first use | High | Established | Clarity | **validated** 2026-04-24 (expanded inline in relationship-to-frameworks Layer 0 row) |
 | G5-F08 | No "Core Concepts in Order" orientation page | High | Informed | Clarity | **validated** 2026-04-24 (new `/docs/overview/core-concepts` page, positioned as step 2 in nav) |
-| G5-F09 | Growth model drift: 4 composition patterns vs 5 implementation phases | High | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
+| G5-F09 | Growth model drift: 4 composition patterns vs 5 implementation phases | High | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (a) — canonicalized at 4 patterns; "Secure Governed System" demoted to hardening posture modifier; "Phase 1–5" language retired) |
 | G5-F10 | "See full primitive catalog" link points to AI Engineering, not primitives ref | High | Established | Mechanical | **validated** 2026-04-24 (link → `/docs/reference/primitives`) |
 | G5-F11 | No "What AGF is / is not" box on homepage | High | Informed | Clarity | **validated** 2026-04-24 (two-column is/is-not grid between Standards strip and Rings diagram) |
 | G5-F12 | No 30-day implementation starter path for Minimum Viable Control | Medium | Informed | Actionability | open |
 | G5-F13 | No end-to-end reference architecture walkthrough | Medium | Informed | Actionability | open |
 | G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | **accepted — infra shipped** (`<Status>` component; apply pending primitive stability content decision) |
-| G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
-| G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | **deferred → Content Cohesion Pass v0.3** |
+| G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (b) — 5-sense disambiguation table + qualifier conventions in `shared-vocabulary.md` and site vocabulary; flagship-page audit bundled with G5-F18 editorial pass) |
+| G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (c) — three-layer disambiguation in `shared-vocabulary.md`, `agentic-observability.md` (canonical + site), and site vocabulary) |
 | G5-F17 | No attribution table showing which primitives come from which sources | Medium | Informed | Defensibility | **validated** 2026-04-24 (Primitive Attribution section added to `/docs/reference/primitives`) |
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | **deferred → editorial pass bundled with MI-F07** |
 | G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | **validated** 2026-04-24 (slug renamed to `agentic-observability` matching page title) |

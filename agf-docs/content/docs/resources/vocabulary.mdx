@@ -78,6 +78,32 @@ Used throughout the framework to mark certainty:
 | **Source → Build → Runtime** | Harness workflow: YAML/Markdown source → `harness build` → SDK adapters enforce at call time. Terraform analogy. |
 | **Hard / Adaptive / Behavioral constraints** | Hard = machine-enforced, never relaxes. Adaptive = machine-enforced, trust-dependent. Behavioral = instruction-based, not mechanically enforced. Only hard and adaptive are citable as controls. |
 
+## Governance: Five Distinct Senses
+
+"Governance" carries five distinct senses across AGF material. Qualifiers are required whenever any sense other than #1 is meant.
+
+| Sense | Canonical qualified form | Example |
+|-------|-------------------------|---------|
+| 1. The framework | **AGF** (never "governance" alone) | "AGF synthesizes NIST, OWASP, CSA…" |
+| 2. Ring 2 | **the Governance ring** or **Ring 2** | "Ring 2 (Governance) evaluates policy before release." |
+| 3. Program maturity (AGF L1–L5) | **AGF program maturity** | "The organization's AGF program maturity is L2 Foundation." |
+| 4. Primitive #8 gates | **Governance Gates** (capitalized) | "Governance Gates fire when a release requires authorization." |
+| 5. NIST CSF Govern function | **NIST CSF Govern** | "AGF's Ring 2 aligns to NIST CSF Govern at program scope." |
+
+Bare "governance" as a noun is reserved for sense #1 or deliberate adjectival use ("governance posture"). Decision: [D10](https://github.com/jessepike/agf/blob/main/DECISIONS.md).
+
+## Observability: Three Distinct Layers
+
+"Observability" appears in three places in AGF. The three are not synonyms — they compose.
+
+| Layer | Canonical name | Role |
+|-------|---------------|------|
+| Emission | **Primitive #10 — Event-Driven Observability** | Fabric primitive. Every ring emits structured events through a canonical envelope. |
+| Concept | **Agentic Observability** | Unified correlation layer. One event stream, three detection perspectives (quality, security, governance). |
+| Profile | **Observability Profile** | Role-based implementation guide for observability engineers and SREs. |
+
+Primitive #10 emits. Agentic Observability correlates. The Profile implements. Decision: [D10](https://github.com/jessepike/agf/blob/main/DECISIONS.md).
+
 ## Gate Vocabulary
 
 AGF's gate-related vocabularies form a four-part vocabulary of distinct, scoped enums. They are NOT alternative spellings of one concept. See [DECISIONS.md #8](https://github.com/jessepike/agf/blob/main/DECISIONS.md) (Gate Vocabulary Disambiguation).
@@ -89,6 +115,21 @@ AGF's gate-related vocabularies form a four-part vocabulary of distinct, scoped 
 | **Gate Resolution** | The Primitive #8 (Governance Gates) enum: `APPROVE / REJECT / MODIFY / DEFER / ESCALATE`. The authorizer's response when a gate fires. Also the return value of the `GATE` Ring Control Signal. Emits a GDR. |
 | **Domain Outcome** | Domain-specific gate decision enums. Each domain application defines its own outcome vocabulary that maps onto Gate Resolutions. Tool Gate's `Authorized / Conditionally Authorized / Denied` is the first reference application. Emits a GDR. |
 | **Governance Decision Record (GDR)** | AGF's canonical audit artifact at gate boundaries. A single record format that serializes any Gate Resolution or Domain Outcome into an auditable record. See [Governance Decision Record](/docs/reference/governance-decision-record). |
+
+## Composition Patterns
+
+Four progressive architectures built from primitives. Canonical count: four. "Phase 1–5" language previously used on the Rings Model page is retired — use pattern names. Ring activation is a consequence of pattern selection.
+
+| Pattern | Rings active | Adds |
+|---------|-------------|------|
+| **Minimum Viable Control** | Ring 0 + Fabric (minimal) | #7, #14, #6, #10, #19 (minimal) |
+| **Validation Pipeline** | + Ring 1 | #1, #2, #5, #13 |
+| **Governed Decision Flow** | + Ring 2 | #8, #9, #16, #17 |
+| **Full Governed Agentic System** | + Ring 3 (Learning) | all 19 |
+
+**Hardening posture** (a modifier, not a fifth pattern): Adversarial Robustness (#15) + Evaluation & Assurance (#18) + Trust Ladders (#11) applied within GDF, or as a precondition for entering Full Governed. Express as posture language — "a production-hardened Governed Decision Flow applying #11/#15/#18" — never as a named step.
+
+See [Composition Patterns](/docs/overview/composition-patterns) for full detail. Decision: [D10](https://github.com/jessepike/agf/blob/main/DECISIONS.md).
 
 ## Maturity Levels
 

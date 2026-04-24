@@ -7,6 +7,16 @@ import Image from "next/image";
 
 Agentic Observability is the unified monitoring, detection, and response layer for governed agentic systems. It serves three roles simultaneously: quality monitoring (Ring 3 intelligence), security detection and response, and governance compliance verification.
 
+## Where This Fits in AGF
+
+AGF's observability story has three layers. They are not synonyms — they compose.
+
+- **Primitive #10 — Event-Driven Observability** — fabric primitive. Every ring emits structured events through a canonical envelope. The emission mechanism. [See the primitive →](/docs/reference/primitives)
+- **Agentic Observability (this page)** — the unified correlation concept. One event stream, three detection perspectives (quality, security, governance).
+- **[Observability Profile](/docs/profiles/observability)** — role-based implementation guide for observability engineers and SREs.
+
+**Primitive #10 emits. Agentic Observability correlates. The Profile implements.**
+
 ## Why Unified?
 
 The landscape separates security monitoring (SIEM), quality monitoring (LLM observability tools), and compliance monitoring (GRC platforms) into different tools with different event streams. But agentic threats traverse all three domains — a prompt injection is a security event that causes a quality degradation that creates a compliance violation.

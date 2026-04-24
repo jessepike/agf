@@ -1,6 +1,6 @@
 # AGF Shared Vocabulary
 
-**Last updated:** 2026-04-21
+**Last updated:** 2026-04-24
 
 This document defines the canonical terms used across all AGF documents — the reference architecture, primitives catalog, domain profiles, capability layer docs, and white papers. When terminology conflicts between documents, this vocabulary is authoritative.
 
@@ -182,6 +182,22 @@ The architectural assumption that runs through everything.
 
 ---
 
+## Governance: Five Distinct Senses
+
+The word "governance" carries at least five distinct senses across AGF material. Qualifiers are required whenever any sense other than #1 is meant. Bare "governance" as a noun is reserved for sense #1 (the framework) or deliberate adjectival use ("governance posture") covering multiple senses at once. See DECISIONS.md #10.
+
+| Sense | Canonical qualified form | Example |
+|-------|-------------------------|---------|
+| 1. The framework | **AGF** (never "governance" alone) | "AGF synthesizes NIST, OWASP, CSA…" |
+| 2. Ring 2 | **the Governance ring** or **Ring 2** | "Ring 2 (Governance) evaluates policy before release." |
+| 3. Program maturity (AGF L1–L5) | **AGF program maturity** (retires "program-level governance") | "The organization's AGF program maturity is L2 Foundation." |
+| 4. Primitive #8 gates | **Governance Gates** (capitalized) | "Governance Gates fire when a release requires authorization." |
+| 5. NIST CSF Govern function | **NIST CSF Govern** (always prefixed) | "AGF's Ring 2 aligns to NIST CSF Govern at program scope." |
+
+Editorial rule: when "governance" appears as a standalone noun, identify which sense is meant and replace with the qualified form unless sense #1 is clearly intended or the adjectival use is deliberate.
+
+---
+
 ## Governance Terms
 
 | Term | Definition |
@@ -220,6 +236,20 @@ The architectural assumption that runs through everything.
 
 ---
 
+## Observability: Three Distinct Layers
+
+"Observability" appears in three places in AGF. The three are not synonyms — they compose. See DECISIONS.md #10.
+
+| Layer | Canonical name | Role |
+|-------|---------------|------|
+| Emission | **Primitive #10 — Event-Driven Observability** | Fabric primitive. Every ring emits structured events through a canonical envelope. The mechanism. |
+| Concept | **Agentic Observability** | Unified correlation layer. One event stream, three detection perspectives (quality, security, governance). Consumes Primitive #10's events. |
+| Profile | **Observability Profile** | Role-based implementation guide for observability engineers and SREs. Applies both layers above. |
+
+Rule: Primitive #10 emits. Agentic Observability correlates. The Profile implements. On first appearance in any doc, use the fully qualified name; later references may drop qualifiers only when the sense is unambiguous from local context.
+
+---
+
 ## Observability Terms
 
 | Term | Definition |
@@ -247,15 +277,26 @@ The architectural assumption that runs through everything.
 
 ## Composition Patterns
 
-Progressive governance architectures built from primitives:
+Four progressive governance architectures built from primitives. Canonical count: **four**. See DECISIONS.md #10 (a). Prior "Phase 1–5" language on the Rings Model page and any fifth-pattern references ("Secure Governed System") are retired — use the pattern names. Ring activation is a consequence of pattern selection, not a parallel axis.
 
 | Pattern | Definition | Primitives |
 |---------|-----------|-----------|
-| **Minimum Viable Control** | The absolute floor for any consequential agent. Scope, identity, audit trail, visibility. | #7, #14, #6, #10, #19 (minimal) |
-| **Validation Pipeline** | Verified outputs before release. Ring 0 + Ring 1. | MVC + #1, #2, #5, #13 |
-| **Governed Decision Flow** | Policy-evaluated, human-gateable decisions. Ring 0 + Ring 1 + Ring 2. | Validation Pipeline + #8, #9, #16, #17 |
-| **Secure Governed System** | Defense in depth, pre-deployment validation. All rings + zero trust. | GDF + #15, #18, #11 |
-| **Full Governed Agentic System** | Everything. All rings, all primitives, zero trust, environment optimization. | All 19 primitives |
+| **Minimum Viable Control** | The absolute floor for any consequential agent. Scope, identity, audit trail, visibility. Ring 0 + Fabric (minimal). | #7, #14, #6, #10, #19 (minimal) |
+| **Validation Pipeline** | Verified outputs before release. Adds Ring 1. | MVC + #1, #2, #5, #13 |
+| **Governed Decision Flow** | Policy-evaluated, human-gateable decisions with side-effect management. Adds Ring 2. Mandatory gates always fire; adaptive gates relax as trust builds. | Validation Pipeline + #8, #9, #16, #17 |
+| **Full Governed Agentic System** | All rings active, zero trust at every boundary, Ring 3 self-improvement proposing within governance boundaries, environment optimization loop. The complete architecture. | All 19 primitives |
+
+### Hardening posture (modifier, not a named pattern)
+
+Between Governed Decision Flow and Full Governed Agentic System sits a real architectural distinction: a system can be production-hardened with defense-in-depth, pre-deployment assurance, and trust calibration **before** Ring 3 learning is enabled. That hardening posture is:
+
+- **Adversarial Robustness (#15)** — defense in depth, assume breach
+- **Evaluation & Assurance (#18)** — pre-deployment validation, the gate before the gate
+- **Trust Ladders (#11)** — earned autonomy, not granted by default
+
+This is a **posture applied within Governed Decision Flow** — or as a precondition for entering Full Governed — not a fifth named pattern. The distinction is substantive; naming it as a peer of MVC/Validation Pipeline/GDF/Full Governed was redundant (it's "Full Governed minus Ring 3 learning") and worsened naming density without adding architectural distinction. Express as posture language in prose: "a production-hardened Governed Decision Flow applying #11/#15/#18"; never as a named step in the progression.
+
+Most regulated enterprise deployments live in this posture on top of GDF, whether or not they ever enable Ring 3.
 
 ---
 

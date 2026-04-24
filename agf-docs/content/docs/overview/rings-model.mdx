@@ -115,7 +115,7 @@ This standard contract makes governance rings attachable to any pipeline.
 
 ## Starting Simple, Growing Governed
 
-Organizations don't implement all four rings at once:
+Organizations don't implement all four rings at once. AGF defines four [Composition Patterns](/docs/overview/composition-patterns) as the canonical growth progression — each pattern independently valuable, each a foundation for the next. Ring activation is a consequence of pattern selection:
 
 <Image
   src="/diagrams/composition-patterns.png"
@@ -125,17 +125,14 @@ Organizations don't implement all four rings at once:
   className="rounded-xl border border-zinc-200 my-8"
 />
 
-**Phase 1 — Minimum Viable Control:** Scope, identity, audit trail. Not even Ring 1 yet — just: the agent can't exceed its scope and actions are attributable.
+1. **Minimum Viable Control** — Ring 0 + Fabric (minimal). Scope, identity, audit trail. The agent can't exceed its scope and actions are attributable.
+2. **Validation Pipeline** — adds Ring 1. Verified outputs. Quality assurance becomes structural, not manual.
+3. **Governed Decision Flow** — adds Ring 2. Policy evaluation, human-reviewable gates, transaction control.
+4. **Full Governed Agentic System** — adds Ring 3 (Learning) and the environment optimization loop. Self-improvement, memory, and the full primitive set.
 
-**Phase 2 — Verification (Ring 0 + Ring 1):** Verified outputs. Quality assurance becomes structural, not manual.
+Between Governed Decision Flow and Full Governed, a **hardening posture** applies Adversarial Robustness (#15), Evaluation & Assurance (#18), and Trust Ladders (#11) to production-harden a GDF deployment before Ring 3 learning is enabled. This is a modifier, not a fifth pattern. See [Composition Patterns](/docs/overview/composition-patterns) for full detail.
 
-**Phase 3 — Governance (+ Ring 2):** Policy evaluation, human gates, transaction control.
-
-**Phase 4 — Security & Assurance:** Defense in depth, pre-deployment testing, trust calibration.
-
-**Phase 5 — Learning (+ Ring 3):** Self-improvement, memory, environment optimization.
-
-Each phase is independently valuable. Phase 1 alone is more governance than most organizations have today.
+Each pattern is independently valuable. Minimum Viable Control alone is more governance than most organizations have today.
 
 ## Where This Came From
 

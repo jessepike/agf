@@ -10,6 +10,14 @@ This changelog documents **canonical AGF framework evolution**. Site-level infra
 
 ## [Unreleased]
 
+### Changed
+
+- **Composition Patterns canonicalized at four.** Rings Model "Phase 1–5" growth language retired in favor of the four pattern names; Ring activation reframed as a consequence of pattern selection. The #11/#15/#18 hardening stack (Trust Ladders, Adversarial Robustness, Evaluation & Assurance) is expressed as a **hardening posture** — a modifier applied within Governed Decision Flow, or as a precondition for entering Full Governed — not a fifth named pattern. Earlier drafts referring to "Secure Governed System" as a pattern are retired. Decision: D10 (a).
+- **"Governance" qualifier conventions added** to `docs/shared-vocabulary.md` and the site vocabulary. Five-sense disambiguation table + required qualified forms — "AGF" for the framework, "Ring 2 / the Governance ring", "AGF program maturity" (replacing "program-level governance"), "Governance Gates" capitalized, "NIST CSF Govern" prefixed. Bare "governance" reserved for the framework sense or deliberate adjectival use. Decision: D10 (b).
+- **Observability three-layer disambiguation added** to `docs/shared-vocabulary.md`, the site vocabulary, and `docs/agentic-observability.md` (both canonical and site) as a "Where This Fits in AGF" frame block. Primitive #10 (emits) → Agentic Observability concept (correlates) → Observability Profile (implements) hierarchy now stated explicitly. Decision: D10 (c).
+
+Closes findings G5-F09, G5-F15, G5-F16 (Cohesion Pass v0.3). Meta-finding G5-M02 requires separate holistic re-read.
+
 ---
 
 ## [0.2.0] — 2026-04-22
