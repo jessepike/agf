@@ -10,6 +10,7 @@ Cross-review ledger of findings extracted from every review of AGF. Format, rubr
 **Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
 **Reviews ingested:** 2
+
 - `docs/reviews/2026-04-23-gpt-5-4.md` (external model)
 - `docs/reviews/2026-04-23-mechanical-baseline.md` (internal tooling)
 **Validation passes:** 1
@@ -75,7 +76,7 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | MI-F04 | check-links.mjs route resolution incomplete (exact `/docs`, `/`, app-dir `.txt` routes) | Low | Established | Mechanical | **validated** 2026-04-24 (app-dir route discovery + exact `/docs` handling + anchor-fragment support) |
 | MI-F05 | lint-mdx.sh MDX parse-landmine grep false positive inside YAML code fences | Low | Established | Mechanical | **validated** 2026-04-24 (awk fence-state machine replaces naive `grep -v '```'`) |
 | MI-F06 | preflight.sh treats untracked files as uncommitted; friction with in-flight iterations | Low | Established | Mechanical | **deferred** (BACKLOG tooling sprint) |
-| MI-F07 | Residual markdownlint content hygiene (108 errors: list spacing, long prose, missing fence languages) | Low | Established | Mechanical | **open** (editorial pass) |
+| MI-F07 | Residual markdownlint content hygiene (108 errors: list spacing, long prose, missing fence languages) | Low | Established | Mechanical | **partial** 2026-04-24 (Cohesion Pass v0.3 — MD032 blanks-around-lists auto-fixed across 21 canonical docs; 10 flagship MD040 fences tagged `text`; ~630 MD040 + MD013/MD025/MD028/MD001 errors remain in deeper profile/primitive docs — not release-blocking since canonical `docs/*.md` aren't linted by the pre-push gate; pair with G5-F18 editorial when scheduled) |
 
 ---
 
@@ -372,12 +373,14 @@ Target progression TBD on triage.
 **Cluster A update (2026-04-24):** MI-F04 and MI-F05 shipped in commit `3afefb4` (pre-push hook activation surfaced them as real release-blockers). Ceiling gates reduce from four (F04/F05/F06/F07) to two (F06/F07). Score unchanged at 7 pending re-rating; target ceiling now 9+ after MI-F06 (preflight.sh untracked-file handling) + MI-F07 (content hygiene editorial pass) land.
 
 **Cluster B delta (2026-04-23, partial):** Credibility 5 → 6, Public Readiness 5 → 6.
+
 - **Infra shipped:** `<Confidence level="established|informed|open">` + `<Status state="conceptual|specified|implemented">` components registered globally via `mdx-components.tsx`. Both inline-badge and block-form variants. Dogfoods AGF's own vocabulary.
 - **G5-F05 resolved:** "Operationalize at machine speed" Status Note wrapped in `<Confidence level="open">` block — now visibly distinct as architectural commitment, not current claim.
 - **G5-F04 initial apply:** Homepage Philosophy card shows all three confidence badges; what-is-agf Philosophy section dogfoods the gradient on its own rigor claim.
 - **Ceiling before Pass v0.3:** G5-F03 citations + G5-F20 dated sources + broader `<Confidence>` application across flagship claims unlock Credibility → 7–8. `<Status>` batch-apply is gated on primitive stability content decision (backlogged).
 
 **Cluster C delta (2026-04-23):** Defensibility 5 → 7, Differentiation 6 → 7, Clarity 5 → 6.
+
 - **G5-F06 resolved:** "No framework has the Belief Layer" rewritten as bounded-survey claim + `<Confidence level="informed" />` + cross-link to Primitive Attribution. Dogfoods the gradient on a novelty claim — exactly the meta-pattern G5-M01 called for.
 - **G5-F07 resolved:** OTAA expanded inline ("Observable · Traceable · Auditable · Agent-operable") at its first public-facing appearance in the Seven-Layer Stack table.
 - **G5-F17 resolved:** New Primitive Attribution section on `/docs/reference/primitives` — 19-row table mapping each primitive to its primary lineage (NIST, OWASP, CSA, ISO, OTel, academic, industry practice) plus AGF's specific contribution (naming, placement, invariant). This is the highest-leverage defensibility move: it converts "we invented these primitives" (indefensible) into "we composed these primitives from prior art" (defensible).

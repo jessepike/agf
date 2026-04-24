@@ -42,6 +42,7 @@ Introduced in DECISIONS.md #7. The agent harness is the governance envelope arou
 | **Governance Decision Record (GDR)** | A standard audit artifact capturing a governed decision: inputs, context, decision, conditions, approver, expiry. Produced by tool authorization, trust level changes, governance gate outcomes, constraint overrides, and escalation resolutions. |
 
 **Harness is not to be confused with:**
+
 - **Wrapper** — one of AGF's three deployment modes; a specific runtime interception pattern. A Tier 1 harness may be implemented *via* the wrapper deployment mode, but harness is broader than any single deployment mode.
 - **Hypervisor** — AGT-specific runtime isolation kernel implementing CPU-style privilege rings (Root / Trusted / Standard / Sandbox). Hypervisors are a runtime mechanism harnesses can target; harnesses specify policy, hypervisors enforce execution isolation.
 - **Test harness** (classical software engineering) — a test execution framework (stubs, drivers, input data, expected results). Agent harnesses include test harnesses as a component (eval suites, policy test harnesses) but are substantially broader.
@@ -67,6 +68,7 @@ Introduced in DECISIONS.md #6.
 ## Architecture Terms
 
 ### Rings Model
+
 The central logical architecture of AGF. Four concentric rings plus cross-cutting fabric and an environment substrate. Rings are a *logical* architecture — how they manifest physically depends on the deployment mode.
 
 | Term | Definition |
@@ -79,6 +81,7 @@ The central logical architecture of AGF. Four concentric rings plus cross-cuttin
 | **Environment Substrate** | The governed operating environment beneath all rings: context, instructions, tools, workspace, memory. Governed by Primitive #19 (Agent Environment Governance). |
 
 ### Deployment Modes
+
 How the logical rings manifest physically. Three modes:
 
 | Term | Definition |
@@ -89,6 +92,7 @@ How the logical rings manifest physically. Three modes:
 | **Hybrid Deployment** | Combining modes. Common pattern: middleware mode overall with graph-embedded subsections within a single response. |
 
 ### Composability Interface
+
 The standard contract between rings:
 
 | Term | Definition |
@@ -122,6 +126,7 @@ AGF's gate-related vocabularies form a four-part vocabulary of distinct, scoped 
 Three categories. All are first-class; the distinction is temporal and structural, not hierarchical.
 
 ### Runtime Primitives (#1–#17)
+
 Operate within or across the ring pipeline during agent execution.
 
 | # | Name | Ring | One-Line Definition |
@@ -145,6 +150,7 @@ Operate within or across the ring pipeline during agent execution.
 | 17 | Data Governance & Confidentiality | 2+Fabric | Classification, consent, PII, lineage, retention at every data flow |
 
 ### Lifecycle Primitive (#18)
+
 Operates outside the runtime pipeline.
 
 | # | Name | Scope | One-Line Definition |
@@ -152,6 +158,7 @@ Operates outside the runtime pipeline.
 | 18 | Evaluation & Assurance | Pre-deployment | The gate before the gate — validates configurations before production |
 
 ### Substrate Primitive (#19)
+
 Governs the operating environment beneath all rings.
 
 | # | Name | Scope | One-Line Definition |
@@ -163,6 +170,7 @@ Governs the operating environment beneath all rings.
 ## Security Terms
 
 ### Three-Level Security Model
+
 Security is a pervasive architectural concern, not a ring or layer.
 
 | Term | Definition |
@@ -173,6 +181,7 @@ Security is a pervasive architectural concern, not a ring or layer.
 | **Security Response Bus** | Pre-authorized fast-path from Intelligence directly to Fabric, bypassing normal Governance deliberation for defined threat classes. Governance defines the classes; Intelligence triggers; Fabric contains. Not a governance bypass — governance pre-authorizes. |
 
 ### Zero Trust
+
 The architectural assumption that runs through everything.
 
 | Term | Definition |

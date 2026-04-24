@@ -86,6 +86,7 @@ The primitives endure. The implementations change. Naming the tensions between p
 The agent that creates output must not be the sole agent that validates it. This is the most fundamental **structural** guarantee in any system producing consequential output.
 
 **The pattern:**
+
 - Producer agent generates output
 - Verifier agent(s) evaluate output against defined quality criteria
 - Synthesis agent reconciles or accepts
@@ -93,6 +94,7 @@ The agent that creates output must not be the sole agent that validates it. This
 **Why it endures:** This is separation of duties — the same principle that prevents a single person from writing and approving a check. It doesn't matter if the model improves 100x. You still don't let the same actor produce and certify.
 
 **Variations:**
+
 - Self-audit (same model, different prompt/role — weakest form)
 - Cross-model verification (different model evaluates — stronger)
 - Multi-agent panel (multiple independent evaluators — strongest)
@@ -106,6 +108,7 @@ The agent that creates output must not be the sole agent that validates it. This
 Multi-pass review cycles where output is iteratively improved until it meets a quality threshold — or escalates when iteration limits are reached without convergence.
 
 **The pattern:**
+
 ```
 Output produced
   -> Evaluate against quality criteria
@@ -116,6 +119,7 @@ Output produced
 ```
 
 **Key design decisions:**
+
 - **Convergence criteria:** What does "good enough" mean? Explicit, measurable thresholds — not vibes.
 - **Early exit:** The first iteration that passes the threshold wins. Don't over-optimize.
 - **Iteration budget:** Hard cap on loops (e.g., 10). Unbounded iteration is a cost and latency trap.
@@ -130,6 +134,7 @@ Output produced
 Systems that learn from their own execution history, incorporating new knowledge from memory, knowledge bases, and observed patterns to get better over time — without retraining.
 
 **The pattern:**
+
 ```
 Agent executes task
   -> Execution data logged (inputs, outputs, scores, human feedback)
@@ -143,6 +148,7 @@ Agent executes task
 ```
 
 **Key design decisions:**
+
 - **What feeds the loop:** Execution logs, human overrides, quality scores, KB updates, memory entries
 - **Cycle frequency:** Not every run. Periodic batches — daily, weekly, or threshold-triggered.
 - **What changes:** Prompts, configurations, rules, thresholds — NOT model weights. Runtime-tunable parameters only.
@@ -161,12 +167,14 @@ Agent executes task
 A dedicated role whose sole purpose is to find weaknesses — contradictions, missing evidence, unstated assumptions, edge cases, logical gaps. The challenger exists to stress-test, not to confirm.
 
 **The pattern:**
+
 - Challenger agent receives the same inputs + the producer's output
 - Mandate: find what's wrong, what's missing, what's assumed without evidence
 - Outputs structured challenges: counterclaims, gaps, contradiction flags
 - Challenges are visible in the provenance chain — not silently absorbed
 
 **Key design decisions:**
+
 - **Structural mandate:** The challenger is not asked "is this good?" — it's asked "what's wrong with this?" The framing matters.
 - **Independence:** The challenger should not share context/state that would bias it toward agreement.
 - **Visibility:** Challenge results are first-class artifacts, not internal logs. Reviewers see what was challenged and how.
@@ -183,6 +191,7 @@ A dedicated role whose sole purpose is to find weaknesses — contradictions, mi
 Agents produce typed, versioned, stored artifacts — not prose. Every output is a data structure with a schema, not a text blob that has to be parsed later.
 
 **The pattern:**
+
 - Define output contracts before building agents
 - Agent output is validated against schema at runtime
 - Invalid output is a failure, not a "close enough"
@@ -199,6 +208,7 @@ Agents produce typed, versioned, stored artifacts — not prose. Every output is
 Every consequential output traces back through an unbroken chain: source evidence -> reasoning -> intermediate outputs -> final output -> review -> decision. No gaps. No "trust me."
 
 **The pattern:**
+
 - Every node in the chain records: who created it (see Identity & Attribution, #14), when, from what inputs, using what method, with what confidence
 - The chain is immutable and append-only — corrections create new entries, they don't overwrite
 - Any output can be "walked back" to its originating evidence
@@ -215,6 +225,7 @@ Every consequential output traces back through an unbroken chain: source evidenc
 Every agent has explicit, declared scopes, capabilities, and constraints. No agent has unbounded authority. The boundaries are part of the agent's definition, not just its prompt.
 
 **The pattern:**
+
 - Agent definition includes: what it CAN do, what it CANNOT do, what it MUST escalate
 - Tool access is scoped — agents only have the tools they need
 - Output authority is scoped — agents recommend within their domain, they don't decide outside it
@@ -230,6 +241,7 @@ Every agent has explicit, declared scopes, capabilities, and constraints. No age
 Checkpoints before consequential actions. The system pauses, presents evidence, and requests authorization before proceeding with material decisions.
 
 **The pattern:**
+
 - Define which actions are "material" — not everything needs a gate
 - Gate = pause + present evidence + request decision
 - Gate action is recorded: who/what authorized, when, what they decided, why
@@ -237,6 +249,7 @@ Checkpoints before consequential actions. The system pauses, presents evidence, 
 - Gate thresholds can adapt (see Trust Ladders, #11)
 
 **Gate resolution:** When a gate fires, the authorizer returns one of:
+
 - **APPROVE** — proceed, with attestation recorded
 - **REJECT** — halt, with justification recorded
 - **MODIFY** — authorizer changes the output, creating a new artifact version that re-enters Ring 1 for verification
@@ -244,6 +257,7 @@ Checkpoints before consequential actions. The system pauses, presents evidence, 
 - **ESCALATE** — route to higher authority
 
 **Two gate classes:**
+
 - **Adaptive gates** — trust-dependent. Can relax as the system demonstrates reliability. Controlled by Trust Ladders (#11).
 - **Mandatory gates** — always active regardless of trust level. Legally required, regulatorily mandated, or organizationally non-negotiable.
 
@@ -258,6 +272,7 @@ Checkpoints before consequential actions. The system pauses, presents evidence, 
 Governance rules are explicit, versioned, executable objects — not hidden in prompts, not dependent on human memory, not buried in committee meeting notes.
 
 **The pattern:**
+
 - Rules are declared as structured objects (not natural language in prompts)
 - Each rule has: ID, version, conditions, thresholds, actions, effective date
 - Rules are evaluated programmatically against case data
@@ -275,6 +290,7 @@ Governance rules are explicit, versioned, executable objects — not hidden in p
 Every material action emits a structured event. The event stream is the foundation for real-time monitoring, retrospective audit, pattern detection, and system learning.
 
 **The pattern:**
+
 - Common event envelope: event_id, timestamp, actor (see Identity, #14), action, target, state_change, context
 - Events are emitted at agent boundaries, tool calls, gate decisions, human actions
 - Events are immutable and append-only
@@ -291,6 +307,7 @@ Every material action emits a structured event. The event stream is the foundati
 Systems earn autonomy through demonstrated reliability. Verification intensity is high early, decreases as the system proves itself, and re-escalates when anomalies are detected.
 
 **The pattern:**
+
 ```
 Low trust (new system, new context):
   -> Full verification, all layers, human gates active
@@ -306,10 +323,12 @@ Anomaly detected at any level:
 ```
 
 **Two operating speeds:**
+
 - **Slow path (Ring 3):** Systematic trust adjustment based on patterns across many executions. Periodic review cycles. This is how trust climbs.
 - **Fast path (sentinels):** Trip wires that fire in near-real-time when specific anomaly patterns occur. Three consecutive failures, sudden quality score drop, cost spike. This is how trust degrades — immediately, not at the next weekly review.
 
 **Key design decisions:**
+
 - **Trust is earned, not configured.** Based on empirical data from execution history.
 - **Trust is contextual.** A system trusted for one task/document type starts at low trust for a new type.
 - **Trust degrades faster than it builds.** Earning trust takes many successful runs. Losing it takes one anomaly. This asymmetry is by design.
@@ -319,6 +338,7 @@ Anomaly detected at any level:
 
 **Empirical calibration (Mar 2026):**
 Anthropic's agent autonomy research (published analysis of millions of API interactions) provides the first real-world trust evolution data:
+
 - New users auto-approve 20% of agent sessions
 - By 750 sessions, auto-approval reaches 40%
 - Behavioral shift: experienced users move from pre-approval gating to active monitoring (interrupting 9% of turns vs. 5% for beginners)
@@ -328,6 +348,7 @@ This confirms trust ladders are an empirical pattern, not just a design principl
 
 **Academic framework (Feb 2026):**
 DeepMind's "Intelligent AI Delegation" paper (Tomašev, Franklin, Osindero — arXiv 2602.11865) proposes an adaptive delegation framework with six components that map to trust ladder mechanics:
+
 1. Task allocation (which agent handles what)
 2. Authority transfer (what autonomy is granted)
 3. Accountability mechanisms (who is responsible for outcomes)
@@ -344,12 +365,14 @@ The paper argues delegation must be *adaptive* — trust builds or degrades base
 Agents pull from persistent memory and knowledge bases to incorporate recent learnings, decisions, and context — not just their training data and current prompt.
 
 **The pattern:**
+
 - Before execution: agent queries relevant memory/KB for recent context
 - During execution: agent can reference prior decisions, patterns, learnings
 - After execution: significant findings are written back to memory/KB
 - The memory layer is shared across agents and sessions — it's organizational knowledge, not session state
 
 **Key design decisions:**
+
 - **What goes to memory vs. KB vs. nowhere:** Not everything is worth persisting. Routing rules matter.
 - **Freshness:** Recent entries weighted higher. Stale entries decay or are reviewed.
 - **Relevance filtering:** Agents get relevant context, not everything. Semantic search, topic filtering, recency.
@@ -363,6 +386,7 @@ Agents pull from persistent memory and knowledge bases to incorporate recent lea
 Agentic systems are distributed, non-deterministic systems. Failure is not exceptional — it is expected. Every governed agentic system needs explicit patterns for detecting, handling, and recovering from failures without losing state or producing silent corruption.
 
 **The pattern:**
+
 - **Retry with backoff** for transient failures (model timeout, API rate limit, provider outage)
 - **Checkpointing** at stage/ring boundaries — save state so recovery resumes from last good checkpoint, not from scratch
 - **Graceful degradation** — if an optional component fails (e.g., cross-model verification unavailable), continue with reduced confidence and flag the degradation explicitly
@@ -370,6 +394,7 @@ Agentic systems are distributed, non-deterministic systems. Failure is not excep
 - **Circuit breaker** — if a dependency fails N times in a window, stop calling it and route to fallback path
 
 **Key design decisions:**
+
 - **Failure classification matters.** A model timeout (transient) requires a different response than schema validation failure (deterministic) or a semantically nonsensical output (quality). Each class has its own recovery path.
 - **Partial completion is real.** A six-stage pipeline that fails at stage 4 has three stages of valid work. Checkpointing preserves that work. Re-execution from scratch is waste.
 - **Silent failure is worse than loud failure.** A system that produces a plausible-looking but incorrect output (hallucinated with confidence) is more dangerous than one that crashes. Error handling must include detection of outputs that are structurally valid but semantically wrong — which connects to Validation Loops (#2) and Adversarial Critique (#4).
@@ -383,12 +408,14 @@ Agentic systems are distributed, non-deterministic systems. Failure is not excep
 Every agent in a system has an authenticated, inspectable identity. Identity answers "who did this" with structural guarantees — not just "which prompt was used" but which specific agent instance, under what authority, operating on whose behalf.
 
 **The pattern:**
+
 - **Agent identity:** agent_id, version, configuration hash — uniquely identifies the specific agent configuration that produced an output
 - **Model provenance:** which model, which version, which provider — required for regulatory contexts where "which AI system" is a compliance question
 - **Delegation chain:** who authorized this agent to act, under what authority, with what scope — connects to Bounded Agency (#7)
 - **Tenant scoping:** whose data is this agent operating on — required for multi-tenant systems and data isolation
 
 **Implementation protocols (per NIST NCCoE Agent Identity Concept Paper, Feb 2026):**
+
 - **Cryptographic workload identity:** SPIFFE/SPIRE provides the identity substrate — each agent instance receives a SPIFFE Verifiable Identity Document (SVID) that cryptographically proves its identity without relying on network location or static secrets. SVIDs are short-lived and automatically rotated, eliminating the static credential problem that plagues 53% of community MCP servers (Astrix analysis). The SPIFFE trust domain maps naturally to our organizational trust boundaries in Cross-System Trust.
 - **Authentication protocols:** OAuth 2.1 for user-delegated agent authority (which human authorized this agent to act on their behalf). OIDC for federated identity across organizational boundaries. JWT tokens for per-interaction authorization that carries through the delegation chain.
 - **Attribute-based access control:** NGAC (Next-Generation Access Control) for fine-grained, policy-driven authorization that evaluates dynamically at runtime — replacing static role-based models that cannot express the context-dependent permissions agentic systems require. NGAC decisions map to our Ring 2 policy evaluation: the access control decision is a governance decision, and NGAC provides the formal algebra for expressing it.
@@ -397,6 +424,7 @@ Every agent in a system has an authenticated, inspectable identity. Identity ans
 **Why it endures:** Bounded Agency (#7) defines what an agent *can* do. Identity defines *who is doing it*. Provenance Chains (#6) record *what happened*. These three are distinct questions that all require answers in any accountable system. In multi-tenant, cross-organization, and regulated environments, "which agent did this" is a compliance question, not a debugging question. As agentic systems interact across organizational boundaries (agent-to-agent communication, marketplace models, federated systems), authenticated identity becomes a prerequisite for trust. The NIST NCCoE framing of agents as *actors* (not applications) confirms that agent identity must be first-class — agents need their own identity lifecycle, not borrowed human credentials.
 
 **Relationship to other primitives:**
+
 - Bounded Agency (#7) defines the box. Identity says who's in the box.
 - Provenance Chains (#6) record what happened. Identity says who did it.
 - Event-Driven Observability (#10) emits events. Identity provides the actor field.
@@ -409,6 +437,7 @@ Every agent in a system has an authenticated, inspectable identity. Identity ans
 Agentic systems must be designed under the assumption that they will face adversarial inputs, compromised components, and intentional manipulation — not just honest failures. Security is not a feature added after the system works. It is a posture that informs how every primitive is implemented.
 
 **The pattern:**
+
 - **Input defense:** Every input to Ring 0 is treated as potentially adversarial. Prompt injection detection, input sanitization, context boundary enforcement.
 - **Ring integrity:** Each ring verifies independently. Ring 1 does not trust Ring 0's output because Ring 0 produced it. Ring 2 does not trust Ring 1's PASS because Ring 1 said so. No ring trusts any other ring by default.
 - **Containment:** If an agent is compromised, the blast radius is limited by Bounded Agency (#7). Compromised agents cannot escalate their own permissions. Lateral movement between pipelines requires authenticated identity (#14).
@@ -417,6 +446,7 @@ Agentic systems must be designed under the assumption that they will face advers
 - **Supply chain trust:** Models, tools, connectors, and plugins are dependencies with their own trust profiles. Model version changes, tool updates, and connector modifications must be verified — not silently absorbed.
 
 **Key design decisions:**
+
 - **Assume breach, not perfection.** The system is designed to limit damage when (not if) a component is compromised, an input is adversarial, or a dependency is malicious.
 - **Defense in depth.** No single ring is the security boundary. Security is enforced at every ring and in the fabric between them. This is the zero trust principle applied to the ring architecture.
 - **Detection and response, not just prevention.** Prevention fails. The Agentic Observability layer (the SIM concept) provides the detection, correlation, and response capabilities — consuming the event stream, running security-specific correlation rules, and triggering response playbooks.
@@ -432,6 +462,7 @@ Agentic systems must be designed under the assumption that they will face advers
 Consequential agentic systems produce side effects — database writes, API calls, notifications, financial transactions, file modifications. These side effects require explicit lifecycle management that goes beyond error handling.
 
 **The pattern:**
+
 - **Side-effect classification:** Every action is classified as read-only, reversible, or irreversible. The classification determines the governance requirements (adaptive vs. mandatory gates) and the recovery options.
 - **Pre-commit / commit / post-commit states:** Side effects are not fire-and-forget. They move through explicit lifecycle states. Pre-commit actions are provisional. Committed actions are recorded in the provenance chain. Post-commit validation confirms the action took effect as intended.
 - **Idempotency:** Re-execution of the same action with the same inputs must produce the same result. Every action carries an idempotency key. Duplicate execution is detected and prevented.
@@ -440,6 +471,7 @@ Consequential agentic systems produce side effects — database writes, API call
 - **Partial-execution state:** When a multi-step action partially completes before failure, the system knows which steps succeeded, which are pending, and which need compensation. This state is recoverable from checkpoints.
 
 **Key design decisions:**
+
 - **Error handling is not transaction control.** Error Handling (#13) covers what happens when things *fail*. Transaction control covers what happens when things *partially succeed* — which is often more dangerous because the system is in an inconsistent state.
 - **Irreversible actions get mandatory gates.** Any action classified as irreversible must pass through a mandatory Governance Gate (#8) regardless of trust level. You can earn the right to skip a quality spot-check, but you cannot earn the right to skip approval before an irreversible action.
 - **The provenance chain records the full transaction lifecycle.** Not just "action taken" but "action proposed → approved → committed → confirmed" or "action proposed → approved → committed → context changed → compensation executed."
@@ -473,6 +505,7 @@ This is not a security primitive (see Adversarial Robustness #15 for adversarial
 **Why it endures:** Data governance is not an AI problem — it is a universal data management concern that every regulated industry has faced. GDPR, CCPA, HIPAA, and industry-specific regulations impose data handling requirements that do not disappear because the processor is an AI agent. As agentic systems handle more sensitive data and cross more organizational boundaries, the data governance requirements intensify. The patterns (classification, consent, lineage, retention, deletion) have governed enterprise data management for decades. They endure because the regulatory and ethical obligations endure.
 
 **Relationship to other primitives:**
+
 - Provenance Chains (#6) provides the lineage substrate. Data governance defines what lineage must capture.
 - Memory-Augmented Reasoning (#12) is the primary data store this primitive governs.
 - Policy as Code (#9) encodes the data handling rules. Data governance defines what policies are needed.
@@ -508,6 +541,7 @@ This is not a runtime primitive. It is a **pre-deployment and continuous assuran
 **Why it endures:** Every safety-critical industry requires pre-deployment assurance. Aviation has type certification. Medical devices have clinical trials. Financial systems have stress tests. Software has CI/CD pipelines with automated testing. The principle that systems must demonstrate safety and correctness before deployment is not new — it is the fundamental assurance pattern. For agentic systems, the assurance challenge is harder (non-deterministic outputs, adversarial environments, evolving configurations) but the principle is the same. No governed system should enter production without passing its evaluation suite. No configuration change should deploy without regression validation.
 
 **Relationship to other primitives:**
+
 - Adversarial Critique (#4) is a runtime pattern. Evaluation & Assurance is a design-time/pre-deployment pattern. They are complementary, not redundant.
 - Self-Improving Cycles (#3) produces changes. Evaluation & Assurance validates them before deployment.
 - Policy as Code (#9) defines rules. Policy test harnesses verify the rules behave as intended.
@@ -556,6 +590,7 @@ This is not a performance optimization concern. It is a governance concern. Cont
 **What this primitive adds is the unification.** No existing work treats the *complete, composed* agent operating environment — context composition, instruction architecture, capability provisioning, workspace scoping, and session state management — as a *single* governed, versioned, auditable primitive. Individual components are governed elsewhere: prompts (prompt governance literature), actions (AgentSpec, OWASP), identity/access (SAGA, NIST NCCoE), runtime infrastructure (OpenShell), tools (MCP governance). The specific framing of the *composed environment itself* as the unit of governance — with a self-improving optimization loop subject to the same ring architecture that governs agent behavior — is where this primitive's contribution lies.
 
 **Relationship to other primitives:**
+
 - Bounded Agency (#7) limits what an agent CAN DO. Environment Governance limits what an agent CAN SEE and REACH — and ensures what it sees is optimal, not just permitted.
 - Memory-Augmented Reasoning (#12) covers persistent memory. Environment Governance covers the full operating substrate: context composition, instructions, tools, workspace, session state — with memory as one component.
 - Policy as Code (#9) defines governance rules. Environment Governance treats the environment configuration ITSELF as a policy artifact — who composed this context, under what policy, and is that composition auditable?
@@ -673,6 +708,7 @@ The self-improving cycle for the agent's operating substrate:
 ```
 
 **Governance constraint:** The optimization loop PROPOSES changes. It does not autonomously apply them. This is critical — an unconstrained optimization loop on the agent's own environment could:
+
 - Optimize instructions to bypass governance constraints ("I work better without policy checks")
 - Expand tool access beyond authorized scope ("I need this tool I'm not supposed to have")
 - Modify context composition to exclude governance-relevant information ("This audit context is low-signal")
@@ -722,6 +758,7 @@ Security operates at three distinct levels with different temporal characteristi
 The fabric is the embedded security substrate within every ring and at every ring boundary. It is always active, synchronous, and operates at wire speed.
 
 **What it does:**
+
 - **Input sanitization** — every input to any ring is treated as potentially adversarial. Prompt injection detection, context boundary enforcement, payload validation.
 - **Output scanning** — every output is inspected before crossing a ring boundary. Known pattern detection, classification markers, integrity assertions.
 - **Runtime containment** — sandboxing, resource limits, execution isolation. If an agent is compromised, the blast radius is bounded by the fabric.
@@ -743,6 +780,7 @@ The fabric is the embedded security substrate within every ring and at every rin
 Security policy is policy. It lives in Ring 2, evaluated by Policy as Code (#9), enforced through Governance Gates (#8). Security governance makes the decisions that the fabric enforces.
 
 **What it does:**
+
 - **Access control policy** — who (which agents, which models, which humans) can do what (which tools, which data, which actions) under what conditions (trust level, risk classification, context).
 - **Data classification and handling** — PII rules, consent scope, data residency, retention policy, redaction requirements. What data enters persistent stores. What data crosses organizational boundaries.
 - **Irreversible-action authorization** — any action classified as irreversible by Transaction & Side-Effect Control (#16) must pass through a mandatory governance gate regardless of trust level. Security governance defines which actions are irreversible.
@@ -758,6 +796,7 @@ Security policy is policy. It lives in Ring 2, evaluated by Policy as Code (#9),
 Security intelligence is the SIEM pattern applied to agentic systems. It lives in the observability layer, consuming the event stream from all rings, running security-specific correlation rules, and triggering response playbooks.
 
 **What it does:**
+
 - **Behavioral anomaly detection** — baseline agent behavior and detect divergence. Trust manipulation patterns (performing well on low-stakes tasks to earn trust, then exploiting it on high-stakes tasks). Behavioral drift over time.
 - **Cross-pipeline correlation** — detect attack patterns that span multiple agents or pipelines. Lateral movement, coordinated behavior changes, cascading failures. A quality degradation pattern in one pipeline that correlates with a privilege escalation in another — that's a security event, not a quality event.
 - **Memory and state introspection** — Intelligence has **read access to agent internal state** — memory stores, context windows, embedding stores, tool registries, loaded plugin manifests. This is not just observability over actions (the SIEM pattern) — it is introspection into agent internals (the EDR pattern). This distinction matters: slow memory poisoning (OWASP ASI06) is invisible to behavioral telemetry but detectable through memory-state drift analysis.
@@ -765,6 +804,7 @@ Security intelligence is the SIEM pattern applied to agentic systems. It lives i
 - **Response playbooks** — defined response actions for detected threat patterns. Quarantine, trust degradation, blast radius containment, human escalation, forensic evidence preservation.
 
 **Temporal characteristic:** Dual-speed.
+
 - **Fast path (sentinels):** Near-real-time anomaly-triggered responses. Sub-second detection of known patterns.
 - **Slow path (analysis):** Hours to days. Pattern analysis across many executions. Behavioral drift. Memory evolution tracking.
 
@@ -777,6 +817,7 @@ The three security levels must coordinate, and **coordination latency is itself 
 **The Security Response Bus** is a pre-authorized fast-path from Intelligence directly to Fabric enforcement points, bypassing normal Governance deliberation for defined threat classes:
 
 **How it works:**
+
 1. **Governance pre-authorizes response classes.** "If Intelligence detects lateral movement pattern X, Fabric may immediately isolate the affected agents." These authorizations are versioned policy, recorded in the provenance chain, and auditable.
 2. **Intelligence triggers pre-authorized responses.** When a detection matches a pre-authorized threat class, Intelligence sends a containment signal directly to Fabric — no Governance round-trip.
 3. **Fabric executes containment.** Circuit breakers fire, agents are isolated, blast radius is bounded.
@@ -887,6 +928,7 @@ Wraps Ring 0. Evaluates the output before it goes anywhere. The question Ring 1 
 **Time horizon:** Per-output. Seconds to minutes.
 
 **Behavior:**
+
 - Receives structured output from Ring 0
 - Runs verification layers (self-audit, cross-model, deterministic checks)
 - If output passes quality threshold: forward to Ring 2
@@ -907,6 +949,7 @@ Correct (Ring 1) and authorized (Ring 2) are different questions. An output can 
 **Time horizon:** Per-decision. Minutes to hours — gates may pause for human review.
 
 **Behavior:**
+
 - Receives verified output from Ring 1
 - Evaluates against policy rules (versioned, executable)
 - If policy passes + no gate required: record provenance, forward
@@ -926,10 +969,12 @@ Ring 3 does not act on individual outputs. It acts on **patterns across outputs*
 **Primitives active:** Self-Improving Cycles (#3), Memory-Augmented Reasoning (#12), Trust Ladders (#11)
 
 **Time horizon:** Dual-speed.
+
 - **Slow path:** Per-pattern. Days to weeks — systematic improvement across many executions.
 - **Fast path (sentinels):** Near-real-time — anomaly-triggered trust degradation. When trip wires fire (consecutive failures, quality score cliff, cost spike), trust drops immediately and verification re-escalates. The slow path later ratifies or adjusts.
 
 **Behavior:**
+
 - Ingests execution data from all rings (inputs, outputs, scores, human feedback, overrides, gate decisions)
 - Periodically analyzes patterns: quality trends, failure modes, override clusters, cost drift
 - Pulls from memory/KB for new learnings and organizational context
@@ -1042,6 +1087,7 @@ The rings literally wrap the core execution. Ring 0 produces a discrete output, 
 **How checkpointing works:** Checkpoint between each ring. Each checkpoint captures the full state: Ring 0 output, Ring 1 verification results, Ring 2 policy evaluation. Recovery restarts from the last clean checkpoint.
 
 **Governance properties:**
+
 - **Audit clarity:** Highest. Each stage boundary is a clean cut in the provenance chain. Auditors can see exactly what Ring 0 produced, exactly what Ring 1 found, exactly what Ring 2 decided.
 - **Human oversight:** Easiest. Gates pause cleanly. Reviewers see the complete context. No time pressure from in-flight execution.
 - **Reproducibility:** Highest. Given the same input and configuration, the pipeline produces the same trace.
@@ -1091,6 +1137,7 @@ This creates a design constraint: **the agent must be resumable.** Pausing for a
 **How checkpointing works:** Checkpoint at each interrupt boundary. The checkpoint captures: all prior step results, the current execution graph position, the agent's context/state, and any in-flight operations. Recovery can restart from the last interrupt checkpoint, but steps between checkpoints may need re-execution.
 
 **Governance properties:**
+
 - **Audit clarity:** Good. The provenance chain shows which control points triggered and what decisions were made. But the interleaving of execution and governance makes the trace more complex than wrapper mode — an auditor must follow the execution graph, not just a linear stage sequence.
 - **Human oversight:** Good, with constraints. Gates pause at interrupt points, and the human sees the execution context up to that point. But the context is richer (partial execution state, tool call history, in-progress work) and the reviewer needs more domain expertise to evaluate.
 - **Reproducibility:** Moderate. The execution graph is deterministic given the same inputs and tool responses, but tool responses are external and may vary. Non-determinism in LLM steps means the specific interrupt points triggered may differ across runs.
@@ -1139,6 +1186,7 @@ The release gate blocks output delivery until Ring 1 signals pass. For streaming
 For actions requiring human approval, graph-embedded mode faces its hardest challenge. The agent has already invested computation in producing the output. If a governance gate pauses for human review, the agent's speculative execution must be held in a buffer — or, if the human rejects, rolled back. **Speculative execution that touches external state (API calls, database writes) before the gate resolves is a Transaction & Side-Effect Control (#16) problem.** The agent must not commit irreversible side effects until the governance gate clears.
 
 **Speculative execution formal bounds** *(Informed proposal — these bounds are derived from our analysis of concurrent governance overhead and require empirical validation in production agentic systems):* Graph-embedded mode's concurrent processing introduces combinatorial complexity that must be bounded:
+
 - **Depth limit:** Speculative execution chains (where one speculative step triggers further speculative steps) should be bounded to depth 3-4. Concurrent state management overhead grows super-linearly beyond depth 4 (the coordination cost of tracking speculative branches, maintaining rollback state, and synchronizing governance signals across concurrent execution paths exceeds the latency savings from speculation). Implementations should measure their specific overhead curves and calibrate accordingly.
 - **Entropy constraint:** Speculative execution is only valuable when the probability of governance rejection is low. If the historical rejection rate for a given action class exceeds a configured threshold (recommended starting point: 20%), that action class should be excluded from speculative execution and processed sequentially with explicit governance approval before proceeding. The 20% threshold is a starting heuristic — the optimal threshold depends on the cost of wasted speculative computation relative to the latency benefit.
 - **Resource budget:** Speculative computation consumes resources that are wasted on rejection. A per-request speculative budget (compute time, token count, API calls) prevents runaway speculation. When the budget is exhausted, remaining steps fall back to sequential processing.
@@ -1147,6 +1195,7 @@ For actions requiring human approval, graph-embedded mode faces its hardest chal
 The practical constraint: graph-embedded mode works best when governance gates are rare (most output passes policy automatically) and when the cost of speculative-then-discarded computation is acceptable. For systems with frequent mandatory gates, middleware mode is a better fit.
 
 **How the Security Response Bus works:** Most complex of the three modes. Intelligence must send containment signals to multiple concurrent execution nodes simultaneously. The challenges:
+
 - Ring 0 may have output in the buffer that hasn't been released — containment must flush or quarantine the buffer.
 - In-flight verification and policy evaluation must be interrupted.
 - If the agent is part of a swarm, containment of one agent must propagate to downstream agents that are consuming its output stream.
@@ -1156,6 +1205,7 @@ Pre-authorized response classes must account for the concurrent execution model.
 **How checkpointing works:** Most complex. Checkpoint must capture the parallel state of all concurrent executions: Ring 0's output buffer, Ring 1's evaluation state, Ring 2's policy context, and the Security Fabric's signal state. Recovery requires restarting all concurrent nodes from a consistent snapshot — a coordination problem analogous to distributed database recovery.
 
 **Governance properties:**
+
 - **Audit clarity:** Lowest. Concurrent execution means the provenance chain is a partial order, not a total order. Multiple rings fire simultaneously, and the causal relationships between events are more complex to reconstruct. Auditors need tooling to visualize concurrent traces, not just linear logs.
 - **Human oversight:** Hardest. Speculative execution means the agent has "moved on" by the time a gate fires. The reviewer must understand that rejecting a gate may require discarding work already done. Cognitive load on reviewers is higher.
 - **Reproducibility:** Lowest. Concurrency introduces timing-dependent behavior. The same inputs may produce different execution orderings across runs. The logical outcome should be equivalent (same guarantees), but the specific trace may differ.
@@ -1292,6 +1342,7 @@ When agents operate across organizational boundaries — federated pipelines, ma
 ### Cross-Ring Concern Routing
 
 Rings occasionally discover issues outside their domain:
+
 - Ring 1 (Verification) discovers what appears to be a policy violation — not a quality issue, but a governance issue.
 - Ring 2 (Governance) discovers what appears to be a quality deficiency — not a policy issue, but a verification issue.
 - Any ring discovers a security anomaly that should be routed to Security Intelligence.
@@ -1346,6 +1397,7 @@ Ring receives (in context):
 ```
 
 **Signal restrictions by ring:**
+
 - **Ring 1** may return: PASS, REVISE(quality), HALT, ERROR
 - **Ring 2** may return: PASS, REVISE(context), HALT, GATE, DELEGATE, ERROR
 - **Ring 3** does not return signals on individual outputs. It modifies configuration between executions.
@@ -1387,6 +1439,7 @@ The enduring primitive is **versioned, auditable, reviewable control-plane state
 **Where git is not enough:** Runtime state, memory stores, vector indexes, feature flags, secrets, artifact registries, and multi-service rollout coordination require different versioning mechanisms — database-backed version stores, event sourcing, artifact registries with signed releases. The principle (versioned, auditable, rollbackable) applies uniformly. The implementation varies by artifact type.
 
 This applies at every level:
+
 - **Ring 0:** Agent prompts, schema definitions, domain configs
 - **Ring 1:** Verification rules, quality thresholds, convergence criteria
 - **Ring 2:** Policy rules, gate requirements, escalation paths
@@ -1399,20 +1452,24 @@ This applies at every level:
 When a GATE signal pauses for human authorization, the quality of the human decision depends on what the human sees and how the interaction is structured. Rubber-stamped approvals are governance theater — worse than no gate at all, because they create a false sense of oversight.
 
 **Evidence presentation:**
+
 - The gate must present the **minimum viable context** for an informed decision — not a data dump. What is being approved? What are the consequences? What is the risk classification? What does the agent recommend, and why?
 - Evidence must include: the proposed action, the identity context (which agent, which model, which delegation chain), the policy that triggered the gate, any Ring 1 findings, and the risk classification.
 - **Counterfactual framing:** Where possible, present what happens if the gate is approved AND what happens if it is rejected. Both paths should be visible.
 
 **Rubber-stamping detection:**
+
 - Security Intelligence monitors gate approval patterns. Approval cadence (time between gate presentation and approval) that is consistently below a threshold indicates rubber-stamping.
 - Sequential approvals without rejection or modification over extended periods are flagged for review.
 - Cognitive load management: if a human reviewer is presented with more than N gates per hour, the system alerts that review quality is likely degrading. The threshold N is configurable and should be informed by the research showing ~50% oversight accuracy under load.
 
 **Timeout behavior:**
+
 - Gates have configurable timeout periods. If a gate is not resolved within the timeout, the system takes a defined default action — which may be HALT (fail closed) or ESCALATE (route to a different reviewer).
 - Fail-closed is the default for high-risk gates. Fail-open is never the default — it must be explicitly configured and documented as a governance decision.
 
 **Cognitive load management:**
+
 - Gate complexity should be proportional to decision stakes. Low-stakes gates present minimal evidence and accept simple approve/reject. High-stakes gates present comprehensive evidence and may require structured justification for the decision.
 - Batch approval for homogeneous low-risk gates (e.g., "approve all 15 format-change outputs") is permitted when the gate policy explicitly allows it. Batch approval is never available for gates involving irreversible actions or high-risk classifications.
 
@@ -1516,6 +1573,7 @@ Every ring adds cost. The rings should be independently activatable so you only 
 **The economic question is not "how much does governance cost?"** It is **"what is the cost of ungoverned failure?"** For regulated contexts, the comparison is: audit failure, regulatory penalty, reputational damage, legal liability. For any context, the comparison is: the cost of fixing a bad output that wasn't caught vs. the cost of catching it.
 
 **Proportional activation:**
+
 - **Low-stakes task** → Ring 0 + minimal Ring 1 (basic validation). Cost: near-zero overhead.
 - **Medium-stakes task** → Ring 0 + Ring 1 (full validation) + adaptive Ring 2 gates. Cost: 1.5-3x Ring 0 alone.
 - **High-stakes decision** → All four rings, mandatory gates, full adversarial critique. Cost: 3-5x Ring 0 alone, but the alternative is unacceptable risk.
@@ -1529,6 +1587,7 @@ Every ring adds cost. The rings should be independently activatable so you only 
 The multipliers above (1.5-3x, 3-5x) are not safe general planning assumptions. They describe LLM compute costs only.
 
 **Empirical reference points from the literature:**
+
 - **Policy evaluation overhead:** Microsoft AutoGen Governance Toolkit achieves 0.43s total overhead across 7,000+ decisions over 11 days (~0.06ms per decision) — demonstrating that runtime governance overhead is negligible at per-decision scale.
 - **Gateway routing latency:** Bifrost AI gateway achieves 11μs per request at 5,000 RPS — demonstrating that wire-speed routing overhead is feasible for governance middleware layers.
 - **Explainability overhead:** SHAP/LIME-based explanation generation adds approximately 2x compute relative to the base inference — a real cost when transparency is required at every gate.

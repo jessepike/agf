@@ -179,18 +179,22 @@ The Mode Selection Matrix (in the Platform Profile) provides a 10-row decision t
 The primitives compose into progressively more governed architectures:
 
 **Minimum Viable Control** — The floor for any consequential agent system:
+
 - Bounded Agency (#7) + Identity (#14) + Provenance (#6) + Observability (#10) + Environment Governance (#19, minimal)
 - What it gives you: agents that can't exceed their scope, actions that are attributable, an audit trail, and scoped operating environments
 
 **Validation Pipeline** (Ring 0 + Ring 1):
+
 - Minimum Viable Control + Separation of Producer/Verifier (#1) + Validation Loops (#2) + Structured Output (#5)
 - What it gives you: verified outputs before release
 
 **Governed Decision Flow** (Ring 0 + Ring 1 + Ring 2):
+
 - Validation Pipeline + Governance Gates (#8) + Policy as Code (#9) + Transaction Control (#16)
 - What it gives you: policy-evaluated, human-gateable decisions with side-effect management
 
 **Full Governed Agentic System** (All rings, all primitives, zero trust):
+
 - Every ring active, every primitive engaged, zero trust at every boundary, environment optimization loop improving the substrate continuously
 - What it gives you: the complete governance architecture for high-stakes, regulated, enterprise-grade agentic systems
 

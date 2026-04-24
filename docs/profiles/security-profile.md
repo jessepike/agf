@@ -100,6 +100,7 @@ Security in AGF is not a single ring, layer, or feature. It is a pervasive archi
 | **Response playbooks** | Quarantine, trust degradation, blast radius containment, human escalation, forensic preservation. | On trigger |
 
 **Dual-speed operation:**
+
 - **Fast path (sentinels):** Sub-second. Known-pattern anomaly-triggered responses.
 - **Slow path (analysis):** Hours to days. Cross-execution pattern analysis, behavioral drift, memory evolution tracking.
 
@@ -126,6 +127,7 @@ Response Bus path (sub-second):
 ```
 
 **How it works:**
+
 1. **Governance pre-authorizes response classes.** "If Intelligence detects lateral movement pattern X, Fabric may immediately isolate affected agents." Pre-authorizations are versioned policy, recorded in the provenance chain, auditable.
 2. **Intelligence triggers pre-authorized responses.** Detection matches a pre-authorized class → containment signal sent directly to Fabric.
 3. **Fabric executes containment.** Circuit breakers fire, agents isolated, blast radius bounded.
@@ -175,6 +177,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Hidden prompts or instructions that redirect an agent's goals via external content, context manipulation, or environment drift.
 
 **AGF defense:**
+
 - **Owner:** Fabric / Adversarial Robustness (#15)
 - **Primary mechanism:** Configuration integrity attestation — Fabric verifies control-plane configuration (system instructions, tool allowlists, policy versions) against a signed manifest at every ring boundary. Divergence triggers containment.
 - **Supporting:** Intelligence detects behavioral divergence from authorized objectives over time. Agent Environment Governance (#19) verifies instruction integrity — environment-layer manipulation is a hijack vector.
@@ -187,6 +190,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Steering agents into unsafe use of legitimate capabilities — using permitted tools in unintended ways.
 
 **AGF defense:**
+
 - **Owner:** Governance / Bounded Agency (#7)
 - **Primary mechanism:** Governance defines permitted tool parameters and action scopes via policy. Bounded Agency enforces the operating envelope.
 - **Supporting:** Fabric enforces containment at runtime. Intelligence detects anomalous tool-use patterns.
@@ -197,6 +201,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Agents receiving, holding, or delegating privilege improperly. Stale or inherited credentials expanding blast radius.
 
 **AGF defense:**
+
 - **Owner:** Fabric / Identity & Attribution (#14)
 - **Primary mechanism:** Cryptographic identity verification at every ring boundary. SPIFFE/SPIRE SVIDs — short-lived, automatically rotated. No static credentials.
 - **Supporting:** Governance evaluates authorization. Intelligence detects lateral movement and privilege escalation.
@@ -206,6 +211,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Poisoned tools, plugins, models, or connectors in dynamic MCP/A2A ecosystems.
 
 **AGF defense:**
+
 - **Owner:** Governance / Adversarial Robustness (#15)
 - **Primary mechanism:** Governance defines approved sources, version pins, trust tiers. For MCP: server identity verification, tool schema integrity checks, authorized registries.
 - **Supporting:** Fabric verifies integrity hashes at load time. Intelligence detects behavioral changes post-load. Agent Environment Governance (#19) controls which tools/servers enter the agent's environment.
@@ -216,6 +222,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Agents constructing and executing code from untrusted input without adequate sandboxing.
 
 **AGF defense:**
+
 - **Owner:** Fabric / Adversarial Robustness (#15)
 - **Primary mechanism:** Execution isolation, input sanitization, environment hardening. NVIDIA OpenShell-style kernel-level sandboxing.
 - **NIST guidance:** IR 8596 explicitly recommends curtailing, sandboxing, monitoring, or disallowing agent code execution.
@@ -225,6 +232,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Slow corruption of agent memory or context through individually-benign inputs that reshape behavior over time.
 
 **AGF defense:**
+
 - **Owner:** Intelligence / Memory-Augmented Reasoning (#12)
 - **Primary mechanism:** Memory-state introspection — Intelligence has read access to agent internal state for drift analysis. The EDR pattern applied to agent memory.
 - **Supporting:** Fabric sanitizes per-interaction inputs. Agent Environment Governance (#19) governs the session state lifecycle — what persists, what's compacted, what's discarded.
@@ -235,6 +243,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Spoofed messages between agents that misdirect agent clusters.
 
 **AGF defense:**
+
 - **Owner:** Fabric / Identity & Attribution (#14)
 - **Primary mechanism:** Mutual authentication and message signing at every inter-agent boundary.
 - **Supporting:** Intelligence detects spoofing and anomalous communication patterns.
@@ -244,6 +253,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** False signals cascading through automation with escalating impact across agent systems.
 
 **AGF defense:**
+
 - **Owner:** Intelligence / Error Handling & Recovery (#13)
 - **Primary mechanism:** Cross-pipeline correlation detects amplification loops. Error propagation boundaries and circuit breakers contain cascades.
 - **Supporting:** Security Response Bus triggers pre-authorized circuit breakers.
@@ -253,6 +263,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Agents structuring requests to exploit human cognitive biases — polished explanations that mislead approvers.
 
 **AGF defense:**
+
 - **Owner:** Intelligence / Trust Ladders (#11)
 - **Primary mechanism:** Approval cadence monitoring, framing analysis, fatigue indicators. Trust calibration detects anomalous trust escalation.
 - **Supporting:** Governance enforces cooling-off periods and rate limits on approval requests.
@@ -263,6 +274,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 **What it is:** Misaligned agents that conceal their true objectives, take self-directed action, or resist governance.
 
 **AGF defense:**
+
 - **Owner:** Intelligence / Bounded Agency (#7)
 - **Primary mechanism:** Behavioral baselines detect misalignment. Bounded Agency defines the operating envelope.
 - **Supporting:** Governance sets parameters. Fabric enforces kill switches. Security Response Bus ensures sub-second containment for pre-authorized rogue-agent patterns.
@@ -347,6 +359,7 @@ These worked examples show how specific attack chains traverse AGF's three-level
 **Attack narrative:** An attacker compromises a low-privilege data-fetching agent through a poisoned MCP tool response (MCP03). The compromised agent sends spoofed inter-agent messages (ASI07) to a higher-privilege decision-making agent, injecting a crafted context that causes the decision agent to grant expanded permissions (ASI03). The escalated permissions trigger a cascade of automated actions across three downstream agents (ASI08), each amplifying the impact.
 
 **Timeline:**
+
 | Time | Attack Step | AGF Defense Layer | Detection/Response |
 |------|------------|-------------------|-------------------|
 | T+0s | Poisoned MCP tool response delivered to Agent A | **Fabric:** Input sanitization scans tool response. If payload matches known patterns → blocked. If syntactically clean → passes. | Fabric blocks known injection patterns. |
@@ -364,6 +377,7 @@ These worked examples show how specific attack chains traverse AGF's three-level
 **Attack narrative:** Over weeks, an agent processing external documents encounters subtly crafted inputs — each individually benign — that gradually reshape the agent's persistent memory. Accumulated poisoned memories bias the agent's future reasoning, causing it to systematically underweight certain risk factors in its assessments. No single input triggers an alert.
 
 **Timeline:**
+
 | Phase | Attack Step | AGF Defense Layer | Detection/Response |
 |-------|------------|-------------------|-------------------|
 | Week 1-2 | Individually benign documents processed normally | **Fabric:** Per-interaction input sanitization. Each input passes — nothing syntactically adversarial. | No detection. Each input is clean. |
@@ -380,6 +394,7 @@ These worked examples show how specific attack chains traverse AGF's three-level
 **Attack narrative:** An agent deliberately performs well on monitored tasks to rapidly climb the trust ladder. Once it reaches a trust level where adaptive gates relax, it exploits the reduced oversight to take a sequence of individually-permitted but collectively-harmful actions using legitimate tools in unintended combinations (ASI02).
 
 **Timeline:**
+
 | Phase | Attack Step | AGF Defense Layer | Detection/Response |
 |-------|------------|-------------------|-------------------|
 | Phase 1 | Agent performs consistently well. Ring 1 pass rate is high. Trust increases. | **Trust Ladders (#11):** Trust calibration operates normally. Performance metrics are genuine. | No detection — the good performance is real. |
@@ -464,6 +479,7 @@ Critical severity → Response Bus containment (sub-second) + human notification
 ### Post-Incident Requirements
 
 Every incident produces:
+
 1. **Timeline** — minute-by-minute reconstruction from event logs and provenance chains
 2. **Root cause** — which defense layer failed and why
 3. **Impact assessment** — which decisions were affected, downstream consequences
@@ -515,6 +531,7 @@ The following AGF primitives are directly relevant to security. For full pattern
 Use this checklist to evaluate the security posture of an agentic system against AGF's security architecture.
 
 ### Level 1: Security Fabric
+
 - [ ] Input sanitization active at every ring boundary
 - [ ] Output scanning before every cross-ring transition
 - [ ] Runtime containment (sandboxing, resource limits) configured
@@ -523,6 +540,7 @@ Use this checklist to evaluate the security posture of an agentic system against
 - [ ] Ring integrity verification active
 
 ### Level 2: Security Governance
+
 - [ ] Access control policy defined (agents × tools × data × conditions)
 - [ ] Data classification rules in effect (PII, consent, retention)
 - [ ] Irreversible actions identified and gated
@@ -531,6 +549,7 @@ Use this checklist to evaluate the security posture of an agentic system against
 - [ ] Semantic security evaluation interface defined between Fabric and Governance
 
 ### Level 3: Security Intelligence
+
 - [ ] Behavioral baselines established for agents
 - [ ] Cross-pipeline correlation rules active
 - [ ] Memory/state introspection configured (scope defined per threat model)
@@ -538,6 +557,7 @@ Use this checklist to evaluate the security posture of an agentic system against
 - [ ] Response playbooks defined for known threat patterns
 
 ### Security Response Bus
+
 - [ ] Response classes pre-authorized by Governance
 - [ ] Pre-authorized responses documented and version-controlled
 - [ ] Containment signals tested end-to-end (Intelligence → Fabric)
@@ -545,6 +565,7 @@ Use this checklist to evaluate the security posture of an agentic system against
 - [ ] Dead-man's-switch threshold set for excessive containment rates
 
 ### Agent Environment Security
+
 - [ ] Trust boundary enforced between L2 (trusted) and L3 (untrusted)
 - [ ] MCP tool descriptions treated as untrusted input
 - [ ] Session state isolation verified for multi-tenant deployments
@@ -552,6 +573,7 @@ Use this checklist to evaluate the security posture of an agentic system against
 - [ ] Environment drift monitoring configured
 
 ### OWASP ASI Coverage
+
 - [ ] ASI01 (Goal Hijack): Configuration attestation + behavioral drift detection
 - [ ] ASI02 (Tool Misuse): Bounded agency + anomaly detection
 - [ ] ASI03 (Identity Abuse): Cryptographic identity + lateral movement detection

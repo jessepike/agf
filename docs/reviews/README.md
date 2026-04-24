@@ -81,6 +81,7 @@ Applied to every finding. Mirrors AGF's own epistemic discipline from `docs/shar
 **Why two axes** (severity × confidence): prevents acting on low-confidence opinion as if it were defect; prevents deferring defects with high confidence just because severity is low.
 
 Priority rule of thumb:
+
 - High severity + Established confidence → fix soon
 - High severity + Open confidence → investigate first
 - Low severity + Established confidence → easy win, batch with other work
@@ -111,7 +112,7 @@ Composite: simple average for now (weights calibrate as we collect more reviews)
 
 ## Lifecycle of a finding
 
-```
+```text
 1. INGEST     Review arrives → stored verbatim in docs/reviews/YYYY-MM-DD-*.md
 2. EXTRACT    Each discrete finding → row in docs/findings-ledger.md with F-ID
 3. TRIAGE     Per finding: accept / defer / reject, with rationale
@@ -131,7 +132,7 @@ Composite: simple average for now (weights calibrate as we collect more reviews)
 
 When a commit addresses findings, reference F-IDs in the commit body:
 
-```
+```text
 fix(site): add inline citations to Trust Ladders empirical claims
 
 Closes G5-F03.
@@ -270,7 +271,7 @@ Possible outcomes:
 
 This protocol extends the existing finding lifecycle without adding new states:
 
-```
+```text
 OPEN → (triage) → ACCEPTED | DEFERRED | REJECTED
                 → RESOLVED (work shipped) → VALIDATED (reviewer confirmed, including meta closeout pass)
                                          → REGRESSED (previously validated, now failing)

@@ -66,6 +66,7 @@ Observability is not a feature — it's a prerequisite. Without structured event
 Infrastructure observability (latency, errors, throughput) tells you if the system is running. Agent observability tells you if the system is **behaving within governance boundaries**. These are different questions requiring different event schemas, correlation rules, and response patterns.
 
 What matters for agent governance:
+
 - Did the agent stay within its declared scope? (Bounded Agency #7)
 - Did the agent's output pass verification? (Ring 1)
 - Did the governance gate function when it should have? (Governance Gates #8)
@@ -109,6 +110,7 @@ Agentic Observability serves three distinct roles in the Agentic Primitives arch
 The learning layer. Consumes execution data from all rings and feeds Ring 3's Self-Improving Cycles (#3), Trust Ladders (#11), and Memory-Augmented Reasoning (#12).
 
 **What it monitors:**
+
 - Verification pass/fail rates by agent, task type, document type
 - Human override patterns (which fields, which directions, which agents)
 - Convergence speed (how many validation loop iterations to pass)
@@ -116,6 +118,7 @@ The learning layer. Consumes execution data from all rings and feeds Ring 3's Se
 - Cost and latency per ring, per agent, per task type
 
 **What it produces:**
+
 - Trust ladder adjustments (empirical, not configured)
 - Prompt improvement recommendations (from override patterns)
 - Threshold recalibration signals (from false positive analysis)
@@ -126,6 +129,7 @@ The learning layer. Consumes execution data from all rings and feeds Ring 3's Se
 The security monitoring layer. Implements Primitive #15 (Adversarial Robustness) at the detection and response level. This is where the zero trust posture is monitored and enforced at scale.
 
 **What it monitors:**
+
 - Ring bypass attempts (agent outputs appearing without Ring 1 verification events)
 - Trust manipulation trajectories (agent performing well on low-stakes to build trust for high-stakes exploitation)
 - Evidence integrity anomalies (document modifications, source authentication failures)
@@ -135,6 +139,7 @@ The security monitoring layer. Implements Primitive #15 (Adversarial Robustness)
 - Cross-pipeline poisoning (compromised Pipeline A output feeding Pipeline B)
 
 **What it produces:**
+
 - Immediate trust degradation on anomaly detection (sentinel fast path)
 - Quarantine of affected outputs pending investigation
 - Forensic investigation packages (event timeline, provenance walkback, identity trace)
@@ -146,6 +151,7 @@ The security monitoring layer. Implements Primitive #15 (Adversarial Robustness)
 The compliance and audit layer. Provides the evidence that organizations need to demonstrate governed operation to regulators, auditors, and boards.
 
 **What it monitors:**
+
 - Policy compliance rates across all Ring 2 evaluations
 - Mandatory gate activation (was every required gate actually triggered?)
 - Transaction lifecycle completeness (did every side effect go through pre-commit/commit/confirm?)
@@ -153,6 +159,7 @@ The compliance and audit layer. Provides the evidence that organizations need to
 - Provenance chain completeness (any gaps in the evidence → decision trace?)
 
 **What it produces:**
+
 - Audit packages: complete governance evidence for a scope (time range, agent, case type, policy domain)
 - Regulatory evidence: documentation of governed operation for EU AI Act, NIST AI RMF, ISO 42001
 - Compliance dashboards: policy violation rates, gate compliance, provenance coverage
@@ -258,11 +265,13 @@ Event Envelope:
 Events are classified into categories that map to the three detection domains:
 
 **Execution events (Ring 0):**
+
 - `agent_started`, `agent_completed`, `agent_failed`
 - `tool_called`, `tool_returned`, `tool_failed`
 - `output_produced`, `output_validated_schema`
 
 **Verification events (Ring 1):**
+
 - `verification_started`, `verification_completed`
 - `validation_loop_iteration`, `validation_loop_converged`, `validation_loop_exhausted`
 - `adversarial_critique_started`, `adversarial_critique_completed`
@@ -270,6 +279,7 @@ Events are classified into categories that map to the three detection domains:
 - `revise_quality_issued`
 
 **Governance events (Ring 2):**
+
 - `policy_evaluated`, `policy_passed`, `policy_violated`
 - `gate_triggered` (with gate_type: mandatory | adaptive)
 - `gate_resolved` (with resolution: approve | reject | modify | defer | escalate)
@@ -279,12 +289,14 @@ Events are classified into categories that map to the three detection domains:
 - `approval_granted`, `approval_expired`, `approval_invalidated`
 
 **Learning events (Ring 3):**
+
 - `trust_level_changed` (with direction: increased | decreased | reset)
 - `sentinel_triggered` (fast path anomaly detection)
 - `improvement_recommended`, `improvement_applied`, `improvement_rolled_back`
 - `memory_written`, `memory_queried`, `memory_pruned`
 
 **Security events (cross-cutting):**
+
 - `identity_verified`, `identity_failed`
 - `boundary_violation_detected` (agent exceeded declared scope)
 - `ring_bypass_detected` (output appeared without expected ring events)
@@ -383,6 +395,7 @@ Playbooks define the automated or semi-automated response when correlation rules
 ### Playbook Examples
 
 **Trust Manipulation Detection Playbook:**
+
 ```
 Trigger: trust_manipulation_suspected
 Steps:
@@ -395,6 +408,7 @@ Steps:
 ```
 
 **Mandatory Gate Bypass Playbook:**
+
 ```
 Trigger: mandatory_gate_bypass detected
 Steps:
@@ -425,6 +439,7 @@ Agentic Observability is where the zero trust posture is **monitored and enforce
 ### Security posture scoring
 
 The observability layer maintains a continuous security posture score across:
+
 - **Ring integrity:** Are all rings functioning with proper verification?
 - **Identity completeness:** What percentage of events carry full identity context?
 - **Gate compliance:** Are all mandatory gates being triggered and resolved?
@@ -438,18 +453,21 @@ The observability layer maintains a continuous security posture score across:
 Agentic Observability matures through five levels, mirroring the maturity path of traditional SIEM:
 
 ### Level 1: Event Capture
+
 - Structured event emission at ring boundaries
 - Event persistence (append-only, immutable)
 - Basic event browsing and search
 - **Value:** "We can see what happened"
 
 ### Level 2: Dashboards & Alerting
+
 - Real-time dashboards (quality, governance, cost)
 - Threshold-based alerts (quality below X, cost above Y)
 - Trust level visualization
 - **Value:** "We know when something is wrong"
 
 ### Level 3: Correlation & Detection
+
 - Cross-event pattern detection (quality rules, security rules, governance rules)
 - Temporal correlation (trends over time)
 - Agent-level behavioral baselines
@@ -457,6 +475,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Value:** "We can detect patterns that individual events don't reveal"
 
 ### Level 4: Automated Response
+
 - Playbook-driven response (trust degradation, quarantine, containment, escalation)
 - Automated trust ladder calibration
 - Sentinel fast path for real-time anomaly response
@@ -464,6 +483,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Value:** "The system responds to detected patterns without waiting for humans"
 
 ### Level 5: Predictive Governance
+
 - Predictive quality degradation (before it happens, based on leading indicators)
 - Proactive trust adjustment (detect environments that historically produce failures)
 - Policy impact simulation ("if we change this rule, what happens to the pipeline?")
@@ -491,28 +511,34 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 **Current state of play (updated March 2026):**
 
 *Platform-native agent governance (ecosystem-locked):*
+
 - **Microsoft Agent 365** (announced March 9, 2026, GA May 1, 2026) — "the control plane for agents." Three pillars: Observability, Security, Governance. Agent Registry, Agent ID (Entra identity), integration with Defender/Purview/Sentinel. Tens of millions of agents in registry within two months. $15/user/month. The most direct competitive threat — but Microsoft-ecosystem-locked.
 - **AWS Bedrock AgentCore** — AgentCore Policy GA March 3, 2026. Fine-grained, centralized controls using Cedar policy language. AgentCore Evaluations (preview) for continuous quality monitoring. Framework-agnostic (CrewAI, LangGraph, LlamaIndex). Most comprehensive cloud-native agent platform. AWS-ecosystem-locked.
 - **ServiceNow AI Control Tower** — centralized command center for AI agents. AI Gateway for governed connectivity. Enterprise-grade but ServiceNow-ecosystem-scoped.
 - **Salesforce Agentforce** — Einstein Trust Layer, shared responsibility model. Salesforce-ecosystem-scoped.
 
 *Purpose-built agent governance (cross-platform):*
+
 - **Zenity** — 2025 Gartner Cool Vendor in Agentic AI TRiSM. "Unified observability, governance, and threat protection for any agent on any platform." Platform-agnostic (Microsoft, Salesforce, AWS, GitHub). Fortune 500 customers. Security-focused (CISO buyer), limited deep LLM quality observability.
 
 *LLM observability (quality-focused, governance-light):*
+
 - LangSmith, Arize, Helicone, Fiddler, Galileo — model performance (latency, tokens, hallucination rates). Not governance or security.
 - Datadog, Dynatrace, LogicMonitor — expanding into "agentic observability" as APM extension. Strong on operational metrics, weak on governance semantics.
 
 *Traditional SIEM (security-focused, agent-unaware):*
+
 - Splunk, Chronicle, Elastic SIEM, Sentinel — no agentic event semantics. Some are adding AI-for-SIEM (agents inside the SIEM), not SIEM-for-agents.
 
 *Standards:*
+
 - OpenTelemetry GenAI semantic conventions (Development maturity, v1.40.0) — agent spans, tool calls, MCP conventions. No governance, security, or ring-level semantics.
 - Gartner projects AI governance platform spending at **$492M in 2026, exceeding $1B by 2030**. Inaugural Magic Quadrant for Decision Intelligence Platforms published January 2026.
 
 **The gap (narrowing but still real):** No single product genuinely covers all three domains (quality + security + governance) for arbitrary, **platform-agnostic** agent systems using a unified event correlation architecture. Cloud platforms are strong but ecosystem-locked. Zenity is cross-platform but security-focused. LLM observability tools lack governance. Traditional SIEM lacks agentic semantics. The differentiation axes: **true platform-agnosticism**, **deep LLM quality + governance + security in one architecture**, **cross-system event correlation**, and **open-standards-native (OTel, not proprietary telemetry)**.
 
 **Who needs this:**
+
 - **Enterprises deploying agentic workflows** — customer service, coding, document processing, decision support. They need to prove governed operation.
 - **Regulated industries** — insurance, financial services, healthcare. AI governance audit trails are legally required (EU AI Act, state AI laws, NAIC bulletin).
 - **AI platform teams** — responsible for the reliability, security, and governance of agent infrastructure across the organization.

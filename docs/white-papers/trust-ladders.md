@@ -67,6 +67,7 @@ Higher trust reduces the intensity of adaptive controls:
 This is the critical invariant. Trust Ladders only affect **adaptive** controls — verification intensity, spot-check frequency, routine review gates.
 
 **Mandatory controls are trust-independent:**
+
 - Irreversible actions always require authorization, regardless of trust level
 - Regulatory gates always fire
 - Identity verification runs at every boundary
@@ -161,6 +162,7 @@ Trust calibration operates at two speeds:
 Trust manipulation is a recognized attack vector (OWASP ASI09 — Human-Agent Trust Exploitation). An adversarial agent could deliberately perform well on monitored tasks to rapidly climb the trust ladder, then exploit the reduced oversight.
 
 AGF's Security Intelligence layer monitors for this pattern:
+
 - Anomalous trust trajectory (climbing too fast)
 - Novel behavior following trust promotion
 - Approval patterns that deviate from baseline post-promotion

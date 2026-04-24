@@ -77,6 +77,7 @@ The unified event stream feeds three detection domains:
 ### Quality Detection (Ring 3 Intelligence)
 
 **Monitors:**
+
 - Verification pass/fail rates by agent, task type, document type
 - Human override patterns (which fields, which directions, which agents)
 - Convergence speed (validation loop iterations to pass)
@@ -84,6 +85,7 @@ The unified event stream feeds three detection domains:
 - Cost and latency per ring, per agent, per task type
 
 **Produces:**
+
 - Trust ladder adjustments (empirical, data-driven)
 - Prompt improvement recommendations (from override patterns)
 - Threshold recalibration signals (from false positive analysis)
@@ -92,6 +94,7 @@ The unified event stream feeds three detection domains:
 ### Security Detection (Cross-cutting)
 
 **Monitors:**
+
 - Ring bypass attempts (outputs without expected verification events)
 - Trust manipulation trajectories (building trust on low-stakes for high-stakes exploitation)
 - Evidence integrity anomalies (source authentication failures, provenance tampering)
@@ -101,6 +104,7 @@ The unified event stream feeds three detection domains:
 - Cross-pipeline poisoning (compromised Pipeline A output feeding Pipeline B)
 
 **Produces:**
+
 - Immediate trust degradation on anomaly detection (sentinel fast path)
 - Quarantine of affected outputs pending investigation
 - Forensic investigation packages (event timeline, provenance walkback, identity trace)
@@ -110,6 +114,7 @@ The unified event stream feeds three detection domains:
 ### Governance Detection (Compliance)
 
 **Monitors:**
+
 - Policy compliance rates across all Ring 2 evaluations
 - Mandatory gate activation (was every required gate triggered?)
 - Transaction lifecycle completeness (pre-commit → commit → confirm)
@@ -117,6 +122,7 @@ The unified event stream feeds three detection domains:
 - Provenance chain completeness (gaps in the evidence → decision trace)
 
 **Produces:**
+
 - Audit packages: complete governance evidence for a scope (time range, agent, case type)
 - Regulatory evidence: documentation for EU AI Act, NIST AI RMF, ISO 42001
 - Compliance dashboards: policy violation rates, gate compliance, provenance coverage
@@ -172,11 +178,13 @@ Event Envelope:
 Events classified by ring, mapping to the three detection domains:
 
 **Execution events (Ring 0):**
+
 - `agent_started`, `agent_completed`, `agent_failed`
 - `tool_called`, `tool_returned`, `tool_failed`
 - `output_produced`, `output_validated_schema`
 
 **Verification events (Ring 1):**
+
 - `verification_started`, `verification_completed`
 - `validation_loop_iteration`, `validation_loop_converged`, `validation_loop_exhausted`
 - `adversarial_critique_started`, `adversarial_critique_completed`
@@ -184,6 +192,7 @@ Events classified by ring, mapping to the three detection domains:
 - `revise_quality_issued`
 
 **Governance events (Ring 2):**
+
 - `policy_evaluated`, `policy_passed`, `policy_violated`
 - `gate_triggered` (gate_type: mandatory | adaptive)
 - `gate_resolved` (resolution: approve | reject | modify | defer | escalate)
@@ -193,18 +202,21 @@ Events classified by ring, mapping to the three detection domains:
 - `approval_granted`, `approval_expired`, `approval_invalidated`
 
 **Learning events (Ring 3):**
+
 - `trust_level_changed` (direction: increased | decreased | reset)
 - `sentinel_triggered` (fast path anomaly detection)
 - `improvement_recommended`, `improvement_applied`, `improvement_rolled_back`
 - `memory_written`, `memory_queried`, `memory_pruned`
 
 **Environment events (#19):**
+
 - `environment_composed` (layers assembled, context budget allocated)
 - `environment_optimization_proposed`, `environment_optimization_applied`, `environment_optimization_rejected`
 - `tool_provisioned`, `tool_revoked` (capability set changes)
 - `instruction_version_changed` (L2 instruction update deployed)
 
 **Security events (cross-cutting):**
+
 - `identity_verified`, `identity_failed`
 - `boundary_violation_detected` (agent exceeded declared scope)
 - `ring_bypass_detected` (output without expected ring events)
@@ -350,6 +362,7 @@ The observability layer maintains a continuous security posture score across:
 Agentic Observability matures through five levels, mirroring the maturity path of traditional SIEM:
 
 ### Level 1: Event Capture
+
 - Structured event emission at ring boundaries
 - Event persistence (append-only, immutable)
 - Basic event browsing and search
@@ -357,6 +370,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Effort:** Low — instrument ring boundaries with structured event emission
 
 ### Level 2: Dashboards & Alerting
+
 - Real-time dashboards (quality, governance, cost)
 - Threshold-based alerts (quality below X, cost above Y)
 - Trust level visualization
@@ -364,6 +378,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Effort:** Medium — dashboard infrastructure, alert routing, on-call integration
 
 ### Level 3: Correlation & Detection
+
 - Cross-event pattern detection (quality, security, governance rules)
 - Temporal correlation (trends over time)
 - Agent-level behavioral baselines
@@ -372,6 +387,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Effort:** High — correlation engine, baseline computation, rule authoring
 
 ### Level 4: Automated Response
+
 - Playbook-driven response (trust degradation, quarantine, containment, escalation)
 - Automated trust ladder calibration
 - Sentinel fast path for real-time anomaly response
@@ -380,6 +396,7 @@ Agentic Observability matures through five levels, mirroring the maturity path o
 - **Effort:** High — playbook automation, Response Bus integration, regression gates
 
 ### Level 5: Predictive Governance
+
 - Predictive quality degradation (before it happens, based on leading indicators)
 - Proactive trust adjustment (environments that historically produce failures)
 - Policy impact simulation ("if we change this rule, what happens?")
@@ -439,6 +456,7 @@ The following AGF primitives are directly relevant to observability and operatio
 ## Operations Checklist
 
 ### Level 1: Event Capture (Start Here)
+
 - [ ] Structured events emitted at every ring boundary
 - [ ] Event envelope schema implemented with full identity context
 - [ ] Events persisted to append-only, immutable store
@@ -446,6 +464,7 @@ The following AGF primitives are directly relevant to observability and operatio
 - [ ] Event retention policy defined
 
 ### Level 2: Dashboards & Alerting
+
 - [ ] Quality dashboard: pass rates, convergence speed, cost, human override patterns
 - [ ] Governance dashboard: gate compliance, policy violation rates, provenance coverage
 - [ ] Security dashboard: identity completeness, boundary violations, trust trajectories
@@ -453,6 +472,7 @@ The following AGF primitives are directly relevant to observability and operatio
 - [ ] Trust level visualization operational
 
 ### Level 3: Correlation & Detection
+
 - [ ] Quality correlation rules active (regression, convergence, override clustering, hallucination, resource exhaustion)
 - [ ] Security correlation rules active (goal hijacking, tool misuse, lateral movement, trust manipulation, supply chain, cascading failure, data exfil)
 - [ ] Governance correlation rules active (gate bypass, stale approvals, provenance gaps, missing telemetry, data governance violations)
@@ -460,6 +480,7 @@ The following AGF primitives are directly relevant to observability and operatio
 - [ ] Anomaly detection against baselines configured
 
 ### Level 4: Automated Response
+
 - [ ] Playbooks defined for all critical and high-severity patterns
 - [ ] Response Bus operational (pre-authorized containment for critical threats)
 - [ ] Automated trust ladder calibration active
@@ -467,6 +488,7 @@ The following AGF primitives are directly relevant to observability and operatio
 - [ ] Forensic investigation package generation automated
 
 ### Integration
+
 - [ ] OTel integration: events emitted as OTel spans/events where applicable
 - [ ] SIEM integration: security alerts forwarded to organizational SIEM
 - [ ] GRC integration: audit packages exportable to GRC platforms

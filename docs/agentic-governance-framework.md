@@ -61,6 +61,7 @@ Two components, distinct roles:
 **The model** provides general-purpose reasoning capability — the ability to understand context, generate responses, and make inferences. Models are provided by model providers (Anthropic, OpenAI, Google, open-source communities) and are general-purpose by design.
 
 **The agent specification** provides direction, boundaries, and authority:
+
 - **Role and purpose:** What the agent is for
 - **Constraints and boundaries:** What it can and cannot do (Bounded Agency)
 - **Tools and data access:** What external capabilities and data sources it has
@@ -72,6 +73,7 @@ The model is the reasoning engine. The specification is the governance contract.
 An agent specification without a model is inert — a definition waiting to be instantiated. A model without a specification is undirected — capable but without purpose or boundaries. The agent is what emerges when both are combined and running, much like a container image becomes a process only when instantiated.
 
 This distinction matters for governance because different aspects of the system require different governance approaches:
+
 - **Model governance:** Model selection, version management, provider trust, training data provenance — these are properties of the model, not the specification
 - **Specification governance:** Boundaries, tool access, output contracts, identity, authority delegation — these are properties of the specification
 - **Runtime governance:** Whether the running agent actually operates within its specification — this is what the Agentic Primitives framework's rings address
@@ -81,6 +83,7 @@ This distinction matters for governance because different aspects of the system 
 An **agentic workflow** is a coordinated system of one or more agents, orchestration logic, tools, data sources, and human-in-the-loop checkpoints designed to accomplish a business objective. Agentic workflows are the unit of deployment and governance.
 
 Examples:
+
 - A document assessment pipeline (multiple agents processing a document through extraction, analysis, and reporting stages)
 - A coding agent workflow (an agent that reads requirements, writes code, runs tests, and submits for review)
 - A decision support workflow (agents gathering evidence, evaluating policy, recommending decisions for human approval)
@@ -89,6 +92,7 @@ Examples:
 ### What This Framework Governs
 
 This framework governs **agentic workflows** — the complete systems that take action. This includes:
+
 - The agents within the workflow (their specifications, boundaries, identities)
 - The orchestration logic (how agents coordinate, sequence, and resolve conflicts)
 - The runtime behavior (what happens during execution — verification, authorization, learning)
@@ -154,6 +158,7 @@ Five functions that any organization governing agentic systems must perform. The
 Before you can govern agents, you need to know they exist. This is the shadow AI problem — and it's the same problem shadow IT was a decade ago.
 
 **Activities:**
+
 - Agent inventory: what agentic systems are deployed, where, by whom
 - Capability mapping: what can each agent do, what tools does it have, what data can it access
 - Risk profiling: what's the blast radius if this agent goes wrong
@@ -169,6 +174,7 @@ Before you can govern agents, you need to know they exist. This is the shadow AI
 Not every agent needs four rings of governance. A personal productivity agent has different risk characteristics than an autonomous trading system. Assessment determines the governance intensity.
 
 **Activities:**
+
 - Risk classification: categorize agents by consequence level (see Risk Classification below)
 - Regulatory mapping: which regulations apply to this agent's domain (EU AI Act, state AI laws, industry regulations)
 - Threat modeling: what could go wrong, what's the adversarial profile, what's the blast radius
@@ -185,6 +191,7 @@ Not every agent needs four rings of governance. A personal productivity agent ha
 This is where the Agentic Primitives framework lives — the runtime governance engine.
 
 **Activities:**
+
 - Ring activation: configure which rings operate for this agent at what intensity
 - Policy deployment: load the applicable policy rules (Primitive #9)
 - Gate configuration: set mandatory and adaptive gates (Primitive #8)
@@ -193,6 +200,7 @@ This is where the Agentic Primitives framework lives — the runtime governance 
 - Transaction boundaries: define which actions are reversible vs. irreversible (Primitive #16)
 
 **The Rings (Layer 3) are the runtime implementation of this function:**
+
 - Ring 0: Execution within declared boundaries
 - Ring 1: Independent verification of output quality
 - Ring 2: Policy evaluation and authorization
@@ -207,6 +215,7 @@ This is where the Agentic Primitives framework lives — the runtime governance 
 This is where Agentic Observability (Layer 4) lives — the unified monitoring, detection, and response layer.
 
 **Activities:**
+
 - Event ingestion: capture structured events from all rings, all agents
 - Quality monitoring: track verification pass rates, convergence speed, human override patterns
 - Security monitoring: detect ring bypass, trust manipulation, evidence tampering, memory poisoning
@@ -224,6 +233,7 @@ This is where Agentic Observability (Layer 4) lives — the unified monitoring, 
 Governance is not a one-time implementation. It's a continuous cycle. Agents change. Regulations change. Threats change. The governance system must learn and adapt.
 
 **Activities:**
+
 - Policy review: are existing policies still appropriate? Which rules produce false positives? Which gaps have been exposed?
 - Trust evolution: are agents earning trust appropriately? Are trust ladders calibrated correctly?
 - Cross-case learning: what patterns across many agent executions inform better governance?
@@ -258,6 +268,7 @@ Four personas operate the framework. In small organizations, one person may wear
 **What they do:** Define agent specifications (role, constraints, tools, output contracts), build orchestration logic, integrate with data sources and external systems, test and validate workflow behavior.
 
 **What they need from the framework:**
+
 - Clear guardrails: what their agents must do (structured output, bounded agency, identity)
 - Testing tools: evaluation suites, adversarial test harnesses, simulation environments
 - Deployment gates: clear criteria for "this workflow is ready for production"
@@ -271,6 +282,7 @@ Four personas operate the framework. In small organizations, one person may wear
 **What they do:** Operate the agent infrastructure, observability, and governance runtime.
 
 **What they need from the framework:**
+
 - Observability infrastructure: event ingestion, correlation engine, dashboards
 - Incident response tools: playbooks, forensic investigation, containment
 - Trust management: trust ladder calibration, sentinel monitoring
@@ -283,6 +295,7 @@ Four personas operate the framework. In small organizations, one person may wear
 **What they do:** Set policy, assess risk, produce audit evidence, ensure regulatory compliance.
 
 **What they need from the framework:**
+
 - Policy management: author, version, deploy, and review governance rules
 - Risk assessment tools: classify agents, model threats, select controls
 - Audit packages: on-demand governance evidence for any scope
@@ -298,6 +311,7 @@ Four personas operate the framework. In small organizations, one person may wear
 **What they do:** Authorize agent deployment, define business requirements, review and approve material decisions, set risk appetite for their domain, own the outcomes.
 
 **What they need from the framework:**
+
 - Trust visibility: are the agents in my domain performing reliably?
 - Decision review: can I see what my agents decided and why?
 - Override capability: can I intervene when something looks wrong?
@@ -452,6 +466,7 @@ Organizations aren't greenfield. They have existing governance infrastructure. T
 ### What the Framework Owns vs. What It Integrates With
 
 **The framework owns:**
+
 - Agent-specific governance logic (rings, primitives, composability)
 - Agentic event semantics (the event envelope, ring signals, governance events)
 - Trust ladders and verification calibration
@@ -459,6 +474,7 @@ Organizations aren't greenfield. They have existing governance infrastructure. T
 - Agentic-specific correlation rules
 
 **The framework integrates with:**
+
 - Enterprise identity (IAM)
 - Enterprise security monitoring (SIEM)
 - Enterprise risk management (GRC)
@@ -544,6 +560,7 @@ The NIST AI RMF provides the foundational risk management structure. This framew
 | **MANAGE** | GOVERN + EVOLVE | AI RMF MANAGE addresses risks. AGF GOVERN implements runtime controls; EVOLVE iterates based on findings. |
 
 **Key NIST references:**
+
 - NIST AI 100-1: AI Risk Management Framework (core framework)
 - NIST AI 600-1: Generative AI Profile (GenAI-specific risks and mitigations)
 - NIST AI 100-2e2025: Taxonomy of Attacks and Mitigations for Adversarial ML

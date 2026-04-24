@@ -203,12 +203,14 @@ AGF specifies requirements for how gates present information to human reviewers:
 Policy as Code (#9) makes governance rules versioned, executable, and testable — not implicit tribal knowledge.
 
 **For compliance teams, this means:**
+
 - Every governance rule is a versioned artifact with an audit trail
 - Policy changes go through the same review process as code changes
 - Policy test harnesses verify rules behave as expected before deployment
 - Policy behavior is deterministic and reproducible for audit
 
 **Configuration vs. Policy distinction:**
+
 - **Configuration** (can be adjusted by the self-improving loop): quality thresholds, verification intensity, trust levels
 - **Policy** (requires human authorization to change): access control rules, mandatory gate definitions, compliance constraints, data classification rules
 
@@ -219,6 +221,7 @@ Policy as Code (#9) makes governance rules versioned, executable, and testable �
 Data Governance & Confidentiality (#17) addresses GDPR, EU AI Act Art. 10, and organizational data protection requirements.
 
 **For DPOs specifically:**
+
 - **Data classification at ingestion** — every data input is classified before processing
 - **PII detection and handling** — automated detection with configurable handling rules (redact, mask, exclude)
 - **Consent and purpose binding** — data used only for consented purposes, tracked through the provenance chain
@@ -288,6 +291,7 @@ START: What is the worst realistic consequence of an unconstrained error?
 ```
 
 **Override rules:**
+
 - Any system classified as high-risk under EU AI Act Art. 6 → **minimum Tier 3: HIGH**
 - Any system with primarily irreversible actions affecting customers/public → **Tier 4: CRITICAL** regardless of other dimensions
 - When classification dimensions point to different tiers, **use the highest tier indicated**
@@ -425,6 +429,7 @@ This crosswalk maps AGF primitives to established security and compliance contro
 ## Compliance Assessment Checklist
 
 ### EU AI Act Readiness
+
 - [ ] Risk classification completed (Art. 6) → ring activation level determined
 - [ ] Risk management system documented (Art. 9) → three-level security model deployed
 - [ ] Data governance controls in effect (Art. 10) → #17 classification, consent, lineage active
@@ -436,18 +441,21 @@ This crosswalk maps AGF primitives to established security and compliance contro
 - [ ] Transparency obligations met (Art. 50) → AI system identification in place
 
 ### NIST AI RMF Alignment
+
 - [ ] GOVERN → Ring 2 governance policy defined and operational
 - [ ] MAP → Risk classification and ring activation rules documented
 - [ ] MEASURE → Evaluation #18 pre-deployment + Ring 1 continuous verification + Observability #10
 - [ ] MANAGE → Trust Ladders #11 calibrated + Bounded Agency #7 enforced
 
 ### Governance Maturity Self-Assessment
+
 - [ ] Current maturity level identified (Level 1-5)
 - [ ] Gap analysis completed: current level vs. target level
 - [ ] Regulatory posture at current level documented (which requirements are met, which are not)
 - [ ] Advancement plan defined with milestones
 
 ### Audit Evidence Availability
+
 - [ ] Full provenance chain retrievable for any output (who, what, when, why, under what authority)
 - [ ] Gate decisions recorded with evidence packages
 - [ ] Policy rules versioned with change audit trail

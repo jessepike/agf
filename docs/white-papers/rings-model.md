@@ -37,7 +37,7 @@ These are not feature requests. They are structural requirements for any system 
 
 ### Four Rings, One Fabric, One Substrate
 
-```
+```text
 ┌───────────────────────────────────────────────────────────┐
 │  Ring 3 — Learning                                        │
 │  Self-improvement, memory, trust calibration              │
@@ -88,6 +88,7 @@ Policy evaluation and authorization. Ring 2 determines whether a verified output
 Ring 2 can pause execution indefinitely for human review. It is the decision authority. A human reviewer at a governance gate sees structured evidence — the output, the provenance chain, the policy evaluation — and decides: approve, reject, modify, defer, or escalate.
 
 Ring 2 enforces two classes of gates:
+
 - **Adaptive gates** relax as the system proves reliability through Trust Ladders. Routine quality reviews can decrease as trust grows.
 - **Mandatory gates** never relax. Irreversible actions, regulatory requirements, and legally mandated reviews always fire, regardless of trust level.
 

@@ -56,6 +56,7 @@ AGF defines 19 named patterns for governed agentic systems. These are not new in
 ### Runtime Primitives (#1–#17)
 
 #### #1 — Separation of Producer and Verifier
+
 **Ring:** 0 + 1 | **Category:** Structural guarantee
 
 The agent that creates output must not be the sole agent that validates it. This is separation of duties applied to AI output.
@@ -65,6 +66,7 @@ The agent that creates output must not be the sole agent that validates it. This
 - **Distinction from #4:** This is structural (different actors for different roles). #4 is intentional (the challenger's mandate is to find flaws, not confirm quality).
 
 #### #2 — Validation Loops with Convergence Gates
+
 **Ring:** 1 | **Category:** Quality assurance
 
 Multi-pass review cycles where output is iteratively improved until it meets a quality threshold — or escalates when iteration limits are reached.
@@ -73,6 +75,7 @@ Multi-pass review cycles where output is iteratively improved until it meets a q
 - **Economic constraint:** Each iteration costs time and tokens. Budget-aware iteration is non-negotiable.
 
 #### #3 — Self-Improving Cycles
+
 **Ring:** 3 | **Category:** Learning
 
 The system learns from its own execution history to get better over time — without retraining.
@@ -82,6 +85,7 @@ The system learns from its own execution history to get better over time — wit
 - **Honest limitation:** This is the least durable primitive. As foundation models improve, the gap that runtime adaptation fills may narrow. Three independent reviews ranked #3 as the least durable. Include it while the capability-performance gap persists — but acknowledge the trajectory.
 
 #### #4 — Adversarial Critique
+
 **Ring:** 1 | **Category:** Quality assurance
 
 A dedicated challenger whose sole purpose is to find weaknesses. The framing matters: the challenger is asked "what's wrong with this?" — never "is this good?"
@@ -90,6 +94,7 @@ A dedicated challenger whose sole purpose is to find weaknesses. The framing mat
 - **Independence:** The challenger should not share context/state that would bias it toward agreement.
 
 #### #5 — Structured Output Persistence
+
 **Ring:** Fabric | **Category:** Data contract
 
 Every ring produces and consumes structured artifacts — not raw text. This is the data contract that makes rings composable.
@@ -98,6 +103,7 @@ Every ring produces and consumes structured artifacts — not raw text. This is 
 - **Why it matters:** Without structured output, rings can't compose. Ring 1 can't verify what it can't parse. Ring 2 can't evaluate policy against unstructured content.
 
 #### #6 — Provenance Chains
+
 **Ring:** Fabric | **Category:** Auditability
 
 Every output carries its full decision history — which agent, which model, which inputs, which configuration, which decisions led to this result.
@@ -106,6 +112,7 @@ Every output carries its full decision history — which agent, which model, whi
 - **Regulatory value:** Art. 11 (documentation), Art. 12 (record-keeping). This is how you answer "why did the system do that?"
 
 #### #7 — Bounded Agency
+
 **Ring:** 2 | **Category:** Safety
 
 Agents operate within explicit, enforced boundaries — which tools they can use, which data they can access, which actions they can take, what scope they're authorized for.
@@ -114,6 +121,7 @@ Agents operate within explicit, enforced boundaries — which tools they can use
 - **Key invariant:** "The box can get smarter inside. It cannot grow itself." Boundary expansion requires human authorization.
 
 #### #8 — Governance Gates
+
 **Ring:** 2 | **Category:** Human oversight
 
 Explicit decision points where execution pauses for authorization. The primary mechanism for human-in-the-loop governance.
@@ -123,6 +131,7 @@ Explicit decision points where execution pauses for authorization. The primary m
 - **Gate response signals:** APPROVE, REJECT, MODIFY, DEFER, ESCALATE
 
 #### #9 — Policy as Code
+
 **Ring:** 2 | **Category:** Governance
 
 Governance rules as versioned, executable, testable objects — not implicit tribal knowledge.
@@ -131,6 +140,7 @@ Governance rules as versioned, executable, testable objects — not implicit tri
 - **Implementation:** Policy rules live in version control. Policy changes go through the same review process as code changes. Policy test harnesses verify before deployment.
 
 #### #10 — Event-Driven Observability
+
 **Ring:** Fabric | **Category:** Monitoring
 
 Every ring emits structured events — the shared nervous system of the governed system.
@@ -139,6 +149,7 @@ Every ring emits structured events — the shared nervous system of the governed
 - **Key property:** Events are the raw material for Security Intelligence, Ring 3 learning, audit trails, and operational monitoring. Without events, nothing else works.
 
 #### #11 — Trust Ladders
+
 **Ring:** 2 + 3 | **Category:** Risk management
 
 Trust is earned through demonstrated performance, not granted by default. Agents start at low trust with full verification, and earn reduced oversight as they prove reliability.
@@ -149,6 +160,7 @@ Trust is earned through demonstrated performance, not granted by default. Agents
 - **Aligns with:** CSA ATF earned autonomy maturity model (Intern → Junior → Senior → Principal)
 
 #### #12 — Memory-Augmented Reasoning
+
 **Ring:** 0 + 3 | **Category:** Knowledge management
 
 Agents reason with persistent memory — not just immediate context. Cross-session knowledge, accumulated learnings, domain expertise.
@@ -157,6 +169,7 @@ Agents reason with persistent memory — not just immediate context. Cross-sessi
 - **Key concern:** Memory growth without curation is hoarding, not learning. Active memory management: relevance filtering, decay, routing rules, periodic curation.
 
 #### #13 — Error Handling & Recovery
+
 **Ring:** Fabric | **Category:** Resilience
 
 Graceful degradation, checkpointing, compensation. When things go wrong — and they will — the system fails safely.
@@ -166,6 +179,7 @@ Graceful degradation, checkpointing, compensation. When things go wrong — and 
 - **Compensation:** When committed side effects need to be reversed, governed compensation logic executes under the same ring architecture
 
 #### #14 — Identity & Attribution
+
 **Ring:** Fabric | **Category:** Accountability
 
 Every agent has authenticated, inspectable identity. Every action carries identity context through every ring.
@@ -174,6 +188,7 @@ Every agent has authenticated, inspectable identity. Every action carries identi
 - **Implementation protocols:** SPIFFE/SPIRE (cryptographic workload identity), OAuth 2.1 (user-delegated authority), OIDC (federated identity), NGAC (attribute-based access control)
 
 #### #15 — Adversarial Robustness
+
 **Ring:** Security | **Category:** Defense
 
 Assume breach. Defense in depth. Verify explicitly. The security posture for governed agentic systems.
@@ -182,6 +197,7 @@ Assume breach. Defense in depth. Verify explicitly. The security posture for gov
 - **Supply chain trust:** Approved sources, version pins, trust tiers — critical for MCP/A2A ecosystems where 53% of community servers use insecure static API keys.
 
 #### #16 — Transaction & Side-Effect Control
+
 **Ring:** 0 + 2 | **Category:** Safety
 
 Pre-commit/commit/post-commit for irreversible actions. The transaction layer that makes agent actions manageable.
@@ -190,6 +206,7 @@ Pre-commit/commit/post-commit for irreversible actions. The transaction layer th
 - **REVISE(context) semantics:** When Ring 2 says "world changed, re-execute" after side effects are committed — no blind re-execution. Idempotency keys carry across revisions.
 
 #### #17 — Data Governance & Confidentiality
+
 **Ring:** 2 + Fabric | **Category:** Privacy & compliance
 
 Classification, consent, PII detection, lineage, retention at every data flow. Data governance for the agentic context.
@@ -200,6 +217,7 @@ Classification, consent, PII detection, lineage, retention at every data flow. D
 ### Lifecycle Primitive (#18)
 
 #### #18 — Evaluation & Assurance
+
 **Scope:** Pre-deployment | **Category:** Quality gate
 
 The gate before the gate — validates configurations, policies, and agent behavior before they reach production.
@@ -211,6 +229,7 @@ The gate before the gate — validates configurations, policies, and agent behav
 ### Substrate Primitive (#19)
 
 #### #19 — Agent Environment Governance
+
 **Scope:** All rings | **Category:** Operating environment
 
 Every agent operates within a 5-layer environment: identity/policy substrate (L1), instruction architecture (L2), capability set (L3), retrieved context (L4), session state (L5). Agent Environment Governance ensures this substrate is composed by policy, scoped by least privilege, and continuously improved.
@@ -296,26 +315,31 @@ Not every primitive is equally urgent. Implementation priority depends on your s
 The primitives compose into progressively more governed architectures:
 
 ### Minimum Viable Control
+
 Bounded Agency (#7) + Identity (#14) + Provenance (#6) + Observability (#10) + Environment Governance (#19, minimal)
 
 **What it gives you:** Agents that can't exceed their scope, actions that are attributable, an audit trail, and scoped operating environments. The absolute floor for any consequential agent system.
 
 ### Validation Pipeline (Ring 0 + Ring 1)
+
 Minimum Viable Control + Separation (#1) + Validation Loops (#2) + Structured Output (#5) + Error Handling (#13)
 
 **What it gives you:** Verified outputs before release. Quality assurance is structural.
 
 ### Governed Decision Flow (Ring 0 + Ring 1 + Ring 2)
+
 Validation Pipeline + Governance Gates (#8) + Policy as Code (#9) + Transaction Control (#16) + Data Governance (#17)
 
 **What it gives you:** Policy-evaluated, human-gateable decisions with side-effect management.
 
 ### Secure Governed System (All rings + zero trust)
+
 Governed Decision Flow + Adversarial Robustness (#15) + zero trust at every boundary + Evaluation & Assurance (#18) as the deployment gate
 
 **What it gives you:** Defense in depth, pre-deployment validation, and security monitoring for production-grade agentic systems.
 
 ### Full Governed Agentic System (Everything)
+
 All rings active, all primitives engaged, zero trust at every boundary, environment optimization loop improving the substrate continuously.
 
 **What it gives you:** The complete governance architecture for high-stakes, regulated, enterprise-grade agentic systems that improve over time.
@@ -338,36 +362,43 @@ All rings active, all primitives engaged, zero trust at every boundary, environm
 The primitives are not always harmonious. Seven named tensions with architectural resolutions:
 
 ### Tension 1: Self-Improvement vs. Reproducibility
+
 **Conflict:** #3 changes behavior over time. #6 requires traceability.
 **Resolution:** Version everything. Self-improvement creates a new configuration version. Provenance chains reference the active version. Reproducible *at a specific version*, not across versions.
 **Invariant:** *The system is always reproducible at a specific version.*
 
 ### Tension 2: Trust Ladders vs. Governance Gates
+
 **Conflict:** #11 reduces oversight. #8 ensures accountability.
 **Resolution:** Two gate classes. Adaptive gates (trust-dependent — relax as trust grows). Mandatory gates (always active — regulatory, legal, irreversible). Trust only affects adaptive gates.
 **Invariant:** *The system can earn the right to skip a spot-check, never the right to skip regulatory approval.*
 
 ### Tension 3: Bounded Agency vs. Self-Improvement
+
 **Conflict:** #7 constrains scope. #3 makes the agent better. Can it expand its own boundaries?
 **Resolution:** Self-improvement operates within declared bounds. Ring 3 changes what happens *inside* the box. Boundary expansion requires human authorization (Ring 2).
 **Invariant:** *The box can get smarter inside. It cannot grow itself.*
 
 ### Tension 4: Validation Loops vs. Latency/Cost
+
 **Conflict:** #2 and #4 improve quality through iteration, but each pass costs time and money.
 **Resolution:** Budget-aware iteration. Iteration budget (hard cap), cost budget, latency budget, diminishing returns threshold. Proportional critique based on stakes and trust level.
 **Invariant:** *Quality is bounded by economics, not just by capability.*
 
 ### Tension 5: Memory vs. Signal-to-Noise
+
 **Conflict:** #12 accumulates knowledge. But stale/irrelevant memories inject noise.
 **Resolution:** Active memory management — relevance filtering, decay, routing rules, periodic curation. Memory is curated, not accumulated.
 **Invariant:** *Growth without curation is hoarding, not learning.*
 
 ### Tension 6: Policy as Code vs. Self-Improvement
+
 **Conflict:** Can Ring 3 change Ring 2's policy rules?
 **Resolution:** Distinguish configuration (Ring 3 can change: thresholds, intensity, trust levels) from policy (Ring 3 cannot change: authorization, mandatory gates, compliance). Ring 3 can *recommend* policy changes; the recommendation goes through Ring 2 governance for human authorization.
 **Invariant:** *The system can suggest governance changes. It cannot enact them autonomously.*
 
 ### Tension 7: Environment Optimization vs. Governance Integrity
+
 **Conflict:** #19's optimization loop improves the agent's environment, but the environment IS the control surface.
 **Resolution:** Separate the optimizable (context priorities, tool descriptions, session policy) from the inviolable (governance policy, authorization boundaries, security constraints). The loop optimizes within governance boundaries; it cannot move them.
 **Invariant:** *The environment can get better. It cannot get less governed.*
@@ -475,6 +506,7 @@ Agent Environment Governance (#19) includes a governed self-improving cycle for 
 ## Implementation Checklist
 
 ### Phase 1: Minimum Viable Control
+
 - [ ] Agent scope defined (tool allowlists, data access boundaries, output authority limits)
 - [ ] Agent identity established (ID, version, configuration hash)
 - [ ] Provenance logging active (append-only, structured, includes identity context)
@@ -482,23 +514,27 @@ Agent Environment Governance (#19) includes a governed self-improving cycle for 
 - [ ] Workspace scoped and instructions versioned
 
 ### Phase 2: Verification
+
 - [ ] Separate verification agent operational (not self-audit for high-stakes outputs)
 - [ ] Validation loops with convergence criteria and iteration budget
 - [ ] Structured output schema defined and enforced
 - [ ] Error handling: checkpointing at ring boundaries, graceful degradation configured
 
 ### Phase 3: Governance
+
 - [ ] Governance gates operational (adaptive + mandatory classes defined)
 - [ ] Policy rules versioned and testable
 - [ ] Transaction control for irreversible actions (idempotency, compensation)
 - [ ] Data classification pipeline active (PII detection, consent tracking)
 
 ### Phase 4: Security & Assurance
+
 - [ ] Security posture: defense in depth, supply chain trust policy, containment mechanisms
 - [ ] Evaluation suites: pre-deployment testing, regression testing, adversarial testing
 - [ ] Trust Ladders: initial trust levels set, promotion/demotion criteria defined, calibration logging active
 
 ### Phase 5: Learning
+
 - [ ] Ring 3 learning pipeline: execution analysis → improvement proposals → Ring 2 validation → #18 testing → staged deployment
 - [ ] Memory infrastructure: persistent storage, relevance filtering, decay, curation cycles
 - [ ] Full environment optimization loop: observe → identify → propose → validate → deploy, with termination condition

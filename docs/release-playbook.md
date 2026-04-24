@@ -36,7 +36,7 @@ Layer 3 requires no setup — it runs in GitHub Actions on every push to `main`.
 
 ## 5-Stage Pipeline Overview
 
-```
+```text
 Stage 1: Preflight       → Is the repo in a releasable state?
 Stage 2: Sync + Lint     → Are canonical docs and MDX aligned? Are MDX files valid?
 Stage 3: Build           → Does the site build without errors?
@@ -53,17 +53,20 @@ All stages run sequentially. Any failure blocks the rest.
 ### Stage 1: Preflight (`bin/preflight.sh`)
 
 **What it checks:**
+
 - Working tree clean (no uncommitted changes)
 - On `main` branch
 - `pnpm` and `node` available
 - `agf-docs/node_modules` exists (installs if missing)
 
 **When it fails:**
+
 - Uncommitted changes: commit, stash, or use `--allow-dirty` if intentional
 - Wrong branch: `git checkout main` or use `--branch` override for release branches
 - Missing `pnpm`/`node`: these should always be present in the OrbStack dev environment
 
 **Manual invocation:**
+
 ```sh
 bin/preflight.sh                  # strict — requires clean tree on main
 bin/preflight.sh --allow-dirty    # skip dirty check (pre-push mode)
@@ -102,6 +105,7 @@ bin/lint-mdx.sh
 If `markdownlint-cli2` or `cspell` are not installed in `agf-docs/`, the script installs them automatically. Config files (`agf-docs/.markdownlint-cli2.jsonc`, `agf-docs/cspell.json`, `agf-docs/.cspell-agf.txt`) are created on first run if missing.
 
 **When lint fails:**
+
 - markdownlint: check the specific rule in the error message. Most common: line length (MD013, set to 160 chars), missing blank lines around headings (MD022), or bare URLs.
 - cspell: add AGF-specific terms to `agf-docs/.cspell-agf.txt`. One term per line.
 - Parse landmines: escape bare `<` with `\<` in non-code contexts, or wrap in a code block.
@@ -115,6 +119,7 @@ pnpm --dir agf-docs build
 ```
 
 **When it fails:**
+
 - MDX parse errors: usually unclosed JSX tags or malformed frontmatter. The error message includes the file and line number.
 - TypeScript errors: check the imports/exports in `agf-docs/app/` or `agf-docs/lib/`.
 - Missing diagram: the build won't fail on a missing image, but `bin/check-links.mjs` will catch broken refs.
@@ -124,6 +129,7 @@ pnpm --dir agf-docs build
 ### Stage 4: Tag + Publish
 
 **Version bump:**
+
 1. Update `VERSION` with the new version string.
 2. Add entry to `CHANGELOG.md` under `[Unreleased]` → new `[x.y.z] — YYYY-MM-DD` section.
 3. Commit: `chore(release): v0.x.y`
@@ -160,6 +166,7 @@ node bin/smoke-deployed.mjs --base-url https://staging.agf.jessepike.dev
 Results logged to `.status/releases/<timestamp>/smoke.json`.
 
 **When smoke fails:**
+
 - HTTP 404 on a doc route: MDX file is missing or the route mapping is wrong. Check `agf-docs/content/docs/` and `meta.json` files.
 - HTTP 500: build artifact is broken. Check Vercel deploy logs.
 - Body too small: page is rendering empty — usually a data-fetching issue in the MDX source or a frontmatter parse error.
@@ -178,6 +185,7 @@ If a bad release is live and needs immediate reverting:
 **Do NOT force-push to main.** A revert commit preserves history and is traceable in `CHANGELOG.md`.
 
 For the tag, delete it locally and remotely if needed:
+
 ```sh
 git tag -d v0.x.y
 git push origin :refs/tags/v0.x.y
@@ -205,11 +213,13 @@ Exit non-zero on any broken internal link. The pre-push hook runs this in gated 
 The hook at `.githooks/pre-push` runs stages 1–3 on every `git push`.
 
 **One-time setup (per machine):**
+
 ```sh
 git config core.hooksPath .githooks
 ```
 
 Verify it's active:
+
 ```sh
 git config core.hooksPath
 # → .githooks
@@ -217,6 +227,7 @@ git config core.hooksPath
 
 **Bypass policy:**  
 `git push --no-verify` bypasses all hooks. Use for:
+
 - Emergency hotfixes where you accept the risk
 - Non-content commits (e.g., `.gitignore` updates) that don't affect the site
 

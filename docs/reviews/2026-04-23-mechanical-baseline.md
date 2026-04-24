@@ -29,7 +29,7 @@ Build passes cleanly. One real broken internal link. Spell-check dictionary unin
 
 ## check-links.mjs output
 
-```
+```text
 Checking 25 files...
   [BROKEN-ASSET] agf-docs/content/docs/overview/what-is-agf.mdx:109 → /docs
   [BROKEN-ASSET] agf-docs/app/page.tsx:103 → /
@@ -39,6 +39,7 @@ Internal broken links: 3
 ```
 
 Analysis:
+
 - `what-is-agf.mdx:109 → /docs` — real broken link target (no `/docs` index route exists). Relates to GPT-5.4 finding G5-F10 (broken primitive catalog link in same file).
 - `page.tsx:103 → /` — false positive (homepage route; script doesn't recognize root)
 - `page.tsx:378 → /llms.txt` — false positive (llms.txt route exists at `agf-docs/app/llms.txt/route.ts`)

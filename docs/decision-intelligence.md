@@ -53,6 +53,7 @@ Collapsing these into one object destroys the ability to reason about uncertaint
 ### 3. Evidence changes; decisions must respond
 
 When new evidence arrives, the system must be able to:
+
 - Identify which claims are affected
 - Re-evaluate beliefs
 - Re-run policy tests (Primitive #9: Policy as Code)
@@ -127,6 +128,7 @@ Decision Intelligence is a specific application of the Agentic Primitives framew
 The core data structure. A case-bound reasoning substrate — not a generic knowledge graph.
 
 Every decision case produces a graph containing:
+
 - **Agents:** the actors who produced, verified, challenged, and authorized each artifact (human and AI)
 - **Entities:** systems, datasets, vendors, controls, policies, owners
 - **Claims:** assertions produced during reasoning — with typed relationships (SUPPORTS, CONTRADICTS, QUALIFIES) rather than separate claim/counterclaim types
@@ -139,6 +141,7 @@ Every decision case produces a graph containing:
 - **Approval:** human governance action with justification
 
 **Key design rules:**
+
 1. The graph is **case-bound first**. Cross-case intelligence comes later through templates, baselines, and prior-case references — not one giant enterprise graph. Design the schema for cross-case interoperability from day one (global entity IDs, canonical schemas) even if cross-case queries come in a later phase.
 2. Every node includes: creator agent reference, timestamp, method reference, confidence, and source references.
 3. Agents return **structured objects** (#5), not prose. LLM output is converted into graph objects.
@@ -158,6 +161,7 @@ The most conceptually novel element. This is what separates a decision intellige
 Also: `contested`, `insufficient_evidence`, `rejected`, `stale`, `superseded`, `suspended`
 
 **Key transitions:**
+
 - `accepted` → `under_review` (triggered by new contradicting evidence or Challenger finding)
 - `accepted` → `stale` (evidence freshness expired)
 - `accepted` → `superseded` (replaced by newer claim with stronger evidence)
@@ -167,6 +171,7 @@ Also: `contested`, `insufficient_evidence`, `rejected`, `stale`, `superseded`, `
 **The `suspended` state** is an epistemic circuit breaker — a hard halt when the system cannot converge by iteration. Distinct from `under_review` (which implies active processing), `suspended` enforces a governance gate: the claim is frozen and requires explicit human adjudication before any state change.
 
 **The revision cascade — the operating system behavior:**
+
 ```
 New evidence arrives
   → Linked claims updated
@@ -179,6 +184,7 @@ New evidence arrives
 When evidence changes, beliefs revise, which cascades through policy evaluation to decision options. In ring terms: Ring 2 detects the context change and issues REVISE(context) back to Ring 0, triggering re-execution of the affected decision pipeline with updated evidence.
 
 **Cascade protection (from external review):**
+
 - **Cycle detection:** Circular dependencies (Belief A → Claim X → Belief B → Claim Y → Belief A) are detected and broken. The cascade enforces DAG traversal; cycles trigger `suspended` state on the cycle entry point.
 - **Depth limit:** Maximum cascade depth (recommended: 5). Beyond the limit, the cascade halts and surfaces the constraint for human review.
 - **Hysteresis bands:** Promotion and demotion thresholds differ to prevent oscillation. A belief that was just demoted requires a higher evidence bar to be re-promoted than a belief being promoted for the first time.
@@ -187,6 +193,7 @@ When evidence changes, beliefs revise, which cascades through policy evaluation 
 **Existing work and intellectual lineage:**
 
 The Belief Layer draws on established traditions:
+
 - **Argumentation frameworks** — IBIS (Kunz & Rittel), Toulmin model, Dung's abstract argumentation (1995), Carneades (Gordon, Prakken, Walton, 2007) with dialectical statuses and proof standards, ASPIC+ for structured argumentation
 - **Belief revision theory** — AGM framework (Alchourrón, Gärdenfors, Makinson) for rational belief update under new information
 - **Truth Maintenance Systems** — Doyle (1979), de Kleer (1986) for dependency-directed revision cascades
@@ -202,6 +209,7 @@ The Belief Layer draws on established traditions:
 Implementation of Primitive #4 (Adversarial Critique) applied to decision-making.
 
 **The Challenger Agent produces:**
+
 - Contradicting claims (claims with CONTRADICTS relationships to existing claims)
 - Gaps (missing evidence or analysis)
 - Contradiction flags (claims that conflict with each other or with evidence)
@@ -227,6 +235,7 @@ The decision pipeline is an **orchestrated multi-agent system** (see Agentic Pri
 | Memo Agent | R0 (lightweight) | Generates exportable, reviewer-ready decision memos. Formatting tool, not a reasoning agent |
 
 **Design notes (from external review):**
+
 - **Intake + Entity Extraction merged:** These execute highly overlapping NLP tasks. Separating them introduces unnecessary latency and forces context reconstruction. A single agent produces both the normalized case package and extracted entities in one pass.
 - **Belief Manager moved to Ring 1:** Three independent reviews identified the original Ring 0/Ring 1 boundary position as a security vulnerability — a component bridging two trust zones is the most attacked element in any security architecture. The Belief Manager now sits firmly in Ring 1, receiving immutable claim proposals from Ring 0 and subjecting them to adversarial challenge before committing state changes. It operates as a **deterministic state machine** (formal transition rules, not LLM reasoning) to ensure predictable, auditable state transitions.
 - **Memo Agent downgraded:** From full reasoning agent to lightweight formatting tool. It renders the provenance chain for human consumption but does not perform reasoning.
@@ -257,6 +266,7 @@ The decision agents (Intake, Entity Extraction, Evidence, Claim, Recommendation,
 The Challenger Agent lives here. Validation loops verify claim extraction against source documents (grounding checks), cross-model verification challenges key determinations, and deterministic validators check completeness and consistency.
 
 **Key behaviors:**
+
 - Claim grounding: is this claim supported by the source evidence?
 - Cross-model challenge: does an independent model produce the same extraction?
 - Completeness: are all required elements present?
@@ -270,6 +280,7 @@ Policy evaluation, governance gates, provenance recording, and transaction contr
 **Policy evaluation:** Every belief, policy test, and decision option is evaluated against versioned policy rules. The specific policy version is recorded in the provenance chain.
 
 **Governance gates:**
+
 - **Mandatory:** Final decision approval, policy exception authorization, high-risk case escalation. These never relax regardless of trust level.
 - **Adaptive:** Quality review of claim extraction, spot-check of evidence grounding, optional human review of intermediate analysis. These relax as the system demonstrates reliability via Trust Ladders.
 
@@ -282,6 +293,7 @@ Policy evaluation, governance gates, provenance recording, and transaction contr
 Cross-case intelligence, trust calibration, and system improvement.
 
 **Cross-case patterns:**
+
 - Which claim types are most frequently revised by human reviewers? → Prompt improvement opportunities
 - Which policy rules produce the most false-positive gates? → Threshold recalibration
 - Which evidence sources are consistently unreliable? → Source trust adjustment

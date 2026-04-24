@@ -25,6 +25,7 @@ Location: `bin/` and `.githooks/` in this repo.
 | `.githooks/pre-push` | Pre-push gate: preflight → lint → links → `pnpm build` |
 
 One-time setup:
+
 ```sh
 git -C /Users/jessepike/code/clients/risk/AGF config core.hooksPath .githooks
 ```
@@ -46,6 +47,7 @@ Registered in `~/code/_shared/capabilities-registry/capabilities/skills/agf-rele
 Location: `~/code/_shared/pike-agents/plugins/agf-architect/` (outside this repo).
 
 Dedicated AGF domain expert. Two modes:
+
 - **Thought partner (default, 80%):** Socratic discussion on primitives, vocabulary, decisions, crosswalks. Can draft new primitives/decisions/vocabulary entries on request (marked as proposal, not canonical).
 - **Release reviewer (20%):** Stage 2 architect review in `agf-release` skill runs.
 
@@ -114,12 +116,14 @@ bin/lint-mdx.sh
 ### Test 6 — agf-architect agent launches
 
 In a fresh terminal:
+
 ```sh
 claude-agf-architect
 ```
 
 Then inside the session:
-```
+
+```text
 /agf-primitive 8
 ```
 
@@ -128,7 +132,8 @@ Expected: agent reads `docs/agentic-primitives.md`, returns a deep answer about 
 ### Test 7 — Thought-partner mode
 
 Same session:
-```
+
+```text
 /agf-think does the GDR doc conflate HALT and ESCALATE anywhere?
 ```
 

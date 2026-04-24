@@ -85,6 +85,7 @@ These are **distinct but symbiotic capability layers:**
 | **Data relationship** | DI **produces** decisions and emits events | AO **consumes** those events for quality, security, and governance monitoring |
 
 **The symbiosis:**
+
 - Decision Intelligence is a primary **event source** for Agentic Observability
 - Agentic Observability is the **security and quality monitoring layer** for Decision Intelligence
 - DI needs AO to detect trust manipulation, evidence poisoning, and quality degradation in its decision pipeline
@@ -114,6 +115,7 @@ Products and services built on the framework:
 **The implementations may be separate products.** Decision Intelligence (a governed decision platform) and Agentic Observability (a monitoring/detection platform) serve different buyers, have different sales motions, and solve different problems. They share architecture but not necessarily packaging.
 
 **The recommended approach:**
+
 1. **Publish the framework as one unified body of work** — the reference architecture, primitives, profiles, and white papers. This is the thought leadership layer.
 2. **Build products selectively** — each implementation focuses on one composition pattern and serves one buyer. The AI Risk Tools pipeline is a Decision Intelligence product. A pipeline observatory would be an Agentic Observability product.
 3. **Let the framework create cross-sell** — an organization that adopts DI for risk decisions will naturally want AO for monitoring those decisions. The shared vocabulary and architecture make the bridge obvious.

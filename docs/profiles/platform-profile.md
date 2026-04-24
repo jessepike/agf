@@ -143,6 +143,7 @@ Verification, governance, and security run concurrently with execution as peer n
 | **Tradeoff** | Latency for governance clarity. Systems subject to regulatory audit should strongly consider wrapper or middleware. |
 
 **Speculative execution bounds** *(Informed proposal):*
+
 - **Depth limit:** 3-4 levels of speculative chaining. Governance overhead grows super-linearly beyond depth 4.
 - **Entropy constraint:** If historical rejection rate for an action class exceeds ~20%, exclude from speculation and process sequentially.
 - **Resource budget:** Per-request speculative budget (compute, tokens, API calls) prevents runaway speculation.
@@ -347,6 +348,7 @@ A multi-agent system can have rings within rings — each agent with its own Rin
 ### Cross-System Trust
 
 When agents cross organizational boundaries:
+
 - **Federated trust:** Trust resets to Intern level across organizational boundaries unless federated trust agreements exist.
 - **Protocol-level identity:** OAuth 2.1, OIDC, SPIFFE for cross-system authentication.
 - **Capability discovery:** Signed capability manifests before delegation.
@@ -410,6 +412,7 @@ The following AGF primitives are directly relevant to platform engineering. For 
 Use this checklist to verify that your platform supports governed agentic systems.
 
 ### Deployment Mode Infrastructure
+
 - [ ] Deployment mode selected based on system characteristics (Mode Selection Matrix)
 - [ ] Ring infrastructure deployed for selected mode (wrapper/middleware/graph-embedded)
 - [ ] Interrupt policy defined (middleware mode: which actions trigger ring activation)
@@ -417,6 +420,7 @@ Use this checklist to verify that your platform supports governed agentic system
 - [ ] Agent state is resumable (for governance gates that pause mid-execution)
 
 ### Composability Interface
+
 - [ ] Pipeline produces structured output (schema-conformant, not raw text)
 - [ ] Identity context propagated on every action
 - [ ] Events emitted at ring boundaries
@@ -424,6 +428,7 @@ Use this checklist to verify that your platform supports governed agentic system
 - [ ] All six signal types handled (PASS, REVISE, HALT, GATE, DELEGATE, ERROR)
 
 ### Agent Environment
+
 - [ ] 5-layer environment stack configured (L1 identity → L5 session state)
 - [ ] Trust boundary enforced between L2 (trusted) and L3 (untrusted)
 - [ ] Context budget allocation defined
@@ -432,6 +437,7 @@ Use this checklist to verify that your platform supports governed agentic system
 - [ ] Termination condition set for rejected proposals
 
 ### MCP Integration (if applicable)
+
 - [ ] MCP servers authorized via Ring 2 policy
 - [ ] Tool schema integrity verification active
 - [ ] Dynamic tool discovery governance defined
@@ -440,12 +446,14 @@ Use this checklist to verify that your platform supports governed agentic system
 - [ ] OTel trace context propagated via `params._meta`
 
 ### Multi-Agent Coordination (if applicable)
+
 - [ ] Composition pattern selected (sequential/parallel/orchestrated)
 - [ ] DELEGATE signal configured with depth limits (max 3 recommended)
 - [ ] Cross-system trust policy defined (federated trust, capability discovery)
 - [ ] Governance collapse rule configured (outermost Ring 2 authoritative on scope conflicts)
 
 ### Cost Governance
+
 - [ ] Execution budgets enforced (max iterations, max cost, max wall-clock)
 - [ ] Trust Ladders configured (starting trust level, promotion criteria)
 - [ ] Trace storage retention policy defined

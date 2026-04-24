@@ -43,7 +43,7 @@ AGF is **derived from the composition of existing frameworks, guidance, and stan
 
 AGF sits inside a seven-layer conceptual stack. Six layers describe what an organization needs to know and do. A seventh, orthogonal layer — the risk quantification lens — cuts across the rest to produce investment and prioritization economics. When this document refers to the "seven-layer stack," Layer 6 is always orthogonal; the substrate-to-runtime progression is Layers 0 through 5.
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────────┐
 │ 6. Risk quantification lens     FAIR, FAIR-CAM, ISO 31000,         │
 │    (orthogonal, cross-cutting)  NIST AI RMF "Measure"              │
@@ -84,6 +84,7 @@ Each layer answers a distinct question. Organizations typically engage with seve
 **Answers:** *"How do the pieces fit together, architecturally, for an agentic system?"*
 
 AGF provides:
+
 - **Rings Model** — four governance control loops (Execution, Verification, Governance, Learning) that frame where each concern lives in a running agent system
 - **19 Primitives** — named, reusable architectural components (identity, memory, planning, tools, observability, etc.) that every agentic system contains in some form
 - **Three deployment modes** — wrapper, middleware/interrupt, graph-embedded — describing where in the runtime governance controls are enforced
@@ -139,6 +140,7 @@ AGF primitives crosswalk to these catalogs. The crosswalks live in `docs/profile
 Where Layer 3 enumerates controls, Layer 4 provides the operating model — roles, decision cadence, maturity progression, conformance evidence.
 
 **CSA Agentic Trust Framework (ATF) v1.0** — the current leading public operating-model artifact as of April 2026. Built around:
+
 - **Five governance questions:** Who are you? What are you doing? What are you eating/serving? Where can you go? What if you go rogue?
 - **Four-tier maturity model:** Intern → Junior → Senior → Principal, mapped 1:1 to AWS Agentic AI Security Scoping Matrix Scopes 1–4
 - **Five promotion gates:** Performance, Security Validation, Business Value, Incident Record, Governance Sign-off
@@ -207,26 +209,31 @@ The four verbs from AGF's positioning pillars (DECISIONS.md #3) describe how AGF
 Different roles approach this stack from different entry points. AGF's job is to make sure everyone ends up talking about the same system.
 
 **If you are a security lead** starting from OWASP Agentic Top 10 or MAESTRO:
+
 - You are at Layers 1–2.
 - AGF's `docs/profiles/security-profile.md` maps each threat to AGF primitives, then down to specific controls and runtime implementations.
 - Your primary AGF docs: security-profile, agentic-primitives, three-level security model.
 
 **If you are a GRC or compliance lead** starting from AICM, ISO 42001, or EU AI Act:
+
 - You are at Layer 3.
 - AGF's `docs/profiles/grc-profile.md` maps AGF primitives to control-catalog entries and identifies gaps where the catalogs do not yet cover agentic concerns.
 - Your primary AGF docs: grc-profile, agentic-governance-framework, shared-vocabulary.
 
 **If you are an executive or board-level sponsor** starting from ATF, CxOtrust, or similar:
+
 - You are at Layer 4.
 - AGF provides the architectural model underneath the operating model. The CSF parallel (Rings → Primitives → Sub-capabilities → Control Mappings) is the fastest way in.
 - Your primary AGF doc: this one.
 
 **If you are a platform engineer or AI engineering lead** starting from Microsoft AGT, AWS Bedrock, or an open-source agent framework:
+
 - You are at Layer 5.
 - AGF's `docs/profiles/platform-profile.md` and `docs/profiles/ai-engineering-profile.md` show how runtime components implement AGF primitives.
 - Your primary AGF docs: platform-profile, ai-engineering-profile, agentic-primitives, deployment modes.
 
 **If you are a risk officer, CFO, or portfolio lead** starting from FAIR, ISO 31000, or internal risk programs:
+
 - You are at Layer 6.
 - AGF's Decision Intelligence capability layer is where quantified risk integrates.
 - Your primary AGF docs: decision-intelligence, and FAIR-CAM-compatible loss-scenario templates (forthcoming).
