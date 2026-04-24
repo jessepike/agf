@@ -24,16 +24,16 @@ Closes umbrella meta-finding G5-M01 (promises rigor/evidence/confidence without 
 - **Acceptance signal** — G5-M01 re-check: reviewer (human or agent) confirms the pattern is resolved, not just line items.
 - **Scope target:** ~3–4h single focused pass. Ship as v0.3 of the site.
 
-### Content Cohesion Pass v0.3 (NEW 2026-04-23, from Cluster E triage)
+### ~~Content Cohesion Pass v0.3~~ — SHIPPED 2026-04-24 (partial — G5-F18 remains)
 
-Closes umbrella meta-findings G5-M02 (names too many things before proving why) and specific children G5-F09, G5-F15, G5-F16, G5-F18. Siblings the Credibility Pass v0.3 — both ship together as v0.3 content release.
+Shipped via DECISIONS.md #10 across commits `eaef524`, `23588d9`, `b1366cd`. See `status.md` 2026-04-24 evening handoff for full detail.
 
-- **G5-F09 — Growth model drift** — reconcile 4 composition patterns vs 5 implementation phases. Pick one canonical model. Audit every mention of "growth", "phase", "level", "pattern" across the site and align. Candidate resolution: patterns = horizontal (composition shape), phases = vertical (adoption progression) — make the orthogonality explicit.
-- **G5-F15 — "Governance" overloaded** — the word carries 5+ senses (framework name, Ring 2 label, program-level maturity, gate type, NIST CSF function). Disambiguation table in `shared-vocabulary.md` + qualifier conventions ("AGF the framework" / "Ring 2 / Governance ring" / "program-level governance") + audit of public pages.
-- **G5-F16 — Observability taxonomy** — clarify three-layer relationship: Primitive #10 (event emission) vs. Agentic Observability (unified layer) vs. Observability Profile (role-based). Add to `agentic-observability.mdx` and shared-vocabulary.
-- **G5-F18 — Slogan density** — editorial pass reducing named-concept introduction rate. Pair with MI-F07 residual markdownlint content hygiene (same files, same pass).
-- **Acceptance signal** — G5-M02 re-check: reviewer confirms the pattern is resolved.
-- **Scope target:** ~3–4h single focused pass.
+- ~~**G5-F09 — Growth model drift**~~ **RESOLVED** — 4 composition patterns canonicalized (MVC / Validation Pipeline / GDF / Full Governed). "Secure Governed System" demoted to hardening-posture modifier. "Phase 1–5" language retired. (`eaef524`)
+- ~~**G5-F15 — "Governance" overloaded**~~ **RESOLVED (canon + composition-patterns page)** — Five-sense disambiguation table in `shared-vocabulary.md`; qualifier conventions adopted; composition-patterns page audited for Ring 2 senses. Full audit across remaining 13+ public MDX pages queued into Tier 2 editorial. (`eaef524` + `23588d9`)
+- ~~**G5-F16 — Observability taxonomy**~~ **RESOLVED** — Three-layer disambiguation (Primitive #10 emits / Agentic Observability correlates / Profile implements); "Where This Fits" frame block at top of both canonical and site concept docs. (`eaef524`)
+- **G5-F18 — Slogan density** — STILL OPEN. Tier 2 editorial pass, pair with MI-F07 residual. See `status.md` Tier 2.
+- **MI-F07** — PARTIAL. MD032 bulk auto-fix across 21 canonical docs + 10 flagship MD040 tags shipped (`b1366cd`). Deeper MD040 + MD022/031/024 residual non-blocking.
+- **G5-M02 closeout** — gated on F18 completion per Meta-Finding Closeout Protocol.
 
 ### Site update execution (NEW 2026-04-22)
 - Execute changelist at `.private/drafts/site-update-changelist.md` covering v1.0 positioning batch + GDR primitive + macro diagrams + 3 broken-link fixes + homepage card
