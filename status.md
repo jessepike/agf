@@ -1,9 +1,37 @@
 ---
-updated: 2026-04-23
-stage: operate (v0.2.0 shipped; release infrastructure scaffolded 2026-04-23)
+updated: 2026-04-24
+stage: operate (v0.2.0 shipped; validation pass complete 2026-04-24; v0.3 content release queued)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-04-24 (agf-architect Mode C validation + sequence recommendation)
+
+**From:** agf-architect (Sonnet 4.6) — short session following 2026-04-23 evening handoff
+**To:** Next session (model depends on path — see sequence recommendation below)
+**Context:** Executed handoff path 1 (Mode C batch validation) against the 15 findings resolved 2026-04-23 evening. All 15 validated, no regressions. Ledger bookkeeping cleaned up (stale counters, MI-F04/F05 detail-state contradictions). Commit `532aa91` on main, not pushed.
+
+**What shipped:**
+- `docs(ledger): validate 15 resolved findings + fix stale counters` (532aa91) — Mode C verdicts, counter corrections, MI-F04/F05 detail state lines, Cluster A trajectory annotation, top-of-doc Validation passes register
+
+**Proposed v0.3 sequence (agf-architect recommendation — Jesse pending decision):**
+
+1. **Cohesion Pass v0.3** (G5-F09, F15, F16, F18 + M02) — 3–4h · Opus for 30-min vocabulary decisions (F09 canonical-model pick, F15 governance-sense audit, F16 observability three-layer spec), then Sonnet for editorial execution
+2. **Transparency pages** (`/changelog`, `/decisions`, `/roadmap`, `/contribute`) — 1h · Sonnet · independent, slot anywhere
+3. **Cluster D — Actionability** (G5-F12, F13) — 3–4h · Opus · reference walkthrough + 30-day MVC path; biggest differentiation move
+4. **Credibility Pass v0.3** (G5-F03, F14, F20 + M01) — 3–4h · Sonnet · runs last; audits whatever's final across all shipped content
+
+**Rationale for Cohesion-first:** G5-F09 (4 patterns vs 5 phases), G5-F15 (governance overload), G5-F16 (observability taxonomy) are dependencies for Cluster D. If Cluster D ships first, Cohesion has to chase rewrites across freshly-shipped content. Cohesion-first gives Cluster D a clean vocabulary substrate.
+
+**If Jesse disagrees** — Cluster D first is defensible (Actionability 4/10 is the most visible gap). Credibility Pass first is defensible (infra shipped; pure execution).
+
+**Meta-findings still open:** G5-M01 (rigor/evidence promise), G5-M02 (naming density), G5-M03 (public-readiness unevenness) — these are holistic patterns, NOT closeable by child validation alone. Need separate holistic re-read pass when v0.3 content passes land.
+
+**Scorecard after this session:** 6.38/10 composite (unchanged — validation doesn't move scores). Clarity 7 · Coherence 6 · Defensibility 7 · Differentiation 7 · **Actionability 4 (stuck)** · Credibility 6 · Public Readiness 7 · Mechanical 7.
+
+**Branch state:** main is 1 commit ahead of origin/main (532aa91). Push at Jesse's discretion.
+
+---
 
 ## Handoff — 2026-04-23 21:45
 

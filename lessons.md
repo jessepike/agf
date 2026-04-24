@@ -13,6 +13,13 @@ Hot buffer of insights, patterns, and gotchas from recent sessions. One line per
 ## 2026-04-17
 
 
+## 2026-04-24
+
+- **Mode C batch validation pattern works.** Single research subagent for commit-by-commit diff inspection, main agent synthesizes verdicts into a single Mode C report. Keeps main-agent context clean for N-finding batches. Confirmed on 15-finding batch today. Repeat this shape next time we validate a cluster.
+- **Ledger summary counters drift silently from per-row state.** Twice now the top-of-doc counters ("Resolved: 13") have lagged behind actual table state (15 resolved). Fix at source: add a pre-commit check that counts table states vs. summary line, OR just promote counters to computed-from-table at render time. Until then: eyeball the counters on every ledger edit.
+- **Meta-findings don't close when children do.** G5-M01 (rigor promise), G5-M02 (naming density), G5-M03 (artifact unevenness) are *patterns*, not line items. Children can all validate and the pattern still stand. Needs explicit "holistic re-read" protocol — not yet spec'd. Flag for Credibility Pass v0.3 closeout.
+- **"Cohesion-first" sequencing thesis.** G5-F09/F15/F16 are dependencies for Cluster D actionability content. If Cluster D ships first, new prose introduces the same vocabulary conflations Cohesion Pass is supposed to fix, and Cohesion has to chase rewrites. General rule: coherence/vocabulary work precedes new-content work, not the reverse.
+
 ## 2026-04-23
 
 - **Release infrastructure + `agf-architect` agent shipped.** Scripts in `bin/`, skill in dev-system, agent with 6 slash commands. See `docs/tooling-guide.md` for operational reference. First release candidate for using the new pipeline will be the GDR cross-doc integration passes already queued in BACKLOG.
