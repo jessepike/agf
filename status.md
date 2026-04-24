@@ -5,6 +5,40 @@ stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D
 
 # Status — AGF
 
+## Handoff — 2026-04-24 (M01 closeout pass + G5-F21 spawned/resolved)
+
+**From:** CPO session (Opus) — orchestrated independent closeout via Codex
+**To:** Next session (→ **Tier 2: G5-F18 + MI-F07 editorial pass**, Sonnet, 2h)
+**Tree state:** clean post-commit; pending push.
+
+**What shipped this session (single commit):**
+
+- **M01 closeout pass executed** by Codex CLI (gpt-5.4) as Strong-tier independent reviewer. Verdict: **`pattern-persists`** with new child G5-F21 filed. Rationale: hot-spot improvements landed but framework-wide posture still uneven — bare current-state empirical claims remain on flagship overview pages despite homepage's "every claim grounded" promise.
+- **G5-F21 filed and resolved same session.** Three claims fixed: `rings-model.mdx:8` ("most agentic systems in production today have no structural governance"), `rings-model.mdx:26` ("Most deployed agentic systems today are Ring-0-only"), `what-is-agf.mdx:14` ("Most deployments today are brittle"). All three now carry inline `<Confidence level="informed" />` matching the composition-patterns precedent.
+- **Findings ledger:** F21 added + resolved; M01 detail block now contains full closeout-pass note with Codex verdict, scope read, rationale, and next-step recommendation. M01 stays `accepted` pending second independent reviewer per scaling rule (High-severity meta affecting public credibility requires multiple reviewers).
+
+**Method note:** This is the first M01-class closeout pass executed under the protocol canonized in `docs/reviews/README.md` 2026-04-24. The protocol worked exactly as designed — independent reviewer caught real residual pattern that primary author would have missed, surfaced a concrete new child, and the verdict mapped cleanly to existing lifecycle states without requiring protocol changes.
+
+**Scorecard impact (projected, pending re-rating):**
+
+- Credibility 6 → projected **8** (Pass v0.3 + F21 batch — covers all known bare empirical claims on overview)
+- No further dimension shifts from this commit (closeout is governance, not new content)
+
+**Findings ledger state after this session:**
+
+- **Validated:** 15 (unchanged)
+- **Resolved (pending validation):** 8 → adds G5-F21
+- **Open:** G5-F18 (editorial), MI-F07 (residual), G5-M02/M03 (meta)
+- **Accepted (post-closeout-pass):** G5-M01 — awaits second independent reviewer
+
+**Tier 1 next:** **G5-F18 + MI-F07 editorial pass** — Sonnet, 2h. Slogan density reduction across flagship MDX + remaining markdownlint hygiene. Unlocks G5-M02 closeout. Recommendation: bundle a second M01 reviewer pass (fresh Sonnet session, post-editorial) to convert M01 `accepted` → `validated` if pattern-closed converges with Codex.
+
+**Tier 2 quick wins:** Transparency pages (1h) · ai-engineering profile rewrite (2h).
+
+**Tier 3 deferred:** G5-M03 strategic-meta closeout (requires Public Readiness ≥8/10 by independent reviewer).
+
+---
+
 ## Handoff — 2026-04-24 (Credibility Pass v0.3 shipped — G5-F03 + F20 resolved)
 
 **From:** CPO session (Opus) — Credibility Pass v0.3 immediately following Cluster D

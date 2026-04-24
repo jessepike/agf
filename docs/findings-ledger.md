@@ -2,10 +2,10 @@
 
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
-**Last updated:** 2026-04-24 (Credibility Pass v0.3 — G5-F03 + F20 resolved; G5-M01 now triggerable for closeout)
-**Open findings:** 2 (G5-M02, G5-M03 + G5-M01 awaiting closeout pass + 1 mechanical MI-F07)
+**Last updated:** 2026-04-24 (M01 closeout pass — Codex Strong-tier returned `pattern-persists`; G5-F21 filed + resolved same session; M01 stays accepted pending second independent reviewer)
+**Open findings:** 2 (G5-M02, G5-M03) + G5-M01 accepted (post-closeout-pass, awaiting second-reviewer per scaling rule) + 1 mechanical MI-F07
 **Validated:** 15 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19) — all validated 2026-04-24 (agf-architect Mode C batch)
-**Resolved (pending validation):** 7 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability; G5-F03, G5-F20 — Credibility Pass v0.3)
+**Resolved (pending validation):** 8 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability; G5-F03, G5-F20 — Credibility Pass v0.3; G5-F21 — M01 closeout pass spawned)
 **Accepted / queued:** 1 (G5-F14 infra shipped — content batch-apply still gated on primitive stability decision)
 **Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
@@ -67,7 +67,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F18 | Slogan density too high; too many named constructs per page | Medium | Informed | Clarity | **deferred → editorial pass bundled with MI-F07** |
 | G5-F19 | `/docs/reference/observability-concept` slug mismatches page title | Low | Informed | Mechanical | **validated** 2026-04-24 (slug renamed to `agentic-observability` matching page title) |
 | G5-F20 | Time-sensitive claims (e.g., "Agent 365 planned May 2026") need dated sources | Low | Established | Credibility | **resolved** 2026-04-24 (Credibility Pass v0.3 — Agent 365 reference now annotated "announced; GA target May 2026 per Microsoft Ignite 2025; verify current status on Microsoft Learn"; AICM v1.0.3 reference now annotated "verified against the published catalog 2026-04-24"; Trust Ladders empirical citations now read "published Month YYYY" with verification guidance) |
-| G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | open |
+| G5-F21 | Bare current-state empirical claims on overview pages — "most agentic systems in production today have no structural governance" (rings-model:8), "Most deployed agentic systems today are Ring-0-only" (rings-model:26), "Most deployments today are brittle" (what-is-agf:14) — arrive without citation or confidence marker despite homepage's "every claim grounded" promise | Medium | Established | Credibility | **resolved** 2026-04-24 (filed during M01 closeout pass by Codex independent reviewer; same-session fix applied: all three claims now carry inline `<Confidence level="informed" />` with practitioner-observation qualifier matching the composition-patterns precedent) |
+| G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | accepted (closeout pass 2026-04-24 by Codex Strong-tier reviewer returned `pattern-persists`; new child G5-F21 filed and resolved same session; M01 stays accepted per scaling rule — High-severity meta affecting public credibility requires multiple independent reviewers before `pattern-closed` is valid) |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | open |
 | G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |
 | MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **validated** 2026-04-24 |
@@ -323,9 +324,22 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **Confidence:** Established
 - **Dimension:** Credibility / Defensibility
 - **Source:** Sections 1, 3, 5, 9 (red-team critique 2)
-- **State:** open
-- **Umbrella for:** G5-F03, G5-F04, G5-F05, G5-F14
+- **State:** accepted (post-closeout-pass 2026-04-24; pending second independent reviewer per scaling rule)
+- **Umbrella for:** G5-F03, G5-F04, G5-F05, G5-F14, G5-F21
 - **Note:** This is the pattern behind multiple line-item fixes. Even if all 4 line-items land, we should check this pattern holistically — resolving each individually doesn't guarantee the meta is resolved.
+
+#### Closeout pass 2026-04-24
+
+| Field | Content |
+|---|---|
+| Pass date | 2026-04-24 |
+| Reviewer | Codex CLI 0.124.0 (gpt-5.4); tier **Strong** — independent reviewer that did not author any child fixes |
+| Scope read | `index.mdx`; homepage `app/page.tsx`; `overview/what-is-agf.mdx`; `overview/composition-patterns.mdx`; `overview/rings-model.mdx`; `overview/trust-ladders.mdx`; `overview/first-30-days.mdx`; `overview/reference-walkthrough.mdx`; `reference/relationship-to-frameworks.mdx`; `reference/governance-framework.mdx`; `reference/primitives.mdx`; `reference/confidence-levels.mdx`; source review sections 1, 3, 5, 9 |
+| Verdict | **`pattern-persists`** |
+| Rationale | Artifact materially improved — several flagged claims now carry confidence markers, dated caveats, attribution tables, and empirical-source posture. But the public promise is still broader than the delivery: homepage and confidence-levels copy say every claim is grounded or labeled, while flagship overview pages still make current-state empirical claims without markers. A cold reader sees evidence discipline in hot spots, not a consistent framework-wide posture. The original pattern still describes the artifact, less severely than before. |
+| New children | **G5-F21** filed and resolved same session — three current-state empirical claims (`rings-model.mdx:8` and `:26`, `what-is-agf.mdx:14`) now carry inline `<Confidence level="informed" />` matching the composition-patterns precedent |
+| Scorecard delta | N/A (M01 is not a strategic-meta — no scorecard threshold) |
+| Next step | Per scaling rule for High-severity public-credibility metas, M01 stays `accepted` pending a **second** independent reviewer (different model or persona). Recommended: Sonnet fresh-session re-read after Tier 2 (G5-F18 + MI-F07 editorial pass) ships, since editorial pass may surface additional bare claims and a single closeout-pass-after-pass cycle is more reviewer-efficient than two passes per meta. |
 
 ### G5-M02
 
