@@ -5,6 +5,40 @@ stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D
 
 # Status — AGF
 
+## Handoff — 2026-04-24 (M01 + M02 → validated via two-pass closeout convergence)
+
+**From:** CPO session (Opus) — second-pass meta closeout via Codex new-adopter persona
+**To:** Next session (→ **G5-M03 strategic-meta closeout**, requires Public Readiness ≥8/10 by independent reviewer; OR Tier 2 quick wins)
+**Tree state:** clean post-commit; pending push.
+
+**What shipped this session (single ledger commit):**
+
+- **M01 second-pass closeout:** Codex (gpt-5.4, new-adopter persona) read the post-F21 artifact cold and returned `pattern-closed`. Rationale: confidence levels visible in main orientation path, speculative commitments labeled, numeric claims dated/caveated, primitives have attribution table. Dominant posture is now bounded — "synthesis not invention," "planned not shipped," "informed/open where unproven." No new children.
+- **M02 second-pass closeout:** Same reviewer, same persona, against post-F22/F18 artifact. Returned `pattern-closed`. Rationale: many named constructs remain (AGF's style) but the ordering primitives (Core Concepts, First 30 Days, reference walkthrough) materially reduce term stacking by sequencing concepts. Reader path no longer leads with taxonomy. No new children.
+- **Convergence under scaling rule:** Two passes per meta with different framings (generic-reviewer + new-adopter) produced `pattern-persists` → `pattern-closed`. Per `docs/reviews/README.md` scaling rule for High-severity public-credibility/coherence metas, this satisfies the multi-reviewer requirement.
+- **Both M01 + M02 → `validated`.** Validated count 15 → 17.
+
+**Scorecard impact (projected, pending re-rating):**
+
+- Coherence 6 → projected **8** (M02 close + Cohesion Pass v0.3 cumulative effect on naming density)
+- Credibility 6 → projected **8** (M01 close + Cluster B/C + Credibility Pass v0.3 cumulative)
+- Public Readiness 7 → projected **8** (artifact unevenness materially reduced — F12/F13 add concrete actionability, F18/F22 reduce taxonomy-first feel, F03/F20/F21 add evidence posture)
+- Composite ~7.25–7.5 (post-Credibility) → projected **~7.75** (pending external re-score)
+
+**Findings ledger state after this session:**
+
+- **Validated:** 17 (adds G5-M01, G5-M02)
+- **Resolved (pending validation):** 10 (unchanged)
+- **Open:** G5-M03 (strategic-meta — gated on Public Readiness ≥8/10 independent re-score), MI-F07 (residual editorial)
+
+**Tier 1 next:** **G5-M03 strategic-meta closeout** — requires both qualitative re-read AND quantitative scorecard re-score at Public Readiness ≥8/10 by independent reviewer (per protocol Strategic-meta rule). Recommended sequencing: ship Tier 2 quick wins first (transparency pages, ai-engineering profile rewrite) so the M03 reviewer reads the most-complete artifact, then run a single combined re-score + closeout pass with Codex or fresh Sonnet.
+
+**Tier 2 quick wins (do first):** Transparency pages — `/changelog`, `/decisions`, `/roadmap`, `/contribute` MDX routes (1h Sonnet) · ai-engineering profile rewrite to retire Phase 1-5 H3 headings + regenerate 4-pattern progression diagram (2h Sonnet, pairs with the AI Engineer audience that just got served by Cluster D pages).
+
+**Tier 3 deferred:** MI-F07 deeper markdownlint hygiene on canonical `docs/*.md` — non-blocking since pre-push gate doesn't lint that surface. Editorial-pass-of-opportunity, not scheduled.
+
+---
+
 ## Handoff — 2026-04-24 (M01 closeout pass + G5-F21 spawned/resolved)
 
 **From:** CPO session (Opus) — orchestrated independent closeout via Codex
