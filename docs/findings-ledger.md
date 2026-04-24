@@ -26,6 +26,8 @@ Cross-review ledger of findings extracted from every review of AGF. Format, rubr
 - **validated** — reviewer confirmed fix addresses finding
 - **regressed** — previously validated, now failing
 
+**Meta-findings** (F-IDs prefixed `M`) close via an explicit holistic re-read, not by child validation alone. See the Meta-Finding Closeout Protocol in `docs/reviews/README.md` for triggers, reviewer independence tiers, verdicts (`pattern-closed` / `pattern-persists` / `pattern-shifted`), and the strategic-meta scorecard threshold.
+
 ## Severity × Confidence grid
 
 | | Established confidence | Informed confidence | Open confidence |
