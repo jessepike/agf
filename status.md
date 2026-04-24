@@ -1,57 +1,75 @@
 ---
 updated: 2026-04-24
-stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D + Credibility Pass queued)
+stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D next)
 ---
 
 # Status — AGF
 
-## Handoff — 2026-04-24 (evening — Cohesion Pass v0.3 shipped, 3 commits pushed)
+## Handoff — 2026-04-24 (evening close — Cohesion Pass v0.3 shipped + ledger closeout)
 
 **From:** agf-architect session — Sonnet 4.5 + Codex (gpt-5.4) independent review
-**To:** Next session (Cluster D Actionability — Opus recommended)
-**Tree state:** Clean except `lessons.md` (unrelated staged + unstaged `[pending]` workflow state — separate workstream, not this session's work). Origin/main at `b1366cd`. GitHub Actions smoke workflow fires post-deploy.
+**To:** Next session (→ **Cluster D Actionability, Opus**, see Tier 1 below)
+**Tree state:** Clean. Origin/main at `bb56f93`. GitHub Actions smoke workflow fires on every push to `main`.
 
-**What shipped this session (3 commits):**
+**What shipped this session (5 commits):**
 
 | Commit | Summary |
 |---|---|
 | `eaef524` | Canonical Cohesion Pass — DECISIONS.md #10 (a/b/c): 4 composition patterns + "Secure Governed System" demoted to hardening-posture modifier; governance 5-sense qualifier table; observability 3-layer disambiguation. Closes G5-F09, F15, F16 |
 | `23588d9` | F15 qualifier audit on `composition-patterns.mdx` (4 Ring-2 sense fixes + orphan `implementation-phases-roadmap.png` retired); `DIAGRAM-SPECS` entry 2 marked SUPERSEDED; BACKLOG entry for ai-engineering profile rewrite (still has "Phase 1-5" H3 headings) |
 | `b1366cd` | MI-F07 partial — bulk MD032 auto-fix across 21 canonical docs + 10 flagship MD040 tags |
+| `076393f` | Session wrap (initial) — status.md + lessons.md handoff text |
+| `bb56f93` | Ledger closeout — DECISIONS.md #11 (LICENSE CC BY 4.0 canonized retroactively from 2026-04-23 operational confirmation) + BACKLOG P0 blocker cleared |
 
-**Key session insight — discovered prior-session incumbent work in-progress.** Upon git status inspection, found 8 files + D10 draft left uncommitted from a prior (unseen) 2026-04-24 session that started the Cohesion Pass with **5-pattern canonicalization** but then pivoted mid-flight to **4-pattern + hardening posture** on the MDX edits without updating D10/CHANGELOG/shared-vocabulary. My independent Codex review converged on Path C (4 patterns + posture), matching the incumbent MDX. Reconciliation was: fix the lagging decision records to match what the MDX already said; restore lost shared-vocabulary disambiguation sections I accidentally destroyed via a `git checkout` before I realized the incumbent work existed. Lesson captured.
+**Key session insight — discovered prior-session incumbent work in-progress.** Upon git status inspection, found 8 files + D10 draft left uncommitted from a prior (unseen) 2026-04-24 session that started the Cohesion Pass with **5-pattern canonicalization** but then pivoted mid-flight to **4-pattern + hardening posture** on the MDX edits without updating D10/CHANGELOG/shared-vocabulary. My independent Codex review converged on Path C (4 patterns + posture), matching the incumbent MDX. Reconciliation was: fix the lagging decision records to match what the MDX already said; restore lost shared-vocabulary disambiguation sections I accidentally destroyed via a `git checkout` before I realized the incumbent work existed. Lessons captured to `lessons.md` + agent state.
 
 **Scorecard impact (projected, pending independent re-rating):**
+
 - Coherence 6 → **7+ likely** (F09 + F15 + F16 all resolved; naming-density relieved by Secure Governed demotion; observability taxonomy made explicit)
-- Mechanical 7 → unchanged (MI-F07 partial, not full closeout; canonical docs not on pre-push gate path anyway)
+- Mechanical 7 → unchanged (MI-F07 partial; canonical docs not on pre-push gate path)
 - Actionability 4 → unchanged (Cluster D not touched)
 - Other dimensions unchanged
 
 **Findings ledger state after this session:**
+
 - **Validated:** 15 (unchanged)
 - **Resolved (pending validation):** 3 → G5-F09, F15, F16 (Cohesion Pass v0.3)
 - **Partial:** MI-F07 (bulk format fixed; deeper MD040 remains non-blocking)
 - **Open:** G5-F12, F13 (Cluster D), G5-F18 (editorial), G5-M01/M02/M03 (meta)
 
-**M02 meta closeout — NOT yet run.** Protocol triggers when all children in stable non-open state. F09/F15/F16 resolved; F18 deferred; F11 not a child. **F18 still outstanding** — not all M02 children are at stable state. Closeout runs AFTER F18 editorial pass ships, per protocol. Expected verdict when run: `pattern-shifted` toward `pattern-closed` (demoting Secure Governed from pattern to posture was the single highest-leverage density-relief move).
+**P0 blockers:** none. LICENSE resolved via D11.
 
-**Next session sequence (unchanged from prior handoff):**
-
-1. ~~**Cohesion Pass v0.3**~~ — **DONE 2026-04-24** (this session)
-2. **Transparency pages** (`/changelog`, `/decisions`, `/roadmap`, `/contribute`) — 1h · Sonnet · independent, slot anywhere
-3. **Cluster D — Actionability** (G5-F12, F13) — 3–4h · Opus · reference walkthrough + 30-day MVC path; biggest remaining differentiation move
-4. **Credibility Pass v0.3** (G5-F03, F14, F20 + M01 closeout) — 3–4h · Sonnet · runs last
-5. **G5-F18 + MI-F07 full editorial pass** — subjective editorial work benefits from fresh reader; 2h · Sonnet or human editor
-6. **ai-engineering profile rewrite** — retire "Phase 1-5" H3 headings, regenerate the 4-pattern progression diagram (BACKLOG entry added this session)
-
-**Meta-finding closeout triggers (none ready yet):**
-- G5-M01 (rigor promise) — after Credibility Pass v0.3 ships
-- G5-M02 (naming density) — after F18 editorial pass ships (F09/F15/F16 resolved but F18 still deferred)
-- G5-M03 (public readiness) — after all + dimension re-score ≥8/10 by independent reviewer
-
-**Validation queued for next Mode C pass:** G5-F09, F15, F16 (all 3 resolved this session; validation pass should read the D10 text + D10-cited artifacts and confirm the claim holds).
+**M02 meta closeout — NOT yet runnable.** Protocol triggers when all children in stable non-open state. F09/F15/F16 resolved; F18 still deferred (editorial pass). Closeout runs AFTER F18 ships. Expected verdict when run: `pattern-shifted` toward `pattern-closed` (Secure Governed demotion was the highest-leverage density-relief move).
 
 ---
+
+## Next Tranche — Prioritized
+
+**Tier 1 — Highest strategic impact (do next):**
+
+1. **Cluster D Actionability (G5-F12 + F13)** — **Opus · 3–4h · biggest single lever.** Actionability is the only stuck dimension (4/10). It caps further gains on Differentiation and Public Readiness. Shipping the 30-day MVC starter path + end-to-end reference walkthrough breaks the ceiling. Opus recommended for strategic content shaping. *Independent of everything else in this list — start here.*
+
+**Tier 2 — Complementary, ship together as v0.3 content release:**
+
+2. **Credibility Pass v0.3 (G5-F03 + F14 + F20)** — **Sonnet · 3–4h.** Audit flagship pages for numeric/empirical claims; apply `<Confidence>` markers at the claim level; add dated-source annotations on time-sensitive claims. Enables G5-M01 closeout when complete.
+3. **G5-F18 + MI-F07 full editorial pass** — **Sonnet or fresh reader · 2h.** Slogan density reduction + remaining markdownlint hygiene on deeper docs. Subjective editorial; benefits from fresh eyes. Enables G5-M02 closeout when complete.
+
+**Tier 3 — Quick wins, slottable anywhere:**
+
+4. **Transparency pages** — **Sonnet · 1h.** Expose `/changelog`, `/decisions`, `/roadmap`, `/contribute` as MDX routes. Pure execution, no strategy decisions.
+5. **ai-engineering profile rewrite** — **Sonnet · 2h.** Retire "Phase 1-5" H3 headings (per BACKLOG entry); pair with regenerated 4-pattern progression diagram. Fits naturally alongside Cluster D (both touch AI Engineer audience).
+
+**Tier 4 — Meta closeouts (protocol-gated, run AFTER their trigger passes):**
+
+6. **G5-M01 closeout** — runs after Credibility Pass v0.3 ships. Requires holistic re-read + reviewer independence per Meta-Finding Closeout Protocol.
+7. **G5-M02 closeout** — runs after F18 editorial ships.
+8. **G5-M03 closeout** — runs after Clusters D + Credibility + F18 all land. Requires Public Readiness dimension re-score ≥8/10 by independent reviewer per strategic-meta rule in `docs/reviews/README.md`.
+
+**Validation queued for next Mode C pass:** G5-F09, F15, F16 — verify D10 claims hold by reading the canonical docs + cited artifacts.
+
+---
+
+## Previous Handoffs
 
 ## Handoff — 2026-04-24 (close — 5 commits pushed to origin) — SUPERSEDED
 
