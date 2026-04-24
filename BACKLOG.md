@@ -63,6 +63,10 @@ _(nothing actively in flight — session paused at checkpoint 2026-04-17)_
 
 ## Backlogged
 
+### Profile-page phases → patterns alignment (NEW 2026-04-24)
+
+DECISIONS.md #10 (a) retired the "Phase 1–5" vocabulary in favor of 4 composition patterns + hardening posture. Propagated to `overview/composition-patterns.mdx` + `overview/rings-model.mdx` in commit `eaef524`. Still outstanding: `profiles/ai-engineering.mdx` "Implementation Priority" section uses "Phase 1–5" H3 headings + `implementation-phases-roadmap.png` (superseded per DIAGRAM-SPECS entry 2). Do a single rewrite pass when the AI Engineering profile gets its next edit — pair with Cluster D Actionability content work. Regeneration of the diagram (4-pattern progression) is a candidate for the next diagram batch.
+
 ### Site pages — deferred from release-infrastructure session (2026-04-23)
 
 - **`/changelog` page on site** — expose `CHANGELOG.md` as an MDX route under `/docs/changelog` or `/changelog`. Route + MDX needed; content is the canonical `CHANGELOG.md`.

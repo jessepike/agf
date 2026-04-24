@@ -67,9 +67,9 @@ This includes:
 - Ring 3 (Learning) observing execution patterns and proposing improvements
 - Security Intelligence monitoring trust trajectories and behavioral baselines
 - Evaluation & Assurance (#18) running continuous regression
-- The self-improving loop: Ring 3 proposes, Ring 2 validates, governance decides
+- The self-improving loop: Ring 3 proposes, Ring 2 validates, Ring 2 decides
 
-**The invariant across all levels:** The system can suggest governance changes. It cannot enact them autonomously.
+**The invariant across all levels:** The system can suggest policy changes. It cannot enact them autonomously.
 
 ## Hardening Posture — a modifier, not a pattern
 
@@ -94,25 +94,17 @@ Every ring adds overhead. AGF is designed for proportional activation:
 | High-stakes decision | All four rings, mandatory gates | 3–5× Ring 0 alone |
 | Critical-stakes system | All rings + enhanced Security Intelligence | 5×+ Ring 0 alone |
 
-[Trust Ladders](/docs/overview/trust-ladders) are the primary cost optimization mechanism. As trust builds through demonstrated performance, verification intensity decreases and governance gates relax. The system starts expensive and gets cheaper.
+[Trust Ladders](/docs/overview/trust-ladders) are the primary cost optimization mechanism. As trust builds through demonstrated performance, verification intensity decreases and adaptive Governance Gates relax. Mandatory Governance Gates always fire regardless of trust level. The system starts expensive and gets cheaper.
 
 Empirical reference points: policy evaluation overhead at 0.43s total across 7,000+ decisions (~0.06ms per decision, Microsoft AGT); AI gateway routing at 11μs per request at 5K RPS (Bifrost). Governance overhead is measurable and manageable at production scale.
 
 ## The Self-Improving Loop
 
-<Image
-  src="/diagrams/implementation-phases-roadmap.png"
-  alt="Implementation Phases Roadmap — from foundational controls through full governed system"
-  width={1200}
-  height={675}
-  className="rounded-lg border border-stone-200 my-8"
-/>
-
 Once Ring 3 is active, AGF is designed to get better over time:
 
 1. **Ring 3 observes** execution patterns across all rings
 2. **Ring 3 proposes** improvements — better prompts, tighter thresholds, calibrated trust levels, optimized environment configurations
-3. **Ring 2 validates** — governance evaluates whether the proposed change stays within policy
+3. **Ring 2 validates** — Ring 2 evaluates whether the proposed change stays within policy
 4. **Evaluation & Assurance (#18) tests** — regression suites verify the change doesn't degrade known-good behaviors
 5. **The change deploys** — with staged rollout and monitoring
 
@@ -126,7 +118,7 @@ AGF names seven tensions between primitives with architectural resolutions. Thre
 
 **Self-Improvement vs. Reproducibility.** Ring 3 makes the system better, but changes make it harder to reproduce past behavior. Resolution: Ring 3 changes go through versioned configuration management. Every configuration state is traceable and reproducible. The system improves forward; it doesn't drift.
 
-**Environment Optimization vs. Governance Integrity.** The environment optimization loop makes agents more effective, but the environment is the control surface. Resolution: separate the optimizable (context priorities, tool descriptions, session policy) from the inviolable (governance policy, authorization boundaries, security constraints). The loop can improve the agent's experience within governance boundaries; it cannot move the boundaries.
+**Environment Optimization vs. Governance Integrity.** The environment optimization loop makes agents more effective, but the environment is the control surface. Resolution: separate the optimizable (context priorities, tool descriptions, session policy) from the inviolable (Ring 2 policy, authorization boundaries, security constraints). The loop can improve the agent's experience within Ring 2 boundaries; it cannot move the boundaries.
 
 ## Where to Start
 

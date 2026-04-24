@@ -278,7 +278,7 @@ STYLE: Clean modern sans-serif. Flat colors. No gradients. Thin subtle shadows o
 The following diagrams were originally specced 2026-03-18. Check `diagrams/` for current state — several have been generated since this list was written.
 
 1. **ring-interface-composability.png** — Composability Interface signal protocol (PASS/REVISE/HALT/GATE/DELEGATE/ERROR), signal restrictions per ring, execution budgets, REVISE transaction semantics
-2. **implementation-phases-roadmap.png** — 5-phase progressive roadmap: MVC → Verification → Governance → Security → Learning, with primitives per phase, ring activation, value delivery
+2. **implementation-phases-roadmap.png** — 5-phase progressive roadmap: MVC → Verification → Governance → Security → Learning, with primitives per phase, ring activation, value delivery. **SUPERSEDED by DECISIONS.md #10 (a) / Cohesion Pass v0.3 (2026-04-24)** — "phases" vocabulary retired in favor of 4 composition patterns + hardening posture modifier. Removed from `overview/composition-patterns.mdx`; still referenced on `profiles/ai-engineering.mdx` (profile-page pass queued in BACKLOG). Regeneration candidate: a "4-pattern progression" diagram matching the canonical pattern names.
 3. **event-flow-observability-architecture.png** — Event stream from all rings → 3 detection domains → Correlation Engine → dual-speed paths (sentinels + analysis) → response actions
 4. **security-response-bus.png** — Normal path (Intelligence→Governance→Fabric) vs fast path (Intelligence→[pre-authorized]→Fabric, governance notified post-facto)
 5. **belief-revision-cascade.png** — New evidence → claims updated → beliefs re-evaluated → policy tests re-run → decision options re-evaluated → review trigger
