@@ -2,10 +2,10 @@
 
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
-**Last updated:** 2026-04-24
-**Open findings:** 6 (2 GPT-5.4 open + 3 meta + 1 mechanical MI-F07)
+**Last updated:** 2026-04-24 (Cluster D Actionability — G5-F12 + F13 resolved)
+**Open findings:** 4 (3 meta + 1 mechanical MI-F07)
 **Validated:** 15 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19) — all validated 2026-04-24 (agf-architect Mode C batch)
-**Resolved (pending validation):** 3 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10)
+**Resolved (pending validation):** 5 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability)
 **Accepted / queued:** 4 (G5-F03, G5-F14 infra, G5-F20 → Credibility Pass v0.3)
 **Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
@@ -58,8 +58,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F09 | Growth model drift: 4 composition patterns vs 5 implementation phases | High | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (a) — canonicalized at 4 patterns; "Secure Governed System" demoted to hardening posture modifier; "Phase 1–5" language retired) |
 | G5-F10 | "See full primitive catalog" link points to AI Engineering, not primitives ref | High | Established | Mechanical | **validated** 2026-04-24 (link → `/docs/reference/primitives`) |
 | G5-F11 | No "What AGF is / is not" box on homepage | High | Informed | Clarity | **validated** 2026-04-24 (two-column is/is-not grid between Standards strip and Rings diagram) |
-| G5-F12 | No 30-day implementation starter path for Minimum Viable Control | Medium | Informed | Actionability | open |
-| G5-F13 | No end-to-end reference architecture walkthrough | Medium | Informed | Actionability | open |
+| G5-F12 | No 30-day implementation starter path for Minimum Viable Control | Medium | Informed | Actionability | **resolved** 2026-04-24 (Cluster D — new `/docs/overview/first-30-days` MDX page; week-by-week MVC workplan with primitives activated, artifacts produced, exit signals; cross-linked from core-concepts + composition-patterns) |
+| G5-F13 | No end-to-end reference architecture walkthrough | Medium | Informed | Actionability | **resolved** 2026-04-24 (Cluster D — new `/docs/overview/reference-walkthrough` MDX page; one threaded refund scenario through Rings 0–3 with action proposal → verification → gate → GDR → provenance → trust adjustment; six-step threaded view table; cross-linked from core-concepts + composition-patterns) |
 | G5-F14 | No visible status badges (conceptual/specified/implemented) | Medium | Informed | Credibility | **accepted — infra shipped** (`<Status>` component; apply pending primitive stability content decision) |
 | G5-F15 | "Governance" overloaded — framework, Ring 2, program maturity, gates, functions | Medium | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (b) — 5-sense disambiguation table + qualifier conventions in `shared-vocabulary.md` and site vocabulary; flagship-page audit bundled with G5-F18 editorial pass) |
 | G5-F16 | Observability taxonomy unclear — Primitive #10 vs concept vs Profile | Medium | Established | Coherence | **resolved** 2026-04-24 (Cohesion Pass v0.3 / DECISIONS.md #10 (c) — three-layer disambiguation in `shared-vocabulary.md`, `agentic-observability.md` (canonical + site), and site vocabulary) |
@@ -217,8 +217,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **Confidence:** Informed — design recommendation
 - **Dimension:** Actionability
 - **Source:** Section 8, Section 10 Fix #12
-- **State:** open
-- **Proposed action:** New page `/docs/overview/first-30-days` or similar; concrete checkpoints, outputs, checklist for MVC deployment
+- **State:** **resolved** 2026-04-24 — Cluster D Actionability
+- **Resolution:** New MDX page `agf-docs/content/docs/overview/first-30-days.mdx`. Four-week workplan with prerequisites, weekly Goal / Primitives activated / Concrete outputs / Exit signal blocks, exit criteria for moving to Validation Pipeline / Governed Decision Flow, "What MVC is Not" boundary section with `<Confidence level="established">`. Activates the five MVC primitives (#7, #14, #6, #10, #19) in dependency order. Cross-linked from `core-concepts.mdx` "What to read next" and `composition-patterns.mdx` "Where to Start." Registered in `overview/meta.json`.
 
 ### G5-F13
 
@@ -228,8 +228,8 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **Confidence:** Informed
 - **Dimension:** Actionability / Differentiation
 - **Source:** Section 10 Fix #13
-- **State:** open
-- **Proposed action:** One example: agent → verifier → gate → event stream → evidence artifact → trust adjustment. Threaded narrative, not disconnected diagrams. Could pair with Tool Gate MVP as reference implementation.
+- **State:** **resolved** 2026-04-24 — Cluster D Actionability
+- **Resolution:** New MDX page `agf-docs/content/docs/overview/reference-walkthrough.mdx`. Single threaded refund scenario ($450 with adaptive-gate override on customer refund frequency) traced through six steps: Ring 0 action proposal → Ring 1 verification + Ring Control Signal `GATE` → Ring 2 policy evaluation + pending GDR + `gate_triggered` → resolution APPROVE + resolved GDR + `gate_resolved` → Ring 0 execution + `provenance_recorded` linked by `decision_id` → Ring 3 trust trajectory update. Includes two YAML GDR examples (pending + resolved) tracking the canonical schema, a six-row "Threaded View" table mapping step → ring → primitive → artifact → observability emission, and a "Where the Walkthrough Simplifies" candor section under `<Confidence level="informed">`. Cross-linked from `core-concepts.mdx`, `composition-patterns.mdx`, and the new `first-30-days.mdx` page. Registered in `overview/meta.json`.
 
 ### G5-F14
 

@@ -1,0 +1,187 @@
+---
+title: "End-to-End Reference Walkthrough"
+description: "One request, threaded through all four rings — from user intent through verification, gate resolution, GDR emission, event stream, and trust adjustment. The concrete shape of a Governed Decision Flow in motion."
+---
+
+Reading the Rings Model, the Primitives, and Gate Vocabulary separately, it is easy to understand each piece and still not see how they connect. This page traces one request end-to-end through a running [Governed Decision Flow](/docs/overview/composition-patterns#governed-decision-flow) — the AGF composition pattern with Ring 0, Ring 1, and Ring 2 all active.
+
+The scenario is deliberately ordinary: a customer-support agent proposes a refund. The governance machinery is where the interest lives.
+
+*This is an illustrative walkthrough, not a spec. Event names and schema fields track the canonical [Observability profile](/docs/profiles/observability) and [GDR schema](/docs/reference/governance-decision-record). Field values are representative, not normative.*
+
+## The Scenario
+
+An e-commerce company runs a customer-support agent named `support-agent-v2`. A customer contacts support claiming a damaged item; the agent reads the thread, checks the order, and proposes a **$450 refund** to the original payment method.
+
+Policy says:
+
+- Refunds **under $200** resolve automatically if the agent's draft decision passes verification.
+- Refunds **$200–$1,000** pass through an [adaptive Governance Gate (#8)](/docs/reference/primitives) that *may relax* based on the agent's track record.
+- Refunds **above $1,000** pass through a mandatory human gate that *never relaxes*.
+- Customers with **3+ refunds in 60 days** force the adaptive gate to its strict setting regardless of agent trust.
+
+The customer in this walkthrough has had two prior refunds in the last forty days. Not a hard flag — but the gate will notice.
+
+## Starting State
+
+Before the request arrives, the system has the MVC and Validation Pipeline postures already in place (see [First 30 Days](/docs/overview/first-30-days) and [Composition Patterns](/docs/overview/composition-patterns)). Specifically:
+
+- The agent has a distinct [identity (#14)](/docs/reference/primitives); every action it takes is principal-chained to the requesting user.
+- A separate verifier agent, `refund-verifier-v1`, implements [Separation of Producer/Verifier (#1)](/docs/reference/primitives).
+- [Policy as Code (#9)](/docs/reference/primitives) encodes the refund tier rules in a policy module evaluated at Ring 2.
+- The agent has an established [Trust Ladder (#11)](/docs/overview/trust-ladders) record: 417 prior refund decisions over 90 days, 99.3% authorizer approval rate, zero compliance incidents. Its current trust band places it in the relaxed configuration of the adaptive gate.
+
+## Step 1 — Ring 0 · The Agent Drafts an Action
+
+`support-agent-v2` receives the customer message and composes an action proposal: *issue a $450 refund to order #84712, method original-card, reason "item-damaged-on-arrival."*
+
+Bounded Agency (#7) constrains the agent to the action shapes its policy allows — it cannot, for instance, issue a credit to a different account. [Structured Output (#5)](/docs/reference/primitives) forces the proposal into the schema the verifier and gate both consume. The Observability layer emits `agent_started` and `tool_called` events against the agent's identity.
+
+**Artifact produced at this step:** an action proposal, not an executed action. Nothing has moved money yet.
+
+## Step 2 — Ring 1 · The Verifier Challenges
+
+`refund-verifier-v1` receives the proposal and runs its checks: does the order exist, does the damage claim match the complaint thread, is the amount within the item's original purchase price, is there evidence the customer has already been compensated through another channel. It [loops (#2)](/docs/reference/primitives) with the producer agent if ambiguous — in this case, it asks the producer for a confidence score on the damage claim extracted from the thread.
+
+The verifier returns `APPROVE` with a confidence score of 0.84 and flags *"customer has 2 prior refunds in 40 days — below adaptive gate hard threshold but worth noting."*
+
+**Ring Control Signal emitted:** Ring 1 returns `GATE` to Ring 0 — the Composability Interface's way of saying *don't execute, hand to Ring 2*. See [Gate Vocabulary](/docs/reference/primitives#gate-vocabulary--governance-decision-records) for the full signal set.
+
+**Artifact produced at this step:** a verification record, linked to the action proposal.
+
+## Step 3 — Ring 2 · Policy Evaluation and Gate Firing
+
+Ring 2's [Governance Gates (#8)](/docs/reference/primitives) receive the verified proposal. The Policy as Code module evaluates:
+
+- Amount: $450 → adaptive tier
+- Agent trust: band 3 of 4 → relaxed posture
+- Customer refund frequency: 2 in 40 days → **forces gate to strict posture**, overriding the trust band
+
+The adaptive gate fires in its strict configuration. A pending [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) is created with `status: pending`, and a `gate_triggered` event emits to the event stream.
+
+```yaml
+# GDR at gate_triggered
+metadata:
+  schema_version: "1.0"
+  decision_id: "gdr_2026-04-24_84712-refund-review"
+  created_at: "2026-04-24T14:07:22Z"
+  source: "refund-authorization-gate-v3"
+status: pending
+gate_resolution: null   # MUST be null while pending
+default_action: ESCALATE
+decision: "authorize refund draft R-84712-a ($450) above adaptive threshold"
+subject:
+  action_proposal_ref: "proposal_84712-a"
+  initiator: "user:customer_31902 → agent:support-agent-v2"
+inputs:
+  amount: 450.00
+  trust_band: 3
+  policy_decision: "strict-adaptive-override: customer_refund_frequency"
+  verifier_confidence: 0.84
+```
+
+**Observability event emitted:**
+
+```text
+gate_triggered {
+  gate_type: "adaptive",
+  decision_id: "gdr_2026-04-24_84712-refund-review",
+  ring_control_signal: "GATE"
+}
+```
+
+## Step 4 — Resolution · An Authorizer Decides
+
+The strict-posture adaptive gate routes to a human support supervisor. Mandatory gates would have routed to a named role (e.g., compliance officer) regardless of trust. The supervisor reviews the action proposal, the verification record, and the customer's history, and resolves.
+
+Three things can happen:
+
+- **APPROVE** — the refund executes; the GDR transitions to `status: resolved` with `gate_resolution: APPROVE`.
+- **REJECT** — the refund is refused; GDR transitions to `status: resolved` with `gate_resolution: REJECT`.
+- **Timeout without action** — GDR transitions to `status: aborted` via the `default_action` (here, `ESCALATE` to the supervisor's manager; had `default_action` been `HALT`, the pending GDR would transition directly to `aborted` and emit `gate_aborted`). See [Default Action on Timeout](/docs/reference/governance-decision-record#default-action-on-timeout).
+
+In this walkthrough the supervisor approves with a condition: *refund approved, customer flagged for refund-frequency review if a fourth refund is requested in the next 30 days.*
+
+The GDR now looks like:
+
+```yaml
+# GDR at gate_resolved
+metadata:
+  schema_version: "1.0"
+  decision_id: "gdr_2026-04-24_84712-refund-review"
+  created_at: "2026-04-24T14:07:22Z"
+  resolved_at: "2026-04-24T14:11:08Z"
+  source: "refund-authorization-gate-v3"
+status: resolved
+gate_resolution: APPROVE
+decision: "authorize refund R-84712-a ($450) with refund-frequency condition"
+subject:
+  action_proposal_ref: "proposal_84712-a"
+  initiator: "user:customer_31902 → agent:support-agent-v2"
+conditions:
+  - "flag customer_31902 for refund-frequency review on fourth refund within 30d"
+authorization:
+  authorizer: "role:support-supervisor / id:supervisor_221"
+  method: "interactive-review"
+audit:
+  integrity_hash: "sha256:..."
+  retained_until: "2031-04-24"   # 5y per EU AI Act Art. 12
+```
+
+**Observability event emitted:**
+
+```text
+gate_resolved {
+  resolution: "approve",
+  decision_id: "gdr_2026-04-24_84712-refund-review",
+  authorizer: "supervisor_221"
+}
+```
+
+## Step 5 — Execution and Provenance
+
+Once the gate resolves `APPROVE`, the action executes: the payment processor issues the refund. A [Provenance (#6)](/docs/reference/primitives) record attaches the executed action to the GDR by `decision_id`, so any forensic query can trace:
+
+*money moved → which action → which authorized GDR → which verification record → which agent proposal → which user message.*
+
+The [Transaction Control (#16)](/docs/reference/primitives) primitive ensures that if the payment processor errors, the gate's resolution is rolled back in the ledger — the system doesn't persist a "decided but never executed" state.
+
+## Step 6 — Ring 3 · Trust Adjustment
+
+Ring 3 observes the closed loop. `support-agent-v2`'s refund track record updates:
+
+- Prior: 417 decisions, 99.3% authorizer-approval, trust band 3 of 4.
+- Now: 418 decisions, supervisor approved — no change to approval rate. Trust band holds at 3.
+
+If the supervisor had rejected, or if the agent had been involved in a subsequent fraud pattern, Ring 3 would emit a trust-demotion recommendation. Promotions require sustained performance plus explicit authorization — see [Trust Ladders](/docs/overview/trust-ladders) for the full calibration rules. Every promotion or demotion itself emits a GDR; trust changes are governed decisions, not automatic statistical moves.
+
+## The Threaded View
+
+| Step | Ring | Primitive(s) engaged | Artifact produced | Observability emission |
+|---|---|---|---|---|
+| 1 | Ring 0 | #5, #7, #14, #19 | action proposal | `agent_started`, `tool_called` |
+| 2 | Ring 1 | #1, #2 | verification record, Ring Control Signal `GATE` | `verification_completed` |
+| 3 | Ring 2 | #8, #9 | pending GDR | `gate_triggered` (with `decision_id`) |
+| 4 | Ring 2 | #8 | resolved GDR (`APPROVE` + conditions) | `gate_resolved` (with `decision_id`) |
+| 5 | Ring 0 | #6, #16 | provenance record linked by `decision_id` | `provenance_recorded` |
+| 6 | Ring 3 | #11 | trust trajectory update | `trust_level_changed` (or unchanged) |
+
+Six steps; one thread; six linked artifacts; every transition observable; every consequential decision backed by a GDR. That is the shape of a Governed Decision Flow in motion.
+
+## Where the Walkthrough Simplifies
+
+<Confidence level="informed">
+  This walkthrough compresses several real production concerns for legibility.
+</Confidence>
+
+- **Real deployments have multiple verifier and gate classes** — fraud detection, compliance checks, PII handling — that can fire in parallel or sequence. AGF's Composability Interface is designed for this; the scenario shows only one verifier and one gate for clarity.
+- **Action proposals at scale batch and deduplicate** at Ring 0 before reaching Ring 1. The one-proposal-one-gate flow above is the logical model, not necessarily the runtime model.
+- **GDR emission patterns vary by Domain Outcome**. Refunds, tool authorizations, and trust promotions all emit GDRs but populate `subject` and `conditions` differently. See the [GDR Examples](/docs/reference/governance-decision-record#examples) for three distinct schemas.
+- **Trust Ladder dynamics** are more stateful than the single-step view suggests. A single decision rarely moves trust bands; sustained performance over statistically meaningful windows does. The calibration rules live in the [Trust Ladders](/docs/overview/trust-ladders) canonical doc.
+
+## What to Read Next
+
+- **Building the gate layer?** → [Governance Gates (#8)](/docs/reference/primitives) and the [GDR schema](/docs/reference/governance-decision-record).
+- **Wiring observability?** → [Observability profile](/docs/profiles/observability) for the event catalog and span taxonomy.
+- **Designing the policy layer?** → [Policy as Code (#9)](/docs/reference/primitives) and the [Governance Framework](/docs/reference/governance-framework).
+- **Still at the floor?** → [First 30 Days](/docs/overview/first-30-days) for the MVC onboarding path before layering Ring 1 and Ring 2.

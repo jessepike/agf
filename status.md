@@ -1,9 +1,45 @@
 ---
 updated: 2026-04-24
-stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D next)
+stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D Actionability shipped 2026-04-24)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-04-24 (Cluster D Actionability shipped — G5-F12 + F13 resolved)
+
+**From:** CPO session (Opus) — Cluster D content shaping
+**To:** Next session (→ **Credibility Pass v0.3**, Sonnet, ~3-4h, see Tier 2 below)
+**Tree state:** Clean after commit. Origin/main pending push.
+
+**What shipped this session (single commit):**
+
+- New page `agf-docs/content/docs/overview/first-30-days.mdx` — week-by-week MVC starter workplan: prerequisites, four week sections (Inventory & Scope / Identity & Attribution / Provenance & Observability / Scoped Environment & Review), exit criteria to Validation Pipeline + Governed Decision Flow, "What MVC is Not" boundary block. Closes **G5-F12**.
+- New page `agf-docs/content/docs/overview/reference-walkthrough.mdx` — one threaded refund scenario ($450 with adaptive-gate override) traced through Rings 0–3 with two GDR YAML examples, six-row threaded view table mapping step → ring → primitive → artifact → observability event, and a candor section under `<Confidence level="informed">` flagging where the walkthrough simplifies. Closes **G5-F13**.
+- Nav wiring: `overview/meta.json` extended; cross-links added from `core-concepts.mdx` "What to read next" and `composition-patterns.mdx` "Where to Start" callout.
+- cspell dictionary extended (`workplan`, `unauditable`); markdownlint clean; link-check passes; `pnpm build` green (21 prerendered paths).
+
+**Scorecard impact (projected, pending independent re-rating):**
+
+- **Actionability 4 → 7+ likely** (the only stuck dimension; both G5-F12 and G5-F13 directly target it)
+- Differentiation 7 → likely 8 (end-to-end walkthrough was the missing concrete differentiation move)
+- Public Readiness 7 → likely 8 (artifact unevenness reduces — overview now has both onboarding ramp and reference walkthrough)
+- Composite ~6.38 → projected ~6.75–7.0
+
+**Findings ledger state after this session:**
+
+- **Validated:** 15 (unchanged)
+- **Resolved (pending validation):** 5 → G5-F09, F15, F16 (Cohesion Pass v0.3) + G5-F12, F13 (Cluster D)
+- **Open:** G5-F18 (editorial), MI-F07 (residual), G5-M01/M02/M03 (meta)
+
+**Tier 1 next (highest leverage):** **Credibility Pass v0.3** (G5-F03 + F14 + F20) — Sonnet, 3-4h. Now the only remaining content lever; runs against the freshly shipped Cluster D pages too. When complete, unlocks G5-M01 closeout per Meta-Finding Closeout Protocol.
+
+**Tier 2:** G5-F18 + MI-F07 editorial pass — Sonnet, 2h. Slogan density reduction across flagship MDX + remaining markdownlint hygiene. Unlocks G5-M02 closeout.
+
+**Tier 3 quick wins:** Transparency pages (`/changelog`, `/decisions`, `/roadmap`, `/contribute`) — 1h Sonnet. ai-engineering profile rewrite (retire Phase 1-5 H3) — 2h Sonnet, pairs cleanly with Cluster D pages on AI Engineer audience.
+
+**Tier 4 meta closeouts:** G5-M01 after Credibility Pass · G5-M02 after F18/MI-F07 editorial · G5-M03 after Credibility + F18 + Public Readiness independent re-score ≥8/10.
+
+---
 
 ## Handoff — 2026-04-24 (evening close — Cohesion Pass v0.3 shipped + ledger closeout)
 

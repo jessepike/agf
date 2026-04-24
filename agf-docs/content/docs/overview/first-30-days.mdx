@@ -1,0 +1,105 @@
+---
+title: "First 30 Days — Minimum Viable Control"
+description: "A concrete four-week workplan for deploying the Minimum Viable Control composition pattern. Week-by-week goals, primitives activated, artifacts produced, and exit criteria to move toward a Validation Pipeline."
+---
+
+Most organizations with agents in production today have **no formal governance** — see the [Non-existent maturity level](/docs/reference/governance-framework) in the Governance Framework. This page is the thirty-day path from that floor to [Minimum Viable Control (MVC)](/docs/overview/composition-patterns#minimum-viable-control), the AGF composition pattern where agents cannot exceed their scope, every action is attributable, and an audit trail exists.
+
+MVC is Ring 0 only. No independent verification, no gate resolutions, no trust calibration yet. But it is a defensible posture — and it is the foundation every other AGF pattern builds on.
+
+*This is a workplan, not a reference doc. Each step links to the canonical primitive or concept. If a week's outputs are already in place in your system, skip it — the goal is the end state, not the ritual.*
+
+## Prerequisites
+
+Before Week 1, confirm the following. None require new tooling; all require naming things you probably already have.
+
+- **At least one agentic workload is in production or a pre-production pilot.** MVC is for systems that already exist and need governance retrofitted, not for greenfield design. If you're designing a new system, read [Composition Patterns](/docs/overview/composition-patterns) first and target Validation Pipeline directly.
+- **A single named owner** for the thirty-day effort. Cross-functional input is needed (platform, security, AI engineering); single ownership is non-negotiable.
+- **Write access** to the agent's configuration, its runtime environment, and the log sink its events flow into.
+- **A thirty-day executive sponsor window** — a named executive who will accept a one-page status report at Day 15 and a go/no-go at Day 30.
+
+## Week 1 — Inventory and Scope
+
+**Goal:** Name every agent, its job, and the boundary of what it is allowed to do. Most organizations discover in Week 1 that they have more agents than they thought and fewer written boundaries than they assumed.
+
+**Primitives activated this week:** [Bounded Agency (#7)](/docs/reference/primitives), [Environment Governance (#19, minimal)](/docs/reference/primitives).
+
+**Concrete outputs:**
+
+- **Agent Inventory** — a single document or system-of-record entry per agent with: name, owner, current environment, model/provider, tools it can call, data it can read, data it can write, and the human systems it can affect.
+- **Scope Boundary Statement** per agent — one paragraph in plain language that says *what the agent may do* and *what it must not do*, expressed as actions on named resources. The statement is what a Bounded Agency policy will eventually encode — but the paragraph comes first.
+- **Environment classification** — which agents run in prod, which in staging, which on individual laptops. Agents running in environments no one controls are the first candidates for consolidation or decommission.
+
+**Exit signal for Week 1:** The executive sponsor can read any row of the Agent Inventory and say "yes, that matches what I expected" — or "no, it does not" and flag it for remediation in Week 2.
+
+## Week 2 — Identity and Attribution
+
+**Goal:** Make every agent action attributable. If an action hits a system and you cannot point at *which agent, acting on whose behalf, using which credentials* caused it, the action is unauditable. Week 2 closes that gap.
+
+**Primitive activated this week:** [Identity & Attribution (#14)](/docs/reference/primitives).
+
+**Concrete outputs:**
+
+- **One distinct identity per agent.** No shared service accounts across agents. If two agents share credentials today, split them this week even if it means issuing new keys to each.
+- **Principal chain recorded** on every agent invocation: *user → agent → downstream tool*. Most IAM systems already support this via delegated authorization (OAuth on-behalf-of, workload identity). Pick the mechanism your stack already uses; don't introduce a new one.
+- **Attribution audit** on the last 7 days of production traffic — can you answer, for any action logged, which agent and which user initiated it? If the answer is "no" or "sometimes," that is your backlog.
+
+**Exit signal for Week 2:** Any action taken by an agent in the prod environment, selected at random, can be traced to a principal chain within five minutes.
+
+## Week 3 — Provenance and Observability
+
+**Goal:** Every consequential action the agent takes produces a tamper-evident record. Every agent run emits observable signals that show what happened and why.
+
+**Primitives activated this week:** [Provenance (#6)](/docs/reference/primitives), [Observability (#10)](/docs/reference/primitives).
+
+**Concrete outputs:**
+
+- **Provenance record on every write action** — any action that changes state in a system of record emits a record carrying: initiator (from Week 2's principal chain), timestamp, input digest, output digest, tool version. Most platforms have this structure already; the Week 3 job is turning it on for agent traffic, not inventing it.
+- **Minimum observability event set emitted** — at a floor, every agent run emits `agent_started`, `agent_completed`, `tool_called`, `tool_returned`. For naming conventions and the fuller event catalog, see the [Observability profile](/docs/profiles/observability). MVC only requires the floor.
+- **One log sink** where those events land. Splunk, Datadog, a self-hosted OTel collector, a Postgres table — the target doesn't matter for MVC. Discoverable, queryable, and retained for at least 30 days is the bar.
+
+**Exit signal for Week 3:** An operator can reconstruct any completed agent run from the event stream alone, without reading the agent's source code.
+
+## Week 4 — Scoped Environment and Thirty-Day Review
+
+**Goal:** The agent runs somewhere it can be managed — not on a laptop, not in a notebook, not behind a personal API key. The executive sponsor reviews the full MVC posture and decides whether to hold, extend, or advance to [Validation Pipeline](/docs/overview/composition-patterns#validation-pipeline).
+
+**Primitive activated this week:** [Environment Governance (#19, minimal posture)](/docs/reference/primitives).
+
+**Concrete outputs:**
+
+- **Scoped operating environment** per agent — a named runtime (container, sandbox, governed function, controlled workspace) that the platform team owns and can change without the agent owner's involvement. At MVC, the environment's job is *existing and being named*; optimization and feedback loops come later.
+- **Thirty-day review packet** for the executive sponsor, containing: the Agent Inventory, the Scope Boundary Statements, a one-page attestation that Weeks 1–3 outputs are in place, and a recommendation to hold at MVC or advance. The packet is the first governance artifact MVC produces — keep it.
+
+**Exit signal for Week 4:** The sponsor signs the attestation, or flags specific gaps and commits to a remediation window.
+
+## Exit Criteria — Moving Beyond MVC
+
+MVC is a floor, not a destination. Move to [Validation Pipeline](/docs/overview/composition-patterns#validation-pipeline) (Ring 0 + Ring 1) when any of the following become true:
+
+- The agent produces outputs that are consumed by other systems or humans and **rework cost is material** — manual review is buying you verification that structural [Separation of Producer/Verifier (#1)](/docs/reference/primitives) would buy more reliably.
+- Regulatory or contractual obligations require a demonstrable second-check before action.
+- Trust in outputs is the ceiling on how much of the workload you can delegate to the agent.
+
+Move to [Governed Decision Flow](/docs/overview/composition-patterns#governed-decision-flow) (Ring 0 + Ring 1 + Ring 2) when gated decisions are required — regulator sign-off, human-in-the-loop for irreversible action, or [Policy as Code (#9)](/docs/reference/primitives) governing a class of actions.
+
+The [end-to-end reference walkthrough](/docs/overview/reference-walkthrough) shows what a single request looks like once Ring 1 and Ring 2 are in play — useful as a forward-look while you finish MVC.
+
+## What MVC is Not
+
+<Confidence level="established">
+  MVC is not product-ready governance for high-stakes agentic systems. It is the defensible floor. A consumer-facing agent making irreversible decisions needs Governed Decision Flow at minimum; a regulated enterprise deployment needs the full hardening posture described in [Composition Patterns](/docs/overview/composition-patterns#hardening-posture--a-modifier-not-a-pattern).
+</Confidence>
+
+MVC does not give you:
+
+- Independent verification of agent outputs (that's Ring 1 / [Validation Pipeline](/docs/overview/composition-patterns#validation-pipeline))
+- Policy-evaluated gate resolutions or [Governance Decision Records](/docs/reference/governance-decision-record) (that's Ring 2 / [Governed Decision Flow](/docs/overview/composition-patterns#governed-decision-flow))
+- [Trust Ladders](/docs/overview/trust-ladders) — at MVC there is no signal to calibrate trust against
+- Self-improvement loops (Ring 3)
+
+What it gives you is *defensibility*: if someone asks "what is this agent doing and who authorized it," you have an answer backed by artifacts, not reputation.
+
+---
+
+*Next: [End-to-End Reference Walkthrough](/docs/overview/reference-walkthrough) — a single request traced through all four rings, showing how the primitives you activate past MVC connect into a governed flow.*

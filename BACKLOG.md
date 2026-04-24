@@ -14,6 +14,15 @@ _(none — all P0 items resolved)_
 
 ## P1 — High Priority
 
+### ~~Cluster D — Actionability (G5-F12 + F13)~~ — SHIPPED 2026-04-24
+
+Resolved via two new MDX pages in `agf-docs/content/docs/overview/`:
+
+- **`first-30-days.mdx`** — week-by-week MVC starter workplan, prerequisites + four week sections + exit criteria. Closes G5-F12.
+- **`reference-walkthrough.mdx`** — single threaded refund scenario across Rings 0–3 with two GDR YAML examples and a primitive/artifact/event mapping table. Closes G5-F13.
+- Both registered in `overview/meta.json` (positions 6–7), cross-linked from `core-concepts.mdx` and `composition-patterns.mdx`. Site builds clean; lint + link-check + cspell pass.
+- **Scorecard projection:** Actionability 4 → 7+ pending re-rating (the only remaining stuck dimension; unblocks Differentiation + Public Readiness ceilings).
+
 ### Credibility Pass v0.3 (NEW 2026-04-23, from Cluster B triage)
 
 Closes umbrella meta-finding G5-M01 (promises rigor/evidence/confidence without showing enough) and specific children G5-F03 (citations) + G5-F20 (dated sources) + completes G5-F04 batch-apply. Infra already shipped (Confidence + Status components, commit pending).
