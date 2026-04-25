@@ -9,19 +9,20 @@ Site-level infrastructure changes (build config, MDX-only edits) are excluded un
 
 ## Unreleased
 
-### Changed
-
-- **Composition Patterns canonicalized at four** (Minimum Viable Control / Validation Pipeline / Governed Decision Flow / Full Governed Agentic System). The "Phase 1–5" growth language is retired; the #11/#15/#18 hardening stack is expressed as a hardening posture modifier, not a fifth named pattern. Decision: [D10(a)](/docs/transparency/decisions).
-- **"Governance" qualifier conventions** added to `shared-vocabulary.md` — five-sense disambiguation, qualified forms ("AGF" / "the Governance ring" / "AGF program maturity" / "Governance Gates" / "NIST CSF Govern"). Decision: [D10(b)](/docs/transparency/decisions).
-- **Observability three-layer disambiguation** — Primitive #10 (emits) → Agentic Observability (correlates) → Observability Profile (implements). Decision: [D10(c)](/docs/transparency/decisions).
-
-Closes findings G5-F09, G5-F15, G5-F16 (Cohesion Pass v0.3). Meta-finding G5-M02 closed via two-pass closeout convergence 2026-04-24.
-
 ### Added
 
-- **First 30 Days workplan** — week-by-week MVC starter at `/docs/overview/first-30-days`. Closes G5-F12.
-- **Reference Walkthrough** — single threaded refund scenario across Rings 0–3 with two GDR YAML examples at `/docs/overview/reference-walkthrough`. Closes G5-F13.
-- **Confidence markers across flagship pages** — empirical claims now carry `<Confidence level="established|informed|open" />` matching the evidence base; time-sensitive references (Agent 365, AICM v1.0.3, Trust Ladders citations) carry verification dates. Credibility Pass v0.3.
+- **First 30 Days workplan** — a week-by-week starter at [`/docs/overview/first-30-days`](/docs/overview/first-30-days) for teams adopting the Minimum Viable Control composition pattern. Prerequisites, four week sections (Inventory & Scope → Identity & Attribution → Provenance & Observability → Scoped Environment), and exit criteria into Validation Pipeline and Governed Decision Flow.
+- **Reference Walkthrough** — a single threaded scenario at [`/docs/overview/reference-walkthrough`](/docs/overview/reference-walkthrough) tracing a customer refund through all four Rings, with two complete GDR YAML examples and a primitive/artifact/event mapping table.
+- **Transparency section** — public surfaces for [Changelog](/docs/transparency/changelog), [Decisions](/docs/transparency/decisions), [Roadmap](/docs/transparency/roadmap), and [Contribute](/docs/transparency/contribute).
+- **Confidence markers across flagship pages** — empirical claims now carry `<Confidence level="established|informed|open" />` proportional to the evidence base. Time-sensitive references (Agent 365 GA target, CSA AICM v1.0.3, Trust Ladders research citations) carry verification dates so readers can confirm currency.
+- **AI Engineering profile rewrite** — restructured around the four canonical Composition Patterns instead of the retired "Phase 1–5" sequence. Pairs with the new First 30 Days and Reference Walkthrough pages for an AI engineer's reading path.
+
+### Changed
+
+- **Composition Patterns canonicalized at four** (Minimum Viable Control / Validation Pipeline / Governed Decision Flow / Full Governed Agentic System). The "Phase 1–5" growth language is retired; the #11/#15/#18 hardening stack is expressed as a hardening posture modifier, not a fifth named pattern. See [Decision D10(a)](/docs/transparency/decisions).
+- **"Governance" qualifier conventions** — five-sense disambiguation table added to [`/docs/resources/vocabulary`](/docs/resources/vocabulary). Bare "governance" is reserved for the framework sense; structural senses use qualified forms ("AGF" for the framework, "the Governance ring" or "Ring 2", "AGF program maturity", "Governance Gates", "NIST CSF Govern"). See [Decision D10(b)](/docs/transparency/decisions).
+- **Observability three-layer disambiguation** — Primitive #10 emits, [Agentic Observability](/docs/reference/agentic-observability) correlates, the [Observability Profile](/docs/profiles/observability) implements. See [Decision D10(c)](/docs/transparency/decisions).
+- **Per-signal dual-form table** — the Composability Interface specification now includes a per-signal emission table (which Ring Control Signals emit observability events vs Governance Decision Records). Trust Ladder promotions/demotions now have an explicit GDR emission spec. See [Decisions D5 / D9](/docs/transparency/decisions) and [Governance Decision Record](/docs/reference/governance-decision-record).
 
 ## 0.2.0 — 2026-04-22
 

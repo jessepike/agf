@@ -3,16 +3,16 @@ title: "Roadmap"
 description: "What AGF is working on next — open items, planned work, and what is intentionally not yet scoped."
 ---
 
-AGF is maintained by a single author in public, with explicit confidence levels and acknowledged open questions. The roadmap below reflects the current state of work after v0.2.0; it is updated when meaningful items ship or land in the queue.
+AGF is maintained by a single author in public, with explicit confidence levels and acknowledged open questions. The roadmap below reflects the current state of work after v0.2.0; it is updated when meaningful items ship.
 
-This page is a living summary. The detailed work queue lives in `BACKLOG.md` (private). Major decisions surface in [Decisions](/docs/transparency/decisions). Released work surfaces in the [Changelog](/docs/transparency/changelog).
+This page is a public summary of where AGF is heading. Major decisions surface in [Decisions](/docs/transparency/decisions). Released work surfaces in the [Changelog](/docs/transparency/changelog).
 
 ## Now (in flight)
 
 <Confidence level="informed">
 
-- **Cohesion follow-through.** Slogan-density reduction across flagship MDX (G5-F18); transparency pages (this set, shipping with this update). Targets the residual coherence findings from external review GPT-5.4 (2026-04-23).
-- **AI Engineering profile rewrite.** Retire the "Phase 1–5" H3 headings in favor of the four canonical Composition Patterns; regenerate the implementation-progression diagram. Pairs with the AI Engineer audience served by the new [First 30 Days](/docs/overview/first-30-days) and [Reference Walkthrough](/docs/overview/reference-walkthrough) pages.
+- **Public-readiness pass.** Tightening flagship-page voice and cohesion so the publication standard matches the framework substance. Includes editorial cleanup of slogan density and remaining vocabulary residue from earlier drafts.
+- **AI Engineering profile alignment.** The profile has been rewritten around the four canonical Composition Patterns (the prior phase-numbered structure is retired). The matching architecture diagram is queued for regeneration as a four-pattern progression.
 
 </Confidence>
 
@@ -20,9 +20,9 @@ This page is a living summary. The detailed work queue lives in `BACKLOG.md` (pr
 
 <Confidence level="informed">
 
-- **GDR cross-doc integration.** Update `grc-profile` Evidence Artifacts table to reference GDR for Primitive #8 (decision records) and Primitive #11 (promotion/demotion records). Add `decision_id` references to observability event payloads in `observability-profile`.
-- **Composability Interface dual-form audit.** Per D5 / D16, audit each Ring Control Signal and Gate Resolution for explicit dual-form annotations. Pair with Primitive #11 (Trust Ladders) audit — promotion/demotion paths are Domain Outcomes that must emit GDRs.
-- **Agentic Compliance Blind Spots analysis.** Public 10-gap analysis surfacing where current control catalogs (AICM, NIST 800-53, ISO 42001) leave agent-specific failure modes uncovered. The "gap disclosure" commitment from the [Relationship to Frameworks](/docs/reference/relationship-to-frameworks) doc made operational.
+- **Agentic Compliance Blind Spots analysis.** A public gap analysis surfacing where current control catalogs (CSA AICM, NIST 800-53, ISO 42001) leave agent-specific failure modes uncovered. Operationalizes the "gap disclosure" commitment in [Relationship to Frameworks](/docs/reference/relationship-to-frameworks).
+- **GDR machine-form artifacts.** Reference [Governance Decision Record](/docs/reference/governance-decision-record) JSON Schema validators, example GDR libraries for the canonical scenarios, and FAIR-CAM control-effectiveness templates that consume GDRs. Closes the gap between AGF's "machine-consumable" architectural commitment and the artifacts that make it operational.
+- **Maturity-level conformance criteria.** Concrete, testable criteria for advancing through the AGF program-maturity levels (L1 Non-existent → L5 Optimized). Today the levels are labeled and characterized; they are not yet independently auditable.
 
 </Confidence>
 
@@ -33,7 +33,7 @@ This page is a living summary. The detailed work queue lives in `BACKLOG.md` (pr
 - **Primitive #14 Identity & Attribution upgrade.** Ten-point spec already drafted; integrates Microsoft and CSA agentic-identity research. Scope: distinguish agent identity from delegated user identity; add credential lifecycle.
 - **Primitive #15 → "Agent SRE."** Rename and reframe to absorb SLO definition, error-budget policy, and chaos engineering for agentic systems.
 - **TOGAF / SABSA / COBIT crosswalks.** Currently described as "what sits above the AGF stack" without explicit mapping. Crosswalks deferred until adopter demand surfaces.
-- **First adopter case studies.** AGF currently has zero published implementations. The "typically implement both" claims in [Trust Ladders](/docs/overview/trust-ladders) and [Relationship to Frameworks](/docs/reference/relationship-to-frameworks) are flagged as `<Confidence level="open" />` until adopter data exists.
+- **First adopter case studies.** AGF currently has zero published implementations. Claims about typical adopter behavior in [Trust Ladders](/docs/overview/trust-ladders) and [Relationship to Frameworks](/docs/reference/relationship-to-frameworks) are marked `<Confidence level="open" />` until adopter data exists.
 
 </Confidence>
 

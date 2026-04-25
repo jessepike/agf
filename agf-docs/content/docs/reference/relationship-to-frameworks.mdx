@@ -7,10 +7,14 @@ Any organization deploying agentic systems in 2026 is looking at a crowded field
 
 Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them — it's the architectural substrate that explains how they compose.
 
-## Status Note
+## Status Note: current vs planned
 
 <Confidence level="open">
-AGF ships human-readable primitive forms today. Machine-readable primitive schemas (dual-form artifacts), FAIR-CAM control-effectiveness templates, and full maturity-level conformance criteria are planned for v0.3. Where this document describes AGF "operationalizing at machine speed," treat that as the **architectural commitment** — not current reality. The artifacts that make it real are the next major work product.
+**Today (v0.2.0):** AGF ships as human-readable framework documentation — primitive specifications, decision rationale, the GDR YAML schema, and architecture diagrams. The Composability Interface and gate-resolution semantics are specified at the contract level.
+
+**Planned (next major work product):** Machine-readable primitive forms beyond GDR (event-schema libraries for the full Ring Control Signal set, FAIR-CAM control-effectiveness templates, evaluation rubric schemas), independently auditable maturity-level conformance criteria (L1 → L5), and reference implementations of the canonical Composition Patterns.
+
+Where this document describes AGF "operationalizing at machine speed," treat that as the **architectural commitment**, not current capability. The artifacts that make the commitment real are the planned work, not the shipped artifact. A regulated organization adopting AGF today should plan to author the machine-form artifacts itself, using AGF's specifications as the contract.
 </Confidence>
 
 ## The Core Question
@@ -19,7 +23,7 @@ AGF ships human-readable primitive forms today. Machine-readable primitive schem
 
 **No. You need the architecture that makes the frameworks you already use work together for agentic systems. That is AGF.**
 
-AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, prescribes pathways for implementation, and is designed to operationalize at machine speed.
+AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, and prescribes pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note-current-vs-planned)).
 
 ## The Seven-Layer Stack
 
@@ -44,7 +48,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 - **Synthesizes** — pulls from every layer; does not invent primitives
 - **Unifies** — places the synthesized material on a shared architectural substrate
 - **Prescribes** — converts synthesis into actionable implementation pathways per primitive
-- **Operationalizes** — emits machine-readable forms of its primitives alongside human-readable forms (the dual-form principle). At gate boundaries this materializes as a [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) — see DECISIONS.md #5, #8, and #9 for the full vocabulary.
+- **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see [Status Note](#status-note-current-vs-planned) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
 
 ## Important Honest Observations
 

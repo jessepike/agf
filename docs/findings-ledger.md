@@ -71,7 +71,10 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F22 | Seven-Layer Stack Layer 0 row in `relationship-to-frameworks.mdx` compresses six AGF construct families ("4 Rings + 19 Primitives + 3 deployment modes + 3-level security model + 7 tensions + OTAA") into one substrate claim without anchoring use — exemplar of M02 pattern | Medium | Established | Coherence | **resolved** 2026-04-24 (filed during M02 closeout pass by Codex independent reviewer; same-session fix applied: Layer 0 cell now describes substrate function and links to `/docs/overview/what-is-agf` for the construct catalog rather than enumerating constructs in the table) |
 | G5-M01 | (Meta) Promises rigor/evidence/confidence without showing enough | High | Established | Credibility | **validated** 2026-04-24 (two-pass convergence: pass-1 Codex generic-reviewer returned `pattern-persists` + spawned G5-F21; pass-2 Codex new-adopter persona post-F21/F18/F22 fixes returned `pattern-closed`; convergence under scaling rule) |
 | G5-M02 | (Meta) Names too many things before proving why they matter | High | Established | Coherence | **validated** 2026-04-24 (two-pass convergence: pass-1 Codex generic-reviewer returned `pattern-persists` + spawned G5-F22; pass-2 Codex new-adopter persona post-F22/F18 fixes returned `pattern-closed`; convergence under scaling rule) |
-| G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | open |
+| G5-F23 | Changelog Unreleased section uses internal finding-IDs (G5-F##/G5-M##) and process labels ("Cohesion Pass v0.3", "Credibility Pass v0.3") as reader-facing release-note content; reads as internal QA log rather than public release notes | Medium | Established | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 1 by Codex standards-body persona; same-session fix: changelog Unreleased rewritten in external-reader voice — Added/Changed sections describe deliverables; F-IDs/pass-names removed from public surface; canonical CHANGELOG.md retained for commit-level history) |
+| G5-F24 | Roadmap exposed private workflow vocabulary — references to `BACKLOG.md` (private), GPT-5.4 review residue, F-IDs in `Now`/`Next` items — making the roadmap read as in-flight remediation rather than a stable public roadmap | Medium | Established | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 1 by Codex; same-session fix: Roadmap recast around public deliverables — internal tracker references removed; Now/Next items now describe what's shipping rather than which finding is being closed) |
+| G5-F25 | `relationship-to-frameworks.mdx` Status Note + Core Question + "Operationalizes" bullet conflate present-tense capability claims ("operationalize at machine speed") with future-state architectural commitments without explicit Current-vs-Planned framing — capability-inflation risk for first-time regulated readers | Medium | Established | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 1 by Codex; same-session fix: Status Note retitled "Status Note: current vs planned" with explicit Today/Planned split; Core Question paragraph rewritten to call the fourth verb "the architectural commitment AGF is built around" with a pointer to the Status Note; Operationalizes bullet rewritten to distinguish architectural commitment from shipped capability) |
+| G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | accepted (closeout pass 1 — see detail block) |
 | MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **validated** 2026-04-24 |
 | MI-F02 | markdownlint errors in vocabulary.mdx (root cause: config, not content) | Low | Established | Mechanical | **validated** 2026-04-24 |
 | ~~MI-F03~~ | ~~Broken internal link `/docs` in what-is-agf.mdx:109~~ | — | — | — | **collapsed → MI-F04** (tooling false positive; `/docs` route valid) |
@@ -395,8 +398,21 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 - **Confidence:** Informed (reviewer's overall framing)
 - **Dimension:** Public Readiness
 - **Source:** Section 1 executive verdict
-- **State:** open
-- **Note:** Strategic signal, not a single fix. Resolution comes from hitting dimension targets across the scorecard — not from any single action.
+- **State:** accepted (closeout pass 1 complete; awaiting pass 2 convergence)
+- **Note:** Strategic signal — resolution requires hitting Public Readiness ≥8/10 by independent reviewer per Strategic-meta rule (`docs/reviews/README.md`).
+
+**Closeout pass 1 — 2026-04-25**
+
+| Field | Value |
+|---|---|
+| Reviewer | Codex CLI (gpt-5.4) — Strong tier |
+| Persona | Senior security/GRC practitioner, cold first-encounter read |
+| Scope read | Index, what-is-agf, core-concepts, first-30-days, reference-walkthrough, composition-patterns, rings-model, trust-ladders, ai-engineering profile, relationship-to-frameworks, GDR, all four transparency pages |
+| Public Readiness re-score | **7/10** (target ≥8/10) |
+| Verdict | **`pattern-persists`** — quantitative below threshold; qualitative re-read confirmed "credible-in-progress, not clean public-ready" |
+| New children | G5-F23 (changelog internal-language), G5-F24 (roadmap private-workflow exposure), G5-F25 (relationship-to-frameworks present-vs-future slippage) |
+| Same-session resolution | All 3 children fixed in same session per protocol allowance — changelog rewritten in external-reader voice, roadmap recast around public deliverables, relationship-to-frameworks Status Note explicitly distinguishes Current vs Planned |
+| Next action | Pass 2 closeout via different persona (standards-body editor) reads post-fix artifact and re-scores; if Public Readiness ≥8/10 + qualitative re-read converges on `pattern-closed`, M03 → `validated` |
 
 ---
 
