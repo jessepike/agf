@@ -86,3 +86,7 @@ SLSA
 miscredited
 workplan
 unauditable
+# Added 2026-04-25 from transparency pages
+jessepike
+overclaiming
+BDFL

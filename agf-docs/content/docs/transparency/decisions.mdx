@@ -1,0 +1,54 @@
+---
+title: "Decision Log"
+description: "Terminology, structural, and positioning decisions with rationale — why AGF chose the path it did."
+---
+
+This is the public decision log. Each entry captures **what** was decided, **why**, and **what alternatives were considered**. The intent is that future contributors (and AGF itself, in retrospect) can reconstruct the reasoning behind every load-bearing choice.
+
+The [canonical `DECISIONS.md`](https://github.com/jessepike/agf/blob/main/DECISIONS.md) on GitHub is the source of truth. This page summarizes by theme.
+
+## Vocabulary & Terminology
+
+- **D1 (2026-03-19)** — Replace "reliable" with "durable" in the five system properties. Durable adds a distinct architectural property (survives failures, preserves governance over time) that "reliable" — claimed by every framework — does not.
+- **D2 (2026-03-19)** — Replace "prior art" with "existing work". Removes patent/legal jargon for non-academic readers.
+- **D7 (2026-04-21)** — **Harness = governance envelope around an AI agent** (source artifacts + runtime adapters, inseparable). Industry-converged definition; `Agent = Model + Harness`. Distinct from Wrapper (deployment mode), Hypervisor (AGT runtime), Test Harness (unrelated).
+
+## Positioning & Stack
+
+- **D3 (2026-04-21)** — **AGF Positioning Pillars (six).** Category stake (Agentic Governance) · Four verbs (Synthesize / Unify / Prescribe / Operationalize) · OTAA invariant · Dual-form principle · Tempo taxonomy · NIST CSF parallel. Supersedes the earlier "integration layer" framing.
+- **D4 (2026-04-21)** — **Seven-layer stack.** AGF at Layer 0 (architectural substrate), with OWASP at L1, MAESTRO/MS Failure Modes at L2, control catalogs at L3, ATF at L4, runtime references (AGT, CAF, Agent 365) at L5, FAIR/risk quantification orthogonal at L6. Resolves "AGF or X?" → "AGF *and* X, at different layers."
+
+## Gate Vocabulary & Audit
+
+- **D5 (2026-04-21, refined 2026-04-22)** — **Dual-form is load-bearing at gate boundaries.** Every Gate Resolution and Domain Outcome MUST emit human-readable rationale AND a machine-readable GDR simultaneously.
+- **D8 (2026-04-22)** — **Gate Vocabulary Disambiguation: four-part vocabulary.** Ring Control Signal (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`) · Gate Resolution (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`) · Domain Outcome (e.g., `Authorized / Denied`) · Audit Artifact (GDR). Each enum scoped to a different layer; nested per `agentic-primitives.md`.
+- **D9 (2026-04-22)** — **GDR is the canonical audit artifact.** Reusable AGF primitive with polymorphic content. Required at every Gate Resolution and Domain Outcome. Five-state lifecycle. Schema at `docs/schemas/gdr.yaml`. Provides evidence in support of EU AI Act Art. 12, NIST AI RMF MANAGE 4.1, ISO 42001 documentation clauses.
+
+## Maturity Model
+
+- **D6 (2026-04-21)** — **L1 renamed "Awareness" → "Non-existent"**; old L1 content (agent inventory, basic risk classification) absorbed into L2 Foundation. Honestly names the state most organizations are in. Complementary to (not substitute for) CSA ATF's 4-tier per-deployment scale.
+
+## Composition & Coherence
+
+- **D10 (2026-04-24)** — **Cohesion Pass v0.3 — three-part vocabulary reconciliation.**
+  - **(a)** Composition Patterns canonicalized at four (MVC / Validation Pipeline / GDF / Full Governed). "Phase 1–5" retired. Hardening stack (#11/#15/#18) demoted to a hardening posture modifier rather than a fifth pattern.
+  - **(b)** Five-sense disambiguation for "governance"; qualifier conventions adopted across flagship pages.
+  - **(c)** Three-layer observability disambiguation (Primitive #10 emits → Agentic Observability correlates → Observability Profile implements).
+
+## Licensing
+
+- **D11 (2026-04-23)** — **License: CC BY 4.0 (docs)**; Apache-2.0 / MIT for any reference implementations or tooling. Adoption > protection. Commercial value lives in tools, services, and consulting *built around* AGF, not in gating AGF itself.
+
+## Confidence Posture
+
+Every load-bearing claim in AGF carries one of three confidence levels:
+
+- **Established** — evidence is clear, multiple sources would agree
+- **Informed** — AGF's synthesis; plausible but unverified at scale
+- **Open** — flagged but speculative; needs investigation
+
+See [Confidence Levels](/docs/reference/confidence-levels) for the full posture rationale.
+
+---
+
+For the complete entry-by-entry log with full rationale and alternatives considered, see the [canonical DECISIONS.md on GitHub](https://github.com/jessepike/agf/blob/main/DECISIONS.md).

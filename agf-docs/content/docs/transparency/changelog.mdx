@@ -1,0 +1,54 @@
+---
+title: "Changelog"
+description: "Versioned history of canonical AGF framework changes — what shipped, what changed, what was retired."
+---
+
+AGF follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This page surfaces the highlights for site readers; the [canonical `CHANGELOG.md`](https://github.com/jessepike/agf/blob/main/CHANGELOG.md) on GitHub is the source of truth.
+
+Site-level infrastructure changes (build config, MDX-only edits) are excluded unless they affect published framework content.
+
+## Unreleased
+
+### Changed
+
+- **Composition Patterns canonicalized at four** (Minimum Viable Control / Validation Pipeline / Governed Decision Flow / Full Governed Agentic System). The "Phase 1–5" growth language is retired; the #11/#15/#18 hardening stack is expressed as a hardening posture modifier, not a fifth named pattern. Decision: [D10(a)](/docs/transparency/decisions).
+- **"Governance" qualifier conventions** added to `shared-vocabulary.md` — five-sense disambiguation, qualified forms ("AGF" / "the Governance ring" / "AGF program maturity" / "Governance Gates" / "NIST CSF Govern"). Decision: [D10(b)](/docs/transparency/decisions).
+- **Observability three-layer disambiguation** — Primitive #10 (emits) → Agentic Observability (correlates) → Observability Profile (implements). Decision: [D10(c)](/docs/transparency/decisions).
+
+Closes findings G5-F09, G5-F15, G5-F16 (Cohesion Pass v0.3). Meta-finding G5-M02 closed via two-pass closeout convergence 2026-04-24.
+
+### Added
+
+- **First 30 Days workplan** — week-by-week MVC starter at `/docs/overview/first-30-days`. Closes G5-F12.
+- **Reference Walkthrough** — single threaded refund scenario across Rings 0–3 with two GDR YAML examples at `/docs/overview/reference-walkthrough`. Closes G5-F13.
+- **Confidence markers across flagship pages** — empirical claims now carry `<Confidence level="established|informed|open" />` matching the evidence base; time-sensitive references (Agent 365, AICM v1.0.3, Trust Ladders citations) carry verification dates. Credibility Pass v0.3.
+
+## 0.2.0 — 2026-04-22
+
+### Added
+
+- **Governance Decision Record (GDR)** as canonical audit artifact at gate boundaries — new doc, JSON Schema (`docs/schemas/gdr.yaml`), five-state lifecycle. Decisions: D16 + D17.
+- **Relationship to Frameworks** — new canonical doc positioning AGF in the seven-layer landscape (OWASP / MAESTRO / AICM / ATF / AGT / FAIR), with Trust Ladders ↔ ATF mapping.
+- **Macro positioning diagrams** — seven-layer landscape, four-verb invariants, reference architecture macro.
+- **Gate Vocabulary disambiguation** — four-part vocabulary (Ring Control Signals / Gate Resolutions / Domain Outcomes / GDR). Decision: D16.
+- **Five new vocabulary sections** — positioning pillars, harness, maturity, identity & credentialing, governance program.
+- **DECISIONS.md entries D12–D17** — positioning pillars, seven-layer stack, gate-boundary dual-form, maturity model, harness definition, gate vocabulary, GDR.
+- **16-diagram refresh** — full architecture diagram set regenerated.
+
+### Changed
+
+- **L1 Maturity renamed** from "Awareness" → "Non-existent". Inventory content absorbed into L2 Foundation. Decision: D14.
+- **Primitive #8 (Governance Gates)** now requires GDR emission at every gate resolution.
+- Cross-doc references updated for new relationship-to-frameworks doc and GDR primitive.
+
+### Fixed
+
+- Gate-boundary dual-form language reconciled across `relationship-to-frameworks.md` per D16.
+
+## 0.1.0 — 2026-03-19
+
+Initial public release: Rings Model · 19 Primitives · Three-Level Security Model · Five domain profiles · Original 18-diagram set · Documentation site at agf.jessepike.dev. License: CC BY 4.0 (docs); Apache-2.0 / MIT for tooling.
+
+---
+
+For commit-level history and the complete Unreleased section, see the [canonical CHANGELOG on GitHub](https://github.com/jessepike/agf/blob/main/CHANGELOG.md).

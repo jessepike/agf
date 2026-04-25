@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "pages": [
+    "changelog",
+    "decisions",
+    "roadmap",
+    "contribute"
+  ]
+}
