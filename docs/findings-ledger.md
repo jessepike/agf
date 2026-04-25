@@ -2,12 +2,13 @@
 
 Cross-review ledger of findings extracted from every review of AGF. Format, rubric, and lifecycle documented in `docs/reviews/README.md`.
 
-**Last updated:** 2026-04-24 (M01 + M02 second-pass closeout — Codex new-adopter persona returned `pattern-closed` for both; two-pass convergence achieved per scaling rule; both metas → `validated`)
-**Open findings:** 1 (G5-M03 strategic-meta) + 1 mechanical MI-F07
-**Validated:** 17 (MI-F01, MI-F02, MI-F04, MI-F05, G5-F01, G5-F02, G5-F04, G5-F05, G5-F06, G5-F07, G5-F08, G5-F10, G5-F11, G5-F17, G5-F19, G5-M01, G5-M02) — Mode C batch + 2026-04-24 meta closeout convergence
-**Resolved (pending validation):** 10 (G5-F09, G5-F15, G5-F16 — Cohesion Pass v0.3 / DECISIONS.md #10; G5-F12, G5-F13 — Cluster D Actionability; G5-F03, G5-F20 — Credibility Pass v0.3; G5-F21 — M01 closeout pass spawned; G5-F18 — editorial pass; G5-F22 — M02 closeout pass spawned)
+**Last updated:** 2026-04-25 (M03 closeout passes 1–4 by Codex with diversified personas — all 4 passes returned 7/10 / `pattern-persists`; 11 children spawned across the 4 passes, 9 resolved same-session, 2 structurally deferred to Roadmap; M03 accepted as continuous quality dimension)
+**Open findings:** 1 (MI-F07 mechanical residual)
+**Validated:** 17 (unchanged from 2026-04-24)
+**Resolved (pending validation):** 19 (G5-F09, F15, F16 — Cohesion Pass v0.3; G5-F12, F13 — Cluster D Actionability; G5-F03, F20 — Credibility Pass v0.3; G5-F21, F18, F22 — M01/M02 closeout passes; G5-F23, F24, F25 — M03 closeout pass 1; G5-F26, F27, F28 — M03 closeout pass 2; G5-F29, F30, F31 — M03 closeout pass 3)
+**Accepted (continuous quality dimension):** 1 (G5-M03 — staged for closure when Roadmap public-readiness pass ships AND first adopter case study lands)
 **Accepted / queued:** 1 (G5-F14 infra shipped — content batch-apply still gated on primitive stability decision)
-**Deferred:** 3 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07)
+**Deferred:** 5 (MI-F03 collapsed; MI-F06 → tooling sprint; G5-F18 → editorial pass bundled with MI-F07; G5-F32 + G5-F33 → Roadmap structural items per M03 pass 4)
 **Triage progress:** Cluster A Mechanical ✓ | Cluster B Credibility (partial) ✓ | Cluster C Differentiation ✓ | Cluster E Clarity (quick wins) ✓
 **Reviews ingested:** 2
 
@@ -80,7 +81,9 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | G5-F29 | Second instance of the `/#roles` broken link in `core-concepts.mdx:73` ("homepage role chooser"). Same regression as F28 in a sibling overview page; M03 publication-finish pattern. | Low | Established | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 3 by Codex; same-session fix: replaced with five inline profile links matching F28 fix) |
 | G5-F30 | Docs landing page (`index.mdx`) too skeletal for serious evaluators — single sentence + role table without a "how to evaluate AGF in 10 minutes" path | Medium | Informed | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 3 by Codex; same-session fix: added 3-track Evaluate-in-10-min block — What is AGF / First 30 Days / Reference Walkthrough — plus Transparency link strip; role table retained as secondary) |
 | G5-F31 | Canonical reference docs (`relationship-to-frameworks.mdx:15`, `governance-decision-record.mdx:293`) foreground "planned/forthcoming" tooling language at the exact point an adopter is testing seriousness | Medium | Established | Public Readiness | **resolved** 2026-04-25 (filed during M03 closeout pass 3 by Codex; same-session fix: relationship-to-frameworks Status Note rewritten to describe shipped contract surface only with cross-link to Roadmap; GDR §Tooling rewritten — shipped artifact = schema + contract; tooling/validators tracked on Roadmap) |
-| G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | accepted (closeout passes 1+2+3 complete; 9 children resolved; pass 4 in flight) |
+| G5-F32 | Transition-state leakage on flagship pages weakens "ready now" impression — `what-is-agf.mdx:105` audit-in-flight caveat, `ai-engineering.mdx:128` queued-diagram-regen note, `roadmap.mdx:14` "in flight" framing | Low | Established | Public Readiness | **deferred** 2026-04-25 (filed during M03 closeout pass 4 by Codex; structural — the audit-in-flight language was added during pass 2 F27 fix as honest disclosure; removing it would replace honesty with the original overclaim. Resolution requires completing the underlying audit + diagram regen, not editorial polish. Tracked on Roadmap "Now / in flight" until completion.) |
+| G5-F33 | Adoption-proof gap — zero published adopter case studies; the "currently usable" proof surface is missing for skeptical enterprise evaluators | Medium | Established | Public Readiness | **deferred** 2026-04-25 (filed during M03 closeout pass 4 by Codex; structural — cannot be manufactured editorially. Tracked on Roadmap "Soon" as "First adopter case studies"; M03 will not close until at least one adopter case study lands.) |
+| G5-M03 | (Meta) Public readiness premature — framework good, artifact uneven | High | Informed | Public Readiness | **accepted (continuous quality dimension)** — 4 closeout passes 2026-04-25 each at 7/10; 11 children resolved or staged across pass 1+2+3; pass 4 surfaced 2 structural children (F32, F33) deferred to Roadmap. Codex itself acknowledged the meta is behaving as a continuous quality dimension, not a finite list of bugs. Will close when (a) public-readiness pass on Roadmap completes (transition-state caveats can drop), AND (b) at least one adopter case study lands. Both staged as Roadmap items. |
 | MI-F01 | cspell dictionary uninitialized — 35+ technical terms flag as unknown | Medium | Established | Mechanical | **validated** 2026-04-24 |
 | MI-F02 | markdownlint errors in vocabulary.mdx (root cause: config, not content) | Low | Established | Mechanical | **validated** 2026-04-24 |
 | ~~MI-F03~~ | ~~Broken internal link `/docs` in what-is-agf.mdx:109~~ | — | — | — | **collapsed → MI-F04** (tooling false positive; `/docs` route valid) |
@@ -445,6 +448,20 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 | Next action | Pass 4 closeout via technical-lead-go-no-go persona; if still <8/10, accept that M03 is a continuous quality dimension and stage as ongoing editorial polish rather than single-session closure |
 
 **Pattern observation across passes 1–3:** Score held flat at 7/10 across three passes despite 9 children resolved. Each pass surfaces 3 new, finer-grained issues. The meta-finding is behaving as a continuous quality dimension (publication discipline) rather than a finite list of bugs. Same-session tight-loop closure (file → fix → re-pass) demonstrates the protocol works mechanically but does not guarantee score advancement when the meta itself measures qualitative consistency across the whole artifact.
+
+**Closeout pass 4 — 2026-04-25**
+
+| Field | Value |
+|---|---|
+| Reviewer | Codex CLI (gpt-5.4) — Strong tier |
+| Persona | Technical lead at a regulated enterprise doing 30-min go/no-go evaluation (4th distinct persona this session) |
+| Public Readiness re-score | **7/10** (4th consecutive pass at 7/10 — score is structurally bounded above by adoption-proof gap and audit-in-flight caveats) |
+| Verdict | **`pattern-persists`** — Codex explicitly: "G5-M03 is behaving like a continuous quality dimension rather than something one more tight editorial pass can honestly close" |
+| New children | G5-F32 (transition-state leakage on flagship pages), G5-F33 (adoption-proof gap — zero published case studies) |
+| Same-session resolution | NONE — both children are structural, not editorial: F32 because removing the audit-in-flight caveat would replace honesty with the overclaim it was added to fix (pass 2 F27); F33 because adopter case studies cannot be manufactured. Both deferred to Roadmap items. |
+| Honest stopping point | After 4 passes / 11 children / structural blockers identified, the appropriate verdict-mapping is: M03 stays `accepted` as a continuous quality dimension. Will close when (a) Roadmap "public-readiness pass" item ships (drops audit-in-flight language), AND (b) at least one adopter case study lands (closes F33). Neither is a single-session task. |
+
+**Method learning from this session (for future strategic-meta closeouts):** When 3 consecutive passes return the same score with diversified personas, the meta is structurally bounded — additional same-session tight-loops produce diminishing returns. Switch from "close this session" to "stage on roadmap" once the children Codex produces are structural (require external evidence or completion of underlying multi-week work) rather than editorial (require copy/wording/anchor fixes). The decision criterion: are the new children fixable inside the current session by editing files, or do they require shipping work that doesn't exist yet?
 
 ---
 
