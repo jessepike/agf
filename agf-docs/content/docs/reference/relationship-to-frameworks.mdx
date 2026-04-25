@@ -7,14 +7,10 @@ Any organization deploying agentic systems in 2026 is looking at a crowded field
 
 Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them — it's the architectural substrate that explains how they compose.
 
-## Status Note: current vs planned
+## Status Note
 
 <Confidence level="open">
-**Today (v0.2.0):** AGF ships as human-readable framework documentation — primitive specifications, decision rationale, the GDR YAML schema, and architecture diagrams. The Composability Interface and gate-resolution semantics are specified at the contract level.
-
-**Planned (next major work product):** Machine-readable primitive forms beyond GDR (event-schema libraries for the full Ring Control Signal set, FAIR-CAM control-effectiveness templates, evaluation rubric schemas), independently auditable maturity-level conformance criteria (L1 → L5), and reference implementations of the canonical Composition Patterns.
-
-Where this document describes AGF "operationalizing at machine speed," treat that as the **architectural commitment**, not current capability. The artifacts that make the commitment real are the planned work, not the shipped artifact. A regulated organization adopting AGF today should plan to author the machine-form artifacts itself, using AGF's specifications as the contract.
+This page describes AGF's position in the broader landscape — the contract surface AGF commits to. Where the page references "operationalize at machine speed," treat that as the architectural commitment; the schedule of machine-form artifacts beyond the shipped [GDR schema](/docs/reference/governance-decision-record) lives on the [Roadmap](/docs/transparency/roadmap).
 </Confidence>
 
 ## The Core Question
@@ -23,7 +19,7 @@ Where this document describes AGF "operationalizing at machine speed," treat tha
 
 **No. You need the architecture that makes the frameworks you already use work together for agentic systems. That is AGF.**
 
-AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, and prescribes pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note-current-vs-planned)).
+AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, and prescribes pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note)).
 
 ## The Seven-Layer Stack
 
@@ -48,7 +44,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 - **Synthesizes** — pulls from every layer; does not invent primitives
 - **Unifies** — places the synthesized material on a shared architectural substrate
 - **Prescribes** — converts synthesis into actionable implementation pathways per primitive
-- **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see [Status Note](#status-note-current-vs-planned) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
+- **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see [Status Note](#status-note) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
 
 ## Important Honest Observations
 
