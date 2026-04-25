@@ -336,6 +336,17 @@ Anomaly detected at any level:
 
 **Why it endures:** The tension between efficiency (less human oversight) and safety (more human oversight) never goes away. Trust ladders are the mechanism that resolves it dynamically rather than statically.
 
+**Dual-form emission at trust transitions (per D5/D16, D9).** Trust promotions and demotions are **Domain Outcomes** — every transition emits a GDR alongside the corresponding observability event. The minimum required GDR fields for a trust transition:
+
+- `decision`: `trust_promotion` or `trust_demotion`
+- `subject`: the agent identity being re-leveled
+- `inputs`: the evidence that triggered the transition (success-rate window, sentinel signal that fired, anomaly pattern)
+- `rationale`: human-readable justification (used by reviewers spot-checking trust calibration)
+- `authorization`: the policy that authorized the transition (Ring 3 systematic review for slow-path; sentinel rule for fast-path)
+- `audit`: the resulting trust level, the prior trust level, and the policy version active at decision time
+
+The corresponding observability event is `trust_level_changed` (direction: `increased` / `decreased` / `reset`) and carries the GDR's `decision_id`. This makes trust trajectories auditable end-to-end: every change in autonomy level has a record of *why* it changed, not just *that* it changed. Per Tension 2 (Trust Ladders vs. Governance Gates), trust changes against mandatory gates are not permitted — the GDR for any such attempted demotion against a mandatory gate would be rejected at the policy layer before emission.
+
 **Empirical calibration (Mar 2026):**
 Anthropic's agent autonomy research (published analysis of millions of API interactions) provides the first real-world trust evolution data:
 
@@ -1384,7 +1395,22 @@ Ring returns one of:
   - ERROR(reason, partial_state, recovery) → ring failure
       recovery: retry | degrade | halt
 
-**Vocabulary scoping.** The above signals form AGF's Ring Control Signal set (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`). The GATE signal returns a Gate Resolution from the Primitive #8 set (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`). Domain applications layer Domain Outcomes on top (e.g., Tool Gate's `Authorized / Conditionally Authorized / Denied` map onto Gate Resolutions). Ring Control Signals continue to emit observability events; Gate Resolutions and Domain Outcomes emit Governance Decision Records (GDRs). See DECISIONS.md #8 for the full four-part disambiguation and `docs/governance-decision-record.md` for the GDR schema.
+**Vocabulary scoping.** The above signals form AGF's Ring Control Signal set (`PASS / REVISE / HALT / GATE / DELEGATE / ERROR`). The GATE signal returns a Gate Resolution from the Primitive #8 set (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`). Domain applications layer Domain Outcomes on top (e.g., Tool Gate's `Authorized / Conditionally Authorized / Denied` map onto Gate Resolutions). See DECISIONS.md #8 for the full four-part disambiguation and `docs/governance-decision-record.md` for the GDR schema.
+
+**Dual-form emission per signal type (per D5/D16).** Each Ring Control Signal has a defined emission profile. Ring Control Signals always emit observability events; only signals that resolve a gate or surface a Domain Outcome additionally emit a GDR (the dual-form requirement at gate boundaries):
+
+| Signal | Observability event | GDR emission | Notes |
+|---|---|---|---|
+| **PASS** | yes (`*_passed`, e.g., `policy_passed`, `verification_passed`) | no | Pure flow-control; no governance decision occurred. |
+| **REVISE(quality)** | yes (`revise_issued`) | no | Ring 1 quality remediation; no authorizer decision. |
+| **REVISE(context)** | yes (`revise_context_issued`) | no | Ring 2 re-execution request; stale-approval invalidation may emit a GDR for the invalidated approval (see Approval Expiration below). |
+| **HALT** | yes (`halt_issued`, references the pending GDR's `decision_id` if HALT terminates an open gate) | no (HALT is a control signal); the open GDR transitions to `status: aborted` | The HALT itself does not produce a new GDR; it transitions an existing one. |
+| **GATE → APPROVE / REJECT / MODIFY / DEFER / ESCALATE** | yes (`gate_triggered` then `gate_resolved`, both carrying `decision_id`) | **yes** — one GDR per gate resolution (also emitted on DEFER, since DEFER is a resolved decision per DECISIONS.md #9) | Canonical dual-form gate boundary. |
+| **DELEGATE** | yes (`delegated`, references peer agent identity, depth, scope) | no — unless the receiving agent's policy treats acceptance as a Domain Outcome that requires authorization (e.g., delegation across trust boundaries), in which case the receiving Ring 2 emits a GDR | Default delegation is internal control flow; cross-boundary delegation may be policy-governed. |
+| **ERROR** | yes (`error_issued`, with `recovery: retry \| degrade \| halt`) | no — unless the recovery path is `degrade` and the degradation is itself a policy decision (e.g., "proceed without optional verification"), in which case Ring 2 emits a GDR documenting the accepted reduction in assurance | Bare errors are operational events; policy-relevant errors surface as Domain Outcomes. |
+| **Domain Outcome** (e.g., Tool Gate `Authorized / Denied`, Trust Ladder `promote / demote`, Transaction `commit / abort`) | yes (domain-defined event; references `decision_id`) | **yes** — every Domain Outcome emits a GDR | Per DECISIONS.md #9, Domain Outcomes are the second canonical surface (alongside Gate Resolutions) for GDR emission. |
+
+The minimum viable rule: if a primitive is responding to "should this happen?" (authorization), it emits a GDR. If it is responding to "what just happened?" (telemetry), it emits an observability event. Many primitives emit both at the same moment, referencing each other by `decision_id`.
 
 Ring receives (in context):
   - execution_budget:
