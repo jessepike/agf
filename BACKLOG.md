@@ -42,14 +42,29 @@ Shipped via DECISIONS.md #10 across commits `eaef524`, `23588d9`, `b1366cd`. See
 - **MI-F07** — PARTIAL. MD032 bulk auto-fix across 21 canonical docs + 10 flagship MD040 tags shipped (`b1366cd`). Deeper MD040 + MD022/031/024 residual non-blocking.
 - **G5-M02 closeout** — gated on F18 completion per Meta-Finding Closeout Protocol.
 
+### ~~Tier 2 Transparency section~~ — SHIPPED 2026-04-25 (commit `aca778c`)
+
+Four new MDX routes under `/docs/transparency/`: changelog, decisions, roadmap, contribute. Site grows 29 → 33 routes. Closes the deferred "Site pages — /changelog + /decisions" item below and extends with /roadmap + /contribute beyond.
+
+### ~~AI Engineering profile rewrite — Phase 1–5 retired~~ — SHIPPED 2026-04-25 (commit `1166b3e`)
+
+Both canonical and site MDX restructured to four canonical Composition Patterns + hardening posture per D10(a). "Secure Governed System" demoted to posture modifier. Application Examples and Implementation Checklists rebuilt around pattern names. Pairs with Cluster D Actionability content shipped 2026-04-24. Diagram regen still queued.
+
 ### Site update execution (NEW 2026-04-22)
 - Execute changelist at `.private/drafts/site-update-changelist.md` covering v1.0 positioning batch + GDR primitive + macro diagrams + 3 broken-link fixes + homepage card
 - Coordinate with Jesse's parallel diagram work before deploy
 
-### Cross-doc integration passes for GDR (NEW 2026-04-22)
-- Update `docs/profiles/grc-profile.md` Evidence Artifacts table to reference GDR as the format for #8 (human decision records, override logs) and #11 (promotion/demotion records)
-- Add GDR `decision_id` reference to observability event payloads in `docs/profiles/observability-profile.md` (`gate_triggered`, `gate_resolved`, `approval_granted`, etc.)
-- Closes the "competing artifact" coherence risk surfaced in external review
+### ~~Cross-doc integration passes for GDR~~ — SHIPPED 2026-04-25 (commit `a095608` site MDX sync; canonical `157b466`)
+
+`grc.mdx` Evidence table references GDR for #8 / #10 / #11 rows; `observability.mdx` event taxonomy now has `gate_triggered`/`gate_resolved`/`approval_*` carrying `decision_id`. Mirrors canonical `docs/profiles/{grc,observability}-profile.md` integration done in earlier commit. Closes "competing artifact" coherence risk surfaced in external review.
+
+### ~~Composability Interface + Primitive #11 dual-form audit~~ — SHIPPED 2026-04-25 (commit `7245094`)
+
+D17 follow-on closeout. Per-signal dual-form table added to canonical `docs/agentic-primitives.md` Composability Interface section — specifies observability-event vs GDR emission profile for PASS / REVISE-quality / REVISE-context / HALT / GATE / DELEGATE / ERROR / Domain Outcome. Primitive #11 trust transitions now have explicit GDR field requirements (decision/subject/inputs/rationale/authorization/audit) with cross-reference to `trust_level_changed` event carrying `decision_id`. Implementation/clarification commit; refines but does not change D5/D16/D17.
+
+### G5-M03 strategic-meta closeout (4 passes, 11 children, accepted as continuous quality dimension) — 2026-04-25
+
+Four Codex closeout passes with diversified personas (security/GRC, standards-body, practicing-engineer, technical-lead). All 4 returned 7/10 / `pattern-persists`. 11 children spawned across passes 1–4; 9 resolved same-session (F23–F31), 2 deferred to Roadmap as structural items (F32 transition-state catch-22, F33 adoption-proof gap). Codex itself acknowledged M03 is a continuous quality dimension that no single session can close. M03 will close when Roadmap "public-readiness pass" ships AND first adopter case study lands. See `docs/findings-ledger.md` for full pass-by-pass detail blocks.
 
 ### Primitive #8 timeout-behavior prose cleanup (NEW 2026-04-22)
 - Canonical `docs/agentic-primitives.md` Primitive #8 prose says "default action — which may be HALT or ESCALATE" — conflates Ring Control Signal (HALT) with Gate Resolution (ESCALATE)
@@ -60,9 +75,9 @@ Shipped via DECISIONS.md #10 across commits `eaef524`, `23588d9`, `b1366cd`. See
 ### Gate-boundary dual-form audit — remaining work (PARTIAL — superseded by D17)
 - ~~Audit Primitive #8 (Governance Gates) for gate-boundary dual-form emission~~ **Done in commit `288ddee` — Primitive #8 now requires GDR emission at every gate resolution**
 - ~~Specify JSON/YAML schema for gate decision artifact~~ **Done in commit `288ddee` — `docs/schemas/gdr.yaml`**
-- Audit Composability Interface (PASS/REVISE/HALT/GATE/DELEGATE/ERROR signals) for dual-form emission per signal type — STILL OPEN. Resolution per D16: Ring Control Signals emit observability events (not GDRs); GATE returns a Gate Resolution which emits a GDR. Audit confirms coherence and adds explicit dual-form annotations to Composability Interface spec.
-- Audit Primitive #11 (Trust Ladders) — trust promotions/demotions are Domain Outcomes that emit GDRs (per D17). Audit verifies all promotion/demotion paths emit GDRs and adds explicit annotations.
-- Sync MDX versions after canonical changes land
+- ~~Audit Composability Interface (PASS/REVISE/HALT/GATE/DELEGATE/ERROR signals) for dual-form emission per signal type~~ — **DONE 2026-04-25 commit `7245094`** — per-signal table added with observability-event vs GDR emission profile.
+- ~~Audit Primitive #11 (Trust Ladders) — trust promotions/demotions are Domain Outcomes that emit GDRs (per D17)~~ — **DONE 2026-04-25 commit `7245094`** — explicit Dual-form emission at trust transitions subsection added.
+- MDX summary already covers principle and links to canonical for per-signal detail; no MDX sync needed.
 
 ## Active
 

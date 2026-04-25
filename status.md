@@ -1,9 +1,64 @@
 ---
-updated: 2026-04-24
-stage: operate (v0.2.0 shipped; Cohesion Pass v0.3 shipped 2026-04-24; Cluster D Actionability shipped 2026-04-24)
+updated: 2026-04-25
+stage: operate (v0.2.0 shipped; Tier 2 + GDR cross-doc + dual-form audit + M03 4-pass closeout shipped 2026-04-25)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-04-25 (autonomous Tier 2 → ai-engineering rewrite → GDR sync → dual-form audit → M03 4-pass closeout)
+
+**From:** CPO session (Opus) — autonomous run through queued backlog
+**To:** Next session (→ Roadmap "public-readiness pass" + first adopter case study; either unlocks final M03 closure)
+**Tree state:** clean post-commit; **5 commits push-pending.**
+
+**What shipped this session (6 commits):**
+
+1. `aca778c` **feat(site): Transparency section** — 4 new MDX routes under `/docs/transparency/` (changelog, decisions, roadmap, contribute). Site grows from 29 → 33 routes. Closes BACKLOG "Site pages — deferred from release-infrastructure session" + extends with /roadmap + /contribute.
+2. `1166b3e` **docs(profiles): retire Phase 1–5 in AI Engineering profile** — both canonical (`docs/profiles/ai-engineering-profile.md`) and site MDX rewritten to use 4 canonical Composition Patterns + hardening posture modifier per D10(a). "Secure Governed System" demoted to posture language. Closes BACKLOG "Profile-page phases → patterns alignment."
+3. `a095608` **docs(site): sync GDR cross-doc into grc + observability MDX** — mirrors canonical 157b466. `gate_triggered`/`gate_resolved`/`approval_*` events carry `decision_id`; #11 promotion/demotion noted as Domain Outcomes emitting GDRs. Closes BACKLOG "Cross-doc integration passes for GDR."
+4. `7245094` **docs(primitives): per-signal dual-form table on Composability Interface + #11 Trust Ladder GDR-on-transition spec** — D17 follow-on closeout. Per-signal emission table (PASS / REVISE-quality / REVISE-context / HALT / GATE / DELEGATE / ERROR / Domain Outcome) specifying observability-event vs GDR emission profile. #11 trust transitions now have explicit GDR field requirements.
+5. `e0ce809` **docs(meta): G5-M03 closeout pass 1** — Codex security/GRC persona returned 7/10 / `pattern-persists`; G5-F23/F24/F25 spawned + same-session-resolved (changelog external-reader voice; roadmap public deliverables; relationship-to-frameworks current-vs-planned).
+6. `8263964` **docs(meta): G5-M03 closeout passes 2 + 3** — Codex standards-body + practicing-engineer personas, both 7/10 / `pattern-persists`; G5-F26..F31 spawned + same-session-resolved (reference-impl contradiction; "every claim" overclaim; second `/#roles` instance; skeletal index; planned-language reference docs).
+7. `65a722d` **docs(meta): G5-M03 closeout pass 4 — accepted as continuous quality dimension** — Codex technical-lead persona, 4th consecutive 7/10. Codex itself: "G5-M03 is behaving like a continuous quality dimension rather than something one more tight editorial pass can honestly close." G5-F32 (transition-state leakage — catch-22 with F27 honest disclosure) + G5-F33 (adoption-proof gap) deferred to Roadmap as structural items.
+
+**Findings ledger end-state:**
+
+- **Validated:** 17 (unchanged this session — meta closeout work doesn't move children to validated)
+- **Resolved (pending validation):** 19 (was 10) — adds F23, F24, F25, F26, F27, F28, F29, F30, F31 (M03 children) + F18 already-resolved
+- **Open:** 1 (MI-F07 mechanical residual)
+- **Accepted (continuous quality dimension):** 1 (G5-M03 — staged for closure when Roadmap public-readiness pass ships AND first adopter case study lands)
+- **Accepted / queued:** 1 (G5-F14)
+- **Deferred:** 5 (was 3) — adds G5-F32, G5-F33 from M03 pass 4
+
+**Scorecard projection (pending external re-rating):**
+
+- Public Readiness 7/10 (Codex-confirmed, 4 passes converged) — score is structurally bounded above until adoption proof + audit completion
+- Other dimensions per 2026-04-24 baseline; no targeted shifts this session
+- Composite ~7.5–7.75 (held flat from 2026-04-24 projection)
+
+**M03 closure path:**
+
+M03 closes when both:
+1. **Roadmap "public-readiness pass" item ships** — drops the audit-in-flight caveats added during pass 2 F27 fix (catch-22 dissolves)
+2. **At least one adopter case study lands** — closes F33 adoption-proof gap
+
+Neither is a single-session task. Both are tracked on `/docs/transparency/roadmap`.
+
+**Tier 1 next:**
+
+- **Push 6 unpushed commits** (aca778c → 65a722d) once user wants to deploy
+- **Roadmap "public-readiness pass" execution** — complete the confidence-marker audit across all flagship pages so the in-flight caveat can be removed (closes F32)
+- **First adopter case study** — coordinate with whoever is piloting AGF; even a partial walkthrough closes F33
+- **MI-F07 markdownlint hygiene** — only remaining open finding; non-blocking since pre-push gate doesn't lint canonical `docs/*.md`
+
+**Tier 2:**
+
+- Diagram regen — `composition-patterns.png` to true four-pattern progression replacing retired `implementation-phases-roadmap.png`; queued for next diagram batch
+- "Agentic Compliance Blind Spots" 10-gap analysis (Roadmap "Next") — operationalizes the gap-disclosure commitment in relationship-to-frameworks
+- GDR machine-form artifacts (Roadmap "Next") — schema validators, FAIR-CAM templates, evaluation rubric schemas
+- Maturity-level conformance criteria (Roadmap "Next") — concrete L1→L5 testable advancement criteria
+
+---
 
 ## Handoff — 2026-04-24 (M01 + M02 → validated via two-pass closeout convergence)
 
