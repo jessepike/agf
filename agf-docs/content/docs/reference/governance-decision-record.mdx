@@ -280,13 +280,17 @@ The current promotion ships GDR + the canonical schema. Cross-doc integration pa
 
 ## Standards alignment
 
-GDRs provide evidence in support of regulatory record-keeping and decision-documentation requirements. They do not by themselves satisfy these requirements; the host organization's overall governance program does. Specific regulatory mappings:
+<Confidence level="informed">
+
+GDRs provide evidence in support of regulatory record-keeping and decision-documentation requirements. They do not by themselves satisfy these requirements; the host organization's overall governance program does. The mappings below are AGF's reading of how GDR content aligns with each regime's requirement language; they have not been independently audited or certified.
 
 - **EU AI Act Art. 12 (Record-keeping)** — GDRs are durable records of governance decisions affecting high-risk AI systems; they support the Art. 12 logging requirement when retention and integrity controls meet the regulatory standard. (See [Relationship to Frameworks](/docs/reference/relationship-to-frameworks) for AGF's broader Art. 12 evidence story across primitives.)
 - **EU AI Act Art. 14 (Human Oversight)** — GDRs capture the authorizer identity, evidence presented, and decision rationale for gates that satisfy Art. 14 oversight requirements; they support the auditable demonstration of human oversight.
 - **NIST AI RMF MANAGE 4.1** — GDRs document override decisions, appeal outcomes, incident-response gates, and change-management approvals that fall under MANAGE 4.1's scope.
-- **ISO 42001** — GDRs support the documented information requirements (Clause 7.5) and the management review requirements (Clause 9.3) where governance decisions need to be evidenced.
+- **ISO 42001** — GDRs support the documented information requirements (Clause 7.5) and the management review requirements (Clause 9.3) where governance decisions need to be evidenced. ISO clause references are based on the published Annex SL structure; the underlying ISO 42001 text is paywalled and clause numbers should be verified against the official text before contractual use.
 - **AICM** — where AICM controls require documented governance decisions, GDRs provide a consistent format. Specific control crosswalks live in the [GRC Profile](/docs/profiles/grc).
+
+</Confidence>
 
 The GDR schema does not encode any single regulatory framework's vocabulary; it carries the decision content, and crosswalks between GDR fields and regulatory fields are produced per regime.
 

@@ -19,7 +19,7 @@ AGF's observability story has three layers. They are not synonyms — they compo
 
 ## Why Unified?
 
-The landscape separates security monitoring (SIEM), quality monitoring (LLM observability tools), and compliance monitoring (GRC platforms) into different tools with different event streams. But agentic threats traverse all three domains — a prompt injection is a security event that causes a quality degradation that creates a compliance violation.
+The landscape separates security monitoring (SIEM), quality monitoring (LLM observability tools), and compliance monitoring (GRC platforms) into different tools with different event streams. But agentic threats traverse all three domains <Confidence level="informed" /> — a prompt injection is a security event that causes a quality degradation that creates a compliance violation.
 
 **AGF unifies them.** One event stream, one correlation engine, three detection perspectives.
 
@@ -57,7 +57,7 @@ Three detection perspectives operate on the same event stream:
 
 ### Dual-Speed Detection
 
-- **Fast-path sentinels** — sub-second pattern matching for known attack signatures. Triggers the [Security Response Bus](/docs/profiles/security) for immediate containment.
+- **Fast-path sentinels** — sub-second pattern matching for known attack signatures. Triggers the [Security Response Bus](/docs/profiles/security) for immediate containment. <Confidence level="informed" /> The sub-second target is the architectural design point; achievable latency depends on detector implementation.
 - **Slow-path analysis** — hours to days of behavioral pattern analysis. Detects drift, emerging threats, and systemic quality trends.
 
 ## Operational Playbooks
