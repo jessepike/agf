@@ -241,11 +241,11 @@ Every agent operates within a 5-layer environment: identity/policy substrate (L1
 
 ---
 
-## Implementation Priority: Where to Start
+## Implementation Path: Four Composition Patterns
 
-Not every primitive is equally urgent. Implementation priority depends on your system's risk level and maturity.
+AGF organizes implementation around four canonical Composition Patterns rather than time-bound phases. Each pattern is independently valuable; you don't need the next one to get value from the one you're on. Earlier drafts of this profile used "Phase 1–5" language; that progression is retired in favor of pattern names per Decision D10(a).
 
-### Phase 1: Minimum Viable Control (Start Here)
+### Pattern 1 — Minimum Viable Control (Start Here)
 
 **Implement first, regardless of system type:**
 
@@ -259,7 +259,7 @@ Not every primitive is equally urgent. Implementation priority depends on your s
 
 **What this gives you:** Agents that can't exceed their scope, actions that are attributable, an audit trail, and visibility into what's happening.
 
-### Phase 2: Verification (Ring 0 + Ring 1)
+### Pattern 2 — Validation Pipeline (Ring 0 + Ring 1)
 
 **Add when outputs matter:**
 
@@ -272,7 +272,7 @@ Not every primitive is equally urgent. Implementation priority depends on your s
 
 **What this gives you:** Verified outputs. Quality assurance is structural, not manual.
 
-### Phase 3: Governance (Ring 0 + Ring 1 + Ring 2)
+### Pattern 3 — Governed Decision Flow (Ring 0 + Ring 1 + Ring 2)
 
 **Add when decisions are consequential:**
 
@@ -285,17 +285,7 @@ Not every primitive is equally urgent. Implementation priority depends on your s
 
 **What this gives you:** Policy-evaluated, human-gateable decisions with side-effect management and data protection.
 
-### Phase 4: Security & Assurance
-
-**Add when the system is production-bound:**
-
-| Primitive | Why Now | Effort |
-|-----------|--------|--------|
-| **#15 Adversarial Robustness** | Defense in depth. Assume breach. | High — security architecture |
-| **#18 Evaluation & Assurance** | The deployment gate. Validates before production. | Medium — evaluation suites + CI/CD integration |
-| **#11 Trust Ladders** | Calibrated trust. System earns reduced oversight. | Medium — trust model + calibration logic |
-
-### Phase 5: Learning (Full System)
+### Pattern 4 — Full Governed Agentic System (all rings active)
 
 **Add when the system should improve over time:**
 
@@ -306,7 +296,19 @@ Not every primitive is equally urgent. Implementation priority depends on your s
 | **#12 Memory-Augmented Reasoning** | Persistent knowledge across sessions. | Medium — memory infrastructure + curation |
 | **#19 Agent Environment Governance** (full) | The optimization loop for the operating environment. | High — full observe/propose/validate/deploy cycle |
 
-**Key principle:** Each phase is independently valuable. You don't need Phase 5 to get value from Phase 1. Start where the risk is and grow governance as stakes increase.
+### Hardening posture (modifier, not a fifth pattern)
+
+For production-bound or regulated deployments, apply the **#11 / #15 / #18 hardening stack** as a posture modifier within Governed Decision Flow (or as a precondition for entering Full Governed):
+
+| Primitive | Role | Effort |
+|-----------|------|--------|
+| **#15 Adversarial Robustness** | Defense in depth. Assume breach. | High — security architecture |
+| **#18 Evaluation & Assurance** | The deployment gate. Validates before production. | Medium — evaluation suites + CI/CD integration |
+| **#11 Trust Ladders** | Calibrated trust. System earns reduced oversight. | Medium — trust model + calibration logic |
+
+The hardening stack is *not* a fifth named pattern; it is a modifier applied within GDF. Earlier drafts named "Secure Governed System" as a peer pattern — this introduced naming density without adding architectural distinction. Per D10(a), it is now expressed as posture language: "a production-hardened Governed Decision Flow applying #11/#15/#18."
+
+**Key principle:** Each pattern is independently valuable. You don't need Full Governed to get value from MVC. Start where the risk is and grow governance as stakes increase.
 
 ---
 
@@ -332,17 +334,13 @@ Validation Pipeline + Governance Gates (#8) + Policy as Code (#9) + Transaction 
 
 **What it gives you:** Policy-evaluated, human-gateable decisions with side-effect management.
 
-### Secure Governed System (All rings + zero trust)
+### Full Governed Agentic System
 
-Governed Decision Flow + Adversarial Robustness (#15) + zero trust at every boundary + Evaluation & Assurance (#18) as the deployment gate
-
-**What it gives you:** Defense in depth, pre-deployment validation, and security monitoring for production-grade agentic systems.
-
-### Full Governed Agentic System (Everything)
-
-All rings active, all primitives engaged, zero trust at every boundary, environment optimization loop improving the substrate continuously.
+All rings active — Governed Decision Flow plus Ring 3 learning (#3, #4, #12, #19 full). Typically applied with the **hardening posture** (#11/#15/#18) for production-grade deployments. Environment optimization loop improves the substrate continuously without weakening governance.
 
 **What it gives you:** The complete governance architecture for high-stakes, regulated, enterprise-grade agentic systems that improve over time.
+
+The earlier "Secure Governed System" pattern is retired per D10(a); the #11/#15/#18 hardening stack is a posture modifier rather than a peer pattern, applied within Governed Decision Flow or as a precondition for entering Full Governed.
 
 ### Application Examples
 
