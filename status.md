@@ -1,9 +1,53 @@
 ---
 updated: 2026-04-25
-stage: operate (v0.2.0 shipped; Tier 2 + GDR cross-doc + dual-form audit + M03 4-pass closeout shipped 2026-04-25)
+stage: operate (v0.2.0 shipped; Path A public-readiness pass shipped 2026-04-25 → M03 verification pass 5 returned 7/10 / pattern-persists; F33 adoption case study now sole structural blocker)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-04-25 (Path A public-readiness pass + M03 pass 5 verification)
+
+**From:** CPO session (Opus) — autonomous Path A execution + Codex verification
+**To:** Next session (→ F33 adopter case study coordination is the single remaining structural item bounding M03)
+**Tree state:** clean post-wrap; **3 commits push-pending** (`cdea367`, `91b7183`, plus this wrap commit).
+
+**What shipped this session (3 commits):**
+
+1. `cdea367` **feat(diagram+content): Path A public-readiness pass** — confidence-marker audit across 4 previously-unmarked flagship pages (`agentic-observability.mdx` ×2, `governance-decision-record.mdx` Standards Alignment block, `trust-ladders.mdx`, `decision-intelligence.mdx`); transition-state catch-22 caveats removed from `what-is-agf.mdx` + `ai-engineering.mdx`; `composition-patterns.png` regenerated as true 4-pattern progression with hardening-posture modifier band (Gemini-3-pro-image-preview, $0.039); retired `implementation-phases-roadmap.png` superseded; `paywalled` added to cspell. Pre-push gate green. Closes G5-F32.
+2. `91b7183` **docs(meta): G5-M03 pass 5 verification + roadmap freshness fix** — Codex (gpt-5.4) Path A verification pass returned 7/10 / `pattern-persists`; same-session resolution of pass-5 child #1 (stale Roadmap "Now (in flight)" still showed Path A pre-shipment) via Roadmap restructure adding "Recently shipped" section listing public-readiness pass / AI Engineering alignment / Transparency surfaces / GDR canonical artifact.
+3. (this wrap) **chore: session wrap — Path A handoff + lessons + ledger pass-5 detail block** — findings-ledger.md updated with full pass-5 reviewer block + Path A net-effect summary line; status/BACKLOG/lessons synced.
+
+**Codex pass 5 verbatim (qualitative score floor):**
+
+> "I would cite AGF for architecture framing, gate semantics, and governance-pattern design. I would not yet cite it as externally validated evidence of what works in production."
+
+Score floor is honest. Without adopter case studies, Public Readiness is structurally bounded at 7/10 regardless of editorial work.
+
+**Findings ledger end-state:**
+
+- **Validated:** 17 (unchanged)
+- **Resolved (pending validation):** 20 (was 19; +F32 from Path A)
+- **Open:** 1 (MI-F07 mechanical residual)
+- **Accepted (continuous quality dimension):** 1 (G5-M03 — F33 sole remaining structural blocker)
+- **Deferred:** 4 (was 5; F32 promoted to resolved)
+
+**M03 closure path simplified:**
+
+After Path A: only **F33 (first adopter case study)** remains as the structural blocker. Cannot be manufactured editorially. Closure unlocks when at least one published implementation walkthrough lands.
+
+**Tier 1 next:**
+
+- **Push 3 unpushed commits** (`cdea367`, `91b7183`, wrap commit) once user is ready to deploy
+- **F33 adopter case study** — coordinate with whoever is piloting AGF; even a partial walkthrough closes M03
+- **MI-F07 markdownlint hygiene** — only remaining open finding; non-blocking
+
+**Tier 2:**
+
+- "Agentic Compliance Blind Spots" 10-gap analysis (Roadmap "Now")
+- GDR machine-form artifacts (Roadmap "Next") — schema validators, FAIR-CAM templates
+- Maturity-level conformance criteria (Roadmap "Next") — concrete L1→L5 testable advancement criteria
+
+---
 
 ## Handoff — 2026-04-25 (autonomous Tier 2 → ai-engineering rewrite → GDR sync → dual-form audit → M03 4-pass closeout)
 

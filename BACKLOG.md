@@ -62,6 +62,20 @@ Both canonical and site MDX restructured to four canonical Composition Patterns 
 
 D17 follow-on closeout. Per-signal dual-form table added to canonical `docs/agentic-primitives.md` Composability Interface section — specifies observability-event vs GDR emission profile for PASS / REVISE-quality / REVISE-context / HALT / GATE / DELEGATE / ERROR / Domain Outcome. Primitive #11 trust transitions now have explicit GDR field requirements (decision/subject/inputs/rationale/authorization/audit) with cross-reference to `trust_level_changed` event carrying `decision_id`. Implementation/clarification commit; refines but does not change D5/D16/D17.
 
+### ~~Path A — Roadmap public-readiness pass~~ — SHIPPED 2026-04-25 (commits `cdea367` + `91b7183`)
+
+Three coordinated changes that dissolved the F32 catch-22 and demonstrated AGF's confidence-gradient discipline against its own claim:
+
+- **Confidence-marker audit** across 4 previously-unmarked flagship pages (`agentic-observability.mdx`, `governance-decision-record.mdx` Standards Alignment, `trust-ladders.mdx`, `decision-intelligence.mdx`). Homepage claim "load-bearing empirical and novel claims carry one of three confidence levels" is now defensible across the orientation path.
+- **Transition-state cleanup** removed catch-22 caveats from `what-is-agf.mdx` + `ai-engineering.mdx` once underlying audit shipped.
+- **Diagram regen** — `composition-patterns.png` regenerated as true 4-pattern progression (MVC → Validation Pipeline → GDF → Full Governed) with hardening-posture modifier band overlapping Patterns 3–4. Retired `implementation-phases-roadmap.png` superseded.
+- **Codex pass 5 verification** returned 7/10 / `pattern-persists` — score floor unchanged, but Codex confirmed editorial path closed; remaining ceiling is structural (adoption proof).
+- Closes G5-F32. M03 still bounded by F33 only.
+
+### G5-F33 — first adopter case study (sole remaining M03 structural blocker)
+
+Cannot be manufactured editorially. Coordination item — surface from any pilot/POC AGF implementation as a written walkthrough (artifacts, caveats, outcomes). Even a partial single-organization walkthrough closes the gap. Tracked in `/docs/transparency/roadmap` "Now (in flight)."
+
 ### G5-M03 strategic-meta closeout (4 passes, 11 children, accepted as continuous quality dimension) — 2026-04-25
 
 Four Codex closeout passes with diversified personas (security/GRC, standards-body, practicing-engineer, technical-lead). All 4 returned 7/10 / `pattern-persists`. 11 children spawned across passes 1–4; 9 resolved same-session (F23–F31), 2 deferred to Roadmap as structural items (F32 transition-state catch-22, F33 adoption-proof gap). Codex itself acknowledged M03 is a continuous quality dimension that no single session can close. M03 will close when Roadmap "public-readiness pass" ships AND first adopter case study lands. See `docs/findings-ledger.md` for full pass-by-pass detail blocks.

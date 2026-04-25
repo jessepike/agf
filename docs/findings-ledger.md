@@ -463,6 +463,22 @@ See `docs/reviews/README.md` for full rubric + gradient definitions.
 
 **Method learning from this session (for future strategic-meta closeouts):** When 3 consecutive passes return the same score with diversified personas, the meta is structurally bounded — additional same-session tight-loops produce diminishing returns. Switch from "close this session" to "stage on roadmap" once the children Codex produces are structural (require external evidence or completion of underlying multi-week work) rather than editorial (require copy/wording/anchor fixes). The decision criterion: are the new children fixable inside the current session by editing files, or do they require shipping work that doesn't exist yet?
 
+**Closeout pass 5 (Path A verification) — 2026-04-25**
+
+| Field | Value |
+|---|---|
+| Reviewer | Codex CLI (gpt-5.4) — Strong tier |
+| Persona | Regulated-enterprise governance practitioner / financial services director of risk (5th distinct persona this session) |
+| Trigger | Path A public-readiness pass shipped in commit `cdea367` (confidence-marker audit + transition-state cleanup + composition-patterns.png regen). This pass tested whether shipping Path A unblocked the score. |
+| Public Readiness re-score | **7/10** (unchanged — the meta is still structurally bounded by adoption-proof gap) |
+| Verdict | **`pattern-persists`** — Codex narrowed to two children: (1) stale roadmap regression — Roadmap "Now / in flight" still claimed Path A work as in-flight after it shipped (caught a real bug introduced by my own commit timing); (2) F33 adoption-proof gap — same structural blocker as pass 4. |
+| Same-session resolution of pass-5 child #1 | Roadmap restructured in commit `91b7183`: "Now / in flight" reframed around remaining work (first adopter case study; Agentic Compliance Blind Spots); new "Recently shipped" section captures public-readiness pass + AI Engineering alignment + Transparency surfaces + GDR. Stale-claim regression eliminated. |
+| Pass-5 child #2 | F33 (adoption-proof gap) — already deferred from pass 4 to Roadmap. Cannot be fixed editorially. |
+| Codex qualitative quote | "I would cite AGF for architecture framing, gate semantics, and governance-pattern design. I would not yet cite it as externally validated evidence of what works in production." That is the honest score floor for AGF without adopter case studies. |
+| Final state | M03 stays accepted (continuous quality dimension). All editorial children F23–F32 closed. Only F33 (structural, requires adopter coordination) blocks final closure. |
+
+**Path A net effect:** F32 → resolved; F23–F31 confirmed-resolved by pass-5 read; pass-5 child #1 (stale roadmap) → resolved same session. M03 cannot reach `pattern-closed` until F33 lands; everything else editorially achievable in this session shipped.
+
 ---
 
 ## Trajectory tracking
