@@ -1,9 +1,36 @@
 ---
-updated: 2026-04-25
-stage: operate (v0.2.0 shipped; Path A public-readiness pass shipped 2026-04-25 → M03 verification pass 5 returned 7/10 / pattern-persists; F33 adoption case study now sole structural blocker)
+updated: 2026-04-28
+stage: operate (v0.2.0 shipped; Path A complete 2026-04-25; F33 adoption case study sole remaining M03 structural blocker)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-04-27/28 (exploration session — no AGF state change)
+
+**From:** CPO session (Opus) — dashboard-iteration thread that began as AGF kanban request and evolved into operator-workspace design conversation
+**To:** Next AGF session (state unchanged from 2026-04-25 wrap)
+**Tree state:** clean; in sync with origin/main; no AGF commits this session
+
+**What this session was:** Exploration. Started "render a kanban for AGF status." Iterated through 7 image renders + 6 Forge backlog items + the goldilocks frame for human-agent collaboration. All outputs went to Forge backlog (Memory MCP namespace agent-cpo, source_project=forge) and centralized templates at `~/.diagram-forge/templates/`. AGF canonical state was NOT touched.
+
+**AGF-specific outputs (gitignored, in `.private/`):**
+- `kanban-status-2026-04-27.png` — original kanban (rejected pattern, preserved for context)
+- `dashboard-alt-{A,B,C,A-with-context,A-context-gpt-image-2}-*.png` — 5 iteration renders
+- `dashboard-pattern-A-canonical-2026-04-27.png` — locked Hero Card render of AGF state
+- `standup-pattern-canonical-2026-04-27.png` — locked /standup render of AGF state
+
+Both canonical renders also mirrored to `~/.diagram-forge/reference-renders/` for cross-project use. They depict CURRENT AGF state and remain accurate as visual references until F33 closes.
+
+**M03 closure path (unchanged from 2026-04-25):** F33 first adopter case study is the sole remaining structural blocker. Editorial path 100% complete. Cannot be manufactured editorially.
+
+**Tier 1 next (unchanged):**
+- Push F33 adopter coordination — `JESSE` work, relationship/pilot outreach
+- DECISION pending: Tier 2 sequencing — pick which agent track runs first while F33 incubates
+- Tier 2 candidates ready when sequencing decided: Compliance Blind Spots / GDR machine-form schemas / Maturity criteria / MI-F07 lint
+
+**Forge-side outputs (not AGF — but referenced here for cross-link):** 7 Memory entries in agent-cpo namespace (Goldilocks frame, M/M/M time allocation, JTBD routing, dashboard pattern spec, /standup skill, interactive dashboards, prompt-engineering rules) + master handoff pointer. Forge will pick up next session under `claude-forge`.
+
+---
 
 ## Handoff — 2026-04-25 (Path A public-readiness pass + M03 pass 5 verification)
 
