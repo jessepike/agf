@@ -1,8 +1,8 @@
 # AGF Primer
 
-A one-pass orientation to the Agentic Governance Framework for first-time readers and for agents loading project context. Updated with major releases. Canonical sources are linked throughout — read those when depth is needed.
+A one-pass orientation to the Agentic Governance Framework for first-time readers and for agents loading project context. Updated with major releases. Canonical sources are named throughout (`code spans` for paths) — read those when depth is needed.
 
-**Last updated:** 2026-05-01 · **Reflects:** v0.2.0 (shipped 2026-04-22) + v0.3 content passes in flight
+**Last updated:** 2026-05-01 · **Reflects:** v0.2.0 (shipped 2026-04-22) plus unreleased v0.3 content passes shipped through 2026-04-25. **F33** (first adopter case study) remains the sole open structural blocker on M03.
 
 ---
 
@@ -33,8 +33,8 @@ AGF is a reference architecture and operating model for organizations developing
 - **Gate vocabulary (D8)** — four distinct enums: Ring Control Signal · Gate Resolution (`APPROVE / REJECT / MODIFY / DEFER / ESCALATE`) · Domain Outcome (domain-defined) · Audit Artifact (GDR).
 - **Governance Decision Record (GDR, D9)** — canonical machine-form artifact serializing every Gate Resolution and Domain Outcome. Schema at `docs/schemas/gdr.yaml`. Provides evidence in support of EU AI Act Art. 12, NIST AI RMF MANAGE 4.1, ISO 42001 documentation clauses.
 - **Composition Patterns (D10)** — four progression patterns: Minimum Viable Control → Validation Pipeline → Governed Decision Flow → Full Governed Agentic System. "Hardened" is a posture modifier, not a fifth pattern.
-- **Maturity model (D6)** — five program-level levels: L1 Non-existent → L2 Foundation → L3 Defined → L4 Managed → L5 Optimizing. Complementary to (not substituted for) CSA ATF's per-deployment 4-tier autonomy scale.
-- **Confidence gradient** — Established (broad evidence) / Informed (single-source synthesis) / Open (flagged speculative). Applied to every load-bearing claim.
+- **Maturity model (D6)** — five program-level levels: L1 Non-existent → L2 Foundation → L3 Governed → L4 Adaptive → L5 Optimized. Complementary to (not substituted for) CSA ATF's per-deployment 4-tier autonomy scale.
+- **Confidence gradient** — Established (broad evidence) / Informed (single-source synthesis) / Open (flagged speculative). Applied to load-bearing empirical and novel claims across the orientation path and flagship pages; not yet uniform across deeper docs (tracked under M03/F33).
 - **Harness (D7)** — `Agent = Model + Harness`. Industry-standard term. Source artifacts + runtime enforcement adapters, inseparable.
 
 **Seven-layer stack** (D4): AGF as architectural substrate at Layer 0, under threat baseline (OWASP Agentic), threat modeling (CSA MAESTRO + Microsoft Failure Mode Taxonomy), control catalogs (CSA AICM, ISO 42001/27001, NIST 800-53, EU AI Act Annexes, BSI AIC4), operating model (CSA ATF), and runtime references (Microsoft AGT, CAF, Agent 365). Risk quantification (FAIR, FAIR-CAM, ISO 31000) is orthogonal.
@@ -46,7 +46,7 @@ AGF is a reference architecture and operating model for organizations developing
 - **Not a control catalog.** AGF primitives crosswalk to AICM/ISO/NIST controls; AGF doesn't replicate catalog content.
 - **Not a maturity certification.** AGF defines criteria; it doesn't credential adopters. No accreditation body.
 - **Not GRC re-skinning.** Traditional GRC is content; AGF is method, primitives, and signals tuned to probabilistic/agentic behavior.
-- **Not vendor-aligned.** Microsoft AGT, AWS, Google, Salesforce treated as runtime references, never endorsed stacks.
+- **Not vendor-aligned.** Microsoft AGT/CAF/Agent 365 are AGF's current Layer 5 runtime references because they are public, ATF-conformant, and most mature today. AWS, Google, Salesforce, and open-source stacks are treated neutrally and not endorsed; profile docs will expand coverage as other runtimes reach production maturity.
 - **Not opinionated on stack** — primitives are deployment-mode-agnostic.
 
 ## How it gets used
@@ -66,12 +66,14 @@ The framework's top-level operating model (`docs/agentic-governance-framework.md
 
 ## Where AGF is being built (and not)
 
-**In flight (v0.2.0 → v0.3):**
-- Confidence-gradient discipline propagated across all flagship pages (shipped 2026-04-25).
-- GDR cross-doc integration into profile docs + per-signal dual-form table on Composability Interface (shipped 2026-04-25).
-- Composition Patterns canonicalized; "Phase 1–5" retired (shipped 2026-04-24).
+**Recently shipped (post-v0.2.0, on `main`):**
+- Confidence-gradient discipline propagated across flagship pages (Path A, 2026-04-25).
+- GDR cross-doc integration into profile docs + per-signal dual-form table on Composability Interface (2026-04-25).
+- Composition Patterns canonicalized; "Phase 1–5" retired (2026-04-24).
 - Site at agf.jessepike.dev — 33 routes including transparency surfaces (changelog, decisions, roadmap, contribute).
-- M03 (strategic-meta public-readiness) accepted as continuous quality dimension. F33 (first adopter case study) is the sole remaining structural blocker.
+
+**Open structural blockers:**
+- **F33** — first adopter case study. M03 (strategic-meta public-readiness) is accepted as a continuous quality dimension; M03 cannot reach `pattern-closed` until at least one written walkthrough from a real implementation lands. Cannot be manufactured editorially.
 
 **Not building (deliberate scope):**
 - No reference implementation code in this repo. Tooling lives in adjacent repos under Apache-2.0/MIT (e.g., agent-harness CLI).
@@ -108,7 +110,7 @@ The framework's top-level operating model (`docs/agentic-governance-framework.md
 
 ## For agents working in this repo
 
-1. On session start, read `intent.md`, `status.md`, `BACKLOG.md`, `lessons.md`. (`.claude/CLAUDE.md` lists the full context map.)
+1. On session start, read this primer first, then `.private/agf-strategic-intent.md` (when work is strategy-adjacent), then `status.md`, then `BACKLOG.md`. Read `intent.md` and `lessons.md` next; load deeper canonical docs (`docs/*.md`) on demand. (`.claude/CLAUDE.md` lists the full context map.)
 2. Treat `intent.md` as sacred — surface, don't edit.
 3. Concept changes go through `.private/change-queue.md`, not direct commits.
 4. New primitive, vocabulary change, or novel framing → `DECISIONS.md` entry required; release → `CHANGELOG.md` entry required.
