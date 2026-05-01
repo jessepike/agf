@@ -97,6 +97,18 @@ Four Codex closeout passes with diversified personas (security/GRC, standards-bo
 
 _(nothing actively in flight — session paused at checkpoint 2026-04-17)_
 
+### Primer verification (NEW 2026-05-01)
+
+`docs/agf-primer.md` (public) and `.private/agf-strategic-intent.md` (private) shipped 2026-05-01 as the agent-context payload replacement for canonical doc spelunking. Three verification items before treating either as authoritative:
+
+- **Maturity L3/L4/L5 names** in `docs/agf-primer.md`. Primer asserts "L3 Defined / L4 Managed / L5 Optimizing" without reading `docs/agentic-governance-framework.md`. Confirm against canonical or correct.
+- **Strategic-intent extrapolations** in `.private/agf-strategic-intent.md` — success thresholds, R5 (Big 4 / vendor co-option), R6 (timeline-compression invalidation), Year-2 STAR-for-AI mention. All extrapolated from session memory; user review needed.
+- **AGF Lite worksheet status** — primer + strategic-intent treat as committed mitigation; agent state has it as Tier 1.5 candidate. Reconcile language.
+
+**Maintenance discipline:** primer updates with major releases (v0.2 → v0.3 → ...). Strategic-intent updates quarterly or on major repositioning. Both files explicitly carry `Last updated:` markers.
+
+**Optional follow-up (Forge-scope):** Add primer + strategic-intent to `.claude/CLAUDE.md` Context Map so they auto-load on AGF session start. That edit lives in dev-system ownership; route to Forge if approved.
+
 ## Backlogged
 
 ### Profile-page phases → patterns alignment (NEW 2026-04-24)

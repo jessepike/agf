@@ -1,9 +1,47 @@
 ---
-updated: 2026-04-28
+updated: 2026-05-01
 stage: operate (v0.2.0 shipped; Path A complete 2026-04-25; F33 adoption case study sole remaining M03 structural blocker)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-05-01 (agent-context primer + strategic intent)
+
+**From:** CPO session (Sonnet 4.7) — picking up from lost prior session
+**To:** Next session — verify primer content; consider linking from `.claude/CLAUDE.md` context map
+**Tree state:** clean post-wrap. New public file `docs/agf-primer.md` committed; new private file `.private/agf-strategic-intent.md` (gitignored).
+
+**What this session was:** Single focused product decision — created an agent-ready synthesis of AGF that replaces ~50K tokens of canonical doc spelunking with ~3-4K tokens of tight context. Two artifacts:
+
+1. **`docs/agf-primer.md`** (~1100 words, public, CC BY 4.0) — In-one-sentence definition · six pillars · core constructs (19 primitives, Rings, gate vocabulary, GDR, Composition Patterns, maturity, confidence gradient, harness) · seven-layer stack · what AGF is NOT · audience entry table · building/not building · evolution discipline · sacred + live files · operational tail for agents. Grounded against `intent.md` voice and DECISIONS.md #3–#11 verbatim wording.
+
+2. **`.private/agf-strategic-intent.md`** (~750 words, private) — Companion to the public primer. Three roles AGF plays in your practice · success criteria table · commercial boundary line · Year-1/Year-2 posture with Layer A/B/C · commitments + exclusions · risk register R1–R6 · pointers · explicit "what this file is NOT." Synthesized from agent state (Advisory-OaaS sessions Apr 17–21, D-OFF-12 through D-OFF-27).
+
+**Verification queue (next-session):**
+
+- Maturity L3/L4/L5 names — primer says "Defined / Managed / Optimizing" but I didn't read `agentic-governance-framework.md` to confirm. If wrong, fix in primer.
+- Strategic-intent extrapolations — success thresholds, R5/R6 risks, Year-2 STAR-for-AI mention all extrapolated from session memory; review and correct.
+- AGF Lite worksheet — primer/strategic-intent treats this as committed; status memory shows it as Tier 1.5 mitigation candidate. Reconcile.
+
+**Resulting agent-context payload (recommended):**
+```
+Read in this order:
+1. docs/agf-primer.md
+2. .private/agf-strategic-intent.md (private)
+3. status.md
+4. BACKLOG.md
+```
+~3-4K tokens total instead of ~50K from canonical doc tour.
+
+**M03 closure path (unchanged):** F33 first adopter case study is the sole remaining structural blocker. Editorial path 100% complete. Cannot be manufactured editorially.
+
+**Tier 1 next (unchanged from 2026-04-25):**
+- Push F33 adopter coordination — `JESSE` work, relationship/pilot outreach
+- DECISION pending: Tier 2 sequencing — pick which agent track runs first while F33 incubates
+- Tier 2 candidates: Compliance Blind Spots / GDR machine-form schemas / Maturity criteria / MI-F07 lint
+- **NEW from this session:** Verify primer content; consider auto-loading via project CLAUDE.md context map (Forge-scope edit if approved)
+
+---
 
 ## Handoff — 2026-04-27/28 (exploration session — no AGF state change)
 
