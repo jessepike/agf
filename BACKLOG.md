@@ -193,6 +193,15 @@ Residual tooling items. MI-F03/F04/F05 shipped in commit `3afefb4` (pre-push hoo
 - Q4: Taxonomy Updates — Ready for review (older)
 - ~~Q5: Relationship to Frameworks~~ **PROMOTED 2026-04-21** as `docs/relationship-to-frameworks.md` (commit `0e04172`).
 
+### Diagram orphan triage (NEW 2026-05-01)
+
+Pre-campaign alignment audit surfaced 9 zero-reference PNGs in `diagrams/`. None deployed via site mirror (7/9 missing from `agf-docs/public/diagrams/`). 4 of the 9 are referenced from `CHANGELOG.md` 0.2.0 entry (`agent-harness-*` set + agent-environment) — intentional artifacts for the agent-harness repo to reference. 5 are real orphans:
+
+- `1_rings_model.png`, `2_deployment_modes.png`, `4_composition_patterns.png`, `5_multi_agent_coordination.png` — numbered originals from pre-2026-04-21 set; superseded by named versions
+- `multi-agent-coordination.png` — likely duplicate of `5_multi_agent_coordination.png`
+
+Decision needed: delete from canonical (zero history value), move to `diagrams/_archive/` (preserve), or log retirement in `DIAGRAM-SPECS.md`. Recommend **delete** for the four numbered originals (clearly superseded by named versions in the 2026-04-21 macro set + the 2026-04-22 canonical rings-model set) and **delete** for `multi-agent-coordination.png` if confirmed duplicate of named version. Not campaign-blocking; deferred.
+
 ### Future / low priority (NEW 2026-04-22)
 - ISO 42001 clause verification — confirm Clauses 7.5 + 9.3 against official ISO text (paywalled). High-confidence based on Annex SL but not independently verified during GDR doc Standards section drafting. Soften citations if numbers are wrong.
 - RDG → GDR export format specification in `docs/decision-intelligence.md` (P2) — document how the RDG's Final Decision + Approval nodes serialize to a GDR
