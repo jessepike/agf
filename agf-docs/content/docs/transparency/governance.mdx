@@ -1,0 +1,77 @@
+---
+title: "Governance"
+description: "How AGF is governed — BDFL model, decision process, contribution expectations, versioning policy, and the planned evolution toward broader stewardship."
+---
+
+AGF needs to answer two questions before any practitioner takes it seriously: **who decides?** and **what does the path beyond v0.x look like?** This page answers both. The [canonical `GOVERNANCE.md`](https://github.com/jessepike/agf/blob/main/GOVERNANCE.md) on GitHub is the source of truth.
+
+## Model
+
+AGF operates under a **BDFL (Benevolent Dictator For Life)** model for v0.x. Jesse Pike holds sole editorial authority over framework vocabulary, primitive semantics, [`DECISIONS.md`](/docs/transparency/decisions) entries, versioning, and contribution acceptance.
+
+This is scope control, not arrogance — governance frameworks need a stable opinionated core before a committee can make meaningful contributions. The evolution path below makes the handoff explicit.
+
+## Decision process
+
+All substantive decisions are logged in [`DECISIONS.md`](/docs/transparency/decisions) as the public canonical decision record.
+
+**How proposals enter:**
+
+1. File a [GitHub issue](https://github.com/jessepike/agf/issues) with your crosswalk, primitive gap, or vocabulary proposal.
+2. If non-trivial, open a PR with a concrete draft — discussion happens in the PR.
+3. Jesse reviews, decides, and writes the `DECISIONS.md` entry if accepted.
+4. High-stakes decisions get a multi-model external review round before commit (see recent entries for the pattern).
+
+Jesse has final call on all framework content. No appeal process — that is what BDFL means.
+
+## Contribution expectations
+
+| Contribution type | Preferred channel |
+|---|---|
+| Crosswalk (NIST AI RMF, OWASP Agentic, ISO 42001, EU AI Act, AICM) | GitHub issue with draft table |
+| New primitive proposal | GitHub issue — describe the gap, not just the name |
+| Vocabulary addition or refinement | PR against `docs/shared-vocabulary.md` |
+| Clarification, typo, or broken link | PR directly |
+| Substantive framework change | Issue first; PR only after Jesse signals interest |
+
+Confidence labels are mandatory on substantive claims. Contributions that omit them on novel or unverified assertions will be asked to add them before merge. See [Confidence Levels](/docs/reference/confidence-levels) for the full posture.
+
+## Versioning policy
+
+AGF uses **SemVer-ish** versioning. The framework is primarily prose plus schemas, so the increment definitions are adapted:
+
+| Increment | Trigger |
+|---|---|
+| **Major** (1.x.x) | Vocabulary or primitive semantics break backward compatibility; requires migration guide |
+| **Minor** (0.x.0) | New primitive, new concept doc, new profile, new crosswalk section |
+| **Patch** (0.x.y) | Clarifications, tone fixes, cross-reference updates, schema non-breaking additions |
+
+**v1.0 is earned, not scheduled.** Prerequisites:
+
+- External review by practitioners outside the maintainer's network.
+- At least two verified crosswalks (NIST AI RMF + one other).
+- Outside contributors engaged (not just maintainer + their agents).
+- AGF primitives stress-tested against real agentic system designs.
+
+**Current:** v0.2.0 — framework is usable and stable enough to build on, but evolving.
+
+## Evolution
+
+The governance model is expected to evolve at these transitions:
+
+1. **v0.x (now)** — BDFL. Solo or invited-collaborator contributions.
+2. **~v0.4–v0.5** — Add **Core Maintainers** (2–3 practitioners with demonstrated crosswalk or domain expertise). Merge rights delegated to them for profile docs and crosswalks.
+3. **~v1.0+** — Consider **Community Working Group** for major vocabulary decisions. Maintainer retains veto.
+
+This page updates at each governance transition.
+
+## References
+
+- [`DECISIONS.md`](/docs/transparency/decisions) — all framework decisions, numbered and dated
+- [`Changelog`](/docs/transparency/changelog) — version history
+- [`Roadmap`](/docs/transparency/roadmap) — what's next
+- [`Contribute`](/docs/transparency/contribute) — contributor how-to
+
+---
+
+For the canonical entry-by-entry text, see the [GOVERNANCE.md on GitHub](https://github.com/jessepike/agf/blob/main/GOVERNANCE.md).
