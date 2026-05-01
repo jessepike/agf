@@ -10,13 +10,32 @@ This changelog documents **canonical AGF framework evolution**. Site-level infra
 
 ## [Unreleased]
 
+### Added
+
+- **First 30 Days workplan** — week-by-week starter at `agf-docs/content/docs/overview/first-30-days.mdx` for teams adopting the Minimum Viable Control composition pattern. Prerequisites + four week sections (Inventory & Scope → Identity & Attribution → Provenance & Observability → Scoped Environment) + exit criteria into Validation Pipeline and Governed Decision Flow. Closes G5-F12.
+- **Reference Walkthrough** — single threaded customer-refund scenario at `agf-docs/content/docs/overview/reference-walkthrough.mdx` traced across Rings 0–3 with two complete GDR YAML examples and a primitive/artifact/event mapping table. Closes G5-F13.
+- **Transparency section** — public surfaces at `agf-docs/content/docs/transparency/`: changelog, decisions, roadmap, contribute. Site grows 29 → 33 routes.
+- **Confidence markers across flagship pages** — empirical claims now carry `<Confidence level="established|informed|open" />` proportional to the evidence base. Time-sensitive references (Agent 365, AICM v1.0.3, Trust Ladders citations) carry verification dates so readers can confirm currency. Closes G5-F03 + G5-F20. Path A (2026-04-25) extended this to four previously-unmarked flagship pages — closes G5-F32.
+- **AI Engineering profile rewrite** — restructured around the four canonical Composition Patterns instead of the retired "Phase 1–5" sequence. Pairs with the new First 30 Days and Reference Walkthrough pages for an AI engineer's reading path.
+- **GDR cross-doc integration** — `gate_triggered`/`gate_resolved`/`approval_*` events now carry `decision_id`; #11 promotion/demotion noted as Domain Outcomes emitting GDRs. Mirrored from canonical `docs/profiles/{grc,observability}-profile.md` to site MDX.
+- **Per-signal dual-form table** — Composability Interface specification now includes a per-signal emission table (which Ring Control Signals emit observability events vs Governance Decision Records); Trust Ladder promotions/demotions have an explicit GDR emission spec. D17 follow-on closeout.
+- **AGF Primer** — agent-context primer at `docs/agf-primer.md` (~1100 words, public, CC BY 4.0). Six pillars + core constructs + seven-layer stack + audience entry table + operational tail for agents.
+- **Composition Patterns diagram regenerated** — `composition-patterns.png` now renders true four-pattern progression (MVC → Validation Pipeline → GDF → Full Governed) with hardening-posture modifier band overlapping Patterns 3–4. `implementation-phases-roadmap.png` retired as superseded.
+
 ### Changed
 
 - **Composition Patterns canonicalized at four.** Rings Model "Phase 1–5" growth language retired in favor of the four pattern names; Ring activation reframed as a consequence of pattern selection. The #11/#15/#18 hardening stack (Trust Ladders, Adversarial Robustness, Evaluation & Assurance) is expressed as a **hardening posture** — a modifier applied within Governed Decision Flow, or as a precondition for entering Full Governed — not a fifth named pattern. Earlier drafts referring to "Secure Governed System" as a pattern are retired. Decision: D10 (a).
 - **"Governance" qualifier conventions added** to `docs/shared-vocabulary.md` and the site vocabulary. Five-sense disambiguation table + required qualified forms — "AGF" for the framework, "Ring 2 / the Governance ring", "AGF program maturity" (replacing "program-level governance"), "Governance Gates" capitalized, "NIST CSF Govern" prefixed. Bare "governance" reserved for the framework sense or deliberate adjectival use. Decision: D10 (b).
 - **Observability three-layer disambiguation added** to `docs/shared-vocabulary.md`, the site vocabulary, and `docs/agentic-observability.md` (both canonical and site) as a "Where This Fits in AGF" frame block. Primitive #10 (emits) → Agentic Observability concept (correlates) → Observability Profile (implements) hierarchy now stated explicitly. Decision: D10 (c).
+- **Microsoft Agent 365** references updated from "GA target May 2026" to "GA May 1, 2026" with primary-source link, after Microsoft confirmed GA on the announced date.
+- **License canonized** — D11 added retroactively to `DECISIONS.md`: CC BY 4.0 retained for docs (adoption-first); Apache-2.0/MIT for any reference implementations or tooling.
 
-Closes findings G5-F09, G5-F15, G5-F16 (Cohesion Pass v0.3). Meta-finding G5-M02 requires separate holistic re-read.
+### Fixed
+
+- **G5-M01 + G5-M02 → validated** via two-pass closeout convergence (Codex generic-reviewer + new-adopter persona) — Cluster D (Actionability) + Credibility Pass v0.3 + Cohesion Pass v0.3 produced the shifts that closed both metas.
+- **Roadmap freshness** — "Now (in flight)" reframed around remaining work after Path A shipped; "Recently shipped" section captures public-readiness pass + AI Engineering alignment + Transparency surfaces + GDR.
+
+Closes findings G5-F03, G5-F09, G5-F12, G5-F13, G5-F15, G5-F16, G5-F20, G5-F32. M03 staged at 7/10 floor pending F33 (first adopter case study) — structural, cannot be manufactured editorially.
 
 ---
 
