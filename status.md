@@ -1,9 +1,42 @@
 ---
-updated: 2026-05-01 (multi-lens 3-model pressure-test ingested + factual fixes shipped + audit-loop spec built by Forge)
+updated: 2026-05-02 (Tier A Runtime Integration Contract drafted — awaiting Jesse decisions on 10 architectural forks)
 stage: operate (v0.2.0 shipped; Path A complete 2026-04-25; M03 closure path REFRAMED 2026-05-01 — F33 is one of multiple structural blockers; co-equal with Runtime Integration Contract gap surfaced by GPT-5.5)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-05-02 (Tier A Runtime Integration Contract drafted)
+
+**From:** CMO session — spawned `agf-architect` to draft the Tier A Runtime Integration Contract proposal closing 5 cross-model findings (G55-F01..F04 + O47-F02)
+**To:** Next session — Jesse decisions on 10 architectural forks in `.private/drafts/runtime-integration-contract-2026-05-02.md`; once forks resolve, downstream sequencing has 9 ordered steps before agf-architect Mode B review
+**Tree state:** clean post-commit; draft is gitignored under `.private/drafts/`
+
+### What shipped this session
+
+- **`.private/drafts/runtime-integration-contract-2026-05-02.md`** — full proposal covering 5 contract sections (atomicity, ESCALATE/DEFER lifecycle, signal arbitration, DELEGATE handshake, REVISE chain bounds), sacred-file impact assessment, 12-step adoption sequencing, 10 named forks for Jesse, confidence labels per AGF discipline. Routed to draft per sacred-impact (touches DECISIONS.md + GDR doc + primitives doc).
+
+### Architectural forks awaiting Jesse (numbered in draft)
+
+1. §1 atomicity model — Transactional Outbox (recommended) vs 2PC vs Event-Sourced GDR
+2. §1 decision_id allocation — pre-trigger deterministic
+3. §1 fail-closed posture on GDR store unavailability — policy-configurable, default HALT for high/irreversible
+4. §2 lifecycle revision — new `deferred_pending` / `escalated_pending` states (recommended) vs successor-GDR-only
+5. §2 state naming — `_pending` suffix vs bare names
+6. §3 precedence rigidity — strictest-wins normative; quorum_mode hard-disabled for irreversible/high
+7. §4 DELEGATE GDR threshold — `risk_tier: medium` (recommended) vs only `high`
+8. §5 REVISE(context) lifecycle — A (`expired_reason` field, recommended) vs B (REVOKED) vs C (`invalidated`)
+9. §5 max_revise_chain_depth — 5 (recommended) vs 3 vs 7
+10. §5 REVISE(context) replacement-only at runtime layer
+
+### Tier 1 next (next session priority — UPDATED)
+
+1. **Jesse decisions on Runtime Integration Contract forks** (10 named) — blocks all downstream Tier A work
+2. **Jesse decisions on sacred-file proposals** — `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` + `.private/drafts/intent-voice-position-2026-05-01.md` (carried)
+3. **After forks resolve:** DECISIONS.md entry → `docs/runtime-integration-contract.md` canonical doc → primitives + GDR doc edits → schema update → vocabulary additions → observability profile → CHANGELOG → site MDX sync → agf-architect Mode B review
+4. **Tier C: Multi-Axis Conformance Matrix** — Opus's highest-leverage editorial fix; pattern × maturity × risk-tier in agentic-governance-framework.md; 6–10h focused work
+5. **Validate the 3 same-session fixes from 2026-05-01** — agf-architect or fresh model reads GDR doc + agentic-primitives.md changes; confirms GEM-F01/GEM-F02/O47-F01 correctly resolved (different reviewer per protocol)
+
+---
 
 ## Handoff — 2026-05-01 (3-model multi-lens pressure-test + factual fixes + audit-loop spec)
 

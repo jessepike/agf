@@ -76,7 +76,9 @@ Three coordinated changes that dissolved the F32 catch-22 and demonstrated AGF's
 
 The 5-pass Codex chain treated F33 (adopter case study) as the sole remaining structural blocker. The 2026-05-01 multi-lens review (Gemini 3.1 Pro + GPT-5 Codex + Opus 4.7) **contests that diagnosis**. Three new structural blocker classes emerged:
 
-#### Tier A — Runtime Integration Contract (X-M04 cross-model meta)
+#### Tier A — Runtime Integration Contract (X-M04 cross-model meta) — **DRAFTED 2026-05-02, awaiting Jesse decisions**
+
+**Status:** Full proposal drafted at `.private/drafts/runtime-integration-contract-2026-05-02.md` covering all 5 contract sections + sacred-file impact + 12-step adoption sequencing. **10 architectural forks need Jesse decisions before downstream work proceeds.** Once forks resolve: DECISIONS.md entry → `docs/runtime-integration-contract.md` canonical doc → primitives + GDR doc edits → schema update → vocabulary additions → observability profile → CHANGELOG → site MDX sync → agf-architect Mode B review.
 
 **Convergent finding** — GPT-5.5 G55-F01/F02/F03/F04 + Opus O47-F02/F03 all surface distributed-systems failure semantics gaps. AGF specifies architectural objects well; specifies their runtime integration weakly.
 
