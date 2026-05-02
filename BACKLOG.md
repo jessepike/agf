@@ -72,9 +72,74 @@ Three coordinated changes that dissolved the F32 catch-22 and demonstrated AGF's
 - **Codex pass 5 verification** returned 7/10 / `pattern-persists` — score floor unchanged, but Codex confirmed editorial path closed; remaining ceiling is structural (adoption proof).
 - Closes G5-F32. M03 still bounded by F33 only.
 
-### G5-F33 — first adopter case study (sole remaining M03 structural blocker)
+### NEW 2026-05-01 — Structural Blockers from 3-model multi-lens pressure-test
 
-Cannot be manufactured editorially. Coordination item — surface from any pilot/POC AGF implementation as a written walkthrough (artifacts, caveats, outcomes). Even a partial single-organization walkthrough closes the gap. Tracked in `/docs/transparency/roadmap` "Now (in flight)."
+The 5-pass Codex chain treated F33 (adopter case study) as the sole remaining structural blocker. The 2026-05-01 multi-lens review (Gemini 3.1 Pro + GPT-5 Codex + Opus 4.7) **contests that diagnosis**. Three new structural blocker classes emerged:
+
+#### Tier A — Runtime Integration Contract (X-M04 cross-model meta)
+
+**Convergent finding** — GPT-5.5 G55-F01/F02/F03/F04 + Opus O47-F02/F03 all surface distributed-systems failure semantics gaps. AGF specifies architectural objects well; specifies their runtime integration weakly.
+
+Required new canonical doc covering:
+- **GDR/event atomicity contract** (G55-F01) — `decision_id` creation timing; transactional outbox or equivalent durability; idempotent GDR upsert; orphan-event/orphan-GDR reconciliation; append-only mutation history; fail-closed behavior on storage unavailability for high-stakes gates.
+- **Signal arbitration table** for graph-embedded mode (G55-F03) — HALT dominates; ERROR(halt) → HALT; GATE blocks release unless superseded; REVISE invalidates prior PASS; PASS only final after bounded quiet period or quorum; causal metadata required on concurrent signals.
+- **DELEGATE handshake** (G55-F04 + O47-F03) — `DELEGATE_REQUEST` / `DELEGATE_ACCEPTED` / `DELEGATE_REJECTED` / `DELEGATE_EXPIRED`; cross-agent GDR required above configured risk tier or trust-domain boundary; policy-translation failure as first-class `ERROR` or `REJECT` path; issuer-side `delegation_attempted` event with `gdr_required: true|false|conditional`.
+- **ESCALATE/DEFER lifecycle revision** (G55-F02) — non-terminal statuses `deferred_pending` and `escalated_pending`; required `owner` / `routing_target` / `due_at` / `fallback_default_action` / `successor_required` fields; reserve `resolved` for terminal authorizer outcomes only.
+- **REVISE(context) lifecycle resolution** (O47-F02) — pick architectural option among (a) widen `expired` semantics; (b) require successor GDR with `superseded`; (c) add new `invalidated` state. CPO/Jesse decision required.
+
+Co-equal structural blocker with F33 per GPT-5.5 verbatim: *"A case study would prove someone tried AGF; it would not prove the architecture is safe under partial failure, concurrency, escalation outage, or burst load."*
+
+#### Tier B — Standards-Fidelity Audit (X-M05 cross-model meta)
+
+**Gemini Critical + Informed findings** revealed that crosswalks to ISO 42001 / EU AI Act are LLM-fuzzy synthesis ("keyword matching on logs/records") rather than verified semantic alignment. Two findings already resolved this session via factual fixes (GEM-F01 EU AI Act Art. 12 → primary path is observability; GEM-F02 ISO 42001 Clause 9.3 → removed). Residual scope:
+
+- **ISO 42001 Annex A controls** — independent verification against the published ISO 42001 text (paywalled). Annex A controls are AI-specific and NOT in Annex SL; AGF's GDR doc already carries `<Confidence level="informed">` flagging this gap. Verification is a paid-text-access task or community-source-fetch.
+- **EU AI Act Articles 9, 10, 15, 16, 20, 26, 62 deep audit** — these are cited in `relationship-to-frameworks.md` and primitive-level docs but not deeply audited for semantic fidelity. Each Article needs a primary-source read + AGF-mapping verification.
+- **AICM v1.0.3 control crosswalk** — AGF asserts 5/243 controls are agent-native; AGF's broader implicit mapping to AICM domains needs explicit per-control verification.
+- **Independent semantic audit** of `relationship-to-frameworks.md` and all `docs/profiles/*.md` crosswalks to eliminate false equivalencies between AGF's software artifacts and systemic regulatory mandates.
+
+Recommend: external GRC consultant or standards-body partner conducts the audit. Internal effort estimate: 20–30 hours focused work without external eyes.
+
+#### Tier C — Multi-Axis Conformance Matrix (O47-F04, identified by Opus as highest-leverage editorial fix)
+
+AGF's primer claims orthogonality across Patterns × Maturity × Modes × Risk-Tier × Security-Levels but supplies no cross-axis intersection table. An assessor cannot conformance-check without inventing the matrix.
+
+Required new normative section in `docs/agentic-governance-framework.md` (Framework Maturity Model area): Pattern × Maturity × Risk-Tier matrix. Even a 5×4×4 table with cells marked "not required" or "out of scope" closes this. If the answer is "left to the organization," that is itself an architectural commitment requiring `<Confidence level="open">` markup.
+
+Per Opus: *"F04 would unlock Actionability and Coherence simultaneously. Of the two, F04 is internally addressable; F33 is not."* Highest-leverage single editorial move.
+
+Effort: 6–10 hours focused work. CPO + Jesse architectural input required for several cells.
+
+#### Tier D — Confidence Gradient on Structural Claims (X-M06 cross-model meta)
+
+**Convergent finding** — Opus O47-F06 + GPT-5.5 G55-F05: AGF dogfoods the confidence gradient on content claims about external evidence but leaves its own structural architectural decisions unmarked (presented as flat declaratives). Architecture appears more settled than the framework itself believes.
+
+Required confidence-marker pass on:
+- `shared-vocabulary.md` — entire doc is currently unmarked; structural definitions are load-bearing.
+- `agentic-primitives.md` — Composability Interface signal restrictions; Governance Collapse Rule (`max 3 levels`); trust-ladder asymmetry (`trust degrades faster than it builds`); per-signal emission rules; Default Action on Timeout choices.
+- `confidence-levels.mdx` — broaden coverage scope to "load-bearing empirical, comparative, novel, AND structural claims."
+
+Pair with G5-F18 editorial pass + G55-F05 confidence-page-overclaim fix. Single coherent editorial pass closes both atomic findings + the meta.
+
+#### Tier E — Replacement-Cost Matrix (G55-F06)
+
+GPT-5.5 finding: positioning page does not name what would be lost without AGF. The "deletion test" (delete AGF tomorrow; what breaks?) is the strongest adoption objection AGF faces, and the current relationship-to-frameworks.md answer is mostly verbs (synthesize, unify, prescribe, operationalize).
+
+Required new "What you lose without AGF" matrix on `relationship-to-frameworks.md`. For each AGF original synthesis (GDR at gate boundaries, Composability Interface, ring deployment modes, signal vocabulary, trust-ladder/gate interaction, Belief Layer, Environment Governance), state whether source frameworks provide it directly / partially / not at all.
+
+CMO/CPO scope. Effort: 3–4 hours.
+
+#### Sequencing recommendation
+
+1. **Tier A (Runtime Integration Contract)** — load-bearing structural blocker; co-equal with F33; would unlock regulated-adoption scoring meaningfully.
+2. **Tier C (Multi-Axis Matrix)** — Opus's highest-leverage single editorial fix; force-multiplies several other findings.
+3. **Tier D (Confidence on Structural Claims)** — editorial; closes 2 atomic findings + 1 meta in one pass.
+4. **Tier B (Standards-Fidelity Audit)** — partially shipped; remainder needs external partner or focused multi-day work.
+5. **Tier E (Replacement-Cost Matrix)** — content; sharpens positioning.
+
+### G5-F33 — first adopter case study (one structural blocker among multiple — NOT sole)
+
+Per GPT-5.5 G55-F07 (2026-05-01): F33 reframed from "sole remaining structural blocker" to "external adoption proof — one of multiple structural blockers." See Tier A above for the runtime-contract co-equal blocker; Tier B for standards-fidelity blocker. Cannot be manufactured editorially. Coordination item — surface from any pilot/POC AGF implementation as a written walkthrough (artifacts, caveats, outcomes). Even a partial single-organization walkthrough closes this gap. Tracked in `/docs/transparency/roadmap` "Now (in flight)."
 
 ### G5-M03 strategic-meta closeout (4 passes, 11 children, accepted as continuous quality dimension) — 2026-04-25
 

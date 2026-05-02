@@ -1,9 +1,69 @@
 ---
-updated: 2026-05-01
-stage: operate (v0.2.0 shipped; Path A complete 2026-04-25; F33 adoption case study sole remaining M03 structural blocker)
+updated: 2026-05-01 (multi-lens 3-model pressure-test ingested + factual fixes shipped + audit-loop spec built by Forge)
+stage: operate (v0.2.0 shipped; Path A complete 2026-04-25; M03 closure path REFRAMED 2026-05-01 — F33 is one of multiple structural blockers; co-equal with Runtime Integration Contract gap surfaced by GPT-5.5)
 ---
 
 # Status — AGF
+
+## Handoff — 2026-05-01 (3-model multi-lens pressure-test + factual fixes + audit-loop spec)
+
+**From:** CMO session — orchestrated 3-model pressure-test (Gemini 3.1 Pro + GPT-5 Codex + Opus 4.7) + drove factual fixes + spawned Forge subagent to build audit-loop infrastructure
+**To:** Next session — Jesse decision required on sacred-file proposals (GEM-F03 stack clarification + GEM-F04 voice position); Tier A Runtime Integration Contract is highest-leverage structural work
+**Tree state:** clean post-commit; Forge build artifacts in dev-system paths (review-loop extension + agf-architect mode + drift cron) — see Forge agent output file for detail
+
+### What shipped this session
+
+**Track A — Reviews captured + ledger extracted:**
+- `docs/reviews/2026-05-01-gemini-3-1-pro.md` — Standards Reconciliation lens; composite 6.6/10; Defensibility 5/10
+- `docs/reviews/2026-05-01-gpt-5-5.md` — Adversarial Practitioner lens; composite 6.5/10; Public Readiness 6/10 (calls 7/10 plateau "too generous for adoption-grade")
+- `docs/reviews/2026-05-01-opus-4-7.md` — Architectural Coherence lens; composite 6.75/10; holds 7/10 PR with caveats
+- 3-model average composite **~6.6/10** — materially below the 5-pass Codex 7.5 projection. The earlier Codex chain was generous.
+- Findings ledger updated with 18 new atomic findings + 3 cross-model meta-findings (X-M04 Runtime Contract Gap, X-M05 Standards-Fidelity Gap, X-M06 Confidence-Gradient-Stops-at-Architecture-Boundary)
+
+**Track B — Factual fixes applied this session (3 findings → resolved):**
+- **GEM-F02 (Critical):** ISO/IEC 42001 Clause 9.3 mapping removed from GDR doc; replaced with Clause 8.1 Operational Planning + retained 7.5 Documented Information; explicit `<Confidence level="informed">` block flagging Annex A controls not yet independently verified
+- **GEM-F01 (High):** EU AI Act Art. 12 mapping in GDR doc rewritten — primary path is Agentic Observability events (Primitive #10), not GDR; GDR mapping clarified to Art. 14 Human Oversight as primary; cross-link to observability-profile.md
+- **O47-F01 (High):** `agentic-primitives.md:1289` Multi-Agent "Composition Patterns" heading renamed to "Multi-Agent Topology Patterns" with vocabulary-note callout cross-referencing D10a (eliminates collision with canonical 4-pattern composition vocabulary)
+
+**Track C — Sacred-file proposals drafted (NOT auto-applied):**
+- `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` — proposed clarification for GEM-F03 (DECISIONS.md #4); recommendation: clarify "Layer 0" as architectural-substrate not authority-hierarchy; do NOT invert per reviewer's suggested fix; concrete edits to relationship-to-frameworks.md + DECISIONS.md #4 rationale append. Jesse decision required.
+- `.private/drafts/intent-voice-position-2026-05-01.md` — position-paper response to GEM-F04 (voice debate); recommendation: keep humility voice in intent.md per Pillar #1 commitment; harden RFC-2119 voice in canonical reference docs only (not intent.md). Jesse decision required.
+
+**Track D — Forge built audit-loop infrastructure (background subagent, completed 2026-05-01):**
+- Forge agent ID `a3aeb330009ba08f2` completed in ~8 minutes; full transcript at `/private/tmp/claude-501/.../tasks/a3aeb330009ba08f2.output`
+- Built per validated spec at `.private/drafts/agf-audit-loop-validation-2026-05-01.md` — 4 corrections + 7 secondary specs from independent Opus validation
+- Components built: extended `multi-model:review-loop` skill (3 parameterizations); `agf-architect` audit mode; pre-push hook; `/agf-drift` release-notes-watch cron
+- See Forge output for: skill changes, capabilities-registry version bumps, agent-plugin updates, dev-system commit refs
+
+### M03 closure path — REFRAMED
+
+**Was (pre-2026-05-01):** F33 first adopter case study is the sole remaining structural blocker.
+
+**Now (post-multi-lens):** F33 is **one of multiple structural blockers**. Co-equal: Runtime Integration Contract (X-M04 cross-model meta — GDR/event atomicity, signal arbitration, DELEGATE handshake, ESCALATE/DEFER lifecycle, REVISE(context) lifecycle). Standards-Fidelity Audit (X-M05 — partially shipped this session; ISO 42001 Annex A + EU AI Act articles deep audit remaining) is also load-bearing for regulated-adoption credibility.
+
+GPT-5 Codex verbatim: *"A case study would prove someone tried AGF; it would not prove the architecture is safe under partial failure, concurrency, escalation outage, or burst load. F33 alone is not the ceiling."*
+
+### Tier 1 next (next session priority)
+
+1. **Jesse decisions on sacred-file proposals** — review `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` and `.private/drafts/intent-voice-position-2026-05-01.md`; pick paths; apply
+2. **Tier A: Runtime Integration Contract** — new canonical doc covering GDR/event atomicity, signal arbitration, DELEGATE handshake, ESCALATE/DEFER lifecycle revision, REVISE(context) lifecycle pick. CPO + architectural input required. Highest-leverage structural blocker work.
+3. **Tier C: Multi-Axis Conformance Matrix** — Opus identified as highest-leverage editorial fix. Pattern × Maturity × Risk-Tier matrix in agentic-governance-framework.md. 6–10h focused work.
+4. **Validate the 3 same-session fixes** — agf-architect or fresh model reads GDR doc + agentic-primitives.md changes; confirms GEM-F01/GEM-F02/O47-F01 are correctly resolved (different reviewer than the one who shipped the fix per protocol).
+
+### Tier 2
+
+5. **Tier D: Confidence-marker pass on structural claims** — single editorial pass closes O47-F06 + G55-F05 + X-M06. ~3-4h.
+6. **Tier B residual: ISO 42001 Annex A verification** — paid-text-access task or community-source-fetch.
+7. **Tier E: Replacement-cost matrix** on relationship-to-frameworks.md (G55-F06). CMO/CPO scope; 3-4h.
+8. **Forge audit-loop dogfood** — invoke the new `/agf-audit` (or wherever Forge wired the entry point) on AGF itself to validate the loop end-to-end.
+
+### Verification queue (carried from prior session — still open)
+
+- Maturity L3/L4/L5 names in `docs/agf-primer.md` (Defined / Managed / Optimizing) — not yet verified against canonical
+- Strategic-intent extrapolations in `.private/agf-strategic-intent.md` — review and correct
+- AGF Lite worksheet — primer/strategic-intent treats as committed; agent state has it as Tier 1.5 candidate; reconcile
+
+---
 
 ## Handoff — 2026-05-01 (agent-context primer + strategic intent)
 
