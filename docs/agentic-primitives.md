@@ -1286,7 +1286,9 @@ The rings model describes a single agent pipeline. Real systems involve multiple
 
 The rings model does not break in multi-agent scenarios. It **nests**.
 
-### Composition Patterns
+### Multi-Agent Topology Patterns
+
+> **Vocabulary note:** "Composition Patterns" is reserved (per DECISIONS.md #10a) for AGF's four canonical governance-architecture patterns — Minimum Viable Control, Validation Pipeline, Governed Decision Flow, Full Governed Agentic System. The patterns described in this section are *multi-agent topology* patterns (how independent agent pipelines compose into coordinated systems), a distinct concept. Both senses live in `shared-vocabulary.md`.
 
 **Sequential:** Pipeline A's Ring 2 output feeds Pipeline B's Ring 0 input. The interface is the same structured output contract. Pipeline B treats Pipeline A's output as its input — with its own verification, governance, and learning.
 
