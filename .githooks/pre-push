@@ -1,7 +1,8 @@
 #!/bin/sh
 # .githooks/pre-push — AGF pre-push gate
 #
-# Blocks push on: preflight failure, MDX lint errors, broken internal links, build failure.
+# Blocks push on: preflight failure, MDX lint errors, broken internal links,
+# build failure, single-model H+ findings on changed canonical docs.
 # Bypass (emergencies only): git push --no-verify
 #
 # Activate: git config core.hooksPath .githooks
@@ -16,7 +17,7 @@ echo "=== AGF Pre-Push Gate ==="
 echo ""
 
 # Step 1: Preflight (allow-dirty since pre-push runs during a push, not release)
-echo "--- Step 1/4: Preflight ---"
+echo "--- Step 1/5: Preflight ---"
 if ! "$REPO_ROOT/bin/preflight.sh" --allow-dirty; then
   echo ""
   echo "[BLOCKED] Pre-push gate failed at preflight."
@@ -26,7 +27,7 @@ fi
 echo ""
 
 # Step 2: MDX lint
-echo "--- Step 2/4: MDX Lint ---"
+echo "--- Step 2/5: MDX Lint ---"
 if ! "$REPO_ROOT/bin/lint-mdx.sh"; then
   echo ""
   echo "[BLOCKED] Pre-push gate failed at MDX lint."
@@ -36,7 +37,7 @@ fi
 echo ""
 
 # Step 3: Link check
-echo "--- Step 3/4: Link Check ---"
+echo "--- Step 3/5: Link Check ---"
 if ! node "$REPO_ROOT/bin/check-links.mjs"; then
   echo ""
   echo "[BLOCKED] Pre-push gate failed at link check."
@@ -46,12 +47,48 @@ fi
 echo ""
 
 # Step 4: Build
-echo "--- Step 4/4: agf-docs Build ---"
+echo "--- Step 4/5: agf-docs Build ---"
 if ! pnpm --dir "$REPO_ROOT/agf-docs" build; then
   echo ""
   echo "[BLOCKED] Pre-push gate failed at agf-docs build."
   echo "Fix build errors above or bypass with: git push --no-verify"
   exit 1
+fi
+echo ""
+
+# Step 5: Single-model lightweight content check on changed canonical docs.
+# Blocks on Critical/High findings only. Low/Medium logged but do not block.
+# Skipped if no canonical docs changed in the push range, or if SKIP_CONTENT_CHECK=1.
+echo "--- Step 5/5: Single-Model Content Check (changed canonical docs) ---"
+if [ "${SKIP_CONTENT_CHECK:-0}" = "1" ]; then
+  echo "[SKIPPED] SKIP_CONTENT_CHECK=1"
+else
+  # Compute changed canonical docs: docs/*.md in the push range.
+  # Use upstream..HEAD if upstream exists; else HEAD~5..HEAD as a sensible fallback.
+  RANGE=""
+  if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
+    RANGE="$(git rev-parse --abbrev-ref --symbolic-full-name @{u})..HEAD"
+  else
+    RANGE="HEAD~5..HEAD"
+  fi
+  CHANGED_DOCS="$(git diff --name-only "$RANGE" -- 'docs/*.md' 'docs/**/*.md' 2>/dev/null | grep -E '\.md$' || true)"
+
+  if [ -z "$CHANGED_DOCS" ]; then
+    echo "[SKIPPED] No canonical docs changed in $RANGE."
+  else
+    echo "Changed canonical docs in $RANGE:"
+    echo "$CHANGED_DOCS" | sed 's/^/  - /'
+    echo ""
+
+    # Run the content check script. Exit non-zero blocks the push.
+    if ! "$REPO_ROOT/bin/pre-push-content-check.sh" $CHANGED_DOCS; then
+      echo ""
+      echo "[BLOCKED] Pre-push gate failed at single-model content check (H+ findings)."
+      echo "Review findings above. Bypass with: git push --no-verify"
+      echo "Or set SKIP_CONTENT_CHECK=1 if check infrastructure unavailable."
+      exit 1
+    fi
+  fi
 fi
 echo ""
 
