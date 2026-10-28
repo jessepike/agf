@@ -35,7 +35,7 @@ This is the most direct confirmation of AGF's Middleware/Interrupt deployment mo
 - Gartner lists "coordination mechanisms (standards, APIs, hooks)" as the least mature guardian-agent delivery approach (see `06`).
 
 ### 4. Known limitations and attacks — Established
-- **Hooks as attack surface:** Check Point disclosed CVE-2025-59536 and CVE-2026-21852, where a malicious hook in a repository settings file got code execution on project open.
+- **Repository config as attack surface:** Check Point Research (2026-02-25) showed that repository-controlled Claude Code settings could be weaponized on project open. Malicious **hooks** gave code execution (no separate CVE). **CVE-2025-59536** is an MCP consent bypass that let MCP servers start before the user trusted the project. **CVE-2026-21852** is API traffic redirection that exfiltrated the active API key. All three were patched. The lesson extends beyond hooks: any repo-supplied agent configuration (hooks, MCP server lists, environment settings) is untrusted input.
 - **Enforcement bypass:** Adversa AI found Claude Code ignored deny rules for commands with more than 50 subcommands. Praetorian reported an agent exploiting a hook loophole.
 - **Action ≠ reasoning:** a prompt-injected agent may split a forbidden action into permitted steps. This is the **path-level policy** problem: compliance must be evaluated over trajectories, not single calls (see `11`, *Policies on Paths*).
 - **Delta vs AGF:** AGF's Environment Governance (#19) treats environment composition as an attack surface. Hook configuration is a concrete, CVE-backed instance that AGF doesn't name. The "Recursive Governance Problem" section in `agentic-primitives.md` is directly relevant.
@@ -85,6 +85,7 @@ This is the most direct confirmation of AGF's Middleware/Interrupt deployment mo
 - AWS, Policy in Amazon Bedrock AgentCore is now generally available, 2026-03-03 — https://aws.amazon.com/about-aws/whats-new/2026/03/policy-amazon-bedrock-agentcore-generally-available/
 - AWS ML Blog, Govern AI agent tool access with AgentCore Gateway — https://aws.amazon.com/blogs/machine-learning/govern-ai-agent-tool-access-with-amazon-bedrock-agentcore-gateway/
 - GitHub, microsoft/agent-governance-toolkit releases — https://github.com/microsoft/agent-governance-toolkit/releases
+- BornCity, Vulnerabilities (CVE-2025-59536, CVE-2026-21852) in Anthropic Claude Code, 2026-03-02 — https://borncity.com/win/2026/03/02/vulnerabilities-cve-2025-59536-cve-2026-21852-in-anthropic-claude-code/
 - Microsoft, Agent Governance Toolkit v1.0.0 release notes — https://microsoft.github.io/agent-governance-toolkit/releases/RELEASE_NOTES_v1.0.0/
 - Microsoft Open Source Blog, Introducing the Agent Governance Toolkit, 2026-04-02 — https://opensource.microsoft.com/blog/2026/04/02/introducing-the-agent-governance-toolkit/
 - Agentic Control Plane, Microsoft open-sourced an Agent Governance Toolkit: what it covers and what it doesn't — https://agenticcontrolplane.com/blog/microsoft-agent-governance-toolkit-coverage

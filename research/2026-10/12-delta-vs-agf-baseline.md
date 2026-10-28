@@ -10,13 +10,15 @@ Line references were checked against `main` at `972eee0`. They may drift once th
 
 ## A. Stale or incorrect factual claims in canonical docs
 
+A5 is kept for completeness: it was checked and still holds.
+
 | # | Where | AGF says | Now (source file) | Confidence |
 |---|---|---|---|---|
 | A1 | `docs/profiles/grc-profile.md:86` | EU AI Act high-risk obligations "become applicable 2 August 2026" | Deferred by Reg. (EU) 2026/1744: Annex III **2027-12-02**, Annex I **2028-08-02**. Art. 50 transparency did apply 2026-08-02 (`02`) | Established |
 | A2 | `docs/relationship-to-frameworks.md:57,125,134` | CSA AICM **v1.0.3**, **243** controls, 5 of 243 agent-native | AICM **v1.1**, **247** controls (2026-07-14). No new agent controls, so it's ~5 of 247. Recheck control IDs (`05`) | Established |
 | A3 | `docs/agentic-primitives.md:1842` | "Linux Foundation's **Agentic AI Interoperability Forum** (AAIF)" houses MCP, A2A, **AGNTCY**, AGENTS.md | Name is **Agentic AI Foundation**. 10 projects. AGNTCY not found on AAIF's project list (`08`) | Established (name); Open (AGNTCY) |
 | A4 | `docs/agentic-primitives.md:1818` (OTel table) | "MCP does not yet define standard trace context propagation" | MCP 2026-07-28 documents `traceparent`/`tracestate`/`baggage` in `_meta` (SEP-414) (`08`) | Established |
-| A5 | `docs/agentic-primitives.md:433` (#14) | "MCP does not yet enforce identity verification" | Partly superseded: per-request client/server info, RFC 9207 `iss` validation, issuer-bound credentials, CIMD replaces DCR (`08`) | Established |
+| A5 | `docs/agentic-primitives.md:433` (#14) | "MCP does not yet enforce identity verification" | **Claim still holds.** Auth stays optional and `clientInfo` is self-asserted. Only the optional OAuth path was hardened (RFC 9207 `iss` validation, issuer-bound credentials, CIMD replaces DCR). Worth a dated note, not a correction (`08`) | Established |
 | A6 | `docs/agentic-observability.md:534`, `docs/agentic-primitives.md:1816` | OTel GenAI semconv **v1.40.0** | Last GenAI cut **v1.42.0** (2026-06-12), moved to a dedicated repo with no release. Still "Development". `invoke_agent` split into client/internal spans (`09`) | Established |
 | A7 | `docs/agentic-governance-framework.md:606` | A2A status "Early" | **A2A v1.0.0**, now an AAIF project (`08`) | Established |
 | A8 | `docs/agentic-primitives.md:1734`, `grc-profile.md:127`, `shared-vocabulary.md:338` | IMDA MGF for Agentic AI (Jan 2026) | **v1.5, 2026-05-20**: multi-agent and systemic risks, automation-bias guidance, rules-over-prompts (`02`) | Established |
@@ -56,7 +58,7 @@ Line references were checked against `main` at `972eee0`. They may drift once th
 ## D. New topics AGF doesn't cover
 
 - **Agent Skills as a supply-chain surface** (OWASP AST01–AST10, AAIF Agent Skills standard) (`04`, `08`)
-- **Hook configuration as attack surface** (CVE-2025-59536, CVE-2026-21852) (`07`)
+- **Repository-supplied agent configuration as attack surface**: malicious hooks, MCP consent bypass (CVE-2025-59536), API-key exfiltration via config (CVE-2026-21852) (`07`)
 - **Evaluation-environment containment** for frontier agents, plus the EU GPAI systemic-risk enforcement around it (`02`, `10`)
 - **Insurance-linked certification** (AIUC-1) (`06`)
 - **China** agent policy framework (`02`)

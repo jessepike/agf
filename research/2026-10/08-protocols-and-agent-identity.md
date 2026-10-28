@@ -24,7 +24,7 @@ MCP shipped its biggest revision yet (2026-07-28). It is now **stateless**, has 
 
 **Delta vs AGF:**
 - `agentic-primitives.md` (OTel table): "MCP does not yet define standard trace context propagation; OTel advises using `params._meta`." This is now **resolved upstream**.
-- Primitive #14: "MCP does not yet enforce identity verification." This is partly superseded. Per-request client/server identity metadata, issuer validation, and CIMD tighten authentication, though MCP still does not do agent identity in the AIMS sense.
+- Primitive #14: "MCP does not yet enforce identity verification." **This still holds.** Authorization remains optional for MCP implementations, and the new per-request `clientInfo`/`serverInfo` metadata is self-asserted, so it is not a basis for security decisions. What changed is OAuth hygiene for implementations that *do* use authorization: RFC 9207 `iss` validation, issuer-bound credentials, and CIMD replacing DCR. That is a hardening of the optional auth path, not identity verification at the invocation boundary.
 - AGF's MCP governance concerns ("dynamic tool discovery", "session isolation") need re-reading. There are no protocol sessions now, and list-changed notifications moved to `subscriptions/listen`.
 - `Mcp-Method`/`Mcp-Name` headers make gateway-based (middleware-mode) policy enforcement cheaper, since tool identity is visible without body parsing.
 

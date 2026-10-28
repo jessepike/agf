@@ -18,7 +18,7 @@
 7. **Identity is consolidating fast.** The IETF adopted **AIMS** as a WIMSE WG document and chartered `agentproto`. An `audit` BOF on delegation traceability is forming. Incumbents bought agent-identity startups (Cisco/Astrix, Okta/Permiso, SailPoint/Entro, Cyera/Oasis). → `03`, `08`
 8. **Certification arrived with economic pull.** **AIUC-1** (quarterly, insurer-linked, auditor-accredited) is certifying agent vendors. CSA **STAR for AI Level 2** is live. ISO still has **no agentic work item**, but ISO/IEC 27090 (AI security) published, and the first EU harmonised standard (EN 18286, QMS) is in the OJ. → `03`, `06`
 9. **OTel GenAI is still not stable.** AGF's "custom governance attributes on top of OTel" approach remains right. → `09`
-10. **About 13 factual claims in AGF's canonical docs are now stale** (dates, versions, names, counts). They are listed with file and line in `12`.
+10. **About 12 factual claims in AGF's canonical docs are now stale** (dates, versions, names, counts). They are listed with file and line in `12`, along with one checked claim that still holds.
 
 ## Files
 
