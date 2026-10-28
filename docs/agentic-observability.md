@@ -531,7 +531,7 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 *Standards:*
 
-- OpenTelemetry GenAI semantic conventions (Development maturity, v1.40.0) — agent spans, tool calls, MCP conventions. No governance, security, or ring-level semantics.
+- OpenTelemetry GenAI semantic conventions (Development maturity; last cut v1.42.0, June 2026, now maintained in a dedicated repository) — agent spans, tool calls, MCP conventions. No governance, security, or ring-level semantics.
 - Gartner projects AI governance platform spending at **$492M in 2026, exceeding $1B by 2030**. Inaugural Magic Quadrant for Decision Intelligence Platforms published January 2026.
 
 **The gap (narrowing but still real):** No single product genuinely covers all three domains (quality + security + governance) for arbitrary, **platform-agnostic** agent systems using a unified event correlation architecture. Cloud platforms are strong but ecosystem-locked. Zenity is cross-platform but security-focused. LLM observability tools lack governance. Traditional SIEM lacks agentic semantics. The differentiation axes: **true platform-agnosticism**, **deep LLM quality + governance + security in one architecture**, **cross-system event correlation**, and **open-standards-native (OTel, not proprietary telemetry)**.

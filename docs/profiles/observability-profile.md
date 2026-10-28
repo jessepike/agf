@@ -229,7 +229,7 @@ Gate-boundary governance events are the **log** that a governed decision occurre
 
 ### OTel Integration
 
-AGF is an **OTel-compatible base + governance extensions** architecture. OTel GenAI semantic conventions (Development maturity, v1.40.0) already provide substantial native compatibility — agent spans, tool-call capture, model identity, token usage, and emerging MCP conventions.
+AGF is an **OTel-compatible base + governance extensions** architecture. OTel GenAI semantic conventions (Development maturity; last cut v1.42.0, June 2026) already provide substantial native compatibility — agent spans, tool-call capture, model identity, token usage, and emerging MCP conventions.
 
 **OTel Signal Mapping:**
 

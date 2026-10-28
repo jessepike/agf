@@ -315,7 +315,7 @@ The Model Context Protocol is the canonical implementation of middleware/interru
 | **Ring 2 tool authorization** | Policy defines which MCP servers and tools are authorized (allowlisted servers, permitted tool schemas, scope constraints) |
 | **Security Fabric verification** | Tool integrity verified at each `execute_tool` invocation |
 | **Ring 1 verification** | Evaluates tool selection (right tool?) and tool output (valid results?) |
-| **Identity propagation** | OTel `execute_tool` spans carry identity context. Note: MCP does not yet define standard trace context propagation; use `params._meta`. |
+| **Identity propagation** | OTel `execute_tool` spans carry identity context. MCP spec 2026-07-28 standardizes W3C trace context (`traceparent`/`tracestate`/`baggage`) in `_meta`. |
 
 ### MCP-Specific Governance Concerns
 

@@ -46,7 +46,7 @@ AGF is a reference architecture and operating model for organizations developing
 - **Not a control catalog.** AGF primitives crosswalk to AICM/ISO/NIST controls; AGF doesn't replicate catalog content.
 - **Not a maturity certification.** AGF defines criteria; it doesn't credential adopters. No accreditation body.
 - **Not GRC re-skinning.** Traditional GRC is content; AGF is method, primitives, and signals tuned to probabilistic/agentic behavior.
-- **Not vendor-aligned.** Microsoft AGT/CAF/Agent 365 are AGF's current Layer 5 runtime references because they are public, ATF-conformant, and most mature today. AWS, Google, Salesforce, and open-source stacks are treated neutrally and not endorsed; profile docs will expand coverage as other runtimes reach production maturity.
+- **Not vendor-aligned.** Microsoft AGT/CAF/Agent 365 are AGF's current Layer 5 runtime references because they are public, self-assessed against CSA ATF, and were the most complete reference as of mid-2026. AWS (AgentCore Policy, GA March 2026), Google (Model Armor, Cloud API Registry), Salesforce, and open-source stacks are treated neutrally and not endorsed; profile docs will expand coverage.
 - **Not opinionated on stack** — primitives are deployment-mode-agnostic.
 
 ## How it gets used

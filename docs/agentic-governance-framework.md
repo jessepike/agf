@@ -603,7 +603,7 @@ ISO 42001 establishes organizational requirements for responsible AI. This frame
 |----------|--------|-----------|
 | **OpenTelemetry GenAI Semantic Conventions** | In development | Standardizing agent event tracing. The framework's event architecture should align with OTel semantics for interoperability. |
 | **Model Context Protocol (MCP)** | Active | Protocol for agent-to-tool interaction. MCP relies on OAuth/OIDC for authorization — aligns with Identity & Attribution (#14). |
-| **Agent-to-Agent Protocol (A2A)** | Early | Protocol for inter-agent communication. Relevant to Multi-Agent Coordination and cross-pipeline governance. |
+| **Agent-to-Agent Protocol (A2A)** | v1.0 (Linux Foundation AAIF project) | Protocol for inter-agent communication. Relevant to Multi-Agent Coordination and cross-pipeline governance. |
 | **SPIFFE/SPIRE** | Mature | Workload identity for agents. A candidate implementation for agent identity verification at ring boundaries. |
 | **Next Generation Access Control (NGAC)** | Standard | Attribute-based access control for fine-grained agent authorization. Supports policy-as-code (#9) and bounded agency (#7). |
 

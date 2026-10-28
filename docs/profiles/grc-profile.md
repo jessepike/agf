@@ -83,7 +83,7 @@ Most agentic systems are built on general-purpose AI models (GPT, Claude, Gemini
 
 **What AGF does NOT cover:** Art. 43 (conformity assessment procedures), Art. 73 (serious incident reporting), Art. 72 (post-market monitoring system), Art. 26 (deployer obligations including log retention ≥6 months). These are organizational/regulatory processes above AGF's runtime architecture. AGF provides the technical evidence substrate these processes require.
 
-**Applicability timing (as of March 2026):** The EU AI Act entered into force in 2024 with phased applicability. Prohibitions, definitions, and AI literacy (Art. 4) have applied since 2 February 2025. Governance rules and GPAI obligations have applied since 2 August 2025. High-risk system obligations (Art. 6, 9-15) become applicable 2 August 2026. Organizations should begin preparation now; the obligations in this profile are transitional as of this writing.
+**Applicability timing (as of October 2026):** The EU AI Act entered into force in 2024 with phased applicability. Prohibitions, definitions, and AI literacy (Art. 4) have applied since 2 February 2025. Governance rules and GPAI obligations have applied since 2 August 2025. Transparency obligations (Art. 50) have applied since 2 August 2026. Regulation (EU) 2026/1744 deferred the high-risk system obligations (Art. 6, 9-15): they apply from 2 December 2027 for Annex III systems and from 2 August 2028 for Annex I systems. Organizations should begin preparation now; the obligations in this profile are transitional as of this writing.
 
 ### Human Oversight: An Honest Constraint
 
@@ -124,7 +124,7 @@ The NCCoE published a concept paper (February 2026, public comment period Feb-Ap
 
 ## Singapore IMDA Alignment
 
-The IMDA Model AI Governance Framework for Agentic AI (January 2026) — the world's first government-published governance framework specifically for agentic AI.
+The IMDA Model AI Governance Framework for Agentic AI (January 2026; updated to v1.5 in May 2026 with multi-agent and systemic risk guidance) — the world's first government-published governance framework specifically for agentic AI.
 
 | IMDA Dimension | Description | AGF Mapping |
 |---------------|-------------|-------------|

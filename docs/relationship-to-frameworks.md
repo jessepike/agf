@@ -48,14 +48,14 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 │ 6. Risk quantification lens     FAIR, FAIR-CAM, ISO 31000,         │
 │    (orthogonal, cross-cutting)  NIST AI RMF "Measure"              │
 ├────────────────────────────────────────────────────────────────────┤
-│ 5. Runtime reference            Microsoft AGT (MIT, ATF-conformant)│
+│ 5. Runtime reference            Microsoft AGT (MIT, ATF-mapped)    │
 │                                 + Microsoft CAF + Agent 365        │
 ├────────────────────────────────────────────────────────────────────┤
 │ 4. Operating model              CSA ATF (5 Qs, 4-tier maturity,    │
 │                                 25 conformance requirements)       │
 ├────────────────────────────────────────────────────────────────────┤
-│ 3. Control catalog              CSA AICM v1.0.3 (18 domains,       │
-│                                 243 controls); ISO 42001/27001;    │
+│ 3. Control catalog              CSA AICM v1.1 (18 domains,         │
+│                                 247 controls); ISO 42001/27001;    │
 │                                 NIST 800-53; EU AI Act Annexes;    │
 │                                 BSI AIC4                           │
 ├────────────────────────────────────────────────────────────────────┤
@@ -122,7 +122,7 @@ These two frameworks are complementary, not competitive. MAESTRO is architectura
 
 Control catalogs are enumerative. They tell you what to do, not why or how it fits together.
 
-- **CSA AI Controls Matrix (AICM) v1.0.3** — 18 domains, 243 controls. Maps to ISO 42001, ISO 27001, NIST AI 600-1, BSI AIC4, EU AI Act. Five controls are explicitly agent-native as of v1.0.3: AIS-11 (Agents Security Boundaries), AIS-13 (AI Sandboxing), AIS-15 (Prompt Differentiation), IAM-19 (Agent Access Restriction), TVM-11 (Guardrails). The remaining 238 are AI-general or cloud-inherited. Expected to grow in future revisions.
+- **CSA AI Controls Matrix (AICM) v1.1** (July 2026) — 18 domains, 247 controls. Maps to ISO 42001, ISO 27001, NIST AI 600-1, BSI AIC4, EU AI Act. Five controls were explicitly agent-native as of v1.0.3, and v1.1 added no new agent-specific controls: AIS-11 (Agents Security Boundaries), AIS-13 (AI Sandboxing), AIS-15 (Prompt Differentiation), IAM-19 (Agent Access Restriction), TVM-11 (Guardrails). The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. Expected to grow in future revisions.
 - **ISO/IEC 42001:2023** — the AI Management System standard. Organizations seeking certification against 42001 need the AICM mapping (AICM maps to all 10 ISO 42001 domains, 39 controls).
 - **ISO/IEC 27001:2022** — information security foundation; still relevant but doesn't cover AI-specific concerns.
 - **NIST 800-53 + NIST AI RMF + NIST AI 600-1 (Generative AI Profile)** — the U.S. federal control and risk-management stack.
@@ -131,7 +131,7 @@ Control catalogs are enumerative. They tell you what to do, not why or how it fi
 
 AGF primitives crosswalk to these catalogs. The crosswalks live in `docs/profiles/` (security, GRC, AI engineering, platform, observability). AGF does not replicate the catalogs; AGF provides the architectural map of how controls cluster.
 
-**An important honest observation:** AICM's explicit agentic coverage is thin — 5 of 243 controls (the five listed above) are agent-native as of v1.0.3. This reflects the youth of the agentic field, not a flaw in AICM. AGF's gap analysis ("Agentic Compliance Blind Spots," forthcoming) surfaces the agent-specific failure modes that current control catalogs do not yet cover.
+**An important honest observation:** AICM's explicit agentic coverage is thin — about 5 of 247 controls (the five listed above) are agent-native as of v1.1. This reflects the youth of the agentic field, not a flaw in AICM. AGF's gap analysis ("Agentic Compliance Blind Spots," forthcoming) surfaces the agent-specific failure modes that current control catalogs do not yet cover.
 
 ### Layer 4 — Operating Model (CSA Agentic Trust Framework)
 
@@ -147,7 +147,7 @@ Where Layer 3 enumerates controls, Layer 4 provides the operating model — role
 - **Twenty-five conformance requirements** with MUST/SHOULD/MAY precision per maturity level
 - **Two-tier conformance program:** ATF-Compatible (self-attestation) and ATF-Certified (third-party audit)
 
-ATF is open-source (CC-licensed) and co-developed with Microsoft. Microsoft's Agent Governance Toolkit (Layer 5) is formally ATF-conformant.
+ATF is open-source (CC-licensed) and co-developed with Microsoft. Microsoft's Agent Governance Toolkit (Layer 5) v1.0 published a self-assessed mapping to ATF; later releases do not repeat the claim.
 
 AGF primitives crosswalk to ATF's five elements and 25 requirements. The crosswalk lives in `docs/profiles/grc-profile.md` (and related).
 

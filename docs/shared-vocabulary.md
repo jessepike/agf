@@ -335,7 +335,7 @@ Used throughout the framework to mark certainty:
 | **EU AI Act** | Regulation (EU) 2024/1689 — Artificial Intelligence Act |
 | **FAIR** | Factor Analysis of Information Risk (Jack Jones, 2005) |
 | **FAIR-CAM** | FAIR Controls Analytics Model — quantifies control effectiveness |
-| **IMDA MGF** | Singapore IMDA Model AI Governance Framework for Agentic AI (Jan 2026) |
+| **IMDA MGF** | Singapore IMDA Model AI Governance Framework for Agentic AI (Jan 2026; v1.5 May 2026) |
 | **IR 8596** | NIST Cybersecurity Framework Profile for AI (Cyber AI Profile) |
 | **MAESTRO** | CSA Multi-Agent Environment Security Threat and Risk Operations (7-layer threat model) |
 | **MCP** | Model Context Protocol — de facto standard for agent-tool integration |

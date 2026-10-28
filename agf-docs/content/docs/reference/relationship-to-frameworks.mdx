@@ -28,9 +28,9 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 | Layer | Answers | Frameworks |
 |-------|---------|------------|
 | **6** (orthogonal) | What's the quantified risk? How should we prioritize investment? | FAIR, FAIR-CAM, ISO 31000, NIST AI RMF "Measure" |
-| **5** | What does a production implementation look like? | Microsoft AGT (MIT, ATF-conformant), Azure CAF, Agent 365 (GA May 1, 2026 per [Microsoft](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/); verify current status on Microsoft Learn) |
+| **5** | What does a production implementation look like? | Microsoft AGT (MIT, self-assessed ATF mapping), Azure CAF, Agent 365 (GA May 1, 2026 per [Microsoft](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/); verify current status on Microsoft Learn) |
 | **4** | How do we organize our team, policies, and decisions? | CSA Agentic Trust Framework (ATF) — 5 governance questions, 4-tier maturity, 25 requirements |
-| **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.0.3, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
+| **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.1, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
 | **2** | What specifically can go wrong, by what mechanism, where? | CSA MAESTRO (7 layers), Microsoft Failure Mode Taxonomy (28 modes, 2×2) |
 | **1** | What are the most important things that can go wrong? | OWASP Agentic Top 10 (ASI-01 through ASI-10) |
 | **0** (substrate) | How do the pieces fit together architecturally for an agentic system? | **AGF** — the architectural substrate beneath the layers above. See [What is AGF?](/docs/overview/what-is-agf) for the construct catalog. |
@@ -48,9 +48,9 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 
 ## Important Honest Observations
 
-**AICM's explicit agentic coverage is thin.** <Confidence level="established" /> 5 of 243 controls are agent-native as of CSA AICM v1.0.3 (verified against the published catalog 2026-04-24): AIS-11, AIS-13, AIS-15, IAM-19, TVM-11. The remaining 238 are AI-general or cloud-inherited. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
+**AICM's explicit agentic coverage is thin.** <Confidence level="established" /> About 5 of 247 controls are agent-native as of CSA AICM v1.1 (July 2026), which added no new agent-specific controls. The five below were verified against v1.0.3 on 2026-04-24: AIS-11, AIS-13, AIS-15, IAM-19, TVM-11. The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
 
-**Industry is converging.** Microsoft AGT is formally ATF-conformant. This strengthens AGF's substrate position — when frameworks converge on shared operating models, AGF's role as the architecture underneath becomes clearer, not weaker.
+**Industry is converging.** Microsoft AGT v1.0 published a self-assessed mapping to CSA ATF. This strengthens AGF's substrate position — when frameworks converge on shared operating models, AGF's role as the architecture underneath becomes clearer, not weaker.
 
 **A note on "Rings" terminology.** AGT uses "Ring 0–3" for CPU-style privilege tiers (Root/Trusted/Standard/Sandbox) that enforce execution isolation. AGF uses "R0–R3" for governance control loops (Execution/Verification/Governance/Learning). Same numbering, orthogonal concepts. AGT's privilege rings live inside AGF's R0 Execution ring.
 
