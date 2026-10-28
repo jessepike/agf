@@ -11,11 +11,21 @@ Reference architecture and operating model for organizations governing agentic s
 **Governance:** BDFL (Jesse Pike, sole maintainer). See `GOVERNANCE.md`.
 **Published site:** agf.jessepike.dev
 
+## Start here
+
+On session start, read `status.md`, the newest file in `docs/baseline/`, `BACKLOG.md`, and `lessons.md`. `docs/operations/estate-map.md` explains how the repo, GitHub, Vercel, and the site connect.
+
+This repository is public. Commercial, client, employer, and strategy material goes in `.private/` only. Every push to `main` deploys the live site.
+
 ## Key locations
 
 | Area | Path |
 |---|---|
 | Framework docs | `docs/` |
+| Baselines | `docs/baseline/` |
+| Estate map | `docs/operations/estate-map.md` |
+| Research (public, dated) | `research/YYYY-MM/` |
+| Archive | `docs/archive/` |
 | Decision log | `DECISIONS.md` |
 | Changelog | `CHANGELOG.md` |
 | Diagrams | `diagrams/` |

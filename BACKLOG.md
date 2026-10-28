@@ -4,13 +4,26 @@ Prioritized work queue. P0 = blocking. P1 = high value. Active = in progress. Ba
 
 ---
 
+## Restart queue (added 2026-10-28)
+
+The project was dormant from May to October 2026. Until the future-state conversation happens, these items come before anything older below. The older priorities date from April and May 2026 and should be re-ranked after the October research lands.
+
+1. **October 2026 landscape research** — in progress in `research/2026-10/`.
+2. **Future-state conversation** — what AGF is for now, who it serves, and whether it's worth continued investment. Inputs are `docs/baseline/2026-10-28-current-state.md` and the October research.
+3. **Runtime integration contract forks** — decide the ten forks in `.private/drafts/runtime-integration-contract-2026-05-02.md`, or retire them if the future state changes direction.
+4. **Agent hooks reference implementation** — bring in the agent hooks article (deterministic lifecycle hooks: PreToolUse maps to #7/#8, PostToolUse to #6/#10, SessionStart to #14) and scope a hooks-based MVC reference implementation in middleware mode.
+5. **Refresh `docs/agf-primer.md` and the external context bundle** at `~/code/_shared/context-registry/agf/`. Both are as of May 2026.
+6. **Disk cleanup** — about 12 GB of untrimmed MCP Dev Summit video duplicates in `.private/research/AAIF/`.
+
+---
+
 ## P0 — Blocking
 
 _(none — all P0 items resolved)_
 
 ### ~~LICENSE decision (BLOCKER before external contributors)~~ — RESOLVED 2026-04-23
 - Resolution: **CC BY 4.0 retained** for docs; Apache-2.0/MIT for any reference implementations / tooling. Recorded as DECISIONS.md #11 (entry added 2026-04-24 retroactively after operational confirmation 2026-04-23).
-- `LICENSE` file is correct as-is. `LICENSE-TODO.md` can be archived (consider moving to `.private/archive/` or deleting).
+- `LICENSE` file is correct as-is. `LICENSE-TODO.md` was deleted on 2026-10-28; it remains in git history.
 
 ## P1 — High Priority
 

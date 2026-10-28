@@ -9,20 +9,39 @@ Reference architecture and operating model for organizations governing agentic s
 
 ---
 
+## Start here
+
+This root `CLAUDE.md` is the only authoritative instruction file. The gitignored `.claude/CLAUDE.md` just points back here.
+
+On session start, read in order: `status.md` (current state, kept short), the newest file in `docs/baseline/`, `BACKLOG.md`, and `lessons.md`. Then read `docs/agf-primer.md` for the framework in brief. Read `intent.md` before any content work. For where things live and how the site gets published, see `docs/operations/estate-map.md`.
+
+**This repository is public on GitHub.** Commercial, client, employer (ePlus), and strategy material goes in `.private/` only, and is indexed in `.private/estate-index.md`. `.private/` exists only on this Mac.
+
+**Every push to `main` deploys the live site.** There is no staging step.
+
 ## Key locations
 
 | Area | Path | Purpose |
 |---|---|---|
-| Framework docs | `docs/` | 20+ canonical MDs — governance framework, primitives, DI, observability |
-| Decision log | `DECISIONS.md` | Architectural decisions (D1–D17+); every substantive change logs here |
-| Changelog | `CHANGELOG.md` | Keep-a-Changelog per-release |
-| Diagrams | `diagrams/` | 24+ architecture diagrams + `DIAGRAM-SPECS.md` |
+| Framework docs | `docs/` | Canonical MDs: governance framework, primitives, DI, observability, profiles |
+| Baselines | `docs/baseline/` | Dated current-state baselines |
+| Estate map | `docs/operations/estate-map.md` | How the repo, GitHub, Vercel, the site, and related folders connect |
+| Research (public) | `research/YYYY-MM/` | Dated research passes |
+| Archive | `docs/archive/` | Retired context files, such as the March to May 2026 status log |
+| Decision log | `DECISIONS.md` | Architectural decisions; every substantive change logs here |
+| Changelog | `CHANGELOG.md` | Keep-a-Changelog per release |
+| Diagrams | `diagrams/` | Architecture diagrams + `DIAGRAM-SPECS.md` |
 | Site source | `agf-docs/` | Next.js + Fumadocs site for agf.jessepike.dev |
-| Research archive | `.private/research/` | Source extractions (Microsoft, CSA, etc.) |
-| Intent (sacred) | `intent.md` | North star — do not auto-edit; surface proposed changes for Jesse |
+| Intent (sacred) | `intent.md` | North star. Do not auto-edit; surface proposed changes for Jesse |
 | Backlog | `BACKLOG.md` | Prioritized work queue |
-| Status | `status.md` | Dated project-state snapshots |
+| Status | `status.md` | Current state only; history goes to `docs/archive/` |
 | Lessons | `lessons.md` | Hot buffer of session insights |
+| Private drafts | `.private/drafts/` | Proposals awaiting Jesse's decision |
+| Change queue | `.private/change-queue.md` | Concepts workshopped privately, queued for promotion to public docs |
+| Voice guide | `.private/voice.md` | Read before writing or revising framework content |
+| Private research | `.private/research/` | Source extractions and raw research media (large, local only) |
+
+Content flows one way: edit `docs/*.md` first, then sync to `agf-docs/content/docs/*.mdx` with `agf-docs/scripts/sync-content.sh`. Never edit MDX as the primary source. `docs/agentic-primitives.md` is about 200 KB, so read it by section.
 
 ## Release + review infrastructure
 
