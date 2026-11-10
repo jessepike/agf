@@ -90,6 +90,7 @@ Full rubric + baseline in `docs/reviews/README.md`.
 - **DECISIONS.md entry** required for: new primitive, vocabulary change, primitive semantic change, novel framing, architectural repositioning
 - **CHANGELOG.md entry** required for any release (Added / Changed / Removed / Fixed)
 - Never commit `.private/research/` extractions without explicit direction
+- **Who the commit is from** (set 2026-11-10): a commit an agent makes on its own, for pre-approved or low-risk work, is authored and committed as `Claude <noreply@anthropic.com>`. A change Jesse reviews and approves is committed under her own identity. Agents do not commit under Jesse's name or email.
 
 ## Project constraints
 

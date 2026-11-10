@@ -9,19 +9,19 @@ const stats = [
 
 const stages = [
   {
-    title: "You have not started",
+    title: "Have not started",
     actions: "List your agents. Find out which rules apply. Put a floor in place.",
-    href: "/docs/overview/start-here#you-have-not-started",
+    href: "/docs/overview/start-here#have-not-started",
   },
   {
-    title: "You are piecing things together",
+    title: "Piecing things together",
     actions: "Name an owner per question. Add an independent check. Add an approval step.",
-    href: "/docs/overview/start-here#you-are-piecing-things-together",
+    href: "/docs/overview/start-here#piecing-things-together",
   },
   {
-    title: "You have a program",
+    title: "Have a program",
     actions: "Check versions and dates. Trace one real decision. Test against the gaps.",
-    href: "/docs/overview/start-here#you-have-a-program",
+    href: "/docs/overview/start-here#have-a-program",
   },
 ];
 
