@@ -66,3 +66,7 @@ ISO's AI management-system family is stable. 42001 has no revision, and there is
 - IETF, draft-rosenberg-oauth-aauth-00 — https://www.ietf.org/archive/id/draft-rosenberg-oauth-aauth-00.html
 - IETF, draft-oauth-ai-agents-on-behalf-of-user-02 — https://datatracker.ietf.org/doc/html/draft-oauth-ai-agents-on-behalf-of-user-02
 - arXiv 2510.25819, Identity Management for Agentic AI (OpenID Foundation) — https://arxiv.org/abs/2510.25819
+
+## Corrections (dated notes)
+
+- **2026-11-10.** IETF `audit` BOF: the datatracker history for the BOF request shows one state change, from Proposed to Declined, on 2026-07-06. No approval appears there. The "approved 2026-10-08" statement above was not confirmed. Source: https://datatracker.ietf.org/doc/bofreq-kuhlewind-agent-use-of-delegation-and-interaction-traceability-audit/history/

@@ -285,7 +285,7 @@ Each of the 10 OWASP ASI threats is analyzed below with AGF's defense architectu
 
 The Model Context Protocol has become the de facto standard for agent-tool integration. Its security surface requires dedicated analysis.
 
-> **Note:** The OWASP MCP Top 10 is a living/beta taxonomy as of March 2026. Pin to a specific version for compliance purposes.
+> **Note:** The OWASP MCP Top 10 is a living/beta taxonomy. It was still in its beta and pilot phase when checked on 2026-11-10. Pin to a specific version for compliance purposes.
 
 | MCP Threat | Description | AGF Defense |
 |-----------|-------------|-------------|
@@ -336,7 +336,7 @@ Trust Ladders (#11) align with CSA ATF's earned autonomy maturity model (Intern 
 
 ## MITRE ATLAS Alignment
 
-MITRE ATLAS (Adversarial Threat Landscape for AI Systems) is the de facto standard for AI adversarial threat modeling, modeled after ATT&CK. As of October 2025, it includes 15 tactics, 66 techniques, 46 sub-techniques, and 33 real-world case studies. A 2025 update added 14 techniques specifically focused on AI agents and generative AI systems.
+MITRE ATLAS (Adversarial Threat Landscape for AI Systems) is the de facto standard for AI adversarial threat modeling, modeled after ATT&CK. As of release v2026.09 (15 September 2026), it includes 16 tactics, 120 techniques, 88 sub-techniques, 40 mitigations and 73 case studies. A 2025 update added 14 techniques specifically focused on AI agents and generative AI systems.
 
 AGF's three-level security model complements ATLAS:
 
@@ -522,7 +522,7 @@ The following AGF primitives are directly relevant to security. For full pattern
 
 5. **Intelligence integrity.** Compromised Intelligence + Response Bus = denial-of-service. Mitigated by: cryptographic proof, pre-authorized class limits, dead-man's-switch override, independent verification. Defense-in-depth, not elimination.
 
-6. **OWASP MCP Top 10 stability.** The taxonomy is living/beta as of March 2026. Category definitions may evolve. Pin to a version for compliance.
+6. **OWASP MCP Top 10 stability.** The taxonomy is living/beta and was still in its beta and pilot phase when checked on 2026-11-10. Category definitions may evolve. Pin to a version for compliance.
 
 ---
 

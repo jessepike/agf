@@ -19,21 +19,20 @@ On 2026-11-10 the future-state conversation was held. Jesse restated the purpose
 
 ## In flight
 
-- The October 2026 landscape research landed on `main` on 2026-11-10 in `research/2026-10/` (13 files, researched 2026-10-28). It is a dated snapshot, so record corrections as dated notes and do not edit findings in place. Start with `research/2026-10/12-delta-vs-agf-baseline.md`.
-- The ten runtime integration contract forks are still undecided. The draft is in `.private/drafts/runtime-integration-contract-2026-05-02.md`. These forks have blocked the Tier A structural work since May.
-- A proposed positioning decision (#12) awaits Jesse's acceptance. It brings positioning back in line with `intent.md` and replaces the "Layer 0 substrate" wording of decision #4. The draft is `.private/drafts/purpose-and-positioning-2026-11-10.md`. Scope was settled on 2026-11-10: AGF stays agentic.
-- A landscape and revival review dated 2026-11-10 is in `.private/reviews/`. It lists about 20 wrong or stale facts in the canonical docs.
-- Two older proposals are still undecided: `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` and `.private/drafts/intent-voice-position-2026-05-01.md`.
+- Decision #12 was accepted on 2026-11-10 and is in `DECISIONS.md`. AGF is a practitioner's map across the agentic governance sources, with gap-fills. Scope stays agentic. The "Layer 0 substrate" wording of decision #4 is superseded.
+- A "Start Here" page was added on 2026-11-10 and is the site's front door. Its outside facts were checked that day.
+- Pages that still use Layer 0 wording and need revising: `docs/relationship-to-frameworks.md` and its site copy, `docs/agf-primer.md`, the home page hero text, the seven-layer diagram, and the D3 and D4 summaries.
+- The October 2026 landscape research is in `research/2026-10/`, with dated correction notes from 2026-11-10. A landscape and revival review dated 2026-11-10 is in `.private/reviews/`.
+- Three older proposals are still undecided: the runtime integration contract (ten forks), the seven-layer stack clarification, and the intent and voice position, all in `.private/drafts/`. Decision #12 overtakes most of the second.
 
 ## Next
 
-1. Finish the fact fixes. A first pass of source-checked corrections landed on 2026-11-10 (see `CHANGELOG.md`). Still open and not yet verified: NIST program naming, MITRE ATLAS counts, the OpenTelemetry version reference, the OWASP MCP Top 10 date, and the dated "state of play" section in `docs/agentic-observability.md`.
-2. Accept or amend proposed decision #12.
-3. Build a "start here" map for the early-stage reader and make it the site's front door.
-4. Publish a worked example: Security Market Pulse scored against the primitives, patterns only, limits stated. A draft scorecard is in the private `agf-applied` catalog.
-5. Publish a decision vocabulary crosswalk (AGF, OWASP ACS, CSA AARM, agent hooks).
-6. Decide the three older drafts. The review recommends deciding four of the ten runtime contract forks and deferring six.
-7. Review AGF against the four tests in `intent.md`, with at least one working security leader.
+1. Revise the pages listed above so they match decision #12.
+2. Publish a worked example: Security Market Pulse scored against the primitives, patterns only, limits stated. A draft scorecard is in the private `agf-applied` catalog.
+3. Publish a decision vocabulary crosswalk (AGF, OWASP ACS, CSA AARM, agent hooks).
+4. Decide the three older drafts. The 2026-11-10 review recommends deciding four of the ten runtime contract forks and deferring six.
+5. Review AGF against the four tests in `intent.md`, with at least one working security leader.
+6. Refresh `docs/agf-primer.md` in full. It has had fact corrections only since May.
 
 ## Known housekeeping
 

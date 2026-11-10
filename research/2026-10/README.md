@@ -63,3 +63,7 @@ Applied per AGF's own gradient (`CLAUDE.md`, `docs/shared-vocabulary.md`):
 ## How to use this folder
 
 This folder is a **dated snapshot**. Don't edit findings in place after the fact. Record corrections as a dated note at the bottom of the relevant file, and start a new dated folder (`research/YYYY-MM/`) for the next sweep. Canonical AGF docs should cite this folder when they adopt a finding, and change through the normal `DECISIONS.md` / `CHANGELOG.md` discipline.
+
+## Corrections
+
+Dated correction notes were added on 2026-11-10 at the bottom of files `01`, `03`, `04` and `05`. They affect summary items 2 (most-mapped OWASP category) and 7 (the IETF `audit` BOF) above.

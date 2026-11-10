@@ -507,7 +507,7 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 ## Market Context
 
-**Current state of play (updated March 2026):**
+**State of play as last edited in May 2026.** This vendor list has not been refreshed since. For changes from May to October 2026, see `research/2026-10/` (files 07, 08 and 10).
 
 *Platform-native agent governance (ecosystem-locked):*
 
@@ -560,7 +560,7 @@ Most organizations will start at Level 1-2 and take months to reach Level 3. Lev
 
 ## Open Questions
 
-- **Event schema standardization:** ~~OpenTelemetry GenAI semantic conventions are standardizing LLM-level tracing. Build on OTel or separate?~~ **Resolved:** OTel-compatible base + governance extensions. OTel GenAI conventions (Development maturity, v1.40.0) already cover agent spans, tool calls, model identity. AGF adds governance-specific extensions (ring, deployment_mode, policy_reference, gate_type) as custom attributes within the OTel data model. Pursue standardization of reusable governance extensions through OTel community process.
+- **Event schema standardization:** ~~OpenTelemetry GenAI semantic conventions are standardizing LLM-level tracing. Build on OTel or separate?~~ **Resolved:** OTel-compatible base + governance extensions. OTel GenAI conventions (still at Development maturity as of September 2026; moved to a dedicated repository in June 2026 at schema 1.42.0) already cover agent spans, tool calls, model identity. AGF adds governance-specific extensions (ring, deployment_mode, policy_reference, gate_type) as custom attributes within the OTel data model. Pursue standardization of reusable governance extensions through OTel community process.
 - **Ingestion breadth vs. depth:** Start with deep observability for one agent framework (LangGraph, CrewAI, custom) or broad but shallow ingestion from many? Deep-first is likely — prove the value, then broaden.
 - **Standalone vs. layer:** Start standalone, integrate over time — same path as cloud SIEM. Feed audit packages into existing GRC platforms. Feed security alerts into existing SIEM. But own the agentic intelligence.
 - **Correlation rule authoring:** Who writes correlation rules? Security team? Governance team? Platform team? Likely all three — domain-specific rule authoring with shared infrastructure.

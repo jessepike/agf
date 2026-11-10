@@ -31,7 +31,7 @@ Its core constructs:
 | Reviews and findings | 5 reviews ingested into `docs/reviews/`. The findings ledger has 16 open, 23 resolved but not yet validated, 17 validated, 4 deferred, and 2 accepted findings. |
 | Release tooling | Preflight, lint, link check, drift report, diagram sync, deployed-site smoke test (`bin/`), a pre-push hook, and a GitHub Actions smoke workflow. |
 | Agent support | A dedicated `agf-architect` agent with review, audit, crosswalk, and drift modes, defined outside this repo. |
-| Reference implementation | None. |
+| Reference implementation | None in this repo. Note added 2026-11-10: a related public tool, `github.com/jessepike/agent-harness` (MIT, last pushed 2026-05-25), builds agent configuration from policy files, ships two Claude Code hooks, and says it is built on AGF. It has not been reviewed as a reference implementation. |
 | Adopters or case studies | None known. |
 
 ## How it is published

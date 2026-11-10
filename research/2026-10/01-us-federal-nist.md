@@ -68,3 +68,7 @@ The federal agent-standards picture moved from "initiative announced" (AGF's Feb
 - CSA Labs, Five Eyes Agentic AI Guidance: Enterprise Compliance Baseline, 2026-05 — https://labs.cloudsecurityalliance.org/research/csa-whitepaper-five-eyes-agentic-ai-guidance-analysis-202605/
 - Mayer Brown, Multi-Agency Guidance on Securing Agentic AI Systems, 2026-06-10 — https://www.mayerbrown.com/en/insights/publications/2026/06/multi-agency-guidance-on-securing-agentic-ai-systems
 - Govern365, SR 11-7 and AI: The Words That Changed in April 2026 — https://govern365.ai/blogs/model-risk-management/
+
+## Corrections (dated notes)
+
+- **2026-11-10.** CAISSI naming confirmed: the main heading of https://www.nist.gov/caisi reads "Center for Advancing Innovation and Standards for Super Intelligence (CAISSI)". This moves from Informed to Established. Other NIST pages, including the agent standards initiative page, still use CAISI. COSIS rename confirmed on https://csrc.nist.gov/projects/cosais.
