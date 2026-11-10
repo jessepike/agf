@@ -20,14 +20,15 @@ On 2026-11-10 the future-state conversation was held. Jesse restated the purpose
 ## In flight
 
 - Decision #12 was accepted on 2026-11-10 and is in `DECISIONS.md`. AGF is a practitioner's map across the agentic governance sources, with gap-fills. Scope stays agentic. The "Layer 0 substrate" wording of decision #4 is superseded.
-- A "Start Here" page was added on 2026-11-10 and is the site's front door. Its outside facts were checked that day.
-- Pages that still use Layer 0 wording and need revising: `docs/relationship-to-frameworks.md` and its site copy, `docs/agf-primer.md`, the home page hero text, the seven-layer diagram, and the D3 and D4 summaries.
+- A "Start Here" page was added on 2026-11-10 and is the site's front door. Its versions, dates and counts were checked against the linked sources that day, then checked again by a separate reviewer, and the findings were fixed.
+- Layer 0 wording was removed on 2026-11-10 from the site and from `docs/relationship-to-frameworks.md` and `docs/agf-primer.md`. A new diagram, `governance-landscape-map.png`, replaces the seven-layer image on the site. Other long documents under `docs/` may still say "substrate" in passing.
+- Nothing from 2026-11-10 is pushed yet. Local `main` is ahead of GitHub, and the live site still shows the old pages until the push.
 - The October 2026 landscape research is in `research/2026-10/`, with dated correction notes from 2026-11-10. A landscape and revival review dated 2026-11-10 is in `.private/reviews/`.
 - Three older proposals are still undecided: the runtime integration contract (ten forks), the seven-layer stack clarification, and the intent and voice position, all in `.private/drafts/`. Decision #12 overtakes most of the second.
 
 ## Next
 
-1. Revise the pages listed above so they match decision #12.
+1. Push `main` and the `v0.2.0` tag, then check the live site.
 2. Publish a worked example: Security Market Pulse scored against the primitives, patterns only, limits stated. A draft scorecard is in the private `agf-applied` catalog.
 3. Publish a decision vocabulary crosswalk (AGF, OWASP ACS, CSA AARM, agent hooks).
 4. Decide the three older drafts. The 2026-11-10 review recommends deciding four of the ten runtime contract forks and deferring six.

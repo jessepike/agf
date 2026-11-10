@@ -37,7 +37,7 @@ AGF is a reference architecture and operating model for organizations developing
 - **Confidence gradient** — Established (broad evidence) / Informed (single-source synthesis) / Open (flagged speculative). Applied to load-bearing empirical and novel claims across the orientation path and flagship pages; not yet uniform across deeper docs (tracked under M03/F33).
 - **Harness (D7)** — `Agent = Model + Harness`. Industry-standard term. Source artifacts + runtime enforcement adapters, inseparable.
 
-**Seven-layer stack** (D4): AGF as architectural substrate at Layer 0, under threat baseline (OWASP Agentic), threat modeling (CSA MAESTRO + Microsoft Failure Mode Taxonomy), control catalogs (CSA AICM, ISO 42001/27001, NIST 800-53, EU AI Act Annexes, BSI AIC4), operating model (CSA ATF), and runtime references (Microsoft AGT, CAF, Agent 365). Risk quantification (FAIR, FAIR-CAM, ISO 31000) is orthogonal.
+**Landscape stack** (D4, revised by D12 on 2026-11-10): AGF is a guide across five layers and is not a layer itself. The layers are threat baseline (OWASP Agentic), threat modeling (CSA MAESTRO + Microsoft Failure Mode Taxonomy), control catalogs (CSA AICM, ISO 42001/27001, NIST 800-53, EU AI Act, BSI AIC4), operating model (CSA ATF), and runtime references (Microsoft AGT, CAF, Agent 365). Risk quantification (FAIR, FAIR-CAM, ISO 31000) is orthogonal.
 
 ## What AGF is NOT
 

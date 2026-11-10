@@ -1697,7 +1697,7 @@ The mapping below acknowledges where each part of this framework comes from, how
 
 #### NIST — AI Risk Management and Agent Security
 
-NIST's contributions to AI governance are foundational. The AI RMF 1.0 provides the organizing functions; the GenAI Profile (AI 600-1) extends them for generative AI; and the February 2026 CAISI AI Agent Standards Initiative is now building the agent-specific layer. Note (2026-11-10): NIST's center page now carries the name Center for Advancing Innovation and Standards for Super Intelligence (CAISSI), and the SP 800-53 overlay project was renamed COSIS on 2026-10-20. Documents issued before the change, including the request for information, use CAISI. NIST published a summary of the responses on 2026-05-18 (report 800-5).
+NIST's contributions to AI governance are foundational. The AI RMF 1.0 provides the organizing functions; the GenAI Profile (AI 600-1) extends them for generative AI; and the February 2026 CAISI AI Agent Standards Initiative is now building the agent-specific layer. Note (2026-11-10): The heading of NIST's center page reads Center for Advancing Innovation and Standards for Super Intelligence (CAISSI). We found no rename notice, and other NIST pages still use CAISI. The SP 800-53 overlay project was renamed COSIS on 2026-10-20. Documents issued before the change, including the request for information, use CAISI. NIST published a summary of the responses on 2026-05-18 (NIST AI 800-5).
 
 | NIST Work | What It Contributes | How We Build On It |
 |-----------|--------------------|--------------------|

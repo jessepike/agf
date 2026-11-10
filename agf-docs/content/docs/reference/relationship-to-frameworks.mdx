@@ -1,11 +1,11 @@
 ---
 title: "Relationship to Frameworks"
-description: "How AGF relates to NIST, OWASP, CSA AICM/ATF/MAESTRO, Microsoft AGT, ISO, EU AI Act, FAIR, TOGAF, SABSA, and more — the seven-layer stack."
+description: "How AGF relates to NIST, OWASP, CSA AICM/ATF/MAESTRO, Microsoft AGT, ISO, EU AI Act, FAIR, TOGAF, SABSA, and more, and who covers what."
 ---
 
 Any organization deploying agentic systems in 2026 is looking at a crowded field: threat catalogs (OWASP, MITRE ATLAS), threat-modeling frameworks (CSA MAESTRO, Microsoft Failure Mode Taxonomy), control catalogs (CSA AICM, ISO 42001, NIST 800-53, EU AI Act, BSI AIC4), operating models (CSA ATF, NIST CSF), runtime implementations (Microsoft AGT, AWS, Google, open-source), and risk quantification methodologies (FAIR, FAIR-CAM, ISO 31000).
 
-Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them — it's the architectural substrate that explains how they compose.
+Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them. It shows how they fit together and where the gaps are.
 
 ## Status Note
 
@@ -17,13 +17,13 @@ This page describes AGF's position in the broader landscape — the contract sur
 
 > "We already have NIST. We're evaluating AICM. Our CSO wants ISO 42001. Our security team is reading about MAESTRO. Microsoft is shipping AGT. Do we need another framework?"
 
-**No. You need the architecture that makes the frameworks you already use work together for agentic systems. That is AGF.**
+**No. You need a map of how the frameworks you already use fit together for agentic systems. That is what AGF offers.**
 
-AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, and prescribes pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note)).
+AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, organizes it with one shared model, and recommends pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note)).
 
 ## The Seven-Layer Stack
 
-AGF sits inside a seven-layer conceptual stack. Six layers describe what an organization needs to know and do. A seventh, orthogonal layer — the risk quantification lens — cuts across the rest.
+The landscape can be read as a stack. Five layers describe what an organization needs to know and do. A sixth, the risk quantification lens, cuts across the rest. AGF is a guide across the layers and is not counted as one (see [Decisions](/docs/transparency/decisions), D12). Earlier versions of this page counted AGF as a seventh layer, which is where the name "seven-layer stack" comes from.
 
 | Layer | Answers | Frameworks |
 |-------|---------|------------|
@@ -33,24 +33,24 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 | **3** | What controls must we implement for regulators and auditors? | CSA AICM v1.1, ISO 42001/27001, NIST 800-53 + AI 600-1, EU AI Act, BSI AIC4 |
 | **2** | What specifically can go wrong, by what mechanism, where? | CSA MAESTRO (7 layers), Microsoft Failure Mode Taxonomy (28 modes, 2×2) |
 | **1** | What are the most important things that can go wrong? | OWASP Agentic Top 10 (ASI-01 through ASI-10) |
-| **0** (substrate) | How do the pieces fit together architecturally for an agentic system? | **AGF** — the architectural substrate beneath the layers above. See [What is AGF?](/docs/overview/what-is-agf) for the construct catalog. |
+| **Across all** | How do the pieces fit together for an agentic system, and where are the gaps? | **AGF** — a guide across the layers above, with proposals for the gaps. Begin at [Start Here](/docs/overview/start-here). |
 
-AGF at Layer 0 is the architectural substrate. Risk quantification at Layer 6 is orthogonal — methodology, not content.
+Risk quantification at Layer 6 is a method that applies to every layer. Until 2026-11-10 this page placed AGF at "Layer 0" as an architectural substrate. Decision D12 replaced that wording.
 
 ## How AGF Plays Across the Layers
 
 The four verbs from AGF's positioning pillars describe how AGF operates:
 
 - **Synthesizes** — pulls from every layer; does not invent primitives
-- **Unifies** — places the synthesized material on a shared architectural substrate
-- **Prescribes** — converts synthesis into actionable implementation pathways per primitive
+- **Organizes** — reads the synthesized material through one shared model (the Rings Model and the primitives)
+- **Recommends** — turns the synthesis into suggested implementation pathways per primitive. AGF prescribes nothing a reader must conform to (D12)
 - **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see [Status Note](#status-note) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
 
 ## Important Honest Observations
 
-**AICM's explicit agentic coverage is thin.** <Confidence level="established" /> About 5 of 247 controls are agent-native as of CSA AICM v1.1 (July 2026), which added no new agent-specific controls. The five below were verified against v1.0.3 on 2026-04-24: AIS-11, AIS-13, AIS-15, IAM-19, TVM-11. The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
+**AICM's explicit agentic coverage is thin.** <Confidence level="established" /> About 5 of 247 controls are agent-native as of CSA AICM v1.1 (22 June 2026), which added no new agent-specific controls. The five below were verified against v1.0.3 on 2026-04-24: AIS-11, AIS-13, AIS-15, IAM-19, TVM-11. The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. AGF's "Agentic Compliance Blind Spots" analysis (forthcoming) surfaces the agent-specific failure modes that current catalogs do not yet cover.
 
-**Industry is converging.** Microsoft AGT v1.0 published a self-assessed mapping to CSA ATF. This strengthens AGF's substrate position — when frameworks converge on shared operating models, AGF's role as the architecture underneath becomes clearer, not weaker.
+**Industry is converging.** Microsoft AGT's README lists a self-assessed mapping to all five CSA ATF elements (checked 2026-11-10). When sources converge like this, a map across them gets simpler to draw and to keep current.
 
 **A note on "Rings" terminology.** AGT uses "Ring 0–3" for CPU-style privilege tiers (Root/Trusted/Standard/Sandbox) that enforce execution isolation. AGF uses "R0–R3" for governance control loops (Execution/Verification/Governance/Learning). Same numbering, orthogonal concepts. AGT's privilege rings live inside AGF's R0 Execution ring.
 
