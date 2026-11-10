@@ -21,14 +21,14 @@ On 2026-11-10 the future-state conversation was held. Jesse restated the purpose
 
 - The October 2026 landscape research landed on `main` on 2026-11-10 in `research/2026-10/` (13 files, researched 2026-10-28). It is a dated snapshot, so record corrections as dated notes and do not edit findings in place. Start with `research/2026-10/12-delta-vs-agf-baseline.md`.
 - The ten runtime integration contract forks are still undecided. The draft is in `.private/drafts/runtime-integration-contract-2026-05-02.md`. These forks have blocked the Tier A structural work since May.
-- A proposed positioning decision (#12) awaits Jesse's acceptance. It brings positioning back in line with `intent.md` and replaces the "Layer 0 substrate" wording of decision #4. The draft is `.private/drafts/purpose-and-positioning-2026-11-10.md`. It also holds one open scope question: agentic governance only, or AI governance more widely.
+- A proposed positioning decision (#12) awaits Jesse's acceptance. It brings positioning back in line with `intent.md` and replaces the "Layer 0 substrate" wording of decision #4. The draft is `.private/drafts/purpose-and-positioning-2026-11-10.md`. Scope was settled on 2026-11-10: AGF stays agentic.
 - A landscape and revival review dated 2026-11-10 is in `.private/reviews/`. It lists about 20 wrong or stale facts in the canonical docs.
 - Two older proposals are still undecided: `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` and `.private/drafts/intent-voice-position-2026-05-01.md`.
 
 ## Next
 
-1. Fix the wrong and stale facts. Sources: section 3 of the 2026-11-10 review, and `research/2026-10/12-delta-vs-agf-baseline.md`.
-2. Accept or amend proposed decision #12 and answer its scope question.
+1. Finish the fact fixes. A first pass of source-checked corrections landed on 2026-11-10 (see `CHANGELOG.md`). Still open and not yet verified: NIST program naming, MITRE ATLAS counts, the OpenTelemetry version reference, the OWASP MCP Top 10 date, and the dated "state of play" section in `docs/agentic-observability.md`.
+2. Accept or amend proposed decision #12.
 3. Build a "start here" map for the early-stage reader and make it the site's front door.
 4. Publish a worked example: Security Market Pulse scored against the primitives, patterns only, limits stated. A draft scorecard is in the private `agf-applied` catalog.
 5. Publish a decision vocabulary crosswalk (AGF, OWASP ACS, CSA AARM, agent hooks).

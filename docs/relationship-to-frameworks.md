@@ -1,6 +1,6 @@
 # AGF's Relationship to Existing Frameworks
 
-**Last updated:** 2026-04-21
+**Last updated:** 2026-11-10 (fact corrections; positioning text unchanged since 2026-04-21)
 **Status:** Active
 **Related decisions:** DECISIONS.md #3 (Positioning Pillars), #4 (Seven-Layer Stack), #5 (Gate-Boundary Dual-Form), #6 (Maturity Model), #7 (Harness Definition)
 
@@ -8,7 +8,7 @@
 
 ## Status Note — What Ships Today vs. What's Planned
 
-AGF ships human-readable primitive forms today. Machine-readable primitive schemas (the dual-form artifacts described below), FAIR-CAM control-effectiveness templates, and the full maturity-level conformance criteria are planned for v0.2. Where this document describes AGF "operationalizing at machine speed," treat that as the architectural commitment — the dual-form artifacts and runtime adapters that make it real are the next major work product.
+AGF ships human-readable primitive forms today. v0.2.0 shipped on 2026-04-22 with one machine-readable schema, the Governance Decision Record (`docs/schemas/gdr.yaml`). Machine-readable schemas for the other primitives (the dual-form artifacts described below), FAIR-CAM control-effectiveness templates, and the full maturity-level conformance criteria were planned for v0.2, did not ship, and have no committed version. Where this document describes AGF "operationalizing at machine speed," treat that as the architectural commitment — the dual-form artifacts and runtime adapters that make it real are the next major work product.
 
 ---
 
@@ -111,7 +111,7 @@ AGF cites OWASP Agentic Top 10 as its recommended threat baseline. Every AGF sec
 
 Where Layer 1 enumerates risk categories, Layer 2 provides structured frameworks for mapping threats to the components and flows of a specific agentic system.
 
-- **CSA MAESTRO** (Multi-Agent Environments, Security, Threat, Risk, and Outcome) provides a seven-layer reference architecture for threat-analyzing agentic systems. Layers include Foundation Models, Data Operations, Agent Frameworks, Deployment and Infrastructure, Observability and Monitoring, Security and Compliance, and Agent Ecosystem.
+- **CSA MAESTRO** (Multi-Agent Environments, Security, Threat, Risk, and Outcome) provides a seven-layer reference architecture for threat-analyzing agentic systems. Layers include Foundation Models, Data Operations, Agent Frameworks, Deployment and Infrastructure, Observability and Monitoring, Security and Compliance, and Agent Ecosystem. Note (2026-11-10): CSA has published a MAESTRO v2.0 draft for peer review with ten layers in three domains. AGF's mappings use the seven-layer v1 model until v2 is final.
 - **Microsoft Failure Mode Taxonomy** (Ram Shankar Siva Kumar et al., Apr 2025) organizes 28 named failure modes into a 2×2 grid: Safety vs Security × Novel vs Existing. Ten modes are classified as "novel" to agentic systems.
 
 These two frameworks are complementary, not competitive. MAESTRO is architectural. The Microsoft taxonomy is mode-by-mode. AGF cites both. Specific per-failure-mode-to-primitive mappings live in `docs/profiles/security-profile.md`.
@@ -126,10 +126,10 @@ Control catalogs are enumerative. They tell you what to do, not why or how it fi
 - **ISO/IEC 42001:2023** — the AI Management System standard. Organizations seeking certification against 42001 need the AICM mapping (AICM maps to all 10 ISO 42001 domains, 39 controls).
 - **ISO/IEC 27001:2022** — information security foundation; still relevant but doesn't cover AI-specific concerns.
 - **NIST 800-53 + NIST AI RMF + NIST AI 600-1 (Generative AI Profile)** — the U.S. federal control and risk-management stack.
-- **EU AI Act Annexes** — high-risk system requirements (Articles 9, 10, 12, 15, 16, 20, 26, 62 are the most commonly relevant).
+- **EU AI Act Annexes** — high-risk system requirements (Articles 9, 10, 12, 15, 16, 20, 26, 73 are the most commonly relevant).
 - **BSI AIC4** — Germany's AI cloud service compliance criteria catalogue.
 
-AGF primitives crosswalk to these catalogs. The crosswalks live in `docs/profiles/` (security, GRC, AI engineering, platform, observability). AGF does not replicate the catalogs; AGF provides the architectural map of how controls cluster.
+AGF primitives crosswalk to some of these catalogs today. `docs/profiles/grc-profile.md` holds a crosswalk to NIST 800-53, ISO 27001 and the EU AI Act, and alignment sections for NIST AI RMF and CSA MAESTRO. Crosswalks to CSA AICM and ISO/IEC 42001 are not yet written. AGF does not replicate the catalogs; AGF provides the architectural map of how controls cluster.
 
 **An important honest observation:** AICM's explicit agentic coverage is thin — about 5 of 247 controls (the five listed above) are agent-native as of v1.1. This reflects the youth of the agentic field, not a flaw in AICM. AGF's gap analysis ("Agentic Compliance Blind Spots," forthcoming) surfaces the agent-specific failure modes that current control catalogs do not yet cover.
 
@@ -139,7 +139,7 @@ AGF primitives crosswalk to these catalogs. The crosswalks live in `docs/profile
 
 Where Layer 3 enumerates controls, Layer 4 provides the operating model — roles, decision cadence, maturity progression, conformance evidence.
 
-**CSA Agentic Trust Framework (ATF) v1.0** — the current leading public operating-model artifact as of April 2026. Built around:
+**CSA Agentic Trust Framework (ATF)** — the leading public operating-model artifact as of April 2026. Its public repository showed v0.9.1, a public review draft, when checked on 2026-11-10. Built around:
 
 - **Five governance questions:** Who are you? What are you doing? What are you eating/serving? Where can you go? What if you go rogue?
 - **Four-tier maturity model:** Intern → Junior → Senior → Principal, mapped 1:1 to AWS Agentic AI Security Scoping Matrix Scopes 1–4
@@ -147,9 +147,9 @@ Where Layer 3 enumerates controls, Layer 4 provides the operating model — role
 - **Twenty-five conformance requirements** with MUST/SHOULD/MAY precision per maturity level
 - **Two-tier conformance program:** ATF-Compatible (self-attestation) and ATF-Certified (third-party audit)
 
-ATF is open-source (CC-licensed) and co-developed with Microsoft. Microsoft's Agent Governance Toolkit (Layer 5) v1.0 published a self-assessed mapping to ATF; later releases do not repeat the claim.
+ATF's specification is open (CC BY 4.0). Its repository names one author, Josh Woodruff of MassiveScale.AI, and says it was published through the Cloud Security Alliance. The repository lists Microsoft's Agent Governance Toolkit as "independent convergence" and does not name Microsoft as a co-developer (checked 2026-11-10). Microsoft's Agent Governance Toolkit (Layer 5) v1.0 published a self-assessed mapping to ATF; later releases do not repeat the claim.
 
-AGF primitives crosswalk to ATF's five elements and 25 requirements. The crosswalk lives in `docs/profiles/grc-profile.md` (and related).
+A crosswalk from AGF primitives to ATF's five elements and 25 requirements is not yet written.
 
 **Relationship to AGF Primitive #11 (Trust Ladders).**
 AGF's Trust Ladders primitive and ATF's four-tier maturity model are parallel expressions of the earned-autonomy pattern, operating at different scopes and cadences. AGF Primitive #11 governs per-agent, per-task runtime trust adjustment — promotion and demotion signals, asymmetric degradation, the mandatory-vs-adaptive control distinction. ATF's tiers specify organizational deployment-maturity stages with explicit promotion gates (Performance, Security Validation, Business Value, Incident Record, Governance Sign-off). Both draw on the same principle that autonomy should be earned, not assumed. Organizations adopting AGF typically implement both — the primitive at runtime, the tiers at program governance. See `docs/white-papers/trust-ladders.md` for the primitive specification.
@@ -163,11 +163,11 @@ AGF maintains its own five-level maturity model (L1 Non-existent → L2 Foundati
 
 Runtime references are working implementations. Today's most mature public reference is Microsoft's:
 
-- **Agent Governance Toolkit (AGT)** — MIT-licensed open-source runtime reference implementing primitive-level control across identity, policy, isolation, observability, supply chain, and evaluation. Includes a policy kernel (Agent OS), identity platform (AgentMesh — DIDs, Ed25519, post-quantum crypto), privilege-ring execution runtime, compliance CI integration, and framework adapters for 20+ agent frameworks. AGT is formally ATF-conformant (see Layer 4). Detailed benchmarks, package-by-package architecture, and framework adapter list are documented in `docs/profiles/platform-profile.md`.
+- **Agent Governance Toolkit (AGT)** — MIT-licensed open-source runtime reference implementing primitive-level control across identity, policy, isolation, observability, supply chain, and evaluation. Includes a policy kernel (Agent OS), identity platform (AgentMesh — DIDs, Ed25519, post-quantum crypto), privilege-ring execution runtime, compliance CI integration, and framework adapters for 20+ agent frameworks. AGT v1.0 published a self-assessed mapping to ATF (see Layer 4); that is not a formal conformance claim, and later releases do not repeat it. For benchmarks, package architecture and the adapter list, see the toolkit's own repository. AGF's profiles do not document them.
 - **Azure Cloud Adoption Framework (CAF) for AI Agents** — a four-layer reference architecture (Data governance & compliance, Agent security, Agent observability, Agent development) with prescriptive controls per layer.
 - **Microsoft Agent 365** — the enterprise control-plane SKU. Generally available since May 1, 2026 ([Microsoft, April 21, 2026](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/)). Organizes governance around five capabilities: Registry, Access Control, Visualization, Interoperability, Security.
 
-AGF cites Microsoft AGT as the current leading open-source runtime reference for primitive-level control. Other runtimes (AWS Agentic Scoping, Google ADK, open-source projects) are expected to mature into additional references; AGF is deliberately neutral about which runtime to use, and profile docs will expand coverage as other runtimes reach production maturity.
+AGF cites Microsoft AGT as the current leading open-source runtime reference for primitive-level control. Other runtimes (AWS, Google, Salesforce and open-source stacks) are treated neutrally and are not endorsed; `docs/agf-primer.md` lists the current examples. AGF is deliberately neutral about which runtime to use, and profile docs will expand coverage over time.
 
 **A note on "Rings" terminology.** AGT uses "Ring 0–3" to describe CPU-style privilege tiers (Root/Trusted/Standard/Sandbox) that enforce execution isolation. AGF uses "R0–R3" to describe governance control loops (Execution/Verification/Governance/Learning). Same numbering, orthogonal concepts. AGT's privilege rings live inside AGF's R0 Execution ring.
 
@@ -300,7 +300,7 @@ This document is the public orientation point for AGF's relationship to external
 - **`agentic-observability.md`** — the observability capability layer
 - **`shared-vocabulary.md`** — definitions, including OTAA, dual-form, tempo taxonomy, wire-speed
 - **`profiles/security-profile.md`** — threat-to-primitive-to-control crosswalks, MAESTRO integration, Microsoft Failure Mode mapping
-- **`profiles/grc-profile.md`** — AICM, ISO 42001, NIST AI RMF crosswalks
+- **`profiles/grc-profile.md`** — NIST 800-53, ISO 27001 and EU AI Act crosswalk; NIST AI RMF and CSA MAESTRO alignment
 - **`profiles/platform-profile.md`** — runtime reference architecture mapping (Microsoft AGT, AWS, Google, open-source)
 - **`profiles/ai-engineering-profile.md`** — agent framework integration guidance
 - **`profiles/observability-profile.md`** — OpenTelemetry and telemetry schemas

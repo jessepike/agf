@@ -615,7 +615,7 @@ ISO 42001 establishes organizational requirements for responsible AI. This frame
 - **Tooling landscape:** Which parts of this framework need new tooling vs. can be served by existing tools with agentic extensions? Ring infrastructure and agentic observability likely need new tooling. Risk assessment and lifecycle management could extend existing GRC platforms.
 - **Personal vs. enterprise:** The framework is written for organizations. What's the "personal governance" version? Likely: DISCOVER (know what agents you run), ASSESS (understand what they can do), GOVERN (Ring 0 + basic Ring 1), MONITOR (basic trust visibility). Simplified but structurally the same.
 - **Framework positioning:** Is this framework IP, or is it thought leadership? If IP: how do you protect it? If thought leadership: how do you monetize it? The framework itself is likely thought leadership and community contribution. The implementations — products built on the framework — are the commercial layer.
-- **NIST engagement:** The CAISI RFI and NCCoE concept paper are both seeking public comment. This framework directly addresses many of their questions. Consider submitting a response.
+- **NIST engagement:** The comment periods for the CAISI request for information (deadline 9 March 2026) and the NCCoE concept paper (deadline 2 April 2026) have closed. This framework addresses many of their questions. Watch NIST's follow-up work on agent standards and identity for further chances to contribute.
 
 ---
 
