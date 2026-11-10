@@ -300,7 +300,7 @@ The Model Context Protocol has become the de facto standard for agent-tool integ
 | **MCP09 — Shadow MCP Servers** | Unapproved instances outside organizational governance | Security Governance policy enforcement. Authorized server registries. |
 | **MCP10 — Context Injection & Over-Sharing** | Shared context windows expose sensitive information between tasks/users | Data Governance #17 compartmentalization. #19 session isolation governance. |
 
-**MCP governance in AGF's architecture:** MCP operates primarily in the Middleware/Interrupt deployment mode. Ring 2 policy defines which servers and tools are authorized. The Security Fabric verifies tool integrity at each `execute_tool` invocation. Four MCP-specific governance concerns are addressed: dynamic tool discovery, server trust chains, context window as attack surface, and session isolation. See the [Platform Profile](platform-profile.md) for MCP integration patterns.
+**MCP governance in AGF's architecture:** MCP operates primarily in the Middleware/Interrupt deployment mode. Ring 2 policy defines which servers and tools are authorized. The Security Fabric verifies tool integrity at each `execute_tool` invocation. Four MCP-specific governance concerns are addressed: dynamic tool discovery, server trust chains, context window as attack surface, and session isolation. See the [Platform Profile](platform-profile.md) for MCP integration patterns. Note (2026-11-10): MCP 2026-07-28 removed protocol-level sessions and the `Mcp-Session-Id` header. Isolation between tasks and users is still a governance concern, but it now depends on per-request identity and server-minted handles. This text has not yet been revised for that change.
 
 ---
 
@@ -488,7 +488,7 @@ Every incident produces:
 6. **Policy update** — what governance policy changes are recommended
 7. **Lessons learned** — what would we do differently
 
-**Retention:** Incident records are retained per organizational policy. For regulated systems (EU AI Act Art. 12), event logs must be retained for the system's operational lifetime or as specified by the applicable regulation.
+**Retention:** Incident records are retained per organizational policy. For high-risk systems under the EU AI Act, automatically generated logs must be kept for at least six months unless other law sets a different period (Article 19 for providers, Article 26 for deployers). Article 12 requires that the system is able to record events.
 
 ---
 

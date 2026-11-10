@@ -1829,7 +1829,7 @@ MCP has emerged as the de facto standard for tool execution middleware, adopted 
 
 **How it maps to our framework:** MCP operates primarily in the middleware/interrupt deployment mode. Ring 2 policy defines which MCP servers and tools are authorized. The Security Fabric verifies tool integrity at invocation. Supply chain trust policy (#15) governs MCP server trust — a critical concern given documented MCP vulnerabilities (tool poisoning, rug-pull attacks, 53% of MCP servers using insecure static keys per Astrix Security research, 2025).
 
-**What we address and where we defer:** MCP governance is now integrated into our Middleware/Interrupt deployment mode (dynamic tool discovery governance, server trust chains, context-as-attack-surface, session isolation) and Security Architecture (supply chain trust policy for MCP servers, OWASP MCP Top 10 threat mapping). For protocol-level implementation specifics — secure server development practices, tool integrity verification code patterns, deployment hardening checklists — OWASP's Secure MCP Development Guide and MCP Top 10 provide the implementation-level guidance that complements our architecture-level treatment.
+**What we address and where we defer:** MCP governance is now integrated into our Middleware/Interrupt deployment mode (dynamic tool discovery governance, server trust chains, context-as-attack-surface, session isolation) and Security Architecture (supply chain trust policy for MCP servers, OWASP MCP Top 10 threat mapping). For protocol-level implementation specifics — secure server development practices, tool integrity verification code patterns, deployment hardening checklists — OWASP's Secure MCP Development Guide and MCP Top 10 provide the implementation-level guidance that complements our architecture-level treatment. Note (2026-11-10): MCP 2026-07-28 removed protocol-level sessions and the `Mcp-Session-Id` header. Isolation between tasks and users is still a governance concern, but it now depends on per-request identity and server-minted handles. This text has not yet been revised for that change.
 
 #### A2A (Agent-to-Agent Protocol)
 
@@ -1839,7 +1839,7 @@ Google's A2A protocol (April 2025, now under Linux Foundation AAIF) addresses ag
 
 #### Linux Foundation Agentic AI Foundation (AAIF)
 
-The Linux Foundation's Agentic AI Foundation (AAIF) now houses MCP, A2A, and AGENTS.md among its projects — with gold members including Anthropic, OpenAI, Google, Microsoft, and AWS. This consolidation signals that the protocol governance landscape is converging. MCP's public roadmap (March 2026) includes "Governance Maturation" and "Enterprise Readiness" goals including audit trails and SSO-integrated auth — evidence that governance requirements are entering protocol roadmaps.
+The Linux Foundation's Agentic AI Foundation (AAIF) now houses MCP, A2A, and AGENTS.md among its projects — with platinum members including Anthropic, OpenAI, Google, Microsoft, and AWS. This consolidation signals that the protocol governance landscape is converging. MCP's public roadmap (March 2026) includes "Governance Maturation" and "Enterprise Readiness" goals including audit trails and SSO-integrated auth — evidence that governance requirements are entering protocol roadmaps.
 
 ### Evaluation Frameworks
 

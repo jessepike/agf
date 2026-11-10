@@ -2,7 +2,7 @@
 
 A one-pass orientation to the Agentic Governance Framework for first-time readers and for agents loading project context. Updated with major releases. Canonical sources are named throughout (`code spans` for paths) — read those when depth is needed.
 
-**Last updated:** 2026-05-01 · **Reflects:** v0.2.0 (shipped 2026-04-22) plus unreleased v0.3 content passes shipped through 2026-04-25. **F33** (first adopter case study) remains the sole open structural blocker on M03.
+**Last updated:** 2026-11-10 (fact corrections only; a full refresh is pending) · **Reflects:** v0.2.0 (shipped 2026-04-22) plus unreleased v0.3 content passes shipped through 2026-04-25. **F33** (first adopter case study) is one of four open structural blockers named in `docs/baseline/2026-10-28-current-state.md`.
 
 ---
 
@@ -72,7 +72,7 @@ The framework's top-level operating model (`docs/agentic-governance-framework.md
 - Composition Patterns canonicalized; "Phase 1–5" retired (2026-04-24).
 - Site at agf.jessepike.dev — 33 routes including transparency surfaces (changelog, decisions, roadmap, contribute).
 
-**Open structural blockers:**
+**Open structural blockers:** the 2026-10-28 baseline names four: no runtime integration contract, incomplete standards fidelity, no adoption evidence (F33 below), and no reference implementation.
 - **F33** — first adopter case study. M03 (strategic-meta public-readiness) is accepted as a continuous quality dimension; M03 cannot reach `pattern-closed` until at least one written walkthrough from a real implementation lands. Cannot be manufactured editorially.
 
 **Not building (deliberate scope):**
