@@ -148,10 +148,10 @@ export default function Home() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="/docs/overview/what-is-agf"
+                href="/docs/overview/start-here"
                 className="inline-flex h-10 items-center rounded-md bg-stone-800 px-5 text-sm font-medium text-stone-50 transition-colors hover:bg-stone-700"
               >
-                Read the framework
+                Start here
               </Link>
               <Link
                 href="#roles"

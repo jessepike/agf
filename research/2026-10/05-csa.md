@@ -63,3 +63,7 @@ CSA is consolidating into a **layered agentic governance stack of its own**. The
 - CSA, Operationalizing the Agentic Control Plane: Integrating the AARM Specification — https://cloudsecurityalliance.org/artifacts/operationalizing-the-agentic-control-plane-integrating-the-aarm-specification
 - CSA, MAESTRO Strengthens AI Security Roadmap (open letter to Google), 2026-10-15 — https://cloudsecurityalliance.org/blog/2026/10/15/i-love-google-s-agentic-ai-security-roadmap-adding-maestro-will-make-it-more-powerful-an-open-letter-to-google
 - GitHub, massivescale-ai/agentic-trust-framework — https://github.com/massivescale-ai/agentic-trust-framework
+
+## Corrections (dated notes)
+
+- **2026-11-10.** MAESTRO: a v2.0 draft exists. CSA's page shows it under open peer review, with ten layers in three domains and a review period that ran to 2026-07-10. Whether a final v2.0 has been published was not confirmed. Source: https://cloudsecurityalliance.org/artifacts/maestro-v2

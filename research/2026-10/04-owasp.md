@@ -57,3 +57,8 @@ The **Agentic Top 10 itself is unchanged.** The Dec 2025 edition (ASI01–ASI10)
 - Ken Huang, OWASP AIVSS v0.8, 2026-03-19 — https://kenhuangus.substack.com/p/owasp-aivss-project-announces-the
 - OWASP GenAI, GenAI and Agentic AI Exploit Roundup Q3 2026, 2026-10-08 — https://genai.owasp.org/2026/10/08/genai-and-agentic-ai-exploit-roundup-q3-2026/
 - LLM Works, Mapping the AI Agent Governance Landscape (Aug 2026) — https://www.llm-works.ai/blog/agent-governance-landscape-aug-2026/
+
+## Corrections (dated notes)
+
+- **2026-11-10.** Agent Control Standard license: the repository states Apache-2.0 for code and schemas and CC BY-SA 4.0 for documentation. The "under MIT" statement above was not confirmed. The repository also states v0.1.0, nineteen lifecycle hooks, five dispositions (`allow`, `deny`, `modify`, `ask`, `defer`) and a fail-open default. Source: https://github.com/GenAI-Security-Project/agent-control-standard
+- **2026-11-10.** Q3 exploit roundup: counting the nine listed incidents, ASI03 is the most frequently mapped category (7 of 9). ASI02 and ASI10 follow with 6 each. The roundup dates the Hugging Face incident 10 to 13 July 2026. Source: https://genai.owasp.org/2026/10/08/genai-and-agentic-ai-exploit-roundup-q3-2026/

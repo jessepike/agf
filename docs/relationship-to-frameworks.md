@@ -301,7 +301,7 @@ This document is the public orientation point for AGF's relationship to external
 - **`shared-vocabulary.md`** — definitions, including OTAA, dual-form, tempo taxonomy, wire-speed
 - **`profiles/security-profile.md`** — threat-to-primitive-to-control crosswalks, MAESTRO integration, Microsoft Failure Mode mapping
 - **`profiles/grc-profile.md`** — NIST 800-53, ISO 27001 and EU AI Act crosswalk; NIST AI RMF and CSA MAESTRO alignment
-- **`profiles/platform-profile.md`** — runtime reference architecture mapping (Microsoft AGT, AWS, Google, open-source)
+- **`profiles/platform-profile.md`** — deployment modes, MCP integration and cost of governance
 - **`profiles/ai-engineering-profile.md`** — agent framework integration guidance
 - **`profiles/observability-profile.md`** — OpenTelemetry and telemetry schemas
 - **`DECISIONS.md`** — positioning and terminology decisions, including #3 (positioning pillars), #4 (seven-layer stack), #5 (gate-boundary dual-form), #6 (maturity model), and #7 (harness definition)

@@ -1,0 +1,84 @@
+---
+title: "Start Here"
+description: "A map for the security or risk leader who has to govern AI agents: which source answers which question, where the gaps are, and what to do first."
+---
+
+**This page is for the security or risk leader who has to govern AI agents and is early in building the program.** Most organizations are at this stage. Some have not started. Some are assembling pieces from several sources. A few have a program in place, and it is still young.
+
+No single source covers agent governance. NIST, OWASP, the Cloud Security Alliance (CSA), ISO, the EU and several working groups each cover part of it. This page shows which source to use for which question, where no source has an answer yet, and where to begin.
+
+*Every statement about an outside source on this page was checked against the linked source on 2026-11-10. This field changes every few months. Check the source before you rely on a version or a date.* <Confidence level="established" />
+
+## Which source answers which question
+
+| Your question | Use this | What you get | What it leaves out |
+|---|---|---|---|
+| What can go wrong with agents? | [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/) and [MITRE ATLAS](https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.09) | Ten named agent risks (ASI01 to ASI10, published December 2025). A catalog of attacker techniques (release v2026.09: 16 tactics, 120 techniques, 73 case studies). | They name risks and techniques. They do not tell you which controls to build first. |
+| What can go wrong where agents connect to tools? | [OWASP MCP Top 10](https://owasp.org/projects/mcp-top-10) | Ten risks for the Model Context Protocol (MCP), the common way agents reach tools and data. | It is still a beta. Record the date you read it. |
+| How do I threat-model my own agent system? | [CSA MAESTRO](https://cloudsecurityalliance.org/artifacts/maestro-v2) | A layered model for finding threats in an agent system. Version 1 has seven layers. | A version 2.0 draft with ten layers went to peer review in 2026. We could not confirm a final version. |
+| Which controls do I need, and how do I show them to an auditor? | [CSA AI Controls Matrix](https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1) and NIST SP 800-53 | AICM v1.1 has 247 control objectives in 18 domains, with mappings to ISO/IEC 42001, ISO 27001, the EU AI Act and the NIST AI RMF. | Few of the controls are specific to agents. NIST's [overlay project](https://csrc.nist.gov/projects/cosais) lists agent use cases as proposed and gives no date for them. |
+| How do I run this as a management program? | NIST AI Risk Management Framework and ISO/IEC 42001 | A way to organize the work (Govern, Map, Measure, Manage) and a management system standard you can be audited against. | Neither was written for agents. You have to decide how agent risks fit into them. |
+| What does the law require? | [EU AI Act](https://artificialintelligenceact.eu/) | Duties by risk class. After the 2026 amendment (Regulation 2026/1744), high-risk duties apply from 2 December 2027 for Annex III systems and 2 August 2028 for Annex I products. Prohibitions and general-purpose model duties already apply. | It has no rules written for agents as such. This page does not cover other jurisdictions or sector regulators. |
+| Is there government guidance written for agents? | [Singapore IMDA framework for agentic AI](https://www.globalpolicywatch.com/2026/06/singapore-updates-model-ai-governance-framework-for-agentic-ai/) | Version 1.5 (May 2026). Four pillars: bound the risks up front, keep humans accountable, apply technical controls, and enable end users. It favors system-level controls over controls written into prompts. | It is voluntary guidance. |
+| How much autonomy should an agent get, and how does it earn more? | [CSA Agentic Trust Framework](https://github.com/massivescale-ai/agentic-trust-framework) | A zero-trust operating model for agents with 25 core requirements and maturity levels. | The public version is v0.9.1, a review draft. |
+| How do I enforce decisions while the agent runs? | [OWASP Agent Control Standard](https://github.com/GenAI-Security-Project/agent-control-standard) and [CSA AARM](https://aarm.vercel.app/spec) | ACS v0.1.0 defines nineteen points in an agent's run where a policy can step in, and five outcomes: allow, deny, modify, ask, defer. AARM v1.0 requires one of five decisions for each action and a tamper-evident receipt, and it defines conformance levels. | Both decide one action at a time. The ACS reference setup keeps running if the policy service fails, so change that default for anything that matters. |
+| How do I know which agent did what? | [NIST NCCoE agent identity project](https://www.nccoe.nist.gov/projects/software-and-ai-agent-identity-and-authorization) and the [IETF AIMS draft](https://datatracker.ietf.org/doc/html/draft-ietf-wimse-aims) | NCCoE is exploring standards-based ways to identify agents and authorize what they do. The IETF draft (revision 01, November 2026) gives best-practice guidance built on existing workload identity and OAuth 2.0 standards. | Neither is a finished standard. The NCCoE project is still taking comments. |
+| How do I see what agents did? | [OpenTelemetry GenAI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) | Standard names for model calls, tool calls and agent steps in your telemetry. | They are still marked Development, so names can change. They carry no governance fields such as which policy applied. |
+| How do agents connect to tools? | [Model Context Protocol](https://modelcontextprotocol.io/specification/2026-07-28/changelog.md) | A common protocol. The 2026-07-28 version made it stateless and tightened authorization. | It is a connection protocol. Which servers and tools an agent may use is left to you. |
+
+### How the pieces fit
+
+Read the table as a chain:
+
+1. **Threats** (the first three questions) tell you what to control.
+2. **Control catalogs** (the fourth question) tell you what a control looks like and how to evidence it.
+3. **Management frameworks, law and government guidance** (the next three) tell you what you are accountable for.
+4. **The operating model** (the autonomy question) sets how much each agent may do without a person.
+5. **Runtime, identity, telemetry and connections** (the last four) are where the controls are enforced and recorded.
+
+Most programs start in the middle, with a control catalog or a law, and find later that nothing enforces the controls at runtime. Check the last group early. <Confidence level="informed" />
+
+## Where no source has an answer yet
+
+The sources above mostly answer one question: may this action run, and what proves it. They say much less about the system around the action. AGF proposes an answer for each gap below. These are proposals. They have not been tested widely. <Confidence level="informed" />
+
+| Gap | AGF's proposal | Read |
+|---|---|---|
+| Who checks the agent's work before it is used? | The part that produces output must not be the only part that checks it. | [Rings Model](/docs/overview/rings-model), Ring 1 |
+| Who may change the rules the agent runs under? | The system may suggest changes to its own settings. It may not apply them. A separate governance step decides. | [Rings Model](/docs/overview/rings-model), Ring 3 |
+| What happens to an approval over time? | An approval expires. It is cancelled when the facts behind it change. A deferred or escalated decision has an owner and a due date. | [Governance Decision Record](/docs/reference/governance-decision-record) |
+| What record shows a governance decision that is not a single action? | One record format for release approvals, policy changes and changes in an agent's trust level. | [Governance Decision Record](/docs/reference/governance-decision-record) |
+| How does an agent gain and lose trust? | Trust is earned from a track record and is lost faster than it is earned. Some approvals never relax. | [Trust Ladders](/docs/overview/trust-ladders) |
+
+## Where to begin
+
+Pick the stage that matches you.
+
+### You have not started
+
+1. **List your agents.** For each one, record the owner, the tools it can call, the data it can read and write, and what it can change in the real world. Week 1 of [First 30 Days](/docs/overview/first-30-days) shows how.
+2. **Read the OWASP agentic top ten with that list in front of you.** Mark which risks apply to which agent.
+3. **Put a floor in place.** Limit what each agent can do, give each agent its own identity, and keep a log of what it did. [First 30 Days](/docs/overview/first-30-days) is a four-week plan for this.
+4. **Find out which rules apply to you.** Start with the EU AI Act risk classes if you operate in the EU, then your sector regulator.
+
+### You are piecing things together
+
+1. **Put what you have against the table above.** Write an owner next to each question. The questions with no owner are your gaps.
+2. **Add an independent check on agent output** before anyone relies on it. See [Composition Patterns](/docs/overview/composition-patterns), Validation Pipeline.
+3. **Add an approval step for actions that cannot be undone.** See [Composition Patterns](/docs/overview/composition-patterns), Governed Decision Flow.
+
+### You have a program
+
+1. **Check your dates and versions.** Several sources in the table changed during 2026. A program written a year ago cites versions that have moved.
+2. **Trace one real decision end to end.** The [Reference Walkthrough](/docs/overview/reference-walkthrough) shows what to look for at each step.
+3. **Look at the gaps table.** Ask whether your program has an answer for each row.
+
+## What this page does not do
+
+- It does not give legal advice or certify anything.
+- It covers agent governance. It does not cover AI governance as a whole, such as model risk, fairness or privacy programs.
+- It names the sources AGF tracks. It is not a complete list, and naming a source or a product is not an endorsement.
+
+## How this page is kept
+
+This page carries a check date. The aim is to review it twice a year. Dated research notes are in the [`research/` folder on GitHub](https://github.com/jessepike/agf/tree/main/research). If you find a statement here that is wrong or out of date, [open an issue](https://github.com/jessepike/agf/issues).
