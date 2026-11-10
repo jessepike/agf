@@ -8,12 +8,12 @@ Prioritized work queue. P0 = blocking. P1 = high value. Active = in progress. Ba
 
 The project was dormant from May to October 2026. Until the future-state conversation happens, these items come before anything older below. The older priorities date from April and May 2026 and should be re-ranked after the October research lands.
 
-1. **October 2026 landscape research** — in progress in `research/2026-10/`.
+1. ~~**October 2026 landscape research**~~: landed on `main` 2026-11-10 in `research/2026-10/`.
 2. **Future-state conversation** — what AGF is for now, who it serves, and whether it's worth continued investment. Inputs are `docs/baseline/2026-10-28-current-state.md` and the October research.
 3. **Runtime integration contract forks** — decide the ten forks in `.private/drafts/runtime-integration-contract-2026-05-02.md`, or retire them if the future state changes direction.
 4. **Agent hooks reference implementation** — bring in the agent hooks article (deterministic lifecycle hooks: PreToolUse maps to #7/#8, PostToolUse to #6/#10, SessionStart to #14) and scope a hooks-based MVC reference implementation in middleware mode.
 5. **Refresh `docs/agf-primer.md` and the external context bundle** at `~/code/_shared/context-registry/agf/`. Both are as of May 2026.
-6. **Disk cleanup** — about 12 GB of untrimmed MCP Dev Summit video duplicates in `.private/research/AAIF/`.
+6. ~~**Disk cleanup**~~: done 2026-11-10. The two untrimmed MCP Dev Summit originals (about 12.5 GB) were deleted from `.private/research/AAIF/`.
 
 ---
 

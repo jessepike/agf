@@ -1,5 +1,5 @@
 ---
-updated: 2026-10-28
+updated: 2026-11-10
 stage: operate (v0.2.0 published; dormant May–October 2026; restart in progress)
 ---
 
@@ -17,19 +17,19 @@ Nobody outside Jesse is known to be using AGF. It has never been marketed. Treat
 
 ## In flight
 
-- The October 2026 research pass is being written into `research/2026-10/` by a separate session. Don't edit that folder from other sessions until it lands.
+- The October 2026 landscape research landed on `main` on 2026-11-10 in `research/2026-10/` (13 files, researched 2026-10-28). It is a dated snapshot, so record corrections as dated notes and do not edit findings in place. Start with `research/2026-10/12-delta-vs-agf-baseline.md`.
 - The ten runtime integration contract forks are still undecided. The draft is in `.private/drafts/runtime-integration-contract-2026-05-02.md`. These forks have blocked the Tier A structural work since May.
 - Two older proposals are still undecided: `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` and `.private/drafts/intent-voice-position-2026-05-01.md`.
 
 ## Next
 
-1. Finish the October research and fold its results into the baseline's gap list.
+1. Fold the October research results into the baseline's gap list. `research/2026-10/12-delta-vs-agf-baseline.md` lists the stale claims that are still open.
 2. Hold the future-state conversation. What is AGF for now, who is it for, and is it worth continued investment?
 3. Then decide the runtime contract forks, or retire them if the future state changes direction.
 4. Bring in the agent hooks article (deterministic lifecycle hooks) as input for a hooks-based MVC reference implementation. Nothing from it is in the repo yet.
 
 ## Known housekeeping
 
-- `.private/research/AAIF/` holds about 33 GB of MCP Dev Summit video, both trimmed and untrimmed copies. It is gitignored and lives on this Mac only. The untrimmed copies (about 12 GB) are candidates for deletion or offloading.
+- `.private/research/AAIF/` holds about 22 GB of MCP Dev Summit video (trimmed copies and session clips). It is gitignored and lives on this Mac only. The two untrimmed originals (about 12.5 GB) were deleted on 2026-11-10.
 - Everything under `.private/` lives only on this Mac and has no backup through GitHub. See `docs/operations/estate-map.md` for what it holds.
 - The repository is public. Never commit ePlus, client, or commercial strategy material outside `.private/`.
