@@ -1,8 +1,10 @@
 # AGF's Relationship to Existing Frameworks
 
-**Last updated:** 2026-11-10 (fact corrections; positioning text unchanged since 2026-04-21)
+**Last updated:** 2026-11-10 (fact corrections; positioning revised to decision #12)
 **Status:** Active
-**Related decisions:** DECISIONS.md #3 (Positioning Pillars), #4 (Seven-Layer Stack), #5 (Gate-Boundary Dual-Form), #6 (Maturity Model), #7 (Harness Definition)
+**Related decisions:** DECISIONS.md #3 (Positioning Pillars), #4 (Seven-Layer Stack), #5 (Gate-Boundary Dual-Form), #6 (Maturity Model), #7 (Harness Definition), #12 (Practitioner's Map)
+
+**Positioning note (2026-11-10).** Decision #12 changed how AGF describes itself. AGF is a practitioner's map across the sources below, with proposals for the gaps. It is no longer described as a layer or a substrate that other frameworks sit on. The stack below is kept as a map of who covers what. The label "Layer 0" survives only where this document records the earlier wording.
 
 ---
 
@@ -25,7 +27,7 @@ Any organization deploying agentic systems in 2026 is looking at a crowded field
 
 Each one is authoritative within its scope. None is sufficient alone. Together, they overlap, conflict, and leave gaps — particularly where agentic behavior diverges from the assumptions the frameworks were built under.
 
-AGF's job is not to replace any of them. AGF's job is to provide the architectural substrate that explains how they compose, where they reinforce each other, and where they fail to cover agent-specific concerns. This document is the map.
+AGF's job is not to replace any of them. AGF's job is to show how they fit together, where they reinforce each other, and where they fail to cover agent-specific concerns. This document is the map.
 
 ---
 
@@ -35,13 +37,13 @@ AGF's job is not to replace any of them. AGF's job is to provide the architectur
 
 No. You need the architecture that makes the frameworks you already use work together for agentic systems. That is AGF.
 
-AGF is **derived from the composition of existing frameworks, guidance, and standards.** AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, unifies it on a shared architectural substrate, prescribes pathways for implementation, and is designed to operationalize at machine speed. Where AGF introduces novel architectural framing (Rings Model, OTAA invariant, Producer-Verifier Separation), it marks those as such with explicit confidence levels — see `DECISIONS.md` #3 (AGF Positioning Pillars).
+AGF is **derived from the composition of existing frameworks, guidance, and standards.** AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, organizes it with one shared model, recommends pathways for implementation, and is designed to operationalize at machine speed. Where AGF introduces novel architectural framing (Rings Model, OTAA invariant, Producer-Verifier Separation), it marks those as such with explicit confidence levels — see `DECISIONS.md` #3 (AGF Positioning Pillars).
 
 ---
 
 ## The Seven-Layer Stack (Six Layers + Risk Quantification Lens)
 
-AGF sits inside a seven-layer conceptual stack. Six layers describe what an organization needs to know and do. A seventh, orthogonal layer — the risk quantification lens — cuts across the rest to produce investment and prioritization economics. When this document refers to the "seven-layer stack," Layer 6 is always orthogonal; the substrate-to-runtime progression is Layers 0 through 5.
+The landscape can be read as a stack. Five layers (1 through 5) describe what an organization needs to know and do. A sixth, the risk quantification lens, cuts across the rest to produce investment and prioritization economics. Earlier versions of this document counted AGF as a seventh layer, "Layer 0", and called the whole a "seven-layer stack". Since decision #12, AGF is the guide across the layers and is not counted as one. The name "seven-layer stack" is kept below for continuity.
 
 ```text
 ┌────────────────────────────────────────────────────────────────────┐
@@ -56,7 +58,7 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 ├────────────────────────────────────────────────────────────────────┤
 │ 3. Control catalog              CSA AICM v1.1 (18 domains,         │
 │                                 247 controls); ISO 42001/27001;    │
-│                                 NIST 800-53; EU AI Act Annexes;    │
+│                                 NIST 800-53; EU AI Act;            │
 │                                 BSI AIC4                           │
 ├────────────────────────────────────────────────────────────────────┤
 │ 2. Threat modeling              CSA MAESTRO (7 layers) +           │
@@ -66,20 +68,20 @@ AGF sits inside a seven-layer conceptual stack. Six layers describe what an orga
 │ 1. Threat baseline              OWASP Agentic Top 10 (ASI-01–10)   │
 ├────────────────────────────────────────────────────────────────────┤
 │ 0. Reference architecture       AGF — 4 Rings + 19 Primitives +    │
-│    (substrate)                  3 deployment modes + 3-level       │
+│    (guide across)               3 deployment modes + 3-level       │
 │                                 security + 7 tensions + OTAA       │
 └────────────────────────────────────────────────────────────────────┘
 ```
 
 The layers are ordered from most concrete and specific (top) to most abstract and foundational (bottom). Risk quantification sits outside the stack because it is methodology, not content.
 
-Each layer answers a distinct question. Organizations typically engage with several of them simultaneously, which is how gaps and duplicate work emerge. AGF, at Layer 0, is the shared vocabulary and architectural model that makes the layers resolve into one coherent system.
+Each layer answers a distinct question. Organizations typically engage with several of them simultaneously, which is how gaps and duplicate work emerge. AGF is a guide across the layers. It offers a shared vocabulary and model for reading them together.
 
 ---
 
 ## What Each Layer Is For
 
-### Layer 0 — AGF (Reference Architecture Substrate)
+### AGF — the guide across the layers (formerly "Layer 0")
 
 **Answers:** *"How do the pieces fit together, architecturally, for an agentic system?"*
 
@@ -122,11 +124,11 @@ These two frameworks are complementary, not competitive. MAESTRO is architectura
 
 Control catalogs are enumerative. They tell you what to do, not why or how it fits together.
 
-- **CSA AI Controls Matrix (AICM) v1.1** (July 2026) — 18 domains, 247 controls. Maps to ISO 42001, ISO 27001, NIST AI 600-1, BSI AIC4, EU AI Act. Five controls were explicitly agent-native as of v1.0.3, and v1.1 added no new agent-specific controls: AIS-11 (Agents Security Boundaries), AIS-13 (AI Sandboxing), AIS-15 (Prompt Differentiation), IAM-19 (Agent Access Restriction), TVM-11 (Guardrails). The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. Expected to grow in future revisions.
+- **CSA AI Controls Matrix (AICM) v1.1** (22 June 2026) — 18 domains, 247 controls. Maps to ISO 42001, ISO 27001, NIST AI 600-1, BSI AIC4, EU AI Act. Five controls were explicitly agent-native as of v1.0.3, and v1.1 added no new agent-specific controls: AIS-11 (Agents Security Boundaries), AIS-13 (AI Sandboxing), AIS-15 (Prompt Differentiation), IAM-19 (Agent Access Restriction), TVM-11 (Guardrails). The rest are AI-general or cloud-inherited. Control IDs above are from v1.0.3 and should be rechecked against v1.1. Expected to grow in future revisions.
 - **ISO/IEC 42001:2023** — the AI Management System standard. Organizations seeking certification against 42001 need the AICM mapping (AICM maps to all 10 ISO 42001 domains, 39 controls).
 - **ISO/IEC 27001:2022** — information security foundation; still relevant but doesn't cover AI-specific concerns.
 - **NIST 800-53 + NIST AI RMF + NIST AI 600-1 (Generative AI Profile)** — the U.S. federal control and risk-management stack.
-- **EU AI Act Annexes** — high-risk system requirements (Articles 9, 10, 12, 15, 16, 20, 26, 73 are the most commonly relevant).
+- **EU AI Act** — high-risk system requirements (Articles 9, 10, 12, 15, 16, 20, 26, 73 are the most commonly relevant).
 - **BSI AIC4** — Germany's AI cloud service compliance criteria catalogue.
 
 AGF primitives crosswalk to some of these catalogs today. `docs/profiles/grc-profile.md` holds a crosswalk to NIST 800-53, ISO 27001 and the EU AI Act, and alignment sections for NIST AI RMF and CSA MAESTRO. Crosswalks to CSA AICM and ISO/IEC 42001 are not yet written. AGF does not replicate the catalogs; AGF provides the architectural map of how controls cluster.
@@ -147,7 +149,7 @@ Where Layer 3 enumerates controls, Layer 4 provides the operating model — role
 - **Twenty-five conformance requirements** with MUST/SHOULD/MAY precision per maturity level
 - **Two-tier conformance program:** ATF-Compatible (self-attestation) and ATF-Certified (third-party audit)
 
-ATF's specification is open (CC BY 4.0). Its repository names one author, Josh Woodruff of MassiveScale.AI, and says it was published through the Cloud Security Alliance. The repository lists Microsoft's Agent Governance Toolkit as "independent convergence" and does not name Microsoft as a co-developer (checked 2026-11-10). Microsoft's Agent Governance Toolkit (Layer 5) v1.0 published a self-assessed mapping to ATF; later releases do not repeat the claim.
+ATF's specification is open (CC BY 4.0). Its repository names one author, Josh Woodruff of MassiveScale.AI, and says it was published through the Cloud Security Alliance. The repository lists Microsoft's Agent Governance Toolkit as "independent convergence" and does not name Microsoft as a co-developer (checked 2026-11-10). The README of Microsoft's Agent Governance Toolkit (Layer 5) lists a self-assessed mapping to all five ATF elements (checked 2026-11-10). That is not a formal conformance claim.
 
 A crosswalk from AGF primitives to ATF's five elements and 25 requirements is not yet written.
 
@@ -163,7 +165,7 @@ AGF maintains its own five-level maturity model (L1 Non-existent → L2 Foundati
 
 Runtime references are working implementations. Today's most mature public reference is Microsoft's:
 
-- **Agent Governance Toolkit (AGT)** — MIT-licensed open-source runtime reference implementing primitive-level control across identity, policy, isolation, observability, supply chain, and evaluation. Includes a policy kernel (Agent OS), identity platform (AgentMesh — DIDs, Ed25519, post-quantum crypto), privilege-ring execution runtime, compliance CI integration, and framework adapters for 20+ agent frameworks. AGT v1.0 published a self-assessed mapping to ATF (see Layer 4); that is not a formal conformance claim, and later releases do not repeat it. For benchmarks, package architecture and the adapter list, see the toolkit's own repository. AGF's profiles do not document them.
+- **Agent Governance Toolkit (AGT)** — MIT-licensed open-source runtime reference implementing primitive-level control across identity, policy, isolation, observability, supply chain, and evaluation. Includes a policy kernel (Agent OS), identity platform (AgentMesh — DIDs, Ed25519, post-quantum crypto), privilege-ring execution runtime, compliance CI integration, and framework adapters for 20+ agent frameworks. The AGT README lists a self-assessed mapping to all five ATF elements (see Layer 4; checked 2026-11-10). That is not a formal conformance claim. For benchmarks, package architecture and the adapter list, see the toolkit's own repository. AGF's profiles do not document them.
 - **Azure Cloud Adoption Framework (CAF) for AI Agents** — a four-layer reference architecture (Data governance & compliance, Agent security, Agent observability, Agent development) with prescriptive controls per layer.
 - **Microsoft Agent 365** — the enterprise control-plane SKU. Generally available since May 1, 2026 ([Microsoft, April 21, 2026](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/)). Organizes governance around five capabilities: Registry, Access Control, Visualization, Interoperability, Security.
 
@@ -196,7 +198,7 @@ The four verbs from AGF's positioning pillars (DECISIONS.md #3) describe how AGF
 
 **Synthesize.** AGF pulls from every layer. It does not invent primitives; it composes them from patterns named across NIST, OWASP, CSA, ISO, Microsoft, EU AI Act, OpenTelemetry, and academic research. Every primitive carries attribution.
 
-**Unify.** AGF places the synthesized material on a shared architectural substrate — the Rings Model, the 19 primitives, the three-level security model, the seven tensions. Readers can see the dozens of framework artifacts as one coherent system rather than a stack of independent specifications.
+**Unify.** AGF organizes the synthesized material with one shared model — the Rings Model, the 19 primitives, the three-level security model, the seven tensions. Readers can see the dozens of framework artifacts as one coherent system rather than a stack of independent specifications.
 
 **Prescribe.** AGF converts synthesis into actionable implementation pathways per primitive. Rather than listing controls, AGF describes how to assess current state, define target state, and track progression. Primitive upgrades (like the current work on Primitive #14 Identity & Attribution) codify the prescriptive pathway: sub-capabilities to implement, reference implementations to consider, empirical grounding to anchor the recommendation.
 

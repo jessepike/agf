@@ -141,10 +141,10 @@ export default function Home() {
               framework for agentic systems
             </h1>
             <p className="text-lg text-stone-700 leading-relaxed max-w-2xl mb-4 font-medium">
-              <strong>AGF is a reference architecture and operating model for governing agentic systems</strong> — synthesizing NIST, OWASP, CSA, ISO, EU AI Act, OpenTelemetry, and academic research into a coherent, composable playbook.
+              <strong>AGF is a practitioner&apos;s map for governing agentic systems.</strong> It shows what NIST, OWASP, CSA, ISO, the EU AI Act and OpenTelemetry each cover, how they connect, and where the gaps are. It proposes answers for the gaps.
             </p>
             <p className="text-base text-stone-500 leading-relaxed max-w-2xl mb-10">
-              Built to make agent behavior observable, traceable, auditable, and agent-operable — so the systems shipping today can be governed without rebuilding them tomorrow.
+              Written for the security or risk leader who is early in building the program.
             </p>
             <div className="flex items-center gap-4">
               <Link
@@ -253,29 +253,29 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
               <div className="lg:col-span-2">
                 <p className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-3">
-                  v1.0 Positioning
+                  The landscape
                 </p>
                 <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-4 leading-snug">
                   AGF synthesizes the governance landscape — see how it fits.
                 </h2>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">
                   NIST, OWASP, CSA AICM/ATF/MAESTRO, ISO 42001, EU AI Act, Microsoft
-                  AGT, FAIR — each authoritative, none sufficient alone. AGF is the
-                  architectural substrate that makes the frameworks you already use
-                  work together for agentic systems.
+                  AGT, FAIR — each authoritative, none sufficient alone. AGF maps
+                  how the frameworks you already use fit together for agentic
+                  systems, and where the gaps are.
                 </p>
                 <Link
                   href="/docs/reference/relationship-to-frameworks"
                   className="group inline-flex items-center gap-1 text-sm font-medium text-stone-700 hover:text-stone-900 transition-colors"
                 >
-                  Read the seven-layer stack
+                  See who covers what
                   <ArrowIcon />
                 </Link>
               </div>
               <div className="lg:col-span-3">
                 <Image
-                  src="/diagrams/seven-layer-landscape-stack.png"
-                  alt="The Agentic Governance Landscape — seven-layer stack with AGF as architectural substrate (Layer 0) and unifying frame around OWASP (L1), MAESTRO (L2), AICM/ISO/NIST catalogs (L3), CSA ATF (L4), Microsoft AGT (L5), with FAIR as orthogonal Layer 6"
+                  src="/diagrams/governance-landscape-map.png"
+                  alt="The agentic governance landscape: who covers what. AGF is a guide across OWASP (L1), MAESTRO (L2), AICM, ISO and NIST catalogs (L3), CSA ATF (L4) and Microsoft AGT (L5), with FAIR risk quantification alongside."
                   width={1200}
                   height={900}
                   className="w-full h-auto rounded-lg border border-stone-200 bg-white"

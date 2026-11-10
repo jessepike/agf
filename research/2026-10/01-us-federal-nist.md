@@ -71,4 +71,4 @@ The federal agent-standards picture moved from "initiative announced" (AGF's Feb
 
 ## Corrections (dated notes)
 
-- **2026-11-10.** CAISSI naming confirmed: the main heading of https://www.nist.gov/caisi reads "Center for Advancing Innovation and Standards for Super Intelligence (CAISSI)". This moves from Informed to Established. Other NIST pages, including the agent standards initiative page, still use CAISI. COSIS rename confirmed on https://csrc.nist.gov/projects/cosais.
+- **2026-11-10.** CAISSI naming confirmed: the main heading of https://www.nist.gov/caisi reads "Center for Advancing Innovation and Standards for Super Intelligence (CAISSI)". We found no rename notice, so treat the name as Informed. Other NIST pages, including the agent standards initiative page, still use CAISI. COSIS rename confirmed on https://csrc.nist.gov/projects/cosais.
