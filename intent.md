@@ -1,7 +1,7 @@
 # Concepts — Intent
 
 **Status:** Active
-**Last updated:** 2026-03-17
+**Last updated:** 2026-11-10 (added "Who This Is For"; the rest is unchanged since 2026-03-17)
 
 ---
 
@@ -12,6 +12,34 @@ This directory contains the **Agentic Governance Framework** — a comprehensive
 The landscape of agentic governance is fragmented. NIST provides risk management frameworks. OWASP provides threat taxonomies. CSA provides trust frameworks. ISO provides management systems. OpenTelemetry provides observability standards. Model providers ship their own governance features. Enterprise platforms build their own control planes. Security vendors build point solutions.
 
 **We pull it all together.** We synthesize the best thinking from across the landscape — standards bodies, industry leaders, academic research — and compose it into a coherent, implementable playbook. We sort the pieces so organizations don't have to stitch together 15 different frameworks on their own.
+
+---
+
+## Who This Is For
+
+Added 2026-11-10.
+
+AGF is written for the security or risk leader who is responsible for governing AI agents and is early in building that program. That describes most organizations today. Some have not started. Some are assembling pieces from several sources. A few have a program in place, and it is still young because the field is new and keeps changing.
+
+This reader has to work across many sources at once: NIST, OWASP, CSA, ISO, the EU AI Act, and guidance from cloud and model providers. Each covers part of the problem. AGF's job is to show:
+
+- what each source covers and what it leaves out
+- how the sources connect, with crosswalks where they help
+- where no source gives an answer, with a proposal or a clearly marked gap
+- where to begin and what to do next
+
+AGF does not replace these sources and does not compete with the bodies that publish them. New material appears in AGF only where a gap needs a bridge.
+
+### How to judge AGF
+
+A reader at an early stage should be able to:
+
+1. find where to begin within a few minutes
+2. tell which source to use for which question
+3. trust that each statement about an outside source is correct and dated
+4. see which parts of AGF are established practice and which are proposals
+
+These four tests are the standard for reviews of AGF.
 
 ---
 

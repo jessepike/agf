@@ -15,18 +15,25 @@ On 2026-10-28 the project restarted with three steps. The first is a cleanup and
 
 Nobody outside Jesse is known to be using AGF. It has never been marketed. Treat it as a working reference architecture, not a production system.
 
+On 2026-11-10 the future-state conversation was held. Jesse restated the purpose: AGF is a practitioner's map that stitches the leading sources together, bridges them, and fills or names gaps, for a security or risk leader who is early in building the program. `intent.md` has said this since March and now also names the reader and four tests for judging AGF. AGF is not parked.
+
 ## In flight
 
 - The October 2026 landscape research landed on `main` on 2026-11-10 in `research/2026-10/` (13 files, researched 2026-10-28). It is a dated snapshot, so record corrections as dated notes and do not edit findings in place. Start with `research/2026-10/12-delta-vs-agf-baseline.md`.
 - The ten runtime integration contract forks are still undecided. The draft is in `.private/drafts/runtime-integration-contract-2026-05-02.md`. These forks have blocked the Tier A structural work since May.
+- A proposed positioning decision (#12) awaits Jesse's acceptance. It brings positioning back in line with `intent.md` and replaces the "Layer 0 substrate" wording of decision #4. The draft is `.private/drafts/purpose-and-positioning-2026-11-10.md`. It also holds one open scope question: agentic governance only, or AI governance more widely.
+- A landscape and revival review dated 2026-11-10 is in `.private/reviews/`. It lists about 20 wrong or stale facts in the canonical docs.
 - Two older proposals are still undecided: `.private/drafts/seven-layer-stack-clarification-2026-05-01.md` and `.private/drafts/intent-voice-position-2026-05-01.md`.
 
 ## Next
 
-1. Fold the October research results into the baseline's gap list. `research/2026-10/12-delta-vs-agf-baseline.md` lists the stale claims that are still open.
-2. Hold the future-state conversation. What is AGF for now, who is it for, and is it worth continued investment?
-3. Then decide the runtime contract forks, or retire them if the future state changes direction.
-4. Bring in the agent hooks article (deterministic lifecycle hooks) as input for a hooks-based MVC reference implementation. Nothing from it is in the repo yet.
+1. Fix the wrong and stale facts. Sources: section 3 of the 2026-11-10 review, and `research/2026-10/12-delta-vs-agf-baseline.md`.
+2. Accept or amend proposed decision #12 and answer its scope question.
+3. Build a "start here" map for the early-stage reader and make it the site's front door.
+4. Publish a worked example: Security Market Pulse scored against the primitives, patterns only, limits stated. A draft scorecard is in the private `agf-applied` catalog.
+5. Publish a decision vocabulary crosswalk (AGF, OWASP ACS, CSA AARM, agent hooks).
+6. Decide the three older drafts. The review recommends deciding four of the ten runtime contract forks and deferring six.
+7. Review AGF against the four tests in `intent.md`, with at least one working security leader.
 
 ## Known housekeeping
 
