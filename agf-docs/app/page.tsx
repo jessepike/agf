@@ -1,78 +1,61 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Confidence } from "@/components/confidence";
 
-const roles = [
+const stats = [
+  { value: "12", label: "questions a program has to answer" },
+  { value: "18", label: "sources mapped" },
+  { value: "2026-11-10", label: "last full check" },
+];
+
+const stages = [
   {
-    role: "Security & Threat Modeling",
-    audience: "CISOs, security architects, red teams",
-    href: "/docs/profiles/security",
-    description: "Three-level security model, OWASP mappings, incident response",
+    title: "You have not started",
+    actions: "List your agents. Find out which rules apply. Put a floor in place.",
+    href: "/docs/overview/start-here#you-have-not-started",
   },
   {
-    role: "Platform & Infrastructure",
-    audience: "Platform engineers, DevOps/MLOps",
-    href: "/docs/profiles/platform",
-    description: "Deployment modes, MCP integration, cost of governance",
+    title: "You are piecing things together",
+    actions: "Name an owner per question. Add an independent check. Add an approval step.",
+    href: "/docs/overview/start-here#you-are-piecing-things-together",
   },
   {
-    role: "Governance, Risk & Compliance",
-    audience: "Compliance officers, auditors, DPOs",
-    href: "/docs/profiles/grc",
-    description: "EU AI Act mapping, control crosswalks, evidence guides",
-  },
-  {
-    role: "AI Engineering",
-    audience: "AI/ML engineers, agent developers",
-    href: "/docs/profiles/ai-engineering",
-    description: "19 primitives, composition patterns, implementation priority",
-  },
-  {
-    role: "Observability & Operations",
-    audience: "SREs, SOC analysts, detection engineers",
-    href: "/docs/profiles/observability",
-    description: "Event architecture, correlation engine, operational playbooks",
+    title: "You have a program",
+    actions: "Check versions and dates. Trace one real decision. Test against the gaps.",
+    href: "/docs/overview/start-here#you-have-a-program",
   },
 ];
 
-const concepts = [
+const proposals = [
   {
     title: "The Rings Model",
     href: "/docs/overview/rings-model",
     description:
-      "Four concentric rings — Execution, Verification, Governance, Learning — plus cross-cutting fabric.",
+      "Who checks the agent's work, and who may change the rules it runs under.",
   },
   {
-    title: "19 Primitives",
-    href: "/docs/reference/primitives",
+    title: "Governance Decision Record",
+    href: "/docs/reference/governance-decision-record",
     description:
-      "Named patterns for governed agentic systems. Not invented — connected from established practice.",
+      "One record for approvals, policy changes and changes in an agent's trust level.",
   },
   {
     title: "Trust Ladders",
     href: "/docs/overview/trust-ladders",
-    description:
-      "Agents earn autonomy through demonstrated performance. Start expensive, get cheaper.",
+    description: "How an agent earns autonomy and how it loses it.",
   },
   {
-    title: "Composition Patterns",
-    href: "/docs/overview/composition-patterns",
-    description:
-      "From Minimum Viable Control to Full Governed System — each phase independently valuable.",
+    title: "First 30 Days",
+    href: "/docs/overview/first-30-days",
+    description: "A four-week plan for a minimum floor of control.",
   },
 ];
 
-const standards = [
-  "NIST AI RMF",
-  "OWASP ASI Top 10",
-  "OWASP MCP Top 10",
-  "CSA MAESTRO",
-  "EU AI Act",
-  "ISO/IEC 42001",
-  "MITRE ATLAS",
-  "OpenTelemetry",
-  "Singapore IMDA",
-  "NIST 800-53",
+const roles = [
+  { role: "Security", href: "/docs/profiles/security" },
+  { role: "Platform", href: "/docs/profiles/platform" },
+  { role: "Risk and compliance", href: "/docs/profiles/grc" },
+  { role: "AI engineering", href: "/docs/profiles/ai-engineering" },
+  { role: "Observability", href: "/docs/profiles/observability" },
 ];
 
 function ArrowIcon() {
@@ -105,6 +88,12 @@ export default function Home() {
             AGF
           </Link>
           <nav className="flex items-center gap-6 text-sm text-stone-500">
+            <Link href="/docs/overview/start-here" className="hover:text-stone-800 transition-colors">
+              Start here
+            </Link>
+            <Link href="/docs/reference/source-guide" className="hover:text-stone-800 transition-colors">
+              Sources
+            </Link>
             <Link href="/docs/overview/what-is-agf" className="hover:text-stone-800 transition-colors">
               Docs
             </Link>
@@ -116,156 +105,98 @@ export default function Home() {
             >
               GitHub
             </a>
-            <a
-              href="https://jessepike.dev"
-              className="hover:text-stone-800 transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              jessepike.dev
-            </a>
           </nav>
         </div>
       </header>
 
       <main className="flex-1">
         {/* ── Hero ── */}
-        <section className="mx-auto max-w-6xl px-6 pt-24 pb-20">
-          <div className="max-w-3xl">
-            <p className="text-sm font-medium tracking-wide uppercase text-stone-400 mb-4">
-              Reference Architecture
-            </p>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-800 leading-[1.1] mb-6">
-              A composable governance
-              <br />
-              framework for agentic systems
-            </h1>
-            <p className="text-lg text-stone-700 leading-relaxed max-w-2xl mb-4 font-medium">
-              <strong>AGF is a practitioner&apos;s map for governing agentic systems.</strong> It shows what NIST, OWASP, CSA, ISO, the EU AI Act and OpenTelemetry each cover, how they connect, and where the gaps are. It proposes answers for the gaps.
-            </p>
-            <p className="text-base text-stone-500 leading-relaxed max-w-2xl mb-10">
-              Written for the security or risk leader who is early in building the program.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/docs/overview/start-here"
-                className="inline-flex h-10 items-center rounded-md bg-stone-800 px-5 text-sm font-medium text-stone-50 transition-colors hover:bg-stone-700"
-              >
-                Start here
-              </Link>
-              <Link
-                href="#roles"
-                className="inline-flex h-10 items-center rounded-md border border-stone-300 px-5 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:border-stone-400"
-              >
-                Start with your role
-              </Link>
-            </div>
+        <section className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+          <p className="inline-block rounded-full border border-stone-300 px-3 py-1 text-xs font-medium tracking-wide text-stone-500 mb-8">
+            Agentic Governance Framework
+          </p>
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-stone-800 leading-[1.08] mb-6">
+            A practitioner&apos;s map for{" "}
+            <span className="text-teal-800">governing AI agents.</span>
+          </h1>
+          <p className="text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto mb-10">
+            AGF shows which source answers which question, where the sources
+            say little, and what to do first. It is written for security and
+            risk leaders who are early in the program.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+            <Link
+              href="/docs/overview/start-here"
+              className="inline-flex h-11 items-center rounded-md bg-stone-800 px-6 text-sm font-medium text-stone-50 transition-colors hover:bg-stone-700"
+            >
+              Start here
+            </Link>
+            <Link
+              href="/docs/reference/source-guide"
+              className="inline-flex h-11 items-center rounded-md border border-stone-300 px-6 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:border-stone-400"
+            >
+              Browse the sources
+            </Link>
           </div>
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dd className="text-3xl font-semibold tracking-tight text-teal-800">
+                  {s.value}
+                </dd>
+                <dt className="text-xs text-stone-500 mt-1">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
         </section>
 
-        {/* ── Tagline ── */}
-        <section className="border-y border-stone-200/80 bg-stone-50">
-          <div className="mx-auto max-w-6xl px-6 py-8">
-            <p className="text-center text-stone-400 text-sm tracking-wide">
-              We did not invent these patterns. We sorted the pieces and showed
-              how they fit together.
+        {/* ── Stages ── */}
+        <section className="border-t border-stone-200/80 bg-stone-50">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-2 text-center">
+              Pick your stage
+            </h2>
+            <p className="text-sm text-stone-500 mb-10 text-center">
+              Each one gives you three actions.
             </p>
-          </div>
-        </section>
-
-        {/* ── Standards strip ── */}
-        <section className="border-b border-stone-200/80">
-          <div className="mx-auto max-w-6xl px-6 py-10">
-            <p className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-5 text-center">
-              Integrates &amp; maps to
-            </p>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              {standards.map((s) => (
-                <span
-                  key={s}
-                  className="text-sm text-stone-400 font-mono"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {stages.map((s) => (
+                <Link
+                  key={s.title}
+                  href={s.href}
+                  className="group flex flex-col rounded-lg border border-stone-200 bg-[#fafaf9] p-6 transition-colors hover:border-stone-400"
                 >
-                  {s}
-                </span>
+                  <h3 className="text-base font-semibold text-stone-800 mb-2">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm text-stone-500 leading-relaxed flex-1">
+                    {s.actions}
+                  </p>
+                  <span className="mt-4 flex items-center gap-1 text-xs font-medium text-stone-500 group-hover:text-stone-800 transition-colors">
+                    See the three actions
+                    <ArrowIcon />
+                  </span>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── What AGF is / is not ── */}
-        <section className="border-b border-stone-200/80">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <h2 className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-8 text-center">
-              What AGF is — and what it isn&apos;t
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              <div>
-                <h3 className="text-sm font-semibold text-stone-800 mb-3">
-                  AGF <span className="text-emerald-700">is</span>
-                </h3>
-                <ul className="space-y-2 text-sm text-stone-600 leading-relaxed">
-                  <li>— A reference architecture for agentic systems</li>
-                  <li>— An operating model synthesizing existing frameworks</li>
-                  <li>— A vocabulary of primitives, rings, gates, and invariants</li>
-                  <li>— A crosswalk between NIST, OWASP, CSA, ISO, EU AI Act</li>
-                  <li>— Openly licensed (CC BY 4.0 docs; Apache-2.0 / MIT code)</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-stone-800 mb-3">
-                  AGF <span className="text-stone-500">is not</span>
-                </h3>
-                <ul className="space-y-2 text-sm text-stone-600 leading-relaxed">
-                  <li>— A new control catalog (use NIST 800-53, CSA AICM, ISO 27001)</li>
-                  <li>— A new threat taxonomy (use OWASP, MITRE ATLAS, MAESTRO)</li>
-                  <li>— A platform, product, or vendor solution</li>
-                  <li>— A compliance certification or a replacement for one</li>
-                  <li>— A claim that AGF invented these patterns</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Rings Model Diagram ── */}
-        <section className="border-b border-stone-200/80">
-          <div className="mx-auto max-w-4xl px-6 py-16">
-            <Image
-              src="/diagrams/rings-model-governed-agentic-systems.png"
-              alt="The Rings Model — Governed Agentic Systems: Ring 0 (Execution) through Ring 3 (Learning) with cross-cutting fabric"
-              width={1200}
-              height={675}
-              className="w-full h-auto rounded-lg border border-stone-200"
-              priority={false}
-            />
-            <p className="text-center text-xs text-stone-400 mt-4">
-              The Rings Model — four concentric rings, one fabric, one substrate.{" "}
-              <Link href="/docs/overview/rings-model" className="text-stone-500 hover:text-stone-700 underline underline-offset-2">
-                Learn more
-              </Link>
-            </p>
-          </div>
-        </section>
-
-        {/* ── v1.0 Positioning ── */}
-        <section className="border-b border-stone-200/80 bg-stone-50/60">
+        {/* ── Landscape ── */}
+        <section className="border-t border-stone-200/80">
           <div className="mx-auto max-w-6xl px-6 py-16">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
               <div className="lg:col-span-2">
-                <p className="text-xs font-medium tracking-wide uppercase text-stone-400 mb-3">
-                  The landscape
-                </p>
                 <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-4 leading-snug">
-                  AGF synthesizes the governance landscape — see how it fits.
+                  No single source covers agent governance.
                 </h2>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">
-                  NIST, OWASP, CSA AICM/ATF/MAESTRO, ISO 42001, EU AI Act, Microsoft
-                  AGT, FAIR — each authoritative, none sufficient alone. AGF maps
-                  how the frameworks you already use fit together for agentic
-                  systems, and where the gaps are.
+                  NIST, OWASP, CSA, ISO, the EU and others each cover part of
+                  it. AGF does not replace any of them. It shows how they fit
+                  together.
                 </p>
                 <Link
-                  href="/docs/reference/relationship-to-frameworks"
+                  href="/docs/reference/source-guide"
                   className="group inline-flex items-center gap-1 text-sm font-medium text-stone-700 hover:text-stone-900 transition-colors"
                 >
                   See who covers what
@@ -286,58 +217,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Role Router ── */}
-        <section id="roles" className="mx-auto max-w-6xl px-6 py-20 scroll-mt-16">
-          <div className="mb-10">
+        {/* ── Proposals ── */}
+        <section className="border-t border-stone-200/80 bg-stone-50">
+          <div className="mx-auto max-w-6xl px-6 py-16">
             <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-2">
-              Start with your role
+              Where AGF adds something
             </h2>
-            <p className="text-sm text-stone-500">
-              Five domain profiles, each with the depth your function needs.
+            <p className="text-sm text-stone-500 mb-10">
+              Where the sources say little, AGF proposes an answer. These are
+              proposals and are marked as such.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-stone-200 rounded-lg overflow-hidden border border-stone-200">
-            {roles.map((item) => (
-              <Link
-                key={item.role}
-                href={item.href}
-                className="group flex flex-col bg-[#fafaf9] p-6 transition-colors hover:bg-stone-50"
-              >
-                <span className="text-sm font-semibold text-stone-800 mb-0.5">
-                  {item.role}
-                </span>
-                <span className="text-xs text-stone-400 mb-3">
-                  {item.audience}
-                </span>
-                <span className="text-sm text-stone-500 leading-relaxed flex-1">
-                  {item.description}
-                </span>
-                <span className="mt-4 flex items-center gap-1 text-xs font-medium text-stone-400 group-hover:text-stone-600 transition-colors">
-                  Read profile
-                  <ArrowIcon />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Core Concepts ── */}
-        <section className="border-t border-stone-200/80">
-          <div className="mx-auto max-w-6xl px-6 py-20">
-            <div className="mb-10">
-              <h2 className="text-2xl font-semibold tracking-tight text-stone-800 mb-2">
-                Core concepts
-              </h2>
-              <p className="text-sm text-stone-500">
-                The architectural foundations of the framework.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {concepts.map((item) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {proposals.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="group flex flex-col rounded-lg border border-stone-200 p-6 transition-colors hover:border-stone-300 hover:bg-stone-50"
+                  className="group flex flex-col rounded-lg border border-stone-200 bg-[#fafaf9] p-6 transition-colors hover:border-stone-400"
                 >
                   <h3 className="text-sm font-semibold text-stone-800 mb-2">
                     {item.title}
@@ -345,8 +240,8 @@ export default function Home() {
                   <p className="text-sm text-stone-500 leading-relaxed flex-1">
                     {item.description}
                   </p>
-                  <span className="mt-4 flex items-center gap-1 text-xs font-medium text-stone-400 group-hover:text-stone-600 transition-colors">
-                    Learn more
+                  <span className="mt-4 flex items-center gap-1 text-xs font-medium text-stone-500 group-hover:text-stone-800 transition-colors">
+                    Read
                     <ArrowIcon />
                   </span>
                 </Link>
@@ -355,50 +250,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Philosophy ── */}
-        <section className="border-t border-stone-200/80 bg-stone-50">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div>
-                <h3 className="text-sm font-semibold text-stone-800 mb-2">
-                  Humility before authority
-                </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">
-                  We synthesize, we don&apos;t decree. Every pattern is credited
-                  to the communities that developed it.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-stone-800 mb-2">
-                  Rigor before opinion
-                </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">
-                  Every claim grounded in evidence or clearly marked as an
-                  informed proposal.{" "}
-                  <Link
-                    href="/docs/reference/confidence-levels"
-                    className="underline underline-offset-2 hover:text-stone-700"
-                  >
-                    Confidence levels
-                  </Link>{" "}
-                  throughout: <Confidence level="established" />
-                  {" · "}
-                  <Confidence level="informed" />
-                  {" · "}
-                  <Confidence level="open" />
-                  .
-                </p>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-stone-800 mb-2">
-                  Community over credit
-                </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">
-                  If this framework helps one organization build a safer agentic
-                  system, it has served its purpose.
-                </p>
-              </div>
-            </div>
+        {/* ── Roles ── */}
+        <section className="border-t border-stone-200/80">
+          <div className="mx-auto max-w-6xl px-6 py-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+            <span className="text-stone-400">By role:</span>
+            {roles.map((r) => (
+              <Link
+                key={r.role}
+                href={r.href}
+                className="text-stone-600 underline underline-offset-4 decoration-stone-300 hover:text-stone-900 hover:decoration-stone-500 transition-colors"
+              >
+                {r.role}
+              </Link>
+            ))}
           </div>
         </section>
       </main>
@@ -414,8 +278,12 @@ export default function Home() {
             >
               Jesse Pike
             </a>
+            . Open license (CC BY 4.0).
           </p>
           <div className="flex items-center gap-5 text-xs text-stone-400">
+            <Link href="/docs/transparency/corrections" className="hover:text-stone-600 transition-colors">
+              Changes and corrections
+            </Link>
             <a
               href="https://github.com/jessepike/agf"
               className="hover:text-stone-600 transition-colors"
