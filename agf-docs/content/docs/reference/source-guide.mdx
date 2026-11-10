@@ -1,0 +1,71 @@
+---
+title: "Source Guide"
+description: "Each major source for governing AI agents: what you get, what it leaves out, and its version and date."
+---
+
+This is the detail behind [Start Here](/docs/overview/start-here). For each question it names the source to use, what you get from it, and what it leaves out.
+
+*Each version, date and count was checked against the linked source on 2026-11-10. Where the guide gives AGF's own reading of a source, it says so. Check the source before you rely on a version or a date.* <Confidence level="established" />
+
+## Which source answers which question
+
+| Your question | Use this | What you get | What it leaves out |
+|---|---|---|---|
+| What can go wrong with agents? | [OWASP Top 10 for Agentic Applications for 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) and [MITRE ATLAS](https://atlas.mitre.org/) | OWASP: ten named agent risks, numbered ASI01 to ASI10, published 9 December 2025. ATLAS: a catalog of attacker techniques. On 2026-11-10 its site listed 16 tactics, 221 techniques, 44 mitigations and 77 case studies. The last tagged data release (v2026.09, 15 September 2026) lists fewer. | Both list mitigations. Neither tells you which to do first for your own agents. |
+| What can go wrong where agents connect to tools? | [OWASP MCP Top 10](https://owasp.org/projects/mcp-top-10) | Ten risks for the Model Context Protocol (MCP), the common way agents reach tools and data. | It was still a beta on 2026-11-10. Record the date you read it. |
+| How do I threat-model my own agent system? | [CSA MAESTRO](https://cloudsecurityalliance.org/artifacts/maestro-v2) | A layered model for finding threats in an agent system. Version 1 has seven layers. | Version 2.0 has ten layers and is a peer review draft. The review closed on 10 July 2026. CSA's page still showed it as a review draft on 2026-11-10. |
+| Which controls do I need, and how do I show them to an auditor? | [CSA AI Controls Matrix](https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1) and [NIST SP 800-53](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final) | AICM v1.1 (22 June 2026) has 247 control objectives in 18 domains. It maps them to ISO/IEC 42001, ISO/IEC 27001, the EU AI Act, the NIST AI RMF, BSI AIC4 and AIUC-1. SP 800-53 is the general US federal control catalog. | Few of the controls are specific to agents. By AGF's count, about 5 of the 247 are (counted against v1.0.3 in April 2026). NIST's [overlay project](https://csrc.nist.gov/projects/cosais) lists agent use cases as proposed and gives no date for them. |
+| How do I run this as a management program? | [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) and [ISO/IEC 42001](https://www.iso.org/standard/42001) | The AI RMF gives four functions to organize the work: Govern, Map, Measure, Manage. ISO/IEC 42001 is a management system standard you can be audited against. | Both were published in 2023, before agents were in wide use. You have to decide how agent risks fit into them. |
+| What does the law require? | [EU AI Act](https://artificialintelligenceact.eu/implementation-timeline/) | Duties by risk class. Prohibitions have applied since 2 February 2025 and general-purpose model duties since 2 August 2025. Transparency duties (Article 50) have applied since 2 August 2026. After the 2026 amendment (Regulation (EU) 2026/1744, in force 27 July 2026), high-risk duties apply from 2 December 2027 for the uses listed in Annex III, such as hiring and credit scoring, and from 2 August 2028 for AI built into products regulated under Annex I, such as medical devices. | The Commission's [AI Act FAQ](https://ai-act-service-desk.ec.europa.eu/en/faq) says AI agents are not a separate category under the Act. The general rules apply to them. This page does not cover other jurisdictions or sector regulators. |
+| Is there government guidance written for agents? | [Careful Adoption of Agentic AI Services](https://content.govdelivery.com/accounts/USDHSCISA/bulletins/41544ff) and the [Singapore Model AI Governance Framework for Agentic AI](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf) | The first is a joint guide from six national cyber agencies (United States, Australia, Canada, New Zealand, United Kingdom), dated 1 May 2026. The Singapore framework, hosted by IMDA, is at version 1.5 (20 May 2026, updated 5 June 2026). It has four parts: assess and bound the risks up front, make humans meaningfully accountable, implement technical controls and processes, and enable end-user responsibility. For higher-risk actions it advises safeguards built into the system over safeguards written into prompts. | Both are guidance. Neither is a law or a standard you can be audited against. The Singapore framework calls itself a living document. |
+| How much autonomy should an agent get, and how does it earn more? | [CSA Agentic Trust Framework](https://github.com/massivescale-ai/agentic-trust-framework) | An operating model that applies zero trust to agents. Zero trust means no agent is trusted by default and each request is checked. It has 25 core requirements and maturity levels. The author is Josh Woodruff of MassiveScale.AI, and it is published through CSA. | The public version is v0.9.1, a review draft. |
+| How do I enforce decisions while the agent runs? | [OWASP Agent Control Standard](https://github.com/GenAI-Security-Project/agent-control-standard) and [CSA AARM](https://aarm.vercel.app/spec) | ACS v0.1.0 defines nineteen points in an agent's run where a policy can step in, and five outcomes: allow, deny, modify, ask, defer. AARM v1.0 requires one of five decisions for each action (ALLOW, DENY, MODIFY, STEP_UP, DEFER). It also requires a signed record of each decision that shows any later change, and it defines two conformance levels. | Both act at the level of a single run or session. AARM requires the policy to weigh each action against the session's earlier actions and the agent's stated intent. Neither covers decisions that sit above a session, such as a release approval or a change in an agent's trust level. The ACS reference setup fails open: the agent keeps running if the policy service fails. Set `ACS_ON_DECISION_FAILURE=deny` for anything that matters. |
+| How do I know which agent did what? | [NIST NCCoE agent identity project](https://www.nccoe.nist.gov/projects/software-and-ai-agent-identity-and-authorization) and the [IETF AIMS draft](https://datatracker.ietf.org/doc/html/draft-ietf-wimse-aims) | Guidance on giving agents their own identity and limited authority. Both build on existing standards for workload identity (identity for software, as opposed to people) and OAuth 2.0. | The IETF draft is informational best-practice guidance. The NCCoE project was still taking comments on 2026-11-10. Neither is a standard. |
+| How do I see what agents did? | [OpenTelemetry GenAI conventions](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/README.md) | Standard names for model calls, tool calls and agent steps in your telemetry. | They are still marked Development and moved to their own repository in June 2026, so names can change. They carry no governance fields such as which policy applied. |
+| How do agents connect to tools? | [Model Context Protocol](https://modelcontextprotocol.io/specification/2026-07-28/changelog) | A common protocol. The 2026-07-28 version made it stateless: the server keeps no session between requests. It also requires clients to check which authorization server issued a credential. | It is a connection protocol. Which servers and tools an agent may use is left to you. |
+
+### How the pieces fit
+
+Read the table as a chain:
+
+1. **Threats** (rows 1 to 3) tell you what to control.
+2. **Control catalogs** (row 4) tell you what a control looks like and how to evidence it.
+3. **Management frameworks, law and government guidance** (rows 5 to 7) tell you what you are accountable for.
+4. **The operating model** (row 8) sets how much each agent may do without a person.
+5. **Runtime, identity and telemetry** (rows 9 to 12) are where the controls are enforced and recorded.
+
+AGF's advice: check the last group early. A program that starts from a control catalog or a law can find later that nothing enforces the controls while the agent runs. This is advice from AGF and has not been tested widely. <Confidence level="informed" />
+
+## Where the sources say little
+
+Most of the runtime sources above answer one question: may this action run, and what proves it. They say less about the system around the action. AGF proposes an answer for each gap below. These are proposals from AGF. They have not been tested widely, and other sources may address parts of them. <Confidence level="informed" />
+
+AGF describes an agent system as four rings. Ring 0 does the work. Ring 1 checks the work. Ring 2 decides what is allowed. Ring 3 learns from results and suggests changes. The first two rows below refer to these rings.
+
+| Gap | AGF's proposal | Read |
+|---|---|---|
+| Who checks the agent's work before it is used? | The part that produces output must not be the only part that checks it. | [Rings Model](/docs/overview/rings-model), Ring 1 |
+| Who may change the rules the agent runs under? | The system may suggest changes to its own settings. It may not apply them. A separate governance step decides. | [Rings Model](/docs/overview/rings-model), Ring 3 |
+| What happens to an approval over time? | An approval expires. It is cancelled when the facts behind it change. A deferred or escalated decision has an owner and a due date. | [Governance Decision Record](/docs/reference/governance-decision-record) |
+| What record shows a governance decision that is not a single action? | One record format for release approvals, policy changes and changes in an agent's trust level. | [Governance Decision Record](/docs/reference/governance-decision-record) |
+| How does an agent lose trust while it runs? | The CSA Agentic Trust Framework sets levels and promotion gates for a deployment. It says less about lowering trust for one task at runtime. AGF proposes that trust is lost faster than it is earned and that some approvals never relax. | [Trust Ladders](/docs/overview/trust-ladders) |
+
+## What this guide does not do
+
+- It does not give legal advice or certify anything.
+- It covers agent governance. It does not cover AI governance as a whole, such as model risk, fairness or privacy programs.
+- It names the sources AGF tracks. It is not a complete list, and naming a source or a product is not an endorsement.
+
+The table does not yet answer these questions:
+
+- How do I find agents nobody told me about?
+- How do I govern agents that a vendor runs for me?
+- How do I respond to an agent incident, and how do I stop an agent quickly?
+- How do I test an agent before release?
+- Who is accountable when an agent causes harm?
+
+It also does not yet cover the Agent2Agent (A2A) protocol or the AIUC-1 standard in their own rows.
+
+## How this guide is kept
+
+Sources in this field change every few months. This guide is reviewed at least twice a year, and sooner when a source in the table publishes a new version. The check date at the top shows the last full check. Dated research notes are in the [`research/` folder on GitHub](https://github.com/jessepike/agf/tree/main/research). If you find a statement here that is wrong or out of date, [open an issue](https://github.com/jessepike/agf/issues).

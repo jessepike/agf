@@ -2,6 +2,7 @@
   "root": true,
   "pages": [
     "changelog",
+    "corrections",
     "decisions",
     "roadmap",
     "governance",

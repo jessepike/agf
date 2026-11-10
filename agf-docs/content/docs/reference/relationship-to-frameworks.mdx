@@ -7,23 +7,17 @@ Any organization deploying agentic systems in 2026 is looking at a crowded field
 
 Each is authoritative within its scope. None is sufficient alone. AGF's job is not to replace any of them. It shows how they fit together and where the gaps are.
 
-## Status Note
-
-<Confidence level="open">
-This page describes AGF's position in the broader landscape — the contract surface AGF commits to. Where the page references "operationalize at machine speed," treat that as the architectural commitment; the schedule of machine-form artifacts beyond the shipped [GDR schema](/docs/reference/governance-decision-record) lives on the [Roadmap](/docs/transparency/roadmap).
-</Confidence>
-
 ## The Core Question
 
 > "We already have NIST. We're evaluating AICM. Our CSO wants ISO 42001. Our security team is reading about MAESTRO. Microsoft is shipping AGT. Do we need another framework?"
 
 **No. You need a map of how the frameworks you already use fit together for agentic systems. That is what AGF offers.**
 
-AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, organizes it with one shared model, and recommends pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see [Status Note](#status-note)).
+AGF does not invent a new control catalog or threat taxonomy. It synthesizes existing work, organizes it with one shared model, and recommends pathways for implementation. The fourth verb — operationalize at machine speed — is the architectural commitment AGF is built around; the dual-form artifacts that fully realize it are planned work, not shipped capability today (see the [Roadmap](/docs/transparency/roadmap)).
 
 ## The Seven-Layer Stack
 
-The landscape can be read as a stack. Five layers describe what an organization needs to know and do. A sixth, the risk quantification lens, cuts across the rest. AGF is a guide across the layers and is not counted as one (see [Decisions](/docs/transparency/decisions), D12). Earlier versions of this page counted AGF as a seventh layer, which is where the name "seven-layer stack" comes from.
+The landscape can be read as a stack. Five layers describe what an organization needs to know and do. A sixth, the risk quantification lens, cuts across the rest. AGF is a guide across the layers and is not counted as one (see [Decisions](/docs/transparency/decisions), D12).
 
 | Layer | Answers | Frameworks |
 |-------|---------|------------|
@@ -35,7 +29,7 @@ The landscape can be read as a stack. Five layers describe what an organization 
 | **1** | What are the most important things that can go wrong? | OWASP Agentic Top 10 (ASI-01 through ASI-10) |
 | **Across all** | How do the pieces fit together for an agentic system, and where are the gaps? | **AGF** — a guide across the layers above, with proposals for the gaps. Begin at [Start Here](/docs/overview/start-here). |
 
-Risk quantification at Layer 6 is a method that applies to every layer. Until 2026-11-10 this page placed AGF at "Layer 0" as an architectural substrate. Decision D12 replaced that wording.
+Risk quantification at Layer 6 is a method that applies to every layer.
 
 ## How AGF Plays Across the Layers
 
@@ -44,7 +38,7 @@ The four verbs from AGF's positioning pillars describe how AGF operates:
 - **Synthesizes** — pulls from every layer; does not invent primitives
 - **Organizes** — reads the synthesized material through one shared model (the Rings Model and the primitives)
 - **Recommends** — turns the synthesis into suggested implementation pathways per primitive. AGF prescribes nothing a reader must conform to (D12)
-- **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see [Status Note](#status-note) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
+- **Operationalizes** — the architectural commitment that every primitive must support a machine-readable form alongside its human-readable form (the dual-form principle). Today this is realized at gate boundaries via the [Governance Decision Record (GDR)](/docs/reference/governance-decision-record) schema; the broader machine-form library across the remaining primitives is planned (see the [Roadmap](/docs/transparency/roadmap) and [Decisions](/docs/transparency/decisions) #5, #8, #9).
 
 ## Important Honest Observations
 
@@ -99,3 +93,5 @@ AGF-to-TOGAF/SABSA/COBIT crosswalks are not currently prioritized; they'll be ad
 *AGF is the architecture beneath the frameworks you already use. When the next one ships, AGF is the map that tells you where it fits.*
 
 For the complete document — including per-layer detail, role-based entry points, and full commitments — see the [canonical source](https://github.com/jessepike/agf/blob/main/docs/relationship-to-frameworks.md).
+
+Earlier wording of this page and dated corrections are on [Changes and Corrections](/docs/transparency/corrections).

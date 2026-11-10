@@ -93,3 +93,6 @@ BDFL
 paywalled
 AARM
 AIUC
+CAISSI
+CAISI
+COSIS
